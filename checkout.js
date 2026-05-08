@@ -179,7 +179,7 @@
     const rail = document.getElementById("mock-product-rail");
     if (!rail) return;
     rail.innerHTML = MOCK_PRODUCTS.map((p) => {
-      const inCart = !!cart[p.id];
+      const inCartQty = cart[p.id] || 0;
       return `
         <article class="mock-product">
           <div class="mock-product-image">
@@ -187,15 +187,16 @@
           </div>
           <p class="mock-product-name">${p.name}</p>
           <p class="mock-product-size">${p.size}</p>
+          ${inCartQty ? `<p class="mock-product-count">In basket: ${inCartQty}</p>` : ""}
           <div class="mock-product-meta">
             <p class="mock-product-price">${formatGBP(p.pricePence)}</p>
             <button
               type="button"
-              class="mock-add-btn ${inCart ? "is-added" : ""}"
+              class="mock-add-btn ${inCartQty ? "is-added" : ""}"
               data-add-id="${p.id}"
               aria-label="Add ${p.name} to basket"
             >
-              ${inCart ? "Added (+1)" : "Add"}
+              ${inCartQty ? "Add another" : "Add"}
             </button>
           </div>
         </article>

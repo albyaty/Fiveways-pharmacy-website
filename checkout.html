@@ -106,50 +106,48 @@
       <header class="checkout-heading">
         <span class="kicker">Your basket</span>
         <h1>Review and continue to payment</h1>
-        <p>
-          This is a development checkout page. Use the quick-add panel below to drop
-          mock products into your basket while we wire up real payments.
-        </p>
+        <p>Check your items, update quantities and head to secure payment when you're ready.</p>
       </header>
 
-      <section class="mock-add-panel" aria-labelledby="mock-add-title">
-        <div class="mock-add-header">
-          <div>
-            <span class="mock-add-tag">Dev tool</span>
-            <h2 id="mock-add-title">Quick add mock products</h2>
-            <p>These are placeholders so we can test the basket and payment flow.</p>
-          </div>
-          <button type="button" class="mock-add-clear" id="clear-cart-btn">
-            Clear basket
-          </button>
-        </div>
-
-        <div class="mock-product-rail" id="mock-product-rail">
-          <!-- populated by checkout.js -->
-        </div>
-      </section>
-
       <div class="checkout-layout">
-        <section class="cart-list" aria-labelledby="cart-list-title">
-          <div class="cart-list-head">
-            <h2 id="cart-list-title">Basket</h2>
-            <span class="cart-list-count" data-cart-line-count>0 items</span>
-          </div>
+        <div class="checkout-primary">
+          <section class="mock-add-panel" aria-labelledby="mock-add-title">
+            <div class="mock-add-header">
+              <div>
+                <h2 id="mock-add-title">Add a few pharmacy essentials</h2>
+                <p>Popular everyday picks you can drop straight into the basket.</p>
+              </div>
+              <button type="button" class="mock-add-clear" id="clear-cart-btn">
+                Clear basket
+              </button>
+            </div>
 
-          <div class="cart-empty" id="cart-empty" hidden>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M3.5 5h2l1.7 9.25h9.9L19 8H6.2" />
-              <circle cx="9.25" cy="18.25" r="1.35" />
-              <circle cx="16.7" cy="18.25" r="1.35" />
-            </svg>
-            <h3>Your basket is empty</h3>
-            <p>Add a mock product above to test the checkout flow.</p>
-          </div>
+            <div class="mock-product-rail" id="mock-product-rail">
+              <!-- populated by checkout.js -->
+            </div>
+          </section>
 
-          <ul class="cart-lines" id="cart-lines" role="list">
-            <!-- populated by checkout.js -->
-          </ul>
-        </section>
+          <section class="cart-list" aria-labelledby="cart-list-title">
+            <div class="cart-list-head">
+              <h2 id="cart-list-title">Basket</h2>
+              <span class="cart-list-count" data-cart-line-count>0 items</span>
+            </div>
+
+            <div class="cart-empty" id="cart-empty" hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3.5 5h2l1.7 9.25h9.9L19 8H6.2" />
+                <circle cx="9.25" cy="18.25" r="1.35" />
+                <circle cx="16.7" cy="18.25" r="1.35" />
+              </svg>
+              <h3>Your basket is empty</h3>
+              <p>Add a few essentials below to get started.</p>
+            </div>
+
+            <ul class="cart-lines" id="cart-lines" role="list">
+              <!-- populated by checkout.js -->
+            </ul>
+          </section>
+        </div>
 
         <aside class="summary-card" aria-labelledby="summary-title">
           <h2 id="summary-title">Order summary</h2>
