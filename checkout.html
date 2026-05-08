@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout | Fiveways Pharmacy</title>
+  <meta
+    name="description"
+    content="Review your basket and continue to secure payment for Fiveways Pharmacy orders."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./checkout.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="top-strip">
+      <div class="top-strip-inner container">
+        <p class="top-strip-message">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 7.5h11v7H3z" />
+            <path d="M14 10h3.2l2.3 2.6V14H14z" />
+            <circle cx="7.5" cy="17" r="1.75" />
+            <circle cx="17.5" cy="17" r="1.75" />
+            <path d="M5.75 17H3V9.25" />
+          </svg>
+          <span><strong>Free next-day UK delivery over GBP 25</strong> with discreet packaging</span>
+        </p>
+        <div class="top-strip-links">
+          <a href="#" aria-label="Track order">Track Order</a>
+          <a href="#" aria-label="Customer support">Help Centre</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-shell container">
+      <div class="header-main">
+        <a class="brand" href="./index.html" aria-label="Fiveways Pharmacy home">
+          <img
+            class="brand-logo"
+            src="./official_logo.png"
+            alt="Five Ways Pharmacy"
+            width="300"
+            height="132"
+          />
+        </a>
+
+        <form class="search-bar" role="search" aria-label="Site search">
+          <label class="sr-only" for="site-search">Search products</label>
+          <input
+            id="site-search"
+            type="search"
+            placeholder="Search medicine, vitamins, skincare, baby care..."
+            aria-label="Search products"
+          />
+          <button type="submit">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="6" />
+              <path d="M16 16l5 5" />
+            </svg>
+            <span>Search</span>
+          </button>
+        </form>
+
+        <nav class="header-actions" aria-label="User actions">
+          <a class="header-action" href="#">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8.25" r="3.25" />
+              <path d="M5.75 19.5c1.35-3.05 4.05-4.6 6.25-4.6s4.9 1.55 6.25 4.6" />
+            </svg>
+            <span>Login</span>
+          </a>
+          <a class="header-action" href="#">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 19.5l-6.2-5.95a4.3 4.3 0 0 1 6.2-5.9 4.3 4.3 0 0 1 6.2 5.9Z" />
+            </svg>
+            <span>Wishlist</span>
+          </a>
+          <a href="./checkout.html" class="cart-pill" aria-label="Shopping cart">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3.5 5h2l1.7 9.25h9.9L19 8H6.2" />
+              <circle cx="9.25" cy="18.25" r="1.35" />
+              <circle cx="16.7" cy="18.25" r="1.35" />
+            </svg>
+            <span class="cart-pill-label">Cart</span>
+            <span class="cart-pill-count" data-cart-count>0</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="checkout-main">
+    <section class="container checkout-shell">
+      <nav class="checkout-breadcrumb" aria-label="Breadcrumb">
+        <a href="./index.html">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Checkout</span>
+      </nav>
+
+      <header class="checkout-heading">
+        <span class="kicker">Your basket</span>
+        <h1>Review and continue to payment</h1>
+        <p>
+          This is a development checkout page. Use the quick-add panel below to drop
+          mock products into your basket while we wire up real payments.
+        </p>
+      </header>
+
+      <section class="mock-add-panel" aria-labelledby="mock-add-title">
+        <div class="mock-add-header">
+          <div>
+            <span class="mock-add-tag">Dev tool</span>
+            <h2 id="mock-add-title">Quick add mock products</h2>
+            <p>These are placeholders so we can test the basket and payment flow.</p>
+          </div>
+          <button type="button" class="mock-add-clear" id="clear-cart-btn">
+            Clear basket
+          </button>
+        </div>
+
+        <div class="mock-product-rail" id="mock-product-rail">
+          <!-- populated by checkout.js -->
+        </div>
+      </section>
+
+      <div class="checkout-layout">
+        <section class="cart-list" aria-labelledby="cart-list-title">
+          <div class="cart-list-head">
+            <h2 id="cart-list-title">Basket</h2>
+            <span class="cart-list-count" data-cart-line-count>0 items</span>
+          </div>
+
+          <div class="cart-empty" id="cart-empty" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3.5 5h2l1.7 9.25h9.9L19 8H6.2" />
+              <circle cx="9.25" cy="18.25" r="1.35" />
+              <circle cx="16.7" cy="18.25" r="1.35" />
+            </svg>
+            <h3>Your basket is empty</h3>
+            <p>Add a mock product above to test the checkout flow.</p>
+          </div>
+
+          <ul class="cart-lines" id="cart-lines" role="list">
+            <!-- populated by checkout.js -->
+          </ul>
+        </section>
+
+        <aside class="summary-card" aria-labelledby="summary-title">
+          <h2 id="summary-title">Order summary</h2>
+          <dl class="summary-list">
+            <div class="summary-row">
+              <dt>Subtotal</dt>
+              <dd id="summary-subtotal">GBP 0.00</dd>
+            </div>
+            <div class="summary-row">
+              <dt>Delivery</dt>
+              <dd id="summary-delivery">FREE</dd>
+            </div>
+            <div class="summary-row summary-row--total">
+              <dt>Total</dt>
+              <dd id="summary-total">GBP 0.00</dd>
+            </div>
+          </dl>
+
+          <p class="summary-delivery-note" id="summary-delivery-note">
+            Add GBP 25.00 more for free next-day delivery.
+          </p>
+
+          <button type="button" class="btn btn-primary summary-cta" id="proceed-btn" disabled>
+            Continue to payment
+          </button>
+
+          <p class="summary-status" id="summary-status" hidden></p>
+
+          <ul class="summary-trust" aria-label="Reassurance">
+            <li>Secure checkout via Stripe (coming soon)</li>
+            <li>Pharmacy-checked products</li>
+            <li>Discreet packaging</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand footer-brand" href="./index.html" aria-label="Fiveways Pharmacy home">
+          <img
+            class="brand-logo"
+            src="./official_logo.png"
+            alt="Five Ways Pharmacy"
+            width="300"
+            height="132"
+          />
+        </a>
+        <p>Comfortable, trusted pharmacy shopping for every household.</p>
+        <div class="footer-badges">
+          <span>Secure checkout</span>
+          <span>Registered pharmacy</span>
+        </div>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <a href="./index.html">All products</a>
+        <a href="#">Best sellers</a>
+        <a href="#">Offers</a>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <a href="#">Contact us</a>
+        <a href="#">Delivery info</a>
+        <a href="#">Returns</a>
+      </div>
+      <div>
+        <h4>Account</h4>
+        <a href="#">Login</a>
+        <a href="#">Sign up</a>
+        <a href="#">Order history</a>
+      </div>
+    </div>
+    <div class="footer-base">
+      <p>(c) 2026 Fiveways Pharmacy. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="./checkout.js"></script>
+</body>
+</html>
