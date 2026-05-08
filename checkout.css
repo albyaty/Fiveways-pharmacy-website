@@ -60,16 +60,22 @@
   font-size: 1rem;
 }
 
+.cart-empty[hidden],
+.summary-status[hidden] {
+  display: none;
+}
+
 /* Mock product picker --------------------------------------------------- */
 
 .mock-add-panel {
-  background: var(--background-soft);
-  border: 1px dashed rgba(var(--secondary-rgb), 0.55);
+  background: linear-gradient(180deg, rgba(var(--bgsoft-rgb), 0.72), #ffffff 88%);
+  border: 1px solid rgba(var(--bordersoft-rgb), 0.82);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  box-shadow: var(--shadow-card);
 }
 
 .mock-add-header {
@@ -81,7 +87,7 @@
 }
 
 .mock-add-header h2 {
-  margin: 0.4rem 0 0.25rem;
+  margin: 0;
   font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
   font-size: 1.25rem;
   font-weight: 800;
@@ -89,37 +95,27 @@
 }
 
 .mock-add-header p {
-  margin: 0;
+  margin: 0.28rem 0 0;
   color: var(--muted);
   font-size: 0.92rem;
-}
-
-.mock-add-tag {
-  display: inline-block;
-  background: rgba(var(--textdark-rgb), 0.08);
-  color: var(--text-dark);
-  padding: 0.18rem 0.6rem;
-  border-radius: 6px;
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  max-width: 38rem;
 }
 
 .mock-add-clear {
-  background: transparent;
-  border: 1px solid rgba(var(--textdark-rgb), 0.18);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(var(--bordersoft-rgb), 0.95);
   color: var(--text-dark);
   border-radius: 999px;
   padding: 0.55rem 1rem;
   font-weight: 700;
   cursor: pointer;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
 }
 
 .mock-add-clear:hover {
-  border-color: rgba(var(--textdark-rgb), 0.35);
-  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(var(--secondary-rgb), 0.88);
+  background: #ffffff;
+  transform: translateY(-1px);
 }
 
 .mock-product-rail {
@@ -175,6 +171,13 @@
   font-size: 0.82rem;
 }
 
+.mock-product-count {
+  margin: -0.12rem 0 0;
+  color: var(--deep-teal);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
 .mock-product-meta {
   display: flex;
   align-items: center;
@@ -221,9 +224,20 @@
   align-items: flex-start;
 }
 
+.checkout-primary {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  min-width: 0;
+}
+
 @media (max-width: 960px) {
   .checkout-layout {
     grid-template-columns: 1fr;
+  }
+
+  .checkout-primary {
+    gap: 1.5rem;
   }
 }
 
