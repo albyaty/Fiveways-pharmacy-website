@@ -574,3 +574,177 @@
   background: var(--deep-teal);
   flex: 0 0 auto;
 }
+
+/* Payment step --------------------------------------------------------- */
+
+.payment-step {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.payment-step-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.payment-step-header .kicker {
+  display: inline-block;
+  padding: 0.3rem 0.75rem;
+  background: rgba(var(--primary-rgb), 0.18);
+  color: var(--deep-teal);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.payment-step-header h2 {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.payment-back-btn {
+  background: transparent;
+  border: 1px solid rgba(var(--textdark-rgb), 0.18);
+  color: var(--text-dark);
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.payment-back-btn:hover {
+  border-color: rgba(var(--textdark-rgb), 0.35);
+  background: var(--background-soft);
+}
+
+.payment-test-banner {
+  margin: 0;
+  background: rgba(var(--primary-rgb), 0.16);
+  border: 1px solid rgba(var(--primary-rgb), 0.35);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.payment-test-banner code {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.85em;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.payment-fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.payment-fieldset legend {
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--text-dark);
+  margin-bottom: 0.4rem;
+  padding: 0;
+}
+
+.payment-fieldset label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.payment-fieldset input[type="email"] {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  background: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.payment-fieldset input[type="email"]:focus {
+  outline: none;
+  border-color: var(--brand-secondary);
+  box-shadow: var(--focus-ring);
+}
+
+.payment-error {
+  margin: 0;
+  background: rgba(184, 66, 61, 0.08);
+  border: 1px solid rgba(184, 66, 61, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.85rem;
+  color: #b8423d;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.payment-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-weight: 800;
+  color: var(--text-dark);
+  font-size: 1.1rem;
+}
+
+.payment-summary span:last-child {
+  font-size: 1.4rem;
+}
+
+.payment-pay-btn {
+  width: 100%;
+  font-size: 1.05rem;
+  min-height: 52px;
+}
+
+.payment-pay-btn:disabled,
+.payment-pay-btn[aria-busy="true"] {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+/* Locked cart state when in payment step ------------------------------- */
+
+.cart-list.is-locked .qty-control button,
+.cart-list.is-locked .cart-line-remove,
+.mock-add-panel.is-locked .mock-add-btn,
+.mock-add-panel.is-locked .mock-add-clear {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.summary-cta.is-hidden {
+  display: none;
+}

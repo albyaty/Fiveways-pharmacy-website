@@ -179,12 +179,66 @@
           <p class="summary-status" id="summary-status" hidden></p>
 
           <ul class="summary-trust" aria-label="Reassurance">
-            <li>Secure checkout via Stripe (coming soon)</li>
+            <li>Secure checkout via Stripe</li>
             <li>Pharmacy-checked products</li>
             <li>Discreet packaging</li>
           </ul>
         </aside>
       </div>
+
+      <section class="payment-step" id="payment-step" hidden aria-labelledby="payment-step-title">
+        <div class="payment-step-header">
+          <div>
+            <span class="kicker">Step 2 of 2</span>
+            <h2 id="payment-step-title">Payment &amp; delivery</h2>
+          </div>
+          <button type="button" id="back-to-cart" class="payment-back-btn">
+            Back to basket
+          </button>
+        </div>
+
+        <p class="payment-test-banner" id="payment-test-banner" hidden>
+          <strong>Test mode</strong> — use card
+          <code>4242 4242 4242 4242</code> with any future expiry date and any
+          CVC. No real card will be charged.
+        </p>
+
+        <form id="payment-form" class="payment-form" novalidate>
+          <fieldset class="payment-fieldset">
+            <legend>Contact</legend>
+            <label for="payment-email">Email for receipt and order updates</label>
+            <input
+              type="email"
+              id="payment-email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="you@example.com"
+            />
+          </fieldset>
+
+          <fieldset class="payment-fieldset">
+            <legend>Delivery address</legend>
+            <div id="address-element"><!-- Stripe AddressElement --></div>
+          </fieldset>
+
+          <fieldset class="payment-fieldset">
+            <legend>Payment</legend>
+            <div id="payment-element"><!-- Stripe PaymentElement --></div>
+          </fieldset>
+
+          <p class="payment-error" id="payment-error" hidden></p>
+
+          <div class="payment-summary">
+            <span>Total to charge</span>
+            <span id="payment-total">GBP 0.00</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary payment-pay-btn" id="pay-btn">
+            <span class="pay-btn-label">Pay now</span>
+          </button>
+        </form>
+      </section>
     </section>
   </main>
 
@@ -230,6 +284,7 @@
     </div>
   </footer>
 
+  <script src="https://js.stripe.com/v3/"></script>
   <script src="./checkout.js"></script>
 </body>
 </html>

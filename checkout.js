@@ -2,9 +2,9 @@
   "use strict";
 
   // ---------------------------------------------------------------------------
-  // Mock product catalogue. Prices are in pence (integer) to avoid floating
-  // point drift. When we wire up Stripe, each product id should map 1:1 to a
-  // Stripe Price id so the backend can re-price the basket server-side.
+  // Mock product catalogue. Mirrors api/create-payment-intent.js until we move
+  // to a database. Prices are pence so we never round-trip through floats.
+  // The server is the source of truth -- the client only sends { id, qty }.
   // ---------------------------------------------------------------------------
   const MOCK_PRODUCTS = [
     {
@@ -70,8 +70,7 @@
   const STORAGE_KEY = "fiveways_cart_v1";
 
   // ---------------------------------------------------------------------------
-  // Cart state. Stored as { [productId]: quantity } in localStorage so the
-  // basket survives reloads.
+  // Cart state
   // ---------------------------------------------------------------------------
   function loadCart() {
     try {
@@ -93,6 +92,13 @@
   }
 
   let cart = loadCart();
+
+  // Stripe state for the active payment session.
+  let stripe = null;
+  let stripePublishableKey = null;
+  let elements = null;
+  let paymentIntentClientSecret = null;
+  let isPaymentStepOpen = false;
 
   function addToCart(productId) {
     cart[productId] = (cart[productId] || 0) + 1;
@@ -167,7 +173,7 @@
   }
 
   // ---------------------------------------------------------------------------
-  // Rendering
+  // Rendering (cart + summary + mock rail)
   // ---------------------------------------------------------------------------
   function renderMockRail() {
     const rail = document.getElementById("mock-product-rail");
@@ -206,8 +212,7 @@
 
     const itemCount = lines.reduce((sum, { qty }) => sum + qty, 0);
     if (countEl) {
-      countEl.textContent =
-        itemCount === 1 ? "1 item" : itemCount + " items";
+      countEl.textContent = itemCount === 1 ? "1 item" : itemCount + " items";
     }
     if (pillCount) {
       pillCount.textContent = String(itemCount);
@@ -262,8 +267,7 @@
 
     if (subtotalEl) subtotalEl.textContent = formatGBP(t.subtotal);
     if (deliveryEl) {
-      deliveryEl.textContent =
-        t.delivery === 0 ? "FREE" : formatGBP(t.delivery);
+      deliveryEl.textContent = t.delivery === 0 ? "FREE" : formatGBP(t.delivery);
     }
     if (totalEl) totalEl.textContent = formatGBP(t.total);
 
@@ -281,7 +285,7 @@
     }
 
     if (proceedBtn) {
-      proceedBtn.disabled = t.itemCount === 0;
+      proceedBtn.disabled = t.itemCount === 0 || isPaymentStepOpen;
     }
   }
 
@@ -292,11 +296,210 @@
   }
 
   // ---------------------------------------------------------------------------
-  // Event wiring (delegated where possible to keep things simple).
+  // Stripe payment flow
+  // ---------------------------------------------------------------------------
+  function setLockedState(locked) {
+    document
+      .getElementById("cart-lines")
+      ?.closest(".cart-list")
+      ?.classList.toggle("is-locked", locked);
+    document
+      .querySelector(".mock-add-panel")
+      ?.classList.toggle("is-locked", locked);
+  }
+
+  function showError(message) {
+    const errEl = document.getElementById("payment-error");
+    if (!errEl) return;
+    if (!message) {
+      errEl.hidden = true;
+      errEl.textContent = "";
+      return;
+    }
+    errEl.hidden = false;
+    errEl.textContent = message;
+  }
+
+  async function loadPublishableKey() {
+    const res = await fetch("/api/stripe-config");
+    if (!res.ok) {
+      throw new Error("Could not load Stripe configuration.");
+    }
+    const data = await res.json();
+    if (!data || !data.publishableKey) {
+      throw new Error("Stripe publishable key missing from server response.");
+    }
+    return data.publishableKey;
+  }
+
+  async function createPaymentIntent() {
+    const items = Object.entries(cart).map(([id, qty]) => ({ id, qty }));
+    const res = await fetch("/api/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.error || "Could not create the payment.");
+    }
+    return data;
+  }
+
+  async function startPayment() {
+    const t = totals();
+    if (t.itemCount === 0) return;
+
+    const proceedBtn = document.getElementById("proceed-btn");
+    if (proceedBtn) {
+      proceedBtn.disabled = true;
+      proceedBtn.textContent = "Preparing payment...";
+    }
+
+    try {
+      if (!stripe) {
+        stripePublishableKey = await loadPublishableKey();
+        if (typeof Stripe === "undefined") {
+          throw new Error("Stripe.js failed to load.");
+        }
+        stripe = Stripe(stripePublishableKey);
+      }
+
+      const intent = await createPaymentIntent();
+      paymentIntentClientSecret = intent.clientSecret;
+
+      elements = stripe.elements({
+        clientSecret: paymentIntentClientSecret,
+        appearance: {
+          theme: "stripe",
+          variables: {
+            colorPrimary: "#0f757b",
+            colorText: "#274b50",
+            fontFamily: "Manrope, sans-serif",
+            borderRadius: "10px",
+          },
+        },
+      });
+
+      const addressElement = elements.create("address", {
+        mode: "shipping",
+        allowedCountries: ["GB"],
+      });
+      addressElement.mount("#address-element");
+
+      const paymentElement = elements.create("payment", {
+        layout: { type: "tabs" },
+      });
+      paymentElement.mount("#payment-element");
+
+      const totalEl = document.getElementById("payment-total");
+      if (totalEl) totalEl.textContent = formatGBP(intent.amountPence);
+      const payBtn = document.getElementById("pay-btn");
+      if (payBtn) {
+        payBtn.querySelector(".pay-btn-label").textContent =
+          "Pay " + formatGBP(intent.amountPence);
+      }
+
+      const testBanner = document.getElementById("payment-test-banner");
+      if (testBanner) {
+        // Show the test banner whenever we are using a pk_test_ key.
+        const isTest = (stripePublishableKey || "").startsWith("pk_test_");
+        testBanner.hidden = !isTest;
+      }
+
+      isPaymentStepOpen = true;
+      setLockedState(true);
+      const paymentStep = document.getElementById("payment-step");
+      if (paymentStep) {
+        paymentStep.hidden = false;
+        paymentStep.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      const summaryCta = document.getElementById("proceed-btn");
+      if (summaryCta) summaryCta.classList.add("is-hidden");
+      showError(null);
+    } catch (err) {
+      showError(err && err.message ? err.message : "Something went wrong.");
+      if (proceedBtn) {
+        proceedBtn.disabled = false;
+        proceedBtn.textContent = "Continue to payment";
+      }
+    }
+  }
+
+  function cancelPayment() {
+    isPaymentStepOpen = false;
+    setLockedState(false);
+    paymentIntentClientSecret = null;
+    elements = null;
+
+    const paymentStep = document.getElementById("payment-step");
+    if (paymentStep) paymentStep.hidden = true;
+
+    const proceedBtn = document.getElementById("proceed-btn");
+    if (proceedBtn) {
+      proceedBtn.classList.remove("is-hidden");
+      proceedBtn.disabled = false;
+      proceedBtn.textContent = "Continue to payment";
+    }
+
+    document.getElementById("payment-element").innerHTML = "";
+    document.getElementById("address-element").innerHTML = "";
+
+    const cartList = document.querySelector(".cart-list");
+    if (cartList) {
+      cartList.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
+  async function submitPayment(event) {
+    event.preventDefault();
+    if (!stripe || !elements) return;
+
+    const emailInput = document.getElementById("payment-email");
+    const email = emailInput ? emailInput.value.trim() : "";
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+      showError("Please enter a valid email address.");
+      emailInput?.focus();
+      return;
+    }
+    showError(null);
+
+    const payBtn = document.getElementById("pay-btn");
+    if (payBtn) {
+      payBtn.setAttribute("aria-busy", "true");
+      payBtn.querySelector(".pay-btn-label").textContent = "Processing...";
+    }
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: window.location.origin + "/success.html",
+        receipt_email: email,
+      },
+    });
+
+    if (error) {
+      showError(error.message || "Payment could not be completed.");
+      if (payBtn) {
+        payBtn.removeAttribute("aria-busy");
+        payBtn.querySelector(".pay-btn-label").textContent = "Pay now";
+      }
+    }
+    // If no error, Stripe will have redirected to the return_url.
+  }
+
+  // ---------------------------------------------------------------------------
+  // Event wiring
   // ---------------------------------------------------------------------------
   document.addEventListener("click", (event) => {
     const target = event.target;
     if (!(target instanceof HTMLElement)) return;
+    if (isPaymentStepOpen) {
+      // While paying, ignore basket-level interactions.
+      if (target.closest(".cart-list") || target.closest(".mock-add-panel")) {
+        return;
+      }
+    }
 
     const addBtn = target.closest("[data-add-id]");
     if (addBtn) {
@@ -321,27 +524,20 @@
     }
   });
 
-  const clearBtn = document.getElementById("clear-cart-btn");
-  if (clearBtn) {
-    clearBtn.addEventListener("click", () => {
-      if (Object.keys(cart).length === 0) return;
-      clearCart();
-    });
-  }
+  document.getElementById("clear-cart-btn")?.addEventListener("click", () => {
+    if (Object.keys(cart).length === 0) return;
+    clearCart();
+  });
 
-  const proceedBtn = document.getElementById("proceed-btn");
-  if (proceedBtn) {
-    proceedBtn.addEventListener("click", () => {
-      const t = totals();
-      const status = document.getElementById("summary-status");
-      if (!status) return;
-      status.hidden = false;
-      status.textContent =
-        "Stripe checkout will be wired up here. Total to charge: " +
-        formatGBP(t.total) +
-        ".";
-    });
-  }
+  document.getElementById("proceed-btn")?.addEventListener("click", () => {
+    startPayment();
+  });
+
+  document.getElementById("back-to-cart")?.addEventListener("click", () => {
+    cancelPayment();
+  });
+
+  document.getElementById("payment-form")?.addEventListener("submit", submitPayment);
 
   render();
 })();

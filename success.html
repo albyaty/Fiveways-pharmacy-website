@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order received | Fiveways Pharmacy</title>
+  <meta
+    name="description"
+    content="Thank you for your order with Fiveways Pharmacy. Your order has been received."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./checkout.css" />
+  <style>
+    .success-card {
+      max-width: 640px;
+      margin: 3rem auto;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+    }
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.25rem;
+      border-radius: 50%;
+      background: rgba(var(--primary-rgb), 0.18);
+      color: var(--deep-teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .success-icon svg {
+      width: 32px;
+      height: 32px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .success-card h1 {
+      margin: 0 0 0.75rem;
+      font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      color: var(--text-dark);
+    }
+    .success-card p {
+      margin: 0.4rem 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .success-meta {
+      margin-top: 1.5rem;
+      padding: 1rem 1.2rem;
+      background: var(--background-soft);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      text-align: left;
+    }
+    .success-meta strong {
+      display: inline-block;
+      min-width: 110px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .success-actions {
+      margin-top: 1.75rem;
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .success-status-pending .success-icon {
+      background: rgba(var(--secondary-rgb), 0.2);
+    }
+    .success-status-failed .success-icon {
+      background: rgba(184, 66, 61, 0.12);
+      color: #b8423d;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-shell container">
+      <div class="header-main">
+        <a class="brand" href="./index.html" aria-label="Fiveways Pharmacy home">
+          <img
+            class="brand-logo"
+            src="./official_logo.png"
+            alt="Five Ways Pharmacy"
+            width="300"
+            height="132"
+          />
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="success-card" id="success-card" aria-live="polite">
+      <div class="success-icon" id="success-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 12.5l4 4 10-10" />
+        </svg>
+      </div>
+      <h1 id="success-title">Confirming your payment...</h1>
+      <p id="success-message">Hang tight while we check with our payment partner.</p>
+
+      <div class="success-meta" id="success-meta" hidden>
+        <p><strong>Status</strong> <span id="meta-status"></span></p>
+        <p><strong>Reference</strong> <span id="meta-reference"></span></p>
+        <p><strong>Amount</strong> <span id="meta-amount"></span></p>
+      </div>
+
+      <div class="success-actions">
+        <a href="./index.html" class="btn btn-primary">Back to homepage</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-base">
+      <p>(c) 2026 Fiveways Pharmacy. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    (async () => {
+      const card = document.getElementById("success-card");
+      const titleEl = document.getElementById("success-title");
+      const messageEl = document.getElementById("success-message");
+      const metaEl = document.getElementById("success-meta");
+      const statusEl = document.getElementById("meta-status");
+      const referenceEl = document.getElementById("meta-reference");
+      const amountEl = document.getElementById("meta-amount");
+
+      function setState(stateClass, title, message) {
+        card.classList.remove(
+          "success-status-pending",
+          "success-status-failed"
+        );
+        if (stateClass) card.classList.add(stateClass);
+        titleEl.textContent = title;
+        messageEl.textContent = message;
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const clientSecret = params.get("payment_intent_client_secret");
+      if (!clientSecret) {
+        setState(
+          "success-status-failed",
+          "Order reference missing",
+          "We could not find a payment to confirm. If you were charged, please contact us with the time of your order."
+        );
+        return;
+      }
+
+      try {
+        const cfgRes = await fetch("/api/stripe-config");
+        const cfg = await cfgRes.json();
+        if (!cfg.publishableKey) throw new Error("Missing Stripe key");
+        const stripe = Stripe(cfg.publishableKey);
+        const { paymentIntent } = await stripe.retrievePaymentIntent(
+          clientSecret
+        );
+
+        metaEl.hidden = false;
+        statusEl.textContent = paymentIntent.status;
+        referenceEl.textContent = paymentIntent.id;
+        amountEl.textContent =
+          "GBP " + (paymentIntent.amount / 100).toFixed(2);
+
+        switch (paymentIntent.status) {
+          case "succeeded":
+            try {
+              localStorage.removeItem("fiveways_cart_v1");
+            } catch (err) {}
+            setState(
+              null,
+              "Order received",
+              "Thank you. Your payment has been confirmed and the pharmacy team will be in touch shortly."
+            );
+            break;
+          case "processing":
+            setState(
+              "success-status-pending",
+              "Payment processing",
+              "Your bank is finalising the payment. We will email you a receipt as soon as it clears."
+            );
+            break;
+          case "requires_payment_method":
+            setState(
+              "success-status-failed",
+              "Payment not completed",
+              "Your payment was not successful. Please return to checkout and try again with a different payment method."
+            );
+            break;
+          default:
+            setState(
+              "success-status-pending",
+              "Payment status unclear",
+              "We received the payment with status \"" +
+                paymentIntent.status +
+                "\". Please contact us if you have any concerns."
+            );
+        }
+      } catch (err) {
+        setState(
+          "success-status-failed",
+          "Could not confirm payment",
+          "We could not reach Stripe to confirm. Reference: " + clientSecret
+        );
+      }
+    })();
+  </script>
+</body>
+</html>
