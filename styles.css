@@ -1303,18 +1303,13 @@ main {
   z-index: -1;
 }
 
-@media (hover: none) and (pointer: coarse) {
-  .hero-carousel__controls {
-    display: none;
-  }
-}
-
 @media (max-width: 768px) {
   .hero-panel.hero-carousel {
     border-radius: 28px;
   }
 
   .hero-carousel__controls {
+    display: none;
     padding: 0 0.72rem;
   }
 

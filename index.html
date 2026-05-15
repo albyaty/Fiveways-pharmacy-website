@@ -1346,7 +1346,7 @@
       const prevButton = carousel.querySelector(".hero-carousel__arrow--prev");
       const nextButton = carousel.querySelector(".hero-carousel__arrow--next");
       const status = carousel.querySelector(".hero-carousel__status");
-      const touchViewport = window.matchMedia("(hover: none) and (pointer: coarse)");
+      const mobileCarouselViewport = window.matchMedia("(max-width: 768px)");
 
       if (!slides.length || !dots.length || !prevButton || !nextButton) return;
 
@@ -1481,7 +1481,7 @@
       carousel.addEventListener("pointerdown", markPointerInteraction);
       carousel.addEventListener("touchstart", markPointerInteraction, { passive: true });
       carousel.addEventListener("touchstart", (event) => {
-        if (!touchViewport.matches || event.touches.length !== 1) return;
+        if (!mobileCarouselViewport.matches || event.touches.length !== 1) return;
 
         const touch = event.touches[0];
         touchStartX = touch.clientX;
@@ -1489,7 +1489,7 @@
         clearAutoplay();
       }, { passive: true });
       carousel.addEventListener("touchend", (event) => {
-        if (!touchViewport.matches || touchStartX === null || touchStartY === null || !event.changedTouches.length) {
+        if (!mobileCarouselViewport.matches || touchStartX === null || touchStartY === null || !event.changedTouches.length) {
           touchStartX = null;
           touchStartY = null;
           return;
