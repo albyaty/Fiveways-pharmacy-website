@@ -3757,6 +3757,14 @@ main {
   justify-self: end;
 }
 
+.service-detail-hero-rail {
+  display: grid;
+  align-content: start;
+  gap: 0.82rem;
+  max-width: 24.5rem;
+  justify-self: end;
+}
+
 .service-detail-hero-card__media {
   overflow: hidden;
   border-radius: 22px;
@@ -4236,6 +4244,11 @@ main {
     justify-self: stretch;
   }
 
+  .service-detail-hero-rail {
+    max-width: none;
+    justify-self: stretch;
+  }
+
   .service-detail-hero-card__badge {
     width: min(100%, 17.5rem);
   }
@@ -4266,6 +4279,17 @@ main {
   .service-detail-page {
     gap: 1rem;
     padding-top: 0.72rem;
+  }
+
+  .service-detail-page--covid-vaccines .service-detail-section > .service-detail-cta-panel,
+  .service-detail-page--covid-vaccines .service-detail-section > .service-detail-section-head:not(.service-detail-section-head--compact):not(.service-detail-section-head--conditions),
+  .service-detail-page--covid-vaccines .service-detail-section > .service-detail-faq-list,
+  .service-detail-page--covid-vaccines .service-detail-section > .service-detail-alert,
+  .service-detail-page--flu-vaccines .service-detail-section > .service-detail-cta-panel,
+  .service-detail-page--flu-vaccines .service-detail-section > .service-detail-section-head:not(.service-detail-section-head--compact):not(.service-detail-section-head--conditions),
+  .service-detail-page--flu-vaccines .service-detail-section > .service-detail-faq-list,
+  .service-detail-page--flu-vaccines .service-detail-section > .service-detail-alert {
+    margin-inline-start: 0.38rem;
   }
 
   .service-detail-hero-shell,
@@ -4351,6 +4375,17 @@ main {
   .service-detail-page {
     gap: 0.92rem;
     padding-top: 0.64rem;
+  }
+
+  .service-detail-page--covid-vaccines .service-detail-section > .service-detail-cta-panel,
+  .service-detail-page--covid-vaccines .service-detail-section > .service-detail-section-head:not(.service-detail-section-head--compact):not(.service-detail-section-head--conditions),
+  .service-detail-page--covid-vaccines .service-detail-section > .service-detail-faq-list,
+  .service-detail-page--covid-vaccines .service-detail-section > .service-detail-alert,
+  .service-detail-page--flu-vaccines .service-detail-section > .service-detail-cta-panel,
+  .service-detail-page--flu-vaccines .service-detail-section > .service-detail-section-head:not(.service-detail-section-head--compact):not(.service-detail-section-head--conditions),
+  .service-detail-page--flu-vaccines .service-detail-section > .service-detail-faq-list,
+  .service-detail-page--flu-vaccines .service-detail-section > .service-detail-alert {
+    margin-inline-start: 0.3rem;
   }
 
   .service-detail-hero-shell {
