@@ -3676,6 +3676,13 @@ main {
   margin-top: 0.92rem;
 }
 
+.service-detail-action-note {
+  margin: 0.36rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
 .service-detail-action-row--hero-process {
   justify-content: center;
   margin-top: 1.1rem;
@@ -3743,6 +3750,17 @@ main {
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+.service-detail-hero-card__media--contain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-detail-hero-card__media--contain img {
+  object-fit: contain;
+  padding: 0.8rem;
 }
 
 .service-detail-hero-card__eyebrow {
@@ -3815,6 +3833,15 @@ main {
 @media (min-width: 981px) {
   .service-detail-section-head--conditions {
     margin-left: 2rem;
+  }
+
+  .service-detail-section > .service-detail-info-grid,
+  .service-detail-section > .service-detail-cta-panel,
+  .service-detail-section > .service-detail-section-head:not(.service-detail-section-head--compact):not(.service-detail-section-head--conditions),
+  .service-detail-section > .service-detail-faq-list,
+  .service-detail-section > .service-detail-alert,
+  .service-detail-section > .service-detail-cta-panel + .service-detail-action-note {
+    margin-inline-start: 1.15rem;
   }
 }
 
