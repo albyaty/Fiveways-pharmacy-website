@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book an appointment | Five Ways Pharmacy</title>
+  <meta
+    name="description"
+    content="Book an appointment with the Five Ways Pharmacy team."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./service-payment.css" />
+  <link rel="stylesheet" href="./book.css" />
+</head>
+<body>
+  <header class="checkout-chrome-header">
+    <div class="container checkout-chrome-header__inner">
+      <a class="brand checkout-chrome-header__brand" href="./index.html" aria-label="Five Ways Pharmacy home">
+        <img
+          class="brand-logo"
+          src="./assets/brand/fiveways-logo-new.svg"
+          alt="Five Ways Pharmacy"
+          width="454"
+          height="227"
+        />
+      </a>
+      <div class="checkout-chrome-header__secure" aria-label="Confidential booking">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.5 11h11v8H6.5z" />
+          <path d="M9 11V8a3 3 0 0 1 6 0v3" />
+        </svg>
+        <span>Confidential booking</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="service-payment-main">
+    <section class="container service-payment-shell">
+      <nav class="service-payment-breadcrumb" aria-label="Breadcrumb">
+        <a href="./index.html">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Book an appointment</span>
+      </nav>
+
+      <header class="service-payment-heading">
+        <span class="kicker">Pharmacy bookings</span>
+        <h1>Book a service appointment</h1>
+        <p>
+          Choose a service and pick a time that suits you. Bookings are
+          handled through cal.com; you will receive a calendar invite and
+          confirmation email instantly.
+        </p>
+      </header>
+
+      <!--
+        ============================================================
+        CAL.COM EMBED PLACEHOLDER
+        ============================================================
+        WHAT GOES HERE
+          A cal.com embed that lets the customer pick a service and a
+          time. Two integration shapes to choose from:
+
+          1) Inline (recommended): one calendar widget that lists all
+             event types as services. Looks like part of the page.
+             https://cal.com/docs/core-features/embed/embed-inline
+
+          2) Router (advanced): a questionnaire that routes to the right
+             event type. Better when there are many services with
+             complex selection logic.
+             https://cal.com/docs/core-features/routing-forms
+
+        STEPS TO ENABLE
+          1. Pharmacy owner creates a cal.com account (free Hobby plan
+             is enough to start; Stripe app is free to install).
+          2. Add one event type per bookable service. The "slug" of each
+             event type must match `calEventSlug` in services.js.
+          3. (Optional) Install the Stripe app inside cal.com and
+             attach it to paid event types. Once attached, cal.com
+             collects payment as part of the booking flow -- you do NOT
+             need to send those customers through service-payment.html.
+          4. In cal.com, copy the Embed snippet for your chosen mode.
+          5. Replace the placeholder block below with that snippet.
+          6. Remove this comment.
+        ============================================================
+      -->
+      <section class="cal-placeholder" id="cal-placeholder">
+        <div class="cal-placeholder__inner">
+          <span class="cal-placeholder__tag">Booking widget</span>
+          <h2>Booking calendar appears here</h2>
+          <p>
+            The cal.com embed will load in this space once the pharmacy
+            owner has created their cal.com account and added the event
+            types listed below.
+          </p>
+        </div>
+      </section>
+
+      <h2 class="bookable-services-heading">Services available to book</h2>
+      <div class="bookable-services-grid" id="bookable-services-grid"></div>
+
+      <p class="bookable-empty" id="bookable-empty" hidden>
+        No bookable services are configured yet. Please call the pharmacy
+        to schedule an appointment.
+      </p>
+
+      <p class="service-picker-helper">
+        Need to pay for a service without booking?
+        <a href="./service-payment.html">Go to service payments</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer class="checkout-chrome-footer">
+    <div class="container checkout-chrome-footer__inner">
+      <p>&copy; 2026 Five Ways Pharmacy. Registered UK pharmacy.</p>
+      <p>
+        <a href="./delivery-privacy/">Privacy</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="./speak-to-our-team/">Contact</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="./services.js"></script>
+  <script src="./book.js"></script>
+</body>
+</html>

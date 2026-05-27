@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service Payment | Five Ways Pharmacy</title>
+  <meta
+    name="description"
+    content="Pay securely for Five Ways Pharmacy services online."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./service-payment.css" />
+</head>
+<body>
+  <!-- Minimal checkout-chrome header. We deliberately strip search, mega-nav
+       and account UI here -- standard pattern on payment pages to reduce
+       distractions and abandonment. The footer is similarly trimmed. -->
+  <header class="checkout-chrome-header">
+    <div class="container checkout-chrome-header__inner">
+      <a class="brand checkout-chrome-header__brand" href="./index.html" aria-label="Five Ways Pharmacy home">
+        <img
+          class="brand-logo"
+          src="./assets/brand/fiveways-logo-new.svg"
+          alt="Five Ways Pharmacy"
+          width="454"
+          height="227"
+        />
+      </a>
+      <div class="checkout-chrome-header__secure" aria-label="Secure checkout">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.5 11h11v8H6.5z" />
+          <path d="M9 11V8a3 3 0 0 1 6 0v3" />
+        </svg>
+        <span>Secure checkout</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="service-payment-main">
+    <section class="container service-payment-shell">
+      <nav class="service-payment-breadcrumb" aria-label="Breadcrumb">
+        <a href="./index.html">Home</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Service Payment</span>
+      </nav>
+
+      <!-- View 1: shown when no ?service= param is present. The JS swaps
+           between this view and the single-service view based on URL. -->
+      <section class="service-picker-view" id="service-picker-view" hidden>
+        <header class="service-payment-heading">
+          <span class="kicker">Secure pharmacy payments</span>
+          <h1>Pay for a pharmacy service</h1>
+          <p>
+            Choose the service you need and we will guide you through a secure
+            Stripe checkout. Your card details never touch our server.
+          </p>
+        </header>
+
+        <div class="service-picker-grid" id="service-picker-grid" role="list">
+          <!-- populated by service-payment.js -->
+        </div>
+
+        <p class="service-picker-empty" id="service-picker-empty" hidden>
+          Online service payments are being set up. Please call the pharmacy
+          to make a payment in the meantime.
+        </p>
+
+        <p class="service-picker-helper">
+          Looking to book an appointment instead?
+          <a href="./book.html">Go to bookings</a>.
+        </p>
+      </section>
+
+      <!-- View 2: shown when ?service=xxx is present and valid. -->
+      <section class="service-payment-view" id="service-payment-view" hidden>
+        <header class="service-payment-heading">
+          <span class="kicker">Service payment</span>
+          <h1 id="payment-service-name">Service payment</h1>
+        </header>
+
+        <div class="service-payment-grid">
+          <aside class="service-summary-card" aria-labelledby="service-summary-title">
+            <h2 id="service-summary-title">Selected service</h2>
+            <p class="service-summary-name" id="service-summary-name"></p>
+            <p class="service-summary-description" id="service-summary-description"></p>
+            <dl class="service-summary-totals">
+              <div class="service-summary-row">
+                <dt>Amount</dt>
+                <dd id="service-summary-amount">GBP 0.00</dd>
+              </div>
+              <div class="service-summary-row service-summary-row--total">
+                <dt>Total to charge</dt>
+                <dd id="service-summary-total">GBP 0.00</dd>
+              </div>
+            </dl>
+            <a href="./service-payment.html" class="service-summary-change">
+              Change service
+            </a>
+            <ul class="service-summary-trust" aria-label="Reassurance">
+              <li>Card details handled by Stripe</li>
+              <li>Receipt emailed instantly</li>
+              <li>Pharmacy team in touch shortly</li>
+            </ul>
+          </aside>
+
+          <section class="service-payment-form-card" aria-labelledby="payment-form-title">
+            <h2 id="payment-form-title">Payment &amp; contact</h2>
+
+            <p class="payment-test-banner" id="payment-test-banner" hidden>
+              <strong>Test mode</strong> &mdash; use card
+              <code>4242 4242 4242 4242</code> with any future expiry and any
+              CVC. No real card will be charged.
+            </p>
+
+            <form id="service-payment-form" class="service-payment-form" novalidate>
+              <fieldset class="payment-fieldset">
+                <legend>Contact</legend>
+                <label for="payment-email">Email for receipt and updates</label>
+                <input
+                  type="email"
+                  id="payment-email"
+                  name="email"
+                  required
+                  autocomplete="email"
+                  placeholder="you@example.com"
+                />
+              </fieldset>
+
+              <fieldset class="payment-fieldset">
+                <legend>Billing address</legend>
+                <div id="address-element"><!-- Stripe AddressElement --></div>
+              </fieldset>
+
+              <fieldset class="payment-fieldset">
+                <legend>Payment</legend>
+                <div id="payment-element"><!-- Stripe PaymentElement --></div>
+              </fieldset>
+
+              <p class="payment-error" id="payment-error" hidden></p>
+
+              <button
+                type="submit"
+                class="btn btn-primary service-payment-pay-btn"
+                id="pay-btn"
+                disabled
+              >
+                <span class="pay-btn-label">Loading payment...</span>
+              </button>
+            </form>
+          </section>
+        </div>
+      </section>
+
+      <!-- View 3: shown when ?service=xxx is present but the service is not
+           found, not enabled, or not payable. -->
+      <section class="service-payment-error-view" id="service-payment-error-view" hidden>
+        <header class="service-payment-heading">
+          <h1>Service unavailable</h1>
+          <p id="service-payment-error-message">
+            This service is not currently available for online payment.
+          </p>
+        </header>
+        <a href="./service-payment.html" class="btn btn-primary">See available services</a>
+      </section>
+    </section>
+  </main>
+
+  <footer class="checkout-chrome-footer">
+    <div class="container checkout-chrome-footer__inner">
+      <p>&copy; 2026 Five Ways Pharmacy. Registered UK pharmacy.</p>
+      <p>
+        <a href="./delivery-privacy/">Privacy</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="./speak-to-our-team/">Contact</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="./services.js"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="./service-payment.js"></script>
+</body>
+</html>

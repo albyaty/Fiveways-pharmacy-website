@@ -1,0 +1,511 @@
+/* Service payment page  --  uses tokens from styles.css for full consistency
+   with the calm redesign. Only the layout pieces unique to checkout live
+   here. */
+
+/* Checkout-chrome header / footer ---------------------------------------- */
+
+.checkout-chrome-header {
+  border-bottom: 1px solid var(--line);
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.checkout-chrome-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  min-height: 66px;
+}
+
+.checkout-chrome-header__brand .brand-logo {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+
+.checkout-chrome-header__secure {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--deep-teal-strong);
+  font-weight: 700;
+  font-size: 0.92rem;
+  background: rgba(var(--primary-rgb), 0.16);
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+}
+
+.checkout-chrome-header__secure svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.checkout-chrome-footer {
+  border-top: 1px solid var(--line);
+  background: #ffffff;
+  margin-top: 3rem;
+}
+
+.checkout-chrome-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  flex-wrap: wrap;
+}
+
+.checkout-chrome-footer__inner a {
+  color: var(--deep-teal);
+  font-weight: 600;
+}
+
+.checkout-chrome-footer__inner a:hover {
+  color: var(--deep-teal-strong);
+}
+
+/* Main shell ------------------------------------------------------------- */
+
+.service-payment-main {
+  padding: 2rem 0 3rem;
+}
+
+.service-payment-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.service-payment-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.service-payment-breadcrumb a {
+  color: var(--deep-teal);
+}
+
+.service-payment-breadcrumb a:hover {
+  color: var(--deep-teal-strong);
+}
+
+.service-payment-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  max-width: 720px;
+}
+
+.service-payment-heading .kicker {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.3rem 0.78rem;
+  background: rgba(var(--primary-rgb), 0.18);
+  color: var(--deep-teal);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.service-payment-heading h1 {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.18;
+}
+
+.service-payment-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* Picker view ----------------------------------------------------------- */
+
+.service-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.service-pick-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.service-pick-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(var(--secondary-rgb), 0.6);
+}
+
+.service-pick-card__name {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.service-pick-card__desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.93rem;
+  line-height: 1.45;
+  flex: 1;
+}
+
+.service-pick-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.service-pick-card__price {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-weight: 800;
+  color: var(--text-dark);
+  font-size: 1.35rem;
+}
+
+.service-pick-card__cta {
+  background: linear-gradient(135deg, var(--deep-teal), var(--deep-teal-strong));
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  font-weight: 800;
+  font-size: 0.92rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.service-pick-card__cta svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.service-picker-empty {
+  margin: 1rem 0 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--background-soft);
+  border: 1px dashed rgba(var(--secondary-rgb), 0.55);
+  border-radius: var(--radius-md);
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.service-picker-helper {
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.service-picker-helper a {
+  color: var(--deep-teal);
+  font-weight: 700;
+  border-bottom: 1px solid currentColor;
+}
+
+/* Single-service payment view ------------------------------------------- */
+
+.service-payment-grid {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 1.75rem;
+  align-items: flex-start;
+}
+
+@media (max-width: 880px) {
+  .service-payment-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.service-summary-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  position: sticky;
+  top: calc(var(--sticky-header-height) + 1rem);
+}
+
+@media (max-width: 880px) {
+  .service-summary-card {
+    position: static;
+  }
+}
+
+.service-summary-card h2 {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.service-summary-name {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.service-summary-description {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.service-summary-totals {
+  margin: 0.4rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--line);
+}
+
+.service-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.service-summary-row dt {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.service-summary-row dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.service-summary-row--total {
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--line);
+  margin-top: 0.4rem;
+  font-size: 1.05rem;
+}
+
+.service-summary-row--total dt {
+  color: var(--text-dark);
+  font-weight: 800;
+}
+
+.service-summary-row--total dd {
+  font-weight: 800;
+  font-size: 1.3rem;
+}
+
+.service-summary-change {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  color: var(--deep-teal);
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-bottom: 1px solid currentColor;
+  text-decoration: none;
+}
+
+.service-summary-change:hover {
+  color: var(--deep-teal-strong);
+}
+
+.service-summary-trust {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.service-summary-trust li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.service-summary-trust li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--deep-teal);
+  flex: 0 0 auto;
+}
+
+/* Payment form card ----------------------------------------------------- */
+
+.service-payment-form-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.service-payment-form-card h2 {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.payment-test-banner {
+  margin: 0;
+  background: rgba(var(--primary-rgb), 0.16);
+  border: 1px solid rgba(var(--primary-rgb), 0.35);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.95rem;
+  font-size: 0.88rem;
+  color: var(--text-dark);
+}
+
+.payment-test-banner code {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.85em;
+}
+
+.service-payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.payment-fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.payment-fieldset legend {
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--text-dark);
+  margin-bottom: 0.35rem;
+  padding: 0;
+}
+
+.payment-fieldset label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.payment-fieldset input[type="email"] {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  background: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.payment-fieldset input[type="email"]:focus {
+  outline: none;
+  border-color: var(--brand-secondary);
+  box-shadow: var(--focus-ring);
+}
+
+.payment-error {
+  margin: 0;
+  background: rgba(184, 66, 61, 0.08);
+  border: 1px solid rgba(184, 66, 61, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.85rem;
+  color: #b8423d;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.service-payment-pay-btn {
+  width: 100%;
+  font-size: 1.05rem;
+  min-height: 52px;
+}
+
+.service-payment-pay-btn:disabled,
+.service-payment-pay-btn[aria-busy="true"] {
+  opacity: 0.7;
+  cursor: progress;
+  transform: none !important;
+}
+
+/* Error view ------------------------------------------------------------ */
+
+.service-payment-error-view {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}

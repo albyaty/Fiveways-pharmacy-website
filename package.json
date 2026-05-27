@@ -1,0 +1,9 @@
+{
+  "name": "fiveways-pharmacy-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Five Ways Pharmacy storefront with Stripe service payments and cal.com booking.",
+  "dependencies": {
+    "stripe": "^17.5.0"
+  }
+}
