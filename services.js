@@ -1,10 +1,11 @@
 /**
  * SERVICES CONFIG  --  Bookable services catalogue (free 30-min slots).
  *
- * Five Ways Pharmacy currently offers a fixed set of free NHS / pharmacy
- * services that customers can book. There is no per-service payment; the
- * payment system (service-payment.html) handles prescription billing and
- * custom amounts separately. So this file is now ONLY the booking catalogue.
+ * Five Ways Pharmacy currently offers a fixed set of free pharmacy
+ * services that customers can book through cal.com. There is no
+ * per-service payment; the payment system (service-payment.html) handles
+ * prescription billing and custom amounts separately. So this file is
+ * ONLY the booking catalogue.
  *
  * The frontend reads this to render the list on book.html. cal.com is the
  * actual booking backend -- this file just lists what shows up in the UI
@@ -18,53 +19,45 @@
  *   description     One-sentence blurb shown on booking cards.
  *   calEventSlug    cal.com event-type slug. The pharmacy owner must
  *                   create an event with this slug in their cal.com
- *                   account. Each event should be configured for 30 min.
+ *                   account. Each event is configured for 30 min.
  *   infoUrl         Optional. Path to the service's info page.
  *   enabled         false to hide without deleting.
  * --------------------------------------------------------------------------
  *
- * HOW TO ADD A SERVICE
- *   1. Add an object below.
- *   2. Create the matching event type (30-min slot) in cal.com with the
- *      same slug as calEventSlug.
- *   3. Set enabled: true.
- *   4. Commit + push.
+ * SLUG SOURCE OF TRUTH
+ *   The cal.com event slug is the source of truth. If you change the
+ *   slug in cal.com, change it here too. Otherwise the "Book" button
+ *   will open an "Event not found" modal.
  *
- * HOW TO HIDE A SERVICE
- *   Set enabled: false.
+ * HOW TO ADD A SERVICE
+ *   1. Create the matching event type (30-min slot, free) in cal.com.
+ *   2. Add an object below with the cal.com slug.
+ *   3. Commit + push.
  */
 
 const SERVICES = [
   {
-    id: "pharmacy-first",
+    id: "nhs-pharmacy-first",
     name: "NHS Pharmacy First",
     description: "Free NHS support for common conditions, no GP appointment needed.",
-    calEventSlug: "pharmacy-first",
+    calEventSlug: "nhs-pharmacy-first",
     infoUrl: "./pharmacy-first/",
+    enabled: true,
+  },
+  {
+    id: "nhs-contraception-service",
+    name: "NHS Contraception Service",
+    description: "Free contraception consultation and supply where eligible.",
+    calEventSlug: "nhs-contraception-service",
+    infoUrl: "./nhs-contraception-services/",
     enabled: true,
   },
   {
     id: "stop-smoking-clinic",
     name: "Stop Smoking Clinic",
     description: "Free quit-smoking support with a personalised plan.",
-    calEventSlug: "stop-smoking",
+    calEventSlug: "stop-smoking-clinic",
     infoUrl: "./stop-smoking-clinic/",
-    enabled: true,
-  },
-  {
-    id: "nhs-contraception",
-    name: "NHS Contraception Service",
-    description: "Free contraception consultation and supply where eligible.",
-    calEventSlug: "nhs-contraception",
-    infoUrl: "./nhs-contraception-services/",
-    enabled: true,
-  },
-  {
-    id: "weight-loss-support",
-    name: "Weight Loss Support",
-    description: "Pharmacist-led weight loss programme with ongoing reviews.",
-    calEventSlug: "weight-loss-support",
-    infoUrl: "./weight-loss-support/",
     enabled: true,
   },
   {
@@ -84,11 +77,11 @@ const SERVICES = [
     enabled: true,
   },
   {
-    id: "umbrella-services",
-    name: "Umbrella Services",
-    description: "Bundled pharmacy services and reviews.",
-    calEventSlug: "umbrella-services",
-    infoUrl: "./umbrella-services/",
+    id: "weight-management",
+    name: "Weight Management",
+    description: "Pharmacist-led weight management programme with ongoing reviews.",
+    calEventSlug: "weight-management",
+    infoUrl: "./weight-loss-support/",
     enabled: true,
   },
   {
@@ -97,6 +90,30 @@ const SERVICES = [
     description: "Speak with a pharmacist about everyday health questions.",
     calEventSlug: "health-advice",
     infoUrl: "./health-advice/",
+    enabled: true,
+  },
+  {
+    id: "private-consultations",
+    name: "Private Consultations",
+    description: "Private one-to-one appointment with a pharmacist.",
+    calEventSlug: "private-consultations",
+    infoUrl: null,
+    enabled: true,
+  },
+  {
+    id: "umbrella-services",
+    name: "Umbrella Services",
+    description: "Bundled pharmacy services and reviews.",
+    calEventSlug: "umbrella-services",
+    infoUrl: "./umbrella-services/",
+    enabled: true,
+  },
+  {
+    id: "call-five-ways-pharmacy",
+    name: "Call Five Ways Pharmacy",
+    description: "Schedule a phone call with the pharmacy team.",
+    calEventSlug: "call-five-ways-pharmacy",
+    infoUrl: null,
     enabled: true,
   },
 ];
