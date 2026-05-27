@@ -58,50 +58,18 @@
         </p>
       </header>
 
-      <!--
-        ============================================================
-        CAL.COM EMBED PLACEHOLDER
-        ============================================================
-        WHAT GOES HERE
-          A cal.com embed that lets the customer pick a service and a
-          time. Two integration shapes to choose from:
-
-          1) Inline (recommended): one calendar widget that lists all
-             event types as services. Looks like part of the page.
-             https://cal.com/docs/core-features/embed/embed-inline
-
-          2) Router (advanced): a questionnaire that routes to the right
-             event type. Better when there are many services with
-             complex selection logic.
-             https://cal.com/docs/core-features/routing-forms
-
-        STEPS TO ENABLE
-          1. Pharmacy owner creates a cal.com account (free Hobby plan
-             is enough to start; Stripe app is free to install).
-          2. Add one event type per bookable service. The "slug" of each
-             event type must match `calEventSlug` in services.js.
-          3. (Optional) Install the Stripe app inside cal.com and
-             attach it to paid event types. Once attached, cal.com
-             collects payment as part of the booking flow -- you do NOT
-             need to send those customers through service-payment.html.
-          4. In cal.com, copy the Embed snippet for your chosen mode.
-          5. Replace the placeholder block below with that snippet.
-          6. Remove this comment.
-        ============================================================
-      -->
-      <section class="cal-placeholder" id="cal-placeholder">
-        <div class="cal-placeholder__inner">
-          <span class="cal-placeholder__tag">Booking widget</span>
-          <h2>Booking calendar appears here</h2>
-          <p>
-            The cal.com embed will load in this space once the pharmacy
-            owner has created their cal.com account and added the event
-            types listed below.
-          </p>
-        </div>
-      </section>
+      <!-- The booking flow uses cal.com's modal embed. Each "Book" button
+           below has a data-cal-link attribute; cal.com intercepts the
+           click and opens the calendar in a polished modal overlay. No
+           inline calendar widget needed -- the modal lets the customer
+           pick a time on top of our site rather than redirecting them
+           away. -->
 
       <h2 class="bookable-services-heading">Services available to book</h2>
+      <p class="bookable-services-intro">
+        Pick a service below to open the booking calendar. Each appointment
+        is a free 30-minute slot.
+      </p>
       <div class="bookable-services-grid" id="bookable-services-grid"></div>
 
       <p class="bookable-empty" id="bookable-empty" hidden>
@@ -126,6 +94,14 @@
       </p>
     </div>
   </footer>
+
+  <!-- cal.com embed runtime. Initialises the global Cal() function and
+       auto-binds to any element with a data-cal-link attribute, opening
+       the booking calendar in a modal. -->
+  <script type="text/javascript">
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", {origin:"https://cal.com"});
+  </script>
 
   <script src="./services.js"></script>
   <script src="./book.js"></script>

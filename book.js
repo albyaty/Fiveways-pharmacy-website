@@ -6,10 +6,10 @@
   // button should already have the right data-cal-link attribute and
   // cal.com's embed.js will take it from there.
   //
-  // CONFIG: set CAL_USERNAME to your cal.com username (e.g. "fiveways") so
-  // that buttons resolve to https://cal.com/<username>/<eventSlug>. While
-  // this is null, buttons render in a "pending" state.
-  const CAL_USERNAME = null;
+  // CONFIG: set CAL_USERNAME to your cal.com username so that buttons
+  // resolve to https://cal.com/<username>/<eventSlug>. While this is null,
+  // buttons render in a "pending" state.
+  const CAL_USERNAME = "albayatilabs";
 
   const SERVICES = (typeof window !== "undefined" && window.SERVICES) || [];
 

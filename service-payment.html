@@ -227,6 +227,58 @@
           />
         </div>
 
+        <!-- Delivery section -- only shown for prescription payments. -->
+        <div class="delivery-block" id="delivery-block">
+          <h2 class="payment-setup-card__subtitle">Delivery address</h2>
+          <p class="payment-setup-card__subtitle-hint">
+            By default we deliver your medication to the billing address on
+            your card. Tick the box below to deliver somewhere else.
+          </p>
+
+          <label class="recipient-toggle">
+            <input type="checkbox" id="separate-delivery-toggle" />
+            <span>Use a different delivery address</span>
+          </label>
+
+          <div class="details-grid details-grid--delivery" id="delivery-fields" hidden>
+            <div class="details-field details-field--full">
+              <label for="delivery-line1">Address line 1</label>
+              <input
+                type="text"
+                id="delivery-line1"
+                autocomplete="shipping address-line1"
+                placeholder="Street and number"
+              />
+            </div>
+            <div class="details-field details-field--full">
+              <label for="delivery-line2">Address line 2 <small>(optional)</small></label>
+              <input
+                type="text"
+                id="delivery-line2"
+                autocomplete="shipping address-line2"
+                placeholder="Flat, building, etc."
+              />
+            </div>
+            <div class="details-field">
+              <label for="delivery-city">Town / city</label>
+              <input
+                type="text"
+                id="delivery-city"
+                autocomplete="shipping address-level2"
+              />
+            </div>
+            <div class="details-field">
+              <label for="delivery-postcode">Postcode</label>
+              <input
+                type="text"
+                id="delivery-postcode"
+                autocomplete="shipping postal-code"
+                placeholder="e.g. SW1A 1AA"
+              />
+            </div>
+          </div>
+        </div>
+
         <p class="payment-error" id="setup-error" hidden></p>
 
         <button

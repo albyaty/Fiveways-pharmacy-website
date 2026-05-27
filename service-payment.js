@@ -8,6 +8,9 @@
     MAX_CUSTOM_PENCE: 50000,
   };
 
+  // Permissive UK postcode pattern (case-insensitive, allows missing space).
+  const UK_POSTCODE_RE = /^[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}$/i;
+
   // ---------------------------------------------------------------------------
   // State
   // ---------------------------------------------------------------------------
@@ -33,13 +36,6 @@
     const value = parseFloat(input.value);
     if (!Number.isFinite(value) || value <= 0) return 0;
     return Math.round(value * 100);
-  }
-
-  function currentAmountPence() {
-    if (paymentType === "prescription") {
-      return prescriptionItems * CONFIG.PRESCRIPTION_ITEM_PRICE_PENCE;
-    }
-    return customAmountPence;
   }
 
   function showSetupError(message) {
@@ -79,6 +75,14 @@
       paymentType !== "prescription";
     document.getElementById("amount-section-custom").hidden =
       paymentType !== "custom";
+
+    // Delivery is only relevant for prescription payments. Custom payments are
+    // typically one-off (in-store collection, settling balance) -- no delivery
+    // needed.
+    const deliveryBlock = document.getElementById("delivery-block");
+    if (deliveryBlock) {
+      deliveryBlock.hidden = paymentType !== "prescription";
+    }
     showSetupError(null);
   }
 
@@ -108,7 +112,7 @@
   }
 
   // ---------------------------------------------------------------------------
-  // Validation
+  // Validation + payload assembly
   // ---------------------------------------------------------------------------
   function collectCustomerInfo() {
     const email = document.getElementById("customer-email").value.trim();
@@ -122,6 +126,26 @@
       ? document.getElementById("recipient-name").value.trim()
       : "";
     return { email, name, dob, phone, recipientChecked, recipientName };
+  }
+
+  function collectDeliveryInfo() {
+    if (paymentType !== "prescription") {
+      return { useDifferentDelivery: false };
+    }
+    const toggle = document.getElementById("separate-delivery-toggle");
+    const useDifferent = toggle ? !!toggle.checked : false;
+    if (!useDifferent) {
+      return { useDifferentDelivery: false };
+    }
+    return {
+      useDifferentDelivery: true,
+      delivery: {
+        line1: document.getElementById("delivery-line1").value.trim(),
+        line2: document.getElementById("delivery-line2").value.trim(),
+        city: document.getElementById("delivery-city").value.trim(),
+        postcode: document.getElementById("delivery-postcode").value.trim(),
+      },
+    };
   }
 
   function validateBeforeContinue() {
@@ -166,6 +190,18 @@
     if (info.recipientChecked && !info.recipientName) {
       return "Please enter the patient's name, or untick the box.";
     }
+
+    const delivery = collectDeliveryInfo();
+    if (delivery.useDifferentDelivery) {
+      const d = delivery.delivery;
+      if (!d.line1) return "Please enter the first line of the delivery address.";
+      if (!d.city) return "Please enter the delivery town or city.";
+      if (!d.postcode) return "Please enter the delivery postcode.";
+      if (!UK_POSTCODE_RE.test(d.postcode)) {
+        return "Please enter a valid UK delivery postcode (e.g. SW1A 1AA).";
+      }
+    }
+
     return null;
   }
 
@@ -183,6 +219,7 @@
 
   async function createPayment() {
     const info = collectCustomerInfo();
+    const delivery = collectDeliveryInfo();
     const body = {
       type: paymentType,
       items: paymentType === "prescription" ? prescriptionItems : undefined,
@@ -195,6 +232,8 @@
         phone: info.phone,
         recipientName: info.recipientChecked ? info.recipientName : "",
       },
+      useDifferentDelivery: !!delivery.useDifferentDelivery,
+      delivery: delivery.delivery || null,
     };
     const res = await fetch("/api/create-service-payment", {
       method: "POST",
@@ -370,6 +409,21 @@
       if (!checked) {
         const input = document.getElementById("recipient-name");
         if (input) input.value = "";
+      }
+    });
+
+  document
+    .getElementById("separate-delivery-toggle")
+    ?.addEventListener("change", (event) => {
+      const checked = event.target.checked;
+      const fields = document.getElementById("delivery-fields");
+      if (fields) fields.hidden = !checked;
+      if (!checked) {
+        ["delivery-line1", "delivery-line2", "delivery-city", "delivery-postcode"]
+          .map((id) => document.getElementById(id))
+          .forEach((el) => {
+            if (el) el.value = "";
+          });
       }
     });
 

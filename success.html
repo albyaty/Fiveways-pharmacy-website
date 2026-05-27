@@ -143,6 +143,8 @@
         <dd id="meta-customer-name">--</dd>
         <dt>Patient receiving medication</dt>
         <dd id="meta-recipient">--</dd>
+        <dt>Deliver to</dt>
+        <dd id="meta-delivery">--</dd>
       </dl>
 
       <p class="success-note" id="success-note" hidden>
@@ -226,6 +228,12 @@
           m.recipient_name && m.recipient_name !== "(same as customer)"
             ? m.recipient_name
             : "Same as customer"
+        );
+        setMeta(
+          "meta-delivery",
+          m.delivery && m.delivery !== "(use billing address from Stripe)"
+            ? m.delivery
+            : "Same as billing address"
         );
 
         switch (paymentIntent.status) {

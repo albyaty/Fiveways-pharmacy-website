@@ -1,13 +1,23 @@
 // Creates a Stripe PaymentIntent for either a prescription order (N items
 // at the configured per-item rate) or a custom amount agreed by phone.
 //
-// The frontend sends customer info; the server computes the authoritative
-// amount and attaches everything to Stripe metadata. The pharmacy team
-// reads that metadata from the Stripe Dashboard (and the per-payment email
-// Stripe sends them) to verify what each payment is for.
+// SECURITY MODEL
+//   - The amount is always re-derived from payment-config.js on the server.
+//     Client-supplied numbers are only used as hints (item count or custom
+//     amount). The client cannot tamper with what Stripe is told to charge.
+//   - All free-text fields are trimmed and length-capped before being put
+//     into Stripe metadata so a malicious client cannot blow up the
+//     metadata payload (Stripe rejects keys >500 chars).
+//   - UK postcode is regex-validated when a delivery address is supplied.
+//   - All other customer fields (name, DOB, phone, recipient) are validated
+//     for presence and basic format. Lying about your name/DOB is still
+//     possible (any payment form has this limit) -- the pharmacy verifies
+//     when the customer phones in.
 
 const Stripe = require("stripe");
 const PAYMENT_CONFIG = require("../payment-config.js");
+
+const UK_POSTCODE_RE = /^[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}$/i;
 
 function trimString(value, maxLen) {
   if (typeof value !== "string") return "";
@@ -21,7 +31,6 @@ function isValidEmail(value) {
 }
 
 function isValidDob(value) {
-  // Accept YYYY-MM-DD; must parse to a valid date in the past.
   if (typeof value !== "string") return false;
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
   const ts = Date.parse(value);
@@ -42,7 +51,7 @@ module.exports = async (req, res) => {
       .json({ error: "Stripe is not configured on the server." });
   }
 
-  // Parse body (Vercel parses JSON automatically; stringify fallback).
+  // Parse body.
   let body = req.body;
   if (typeof body === "string") {
     try {
@@ -87,7 +96,9 @@ module.exports = async (req, res) => {
       items +
       " prescription item" +
       (items === 1 ? "" : "s");
-    summary = items + "x prescription items @ GBP " +
+    summary =
+      items +
+      "x prescription items @ GBP " +
       (PAYMENT_CONFIG.PRESCRIPTION_ITEM_PRICE_PENCE / 100).toFixed(2);
   } else {
     const proposed = Math.round(Number(body.customAmountPence));
@@ -107,8 +118,7 @@ module.exports = async (req, res) => {
     }
     amountPence = proposed;
     description = "Five Ways Pharmacy - custom payment";
-    summary =
-      "Custom payment of GBP " + (amountPence / 100).toFixed(2);
+    summary = "Custom payment of GBP " + (amountPence / 100).toFixed(2);
   }
 
   // ---- Validate customer info --------------------------------------------
@@ -136,6 +146,57 @@ module.exports = async (req, res) => {
       .json({ error: "A contact phone number is required." });
   }
 
+  // ---- Validate delivery info --------------------------------------------
+  // Only meaningful for prescription type; ignored for custom.
+  const useDifferentDelivery =
+    type === "prescription" && body.useDifferentDelivery === true;
+  let deliverySummary = "(use billing address from Stripe)";
+  let deliveryMeta = {
+    delivery_line1: "",
+    delivery_line2: "",
+    delivery_city: "",
+    delivery_postcode: "",
+  };
+
+  if (useDifferentDelivery) {
+    const d = body.delivery || {};
+    const line1 = trimString(d.line1, 200);
+    const line2 = trimString(d.line2, 200);
+    const city = trimString(d.city, 120);
+    const postcode = trimString(d.postcode, 16);
+
+    if (!line1) {
+      return res
+        .status(400)
+        .json({ error: "Delivery address line 1 is required." });
+    }
+    if (!city) {
+      return res.status(400).json({ error: "Delivery town/city is required." });
+    }
+    if (!postcode) {
+      return res.status(400).json({ error: "Delivery postcode is required." });
+    }
+    if (!UK_POSTCODE_RE.test(postcode)) {
+      return res
+        .status(400)
+        .json({ error: "Delivery postcode must be a valid UK postcode." });
+    }
+
+    deliveryMeta = {
+      delivery_line1: line1,
+      delivery_line2: line2,
+      delivery_city: city,
+      delivery_postcode: postcode.toUpperCase(),
+    };
+    deliverySummary =
+      line1 +
+      (line2 ? ", " + line2 : "") +
+      ", " +
+      city +
+      ", " +
+      postcode.toUpperCase();
+  }
+
   // ---- Create the PaymentIntent ------------------------------------------
   try {
     const stripe = new Stripe(secretKey);
@@ -155,6 +216,11 @@ module.exports = async (req, res) => {
         customer_dob: customerDob,
         customer_phone: customerPhone.slice(0, 480),
         recipient_name: recipientName || "(same as customer)",
+        delivery: deliverySummary.slice(0, 480),
+        delivery_line1: deliveryMeta.delivery_line1.slice(0, 480),
+        delivery_line2: deliveryMeta.delivery_line2.slice(0, 480),
+        delivery_city: deliveryMeta.delivery_city.slice(0, 480),
+        delivery_postcode: deliveryMeta.delivery_postcode.slice(0, 480),
       },
     });
 

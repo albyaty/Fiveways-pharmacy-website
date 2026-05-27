@@ -466,6 +466,27 @@
   accent-color: var(--deep-teal);
 }
 
+.delivery-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.details-grid--delivery {
+  margin-top: 0.35rem;
+}
+
+.details-field--full {
+  grid-column: 1 / -1;
+}
+
+.details-field label small {
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
 .payment-error {
   margin: 0;
   background: rgba(184, 66, 61, 0.08);

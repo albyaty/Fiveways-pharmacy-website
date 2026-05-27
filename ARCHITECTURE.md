@@ -122,6 +122,10 @@ in. We collect:
 - **Phone number** — so the team can call back if something's unclear.
 - **Recipient name** (optional) — for cases where the medication is for a
   family member or dependent, not the cardholder.
+- **Delivery address** (prescription flow only) — defaults to the card's
+  billing address (which the pharmacy reads from the Stripe Dashboard);
+  customer can opt-in to a separate delivery address via a checkbox. UK
+  postcode is regex-validated server-side.
 
 All of these go into Stripe **metadata** on the PaymentIntent. The
 pharmacy team sees them three ways without us writing any extra code:
@@ -178,16 +182,26 @@ Edit `MAX_CUSTOM_PENCE` in `payment-config.js`.
 
 Set `enabled: false` in `services.js`.
 
-### Connect cal.com (one-time setup)
+### Cal.com setup (already wired)
 
-1. Pharmacy owner creates a free cal.com account.
-2. For every entry in `services.js`, create a matching event type whose
-   slug equals `calEventSlug`, and set duration to 30 minutes.
-3. (Optional, for future paid bookings) install the cal.com Stripe app.
-   Not needed today because all listed bookings are free.
-4. In `book.js`, set `CAL_USERNAME` to the pharmacy's cal.com username.
-5. In `book.html`, replace the `#cal-placeholder` block with the embed
-   snippet from cal.com dashboard → Embed.
+`CAL_USERNAME` in `book.js` is set to `albayatilabs`. The cal.com embed
+script is loaded in `book.html` (the official one-liner that exposes the
+global `Cal()` function). Buttons rendered by `book.js` have
+`data-cal-link="albayatilabs/<calEventSlug>"`; cal.com's embed runtime
+intercepts clicks and opens the calendar in a modal overlay on top of
+the page.
+
+**Slug matching is critical.** Each `calEventSlug` in `services.js` must
+exactly match the URL slug of the matching event type in cal.com. If a
+button opens a "Event not found" modal, the slugs don't match -- either
+rename the event in cal.com or update `services.js`.
+
+### Adding a new bookable service after cal.com is configured
+
+1. Create the new event type in cal.com (30-minute slot, free).
+2. Add a matching entry to `services.js` with the same slug as
+   `calEventSlug`, plus `enabled: true`.
+3. Push.
 
 ### Connect Stripe (already done for test mode)
 
@@ -251,13 +265,6 @@ page.
   Stripe's built-in notifications.
 - **SMS notification to pharmacist on duty.** Same webhook, plus Twilio.
   Useful if the pharmacy wants instant phone alerts during opening hours.
-- **Add a `delivery-address` field to the prescription flow.** Currently
-  delivery is "free" but we don't capture where to deliver. Either:
-    a. Add a separate "Delivery address" fieldset on the setup card (best),
-       so the pharmacy knows where to send the prescription.
-    b. Or rely on the Stripe billing address as the delivery address by
-       convention (worse — they may differ).
-  Confirm with the pharmacy team how they want delivery handled.
 - **Move services to a database** so the pharmacy owner can manage them
   without a code deploy. Supabase + a simple admin page would work. Only
   worth it once the pharmacy owner actually wants to edit services
