@@ -14,17 +14,7 @@
   const SERVICES = (typeof window !== "undefined" && window.SERVICES) || [];
 
   function bookableServices() {
-    return SERVICES.filter(
-      (s) => s.enabled && (s.type === "bookable" || s.type === "both")
-    );
-  }
-
-  function formatPriceTag(service) {
-    if (service.pricePence === 0) return { className: "bookable-card__tag--free", label: "Free" };
-    return {
-      className: "bookable-card__tag--paid",
-      label: "GBP " + (service.pricePence / 100).toFixed(2),
-    };
+    return SERVICES.filter((s) => s.enabled);
   }
 
   function render() {
@@ -42,17 +32,14 @@
 
     grid.innerHTML = services
       .map((s) => {
-        const tag = formatPriceTag(s);
         const ready = !!(CAL_USERNAME && s.calEventSlug);
-        const calLink = ready
-          ? CAL_USERNAME + "/" + s.calEventSlug
-          : null;
+        const calLink = ready ? CAL_USERNAME + "/" + s.calEventSlug : null;
         const cta = ready
-          ? `<button type="button" class="bookable-card__cta bookable-card__cta--ready" data-cal-link="${calLink}" data-cal-namespace="" data-cal-config='{"layout":"month_view"}'>Book now</button>`
+          ? `<button type="button" class="bookable-card__cta bookable-card__cta--ready" data-cal-link="${calLink}" data-cal-namespace="" data-cal-config='{"layout":"month_view"}'>Book 30-min slot</button>`
           : `<button type="button" class="bookable-card__cta bookable-card__cta--pending" disabled aria-disabled="true">Booking setup pending</button>`;
         return `
           <article class="bookable-card">
-            <span class="bookable-card__tag ${tag.className}">${tag.label}</span>
+            <span class="bookable-card__tag bookable-card__tag--free">Free &middot; 30 min</span>
             <h3 class="bookable-card__name">${s.name}</h3>
             <p class="bookable-card__desc">${s.description || ""}</p>
             ${cta}

@@ -1,16 +1,24 @@
 (() => {
   "use strict";
 
-  // The page has three possible views (picker, single-service form, error).
-  // We swap between them based on the ?service= URL parameter and what
-  // services.js currently contains.
+  const CONFIG = (typeof window !== "undefined" && window.PAYMENT_CONFIG) || {
+    PRESCRIPTION_ITEM_PRICE_PENCE: 990,
+    MAX_PRESCRIPTION_ITEMS: 30,
+    MIN_CUSTOM_PENCE: 100,
+    MAX_CUSTOM_PENCE: 50000,
+  };
 
-  const SERVICES = (typeof window !== "undefined" && window.SERVICES) || [];
+  // ---------------------------------------------------------------------------
+  // State
+  // ---------------------------------------------------------------------------
+  let paymentType = "prescription"; // "prescription" | "custom"
+  let prescriptionItems = 1;
+  let customAmountPence = 0;
 
   let stripe = null;
   let stripePublishableKey = null;
   let elements = null;
-  let activeService = null;
+  let activeAmountPence = 0;
 
   // ---------------------------------------------------------------------------
   // Helpers
@@ -19,149 +27,209 @@
     return "GBP " + (pence / 100).toFixed(2);
   }
 
-  function payableServices() {
-    return SERVICES.filter(
-      (s) => s.enabled && (s.type === "payable" || s.type === "both")
-    );
+  function parseCustomAmountPence() {
+    const input = document.getElementById("custom-amount-input");
+    if (!input) return 0;
+    const value = parseFloat(input.value);
+    if (!Number.isFinite(value) || value <= 0) return 0;
+    return Math.round(value * 100);
   }
 
-  function findService(id) {
-    return SERVICES.find((s) => s.id === id) || null;
+  function currentAmountPence() {
+    if (paymentType === "prescription") {
+      return prescriptionItems * CONFIG.PRESCRIPTION_ITEM_PRICE_PENCE;
+    }
+    return customAmountPence;
   }
 
-  function getRequestedServiceId() {
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("service");
-    return id ? id.trim() : null;
+  function showSetupError(message) {
+    const el = document.getElementById("setup-error");
+    if (!el) return;
+    if (!message) {
+      el.hidden = true;
+      el.textContent = "";
+      return;
+    }
+    el.hidden = false;
+    el.textContent = message;
   }
 
-  function showView(name) {
-    const ids = [
-      "service-picker-view",
-      "service-payment-view",
-      "service-payment-error-view",
-    ];
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.hidden = id !== name;
+  function showPaymentError(message) {
+    const el = document.getElementById("payment-error");
+    if (!el) return;
+    if (!message) {
+      el.hidden = true;
+      el.textContent = "";
+      return;
+    }
+    el.hidden = false;
+    el.textContent = message;
+  }
+
+  // ---------------------------------------------------------------------------
+  // UI rendering
+  // ---------------------------------------------------------------------------
+  function renderType() {
+    document.querySelectorAll(".payment-type-option").forEach((btn) => {
+      const isActive = btn.getAttribute("data-type") === paymentType;
+      btn.classList.toggle("is-active", isActive);
+      btn.setAttribute("aria-checked", isActive ? "true" : "false");
+    });
+    document.getElementById("amount-section-prescription").hidden =
+      paymentType !== "prescription";
+    document.getElementById("amount-section-custom").hidden =
+      paymentType !== "custom";
+    showSetupError(null);
+  }
+
+  function renderPrescription() {
+    const subtotal = prescriptionItems * CONFIG.PRESCRIPTION_ITEM_PRICE_PENCE;
+    const countEl = document.getElementById("prescription-count");
+    if (countEl) countEl.textContent = String(prescriptionItems);
+    const subEl = document.getElementById("prescription-subtotal");
+    if (subEl) subEl.textContent = formatGBP(subtotal);
+    const totEl = document.getElementById("prescription-total");
+    if (totEl) totEl.textContent = formatGBP(subtotal);
+
+    document.querySelectorAll(
+      "#prescription-counter [data-counter-action]"
+    ).forEach((btn) => {
+      const action = btn.getAttribute("data-counter-action");
+      if (action === "dec") btn.disabled = prescriptionItems <= 1;
+      if (action === "inc")
+        btn.disabled = prescriptionItems >= CONFIG.MAX_PRESCRIPTION_ITEMS;
     });
   }
 
-  function showError(message) {
-    const errEl = document.getElementById("payment-error");
-    if (!errEl) return;
-    if (!message) {
-      errEl.hidden = true;
-      errEl.textContent = "";
-      return;
-    }
-    errEl.hidden = false;
-    errEl.textContent = message;
+  function renderCustom() {
+    customAmountPence = parseCustomAmountPence();
+    const totEl = document.getElementById("custom-total");
+    if (totEl) totEl.textContent = formatGBP(customAmountPence);
   }
 
   // ---------------------------------------------------------------------------
-  // Picker view
+  // Validation
   // ---------------------------------------------------------------------------
-  function renderPicker() {
-    const grid = document.getElementById("service-picker-grid");
-    const empty = document.getElementById("service-picker-empty");
-    if (!grid) return;
+  function collectCustomerInfo() {
+    const email = document.getElementById("customer-email").value.trim();
+    const name = document.getElementById("customer-name").value.trim();
+    const dob = document.getElementById("customer-dob").value.trim();
+    const phone = document.getElementById("customer-phone").value.trim();
+    const recipientChecked = document.getElementById(
+      "recipient-toggle-input"
+    ).checked;
+    const recipientName = recipientChecked
+      ? document.getElementById("recipient-name").value.trim()
+      : "";
+    return { email, name, dob, phone, recipientChecked, recipientName };
+  }
 
-    const services = payableServices();
-    if (services.length === 0) {
-      grid.innerHTML = "";
-      if (empty) empty.hidden = false;
-      return;
+  function validateBeforeContinue() {
+    if (paymentType === "prescription") {
+      if (prescriptionItems < 1) {
+        return "Choose at least one prescription item.";
+      }
+    } else {
+      if (customAmountPence < CONFIG.MIN_CUSTOM_PENCE) {
+        return (
+          "Enter an amount of at least " +
+          formatGBP(CONFIG.MIN_CUSTOM_PENCE) +
+          "."
+        );
+      }
+      if (customAmountPence > CONFIG.MAX_CUSTOM_PENCE) {
+        return (
+          "Custom amounts above " +
+          formatGBP(CONFIG.MAX_CUSTOM_PENCE) +
+          " must be paid by calling the pharmacy."
+        );
+      }
     }
-    if (empty) empty.hidden = true;
 
-    grid.innerHTML = services
-      .map(
-        (s) => `
-        <article class="service-pick-card" role="listitem">
-          <h3 class="service-pick-card__name">${s.name}</h3>
-          <p class="service-pick-card__desc">${s.description || ""}</p>
-          <div class="service-pick-card__meta">
-            <p class="service-pick-card__price">${formatGBP(s.pricePence)}</p>
-            <a class="service-pick-card__cta" href="./service-payment.html?service=${encodeURIComponent(s.id)}">
-              <span>Continue</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 12h12" />
-                <path d="M13 7l5 5-5 5" />
-              </svg>
-            </a>
-          </div>
-        </article>
-      `
-      )
-      .join("");
+    const info = collectCustomerInfo();
+    if (!info.email || !/^\S+@\S+\.\S+$/.test(info.email)) {
+      return "Please enter a valid email address.";
+    }
+    if (!info.name) {
+      return "Please enter your full name.";
+    }
+    if (!info.dob) {
+      return "Please enter your date of birth.";
+    }
+    const dobTs = Date.parse(info.dob);
+    if (Number.isNaN(dobTs) || dobTs >= Date.now()) {
+      return "Date of birth must be a valid past date.";
+    }
+    if (!info.phone || info.phone.replace(/\D/g, "").length < 7) {
+      return "Please enter a contact phone number.";
+    }
+    if (info.recipientChecked && !info.recipientName) {
+      return "Please enter the patient's name, or untick the box.";
+    }
+    return null;
   }
 
   // ---------------------------------------------------------------------------
-  // Single-service payment flow
+  // Stripe flow
   // ---------------------------------------------------------------------------
   async function loadPublishableKey() {
     const res = await fetch("/api/stripe-config");
-    if (!res.ok) {
-      throw new Error("Could not load Stripe configuration.");
-    }
+    if (!res.ok) throw new Error("Could not load Stripe configuration.");
     const data = await res.json();
-    if (!data || !data.publishableKey) {
+    if (!data || !data.publishableKey)
       throw new Error("Stripe publishable key is missing.");
-    }
     return data.publishableKey;
   }
 
-  async function createPaymentIntent(serviceId, customerEmail) {
+  async function createPayment() {
+    const info = collectCustomerInfo();
+    const body = {
+      type: paymentType,
+      items: paymentType === "prescription" ? prescriptionItems : undefined,
+      customAmountPence:
+        paymentType === "custom" ? customAmountPence : undefined,
+      customer: {
+        email: info.email,
+        name: info.name,
+        dob: info.dob,
+        phone: info.phone,
+        recipientName: info.recipientChecked ? info.recipientName : "",
+      },
+    };
     const res = await fetch("/api/create-service-payment", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ serviceId, customerEmail: customerEmail || "" }),
+      body: JSON.stringify(body),
     });
     const data = await res.json().catch(() => ({}));
-    if (!res.ok) {
-      throw new Error(data.error || "Could not create the payment.");
-    }
+    if (!res.ok) throw new Error(data.error || "Could not create the payment.");
     return data;
   }
 
-  function renderServiceSummary(service) {
-    const nameEl = document.getElementById("payment-service-name");
-    if (nameEl) nameEl.textContent = "Pay for " + service.name;
+  async function startPayment() {
+    const error = validateBeforeContinue();
+    if (error) {
+      showSetupError(error);
+      return;
+    }
+    showSetupError(null);
 
-    const summaryName = document.getElementById("service-summary-name");
-    if (summaryName) summaryName.textContent = service.name;
-
-    const summaryDesc = document.getElementById("service-summary-description");
-    if (summaryDesc) summaryDesc.textContent = service.description || "";
-
-    const amount = document.getElementById("service-summary-amount");
-    if (amount) amount.textContent = formatGBP(service.pricePence);
-
-    const total = document.getElementById("service-summary-total");
-    if (total) total.textContent = formatGBP(service.pricePence);
-
-    document.title = service.name + " | Pay | Five Ways Pharmacy";
-  }
-
-  async function bootPaymentView(service) {
-    activeService = service;
-    renderServiceSummary(service);
-    showView("service-payment-view");
-
-    const payBtn = document.getElementById("pay-btn");
+    const continueBtn = document.getElementById("continue-btn");
+    if (continueBtn) {
+      continueBtn.disabled = true;
+      continueBtn.textContent = "Preparing secure payment...";
+    }
 
     try {
       if (!stripe) {
         stripePublishableKey = await loadPublishableKey();
-        if (typeof Stripe === "undefined") {
+        if (typeof Stripe === "undefined")
           throw new Error("Stripe.js failed to load.");
-        }
         stripe = Stripe(stripePublishableKey);
       }
 
-      const intent = await createPaymentIntent(service.id, "");
+      const intent = await createPayment();
+      activeAmountPence = intent.amountPence;
 
       elements = stripe.elements({
         clientSecret: intent.clientSecret,
@@ -187,36 +255,55 @@
       });
       paymentElement.mount("#payment-element");
 
+      const amountEl = document.getElementById("payment-step-amount");
+      if (amountEl) amountEl.textContent = formatGBP(intent.amountPence);
+      const payBtn = document.getElementById("pay-btn");
+      if (payBtn) {
+        payBtn.querySelector(".pay-btn-label").textContent =
+          "Pay " + formatGBP(intent.amountPence);
+      }
+
       const banner = document.getElementById("payment-test-banner");
       if (banner) {
         banner.hidden = !(stripePublishableKey || "").startsWith("pk_test_");
       }
 
-      if (payBtn) {
-        payBtn.disabled = false;
-        payBtn.querySelector(".pay-btn-label").textContent =
-          "Pay " + formatGBP(intent.amountPence);
+      document.getElementById("setup-card").hidden = true;
+      const step = document.getElementById("payment-step-card");
+      if (step) {
+        step.hidden = false;
+        step.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     } catch (err) {
-      showError(err && err.message ? err.message : "Something went wrong.");
-      if (payBtn) {
-        payBtn.querySelector(".pay-btn-label").textContent = "Payment unavailable";
+      showSetupError(err && err.message ? err.message : "Something went wrong.");
+      if (continueBtn) {
+        continueBtn.disabled = false;
+        continueBtn.textContent = "Continue to payment";
       }
     }
   }
 
-  async function submitPayment(event) {
-    event.preventDefault();
-    if (!stripe || !elements || !activeService) return;
-
-    const emailInput = document.getElementById("payment-email");
-    const email = emailInput ? emailInput.value.trim() : "";
-    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
-      showError("Please enter a valid email address for your receipt.");
-      emailInput?.focus();
-      return;
+  function cancelPayment() {
+    elements = null;
+    activeAmountPence = 0;
+    document.getElementById("payment-step-card").hidden = true;
+    document.getElementById("setup-card").hidden = false;
+    document.getElementById("payment-element").innerHTML = "";
+    document.getElementById("address-element").innerHTML = "";
+    const continueBtn = document.getElementById("continue-btn");
+    if (continueBtn) {
+      continueBtn.disabled = false;
+      continueBtn.textContent = "Continue to payment";
     }
-    showError(null);
+    document
+      .getElementById("setup-card")
+      .scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  async function submitStripePayment(event) {
+    event.preventDefault();
+    if (!stripe || !elements) return;
+    showPaymentError(null);
 
     const payBtn = document.getElementById("pay-btn");
     if (payBtn) {
@@ -228,60 +315,80 @@
       elements,
       confirmParams: {
         return_url: window.location.origin + "/success.html",
-        receipt_email: email,
       },
     });
 
     if (error) {
-      showError(error.message || "Payment could not be completed.");
+      showPaymentError(error.message || "Payment could not be completed.");
       if (payBtn) {
         payBtn.removeAttribute("aria-busy");
         payBtn.querySelector(".pay-btn-label").textContent =
-          "Pay " + formatGBP(activeService.pricePence);
+          "Pay " + formatGBP(activeAmountPence);
       }
     }
-    // On success Stripe redirects to return_url; no further code runs here.
+    // On success Stripe redirects to return_url.
   }
 
   // ---------------------------------------------------------------------------
-  // Routing
+  // Event wiring
   // ---------------------------------------------------------------------------
-  function init() {
-    const requestedId = getRequestedServiceId();
-    if (!requestedId) {
-      renderPicker();
-      showView("service-picker-view");
-      return;
-    }
-
-    const service = findService(requestedId);
-    if (!service || !service.enabled) {
-      const msgEl = document.getElementById("service-payment-error-message");
-      if (msgEl) {
-        msgEl.textContent = service
-          ? "This service is not currently available for online payment."
-          : "We could not find that service.";
-      }
-      showView("service-payment-error-view");
-      return;
-    }
-
-    if (service.type !== "payable" && service.type !== "both") {
-      const msgEl = document.getElementById("service-payment-error-message");
-      if (msgEl) {
-        msgEl.textContent =
-          "This service is bookable but not paid online. Please use the booking page.";
-      }
-      showView("service-payment-error-view");
-      return;
-    }
-
-    bootPaymentView(service);
-  }
+  document.querySelectorAll(".payment-type-option").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      paymentType = btn.getAttribute("data-type") || "prescription";
+      renderType();
+    });
+  });
 
   document
-    .getElementById("service-payment-form")
-    ?.addEventListener("submit", submitPayment);
+    .getElementById("prescription-counter")
+    ?.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLElement)) return;
+      const btn = target.closest("[data-counter-action]");
+      if (!btn) return;
+      const action = btn.getAttribute("data-counter-action");
+      if (action === "inc" && prescriptionItems < CONFIG.MAX_PRESCRIPTION_ITEMS) {
+        prescriptionItems += 1;
+      } else if (action === "dec" && prescriptionItems > 1) {
+        prescriptionItems -= 1;
+      }
+      renderPrescription();
+    });
 
-  init();
+  document
+    .getElementById("custom-amount-input")
+    ?.addEventListener("input", () => {
+      renderCustom();
+    });
+
+  document
+    .getElementById("recipient-toggle-input")
+    ?.addEventListener("change", (event) => {
+      const checked = event.target.checked;
+      const field = document.getElementById("recipient-field");
+      if (field) field.hidden = !checked;
+      if (!checked) {
+        const input = document.getElementById("recipient-name");
+        if (input) input.value = "";
+      }
+    });
+
+  document
+    .getElementById("continue-btn")
+    ?.addEventListener("click", () => {
+      startPayment();
+    });
+
+  document
+    .getElementById("back-btn")
+    ?.addEventListener("click", cancelPayment);
+
+  document
+    .getElementById("stripe-payment-form")
+    ?.addEventListener("submit", submitStripePayment);
+
+  // Initial render
+  renderType();
+  renderPrescription();
+  renderCustom();
 })();

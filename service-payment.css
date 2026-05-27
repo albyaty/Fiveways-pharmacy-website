@@ -1,5 +1,5 @@
-/* Service payment page  --  uses tokens from styles.css for full consistency
-   with the calm redesign. Only the layout pieces unique to checkout live
+/* Service payment page  --  layered on top of styles.css tokens for
+   consistency with the calm redesign. Only payment-specific layout lives
    here. */
 
 /* Checkout-chrome header / footer ---------------------------------------- */
@@ -75,7 +75,7 @@
   color: var(--deep-teal-strong);
 }
 
-/* Main shell ------------------------------------------------------------- */
+/* Page shell ------------------------------------------------------------ */
 
 .service-payment-main {
   padding: 2rem 0 3rem;
@@ -85,6 +85,8 @@
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 .service-payment-breadcrumb {
@@ -108,7 +110,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
-  max-width: 720px;
 }
 
 .service-payment-heading .kicker {
@@ -139,256 +140,9 @@
   font-size: 1rem;
 }
 
-/* Picker view ----------------------------------------------------------- */
+/* Setup card (step 1) --------------------------------------------------- */
 
-.service-picker-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-}
-
-.service-pick-card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  box-shadow: var(--shadow-card);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.service-pick-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-card-hover);
-  border-color: rgba(var(--secondary-rgb), 0.6);
-}
-
-.service-pick-card__name {
-  margin: 0;
-  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--text-dark);
-}
-
-.service-pick-card__desc {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.93rem;
-  line-height: 1.45;
-  flex: 1;
-}
-
-.service-pick-card__meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-top: 0.25rem;
-}
-
-.service-pick-card__price {
-  margin: 0;
-  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
-  font-weight: 800;
-  color: var(--text-dark);
-  font-size: 1.35rem;
-}
-
-.service-pick-card__cta {
-  background: linear-gradient(135deg, var(--deep-teal), var(--deep-teal-strong));
-  color: #ffffff;
-  border-radius: 999px;
-  padding: 0.55rem 1.1rem;
-  font-weight: 800;
-  font-size: 0.92rem;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.service-pick-card__cta svg {
-  width: 14px;
-  height: 14px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.service-picker-empty {
-  margin: 1rem 0 0;
-  padding: 1.25rem 1.5rem;
-  background: var(--background-soft);
-  border: 1px dashed rgba(var(--secondary-rgb), 0.55);
-  border-radius: var(--radius-md);
-  color: var(--text-dark);
-  font-weight: 600;
-}
-
-.service-picker-helper {
-  margin: 0.5rem 0 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-.service-picker-helper a {
-  color: var(--deep-teal);
-  font-weight: 700;
-  border-bottom: 1px solid currentColor;
-}
-
-/* Single-service payment view ------------------------------------------- */
-
-.service-payment-grid {
-  display: grid;
-  grid-template-columns: 360px minmax(0, 1fr);
-  gap: 1.75rem;
-  align-items: flex-start;
-}
-
-@media (max-width: 880px) {
-  .service-payment-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.service-summary-card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  box-shadow: var(--shadow-card);
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  position: sticky;
-  top: calc(var(--sticky-header-height) + 1rem);
-}
-
-@media (max-width: 880px) {
-  .service-summary-card {
-    position: static;
-  }
-}
-
-.service-summary-card h2 {
-  margin: 0;
-  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: var(--text-dark);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.service-summary-name {
-  margin: 0;
-  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--text-dark);
-  line-height: 1.2;
-}
-
-.service-summary-description {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.95rem;
-}
-
-.service-summary-totals {
-  margin: 0.4rem 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  padding-top: 0.85rem;
-  border-top: 1px solid var(--line);
-}
-
-.service-summary-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  font-size: 0.95rem;
-  color: var(--text-dark);
-}
-
-.service-summary-row dt {
-  color: var(--muted);
-  font-weight: 600;
-}
-
-.service-summary-row dd {
-  margin: 0;
-  font-weight: 700;
-}
-
-.service-summary-row--total {
-  padding-top: 0.8rem;
-  border-top: 1px solid var(--line);
-  margin-top: 0.4rem;
-  font-size: 1.05rem;
-}
-
-.service-summary-row--total dt {
-  color: var(--text-dark);
-  font-weight: 800;
-}
-
-.service-summary-row--total dd {
-  font-weight: 800;
-  font-size: 1.3rem;
-}
-
-.service-summary-change {
-  align-self: flex-start;
-  margin-top: 0.5rem;
-  color: var(--deep-teal);
-  font-size: 0.88rem;
-  font-weight: 700;
-  border-bottom: 1px solid currentColor;
-  text-decoration: none;
-}
-
-.service-summary-change:hover {
-  color: var(--deep-teal-strong);
-}
-
-.service-summary-trust {
-  list-style: none;
-  margin: 0.5rem 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-
-.service-summary-trust li {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.service-summary-trust li::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--deep-teal);
-  flex: 0 0 auto;
-}
-
-/* Payment form card ----------------------------------------------------- */
-
-.service-payment-form-card {
+.payment-setup-card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
@@ -399,12 +153,404 @@
   gap: 1.25rem;
 }
 
-.service-payment-form-card h2 {
+.payment-setup-card__title {
   margin: 0;
   font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
   font-size: 1.25rem;
   font-weight: 800;
   color: var(--text-dark);
+}
+
+.payment-setup-card__subtitle {
+  margin: 0.5rem 0 -0.4rem;
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.payment-setup-card__subtitle-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Payment type chooser -------------------------------------------------- */
+
+.payment-type-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+@media (max-width: 540px) {
+  .payment-type-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+.payment-type-option {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-align: left;
+  background: #ffffff;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.payment-type-option:hover {
+  border-color: rgba(var(--secondary-rgb), 0.6);
+}
+
+.payment-type-option.is-active {
+  border-color: var(--deep-teal);
+  box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.18);
+}
+
+.payment-type-option__icon {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  background: rgba(var(--primary-rgb), 0.18);
+  color: var(--deep-teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment-type-option__icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.payment-type-option__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.payment-type-option__copy strong {
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.payment-type-option__copy small {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* Amount sections (prescription + custom) ------------------------------- */
+
+.amount-section {
+  background: var(--background-soft);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.25rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.amount-label {
+  font-weight: 700;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+}
+
+.counter-control {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  align-self: flex-start;
+}
+
+.counter-control button {
+  background: transparent;
+  border: none;
+  width: 42px;
+  height: 42px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.counter-control button:hover {
+  background: var(--background-soft);
+}
+
+.counter-control button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.counter-value {
+  min-width: 44px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--text-dark);
+}
+
+.custom-amount-wrap {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+  max-width: 260px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.custom-amount-wrap:focus-within {
+  border-color: var(--brand-secondary);
+  box-shadow: var(--focus-ring);
+}
+
+.custom-amount-prefix {
+  display: flex;
+  align-items: center;
+  padding: 0 0.85rem;
+  background: var(--background-soft);
+  border-right: 1px solid var(--line);
+  font-weight: 800;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+}
+
+.custom-amount-wrap input {
+  flex: 1;
+  border: none;
+  padding: 0.75rem 0.85rem;
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  background: #ffffff;
+  width: 100%;
+}
+
+.custom-amount-wrap input:focus {
+  outline: none;
+}
+
+.amount-hint {
+  margin: -0.3rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.amount-breakdown {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(var(--bordersoft-rgb), 0.5);
+}
+
+.amount-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.amount-row dt {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.amount-row dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.amount-row--total {
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(var(--bordersoft-rgb), 0.5);
+  margin-top: 0.2rem;
+  font-size: 1.05rem;
+}
+
+.amount-row--total dt {
+  color: var(--text-dark);
+  font-weight: 800;
+}
+
+.amount-row--total dd {
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+/* Customer details ------------------------------------------------------ */
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+
+@media (max-width: 540px) {
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.details-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.details-field label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.details-field input {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.7rem 0.85rem;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  background: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+}
+
+.details-field input:focus {
+  outline: none;
+  border-color: var(--brand-secondary);
+  box-shadow: var(--focus-ring);
+}
+
+.details-field--recipient {
+  grid-column: 1 / -1;
+}
+
+.recipient-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 0.92rem;
+  user-select: none;
+}
+
+.recipient-toggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--deep-teal);
+}
+
+.payment-error {
+  margin: 0;
+  background: rgba(184, 66, 61, 0.08);
+  border: 1px solid rgba(184, 66, 61, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 0.7rem 0.85rem;
+  color: #b8423d;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.payment-setup-cta {
+  width: 100%;
+  font-size: 1.05rem;
+  min-height: 52px;
+  margin-top: 0.25rem;
+}
+
+/* Step 2 -- Stripe form ------------------------------------------------- */
+
+.payment-step-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.payment-step-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.payment-step-card__head .kicker {
+  display: inline-block;
+  padding: 0.3rem 0.78rem;
+  background: rgba(var(--primary-rgb), 0.18);
+  color: var(--deep-teal);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.payment-step-card__head h2 {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.payment-step-card__amount {
+  margin: 0.4rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.payment-step-card__amount strong {
+  color: var(--text-dark);
+  font-weight: 800;
+}
+
+.payment-back-btn {
+  background: transparent;
+  border: 1px solid rgba(var(--textdark-rgb), 0.18);
+  color: var(--text-dark);
+  border-radius: 999px;
+  padding: 0.55rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.payment-back-btn:hover {
+  border-color: rgba(var(--textdark-rgb), 0.35);
+  background: var(--background-soft);
 }
 
 .payment-test-banner {
@@ -425,7 +571,7 @@
   font-size: 0.85em;
 }
 
-.service-payment-form {
+.stripe-payment-form {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -437,7 +583,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.55rem;
 }
 
 .payment-fieldset legend {
@@ -447,39 +593,6 @@
   color: var(--text-dark);
   margin-bottom: 0.35rem;
   padding: 0;
-}
-
-.payment-fieldset label {
-  font-size: 0.85rem;
-  color: var(--muted);
-  font-weight: 600;
-}
-
-.payment-fieldset input[type="email"] {
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 0.75rem 0.9rem;
-  font-size: 0.95rem;
-  color: var(--text-dark);
-  background: #ffffff;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.payment-fieldset input[type="email"]:focus {
-  outline: none;
-  border-color: var(--brand-secondary);
-  box-shadow: var(--focus-ring);
-}
-
-.payment-error {
-  margin: 0;
-  background: rgba(184, 66, 61, 0.08);
-  border: 1px solid rgba(184, 66, 61, 0.3);
-  border-radius: var(--radius-sm);
-  padding: 0.7rem 0.85rem;
-  color: #b8423d;
-  font-size: 0.9rem;
-  font-weight: 600;
 }
 
 .service-payment-pay-btn {
@@ -493,19 +606,4 @@
   opacity: 0.7;
   cursor: progress;
   transform: none !important;
-}
-
-/* Error view ------------------------------------------------------------ */
-
-.service-payment-error-view {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: 2rem;
-  box-shadow: var(--shadow-card);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
 }

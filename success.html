@@ -6,7 +6,7 @@
   <title>Payment received | Five Ways Pharmacy</title>
   <meta
     name="description"
-    content="Thank you for paying for a Five Ways Pharmacy service. We will be in touch shortly."
+    content="Thank you for paying. The pharmacy team has been notified and will process your order shortly."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,18 +60,25 @@
     }
     .success-meta {
       margin-top: 1.5rem;
-      padding: 1rem 1.2rem;
+      padding: 1.1rem 1.2rem;
       background: var(--background-soft);
       border-radius: var(--radius-sm);
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--text-dark);
       text-align: left;
     }
-    .success-meta strong {
-      display: inline-block;
-      min-width: 110px;
-      color: var(--muted);
+    .success-meta dt {
       font-weight: 600;
+      color: var(--muted);
+      margin-top: 0.4rem;
+    }
+    .success-meta dd {
+      margin: 0;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .success-meta dt:first-child {
+      margin-top: 0;
     }
     .success-actions {
       margin-top: 1.75rem;
@@ -86,6 +93,15 @@
     .success-status-failed .success-icon {
       background: rgba(184, 66, 61, 0.12);
       color: #b8423d;
+    }
+    .success-note {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      background: rgba(var(--primary-rgb), 0.14);
+      border-radius: var(--radius-sm);
+      color: var(--text-dark);
+      font-size: 0.88rem;
+      font-weight: 600;
     }
   </style>
 </head>
@@ -114,16 +130,30 @@
       <h1 id="success-title">Confirming your payment...</h1>
       <p id="success-message">Hang tight while we verify with Stripe.</p>
 
-      <div class="success-meta" id="success-meta" hidden>
-        <p><strong>Service</strong> <span id="meta-service">--</span></p>
-        <p><strong>Status</strong> <span id="meta-status">--</span></p>
-        <p><strong>Reference</strong> <span id="meta-reference">--</span></p>
-        <p><strong>Amount</strong> <span id="meta-amount">--</span></p>
-      </div>
+      <dl class="success-meta" id="success-meta" hidden>
+        <dt>Paying for</dt>
+        <dd id="meta-summary">--</dd>
+        <dt>Amount</dt>
+        <dd id="meta-amount">--</dd>
+        <dt>Status</dt>
+        <dd id="meta-status">--</dd>
+        <dt>Payment reference</dt>
+        <dd id="meta-reference">--</dd>
+        <dt>Name on payment</dt>
+        <dd id="meta-customer-name">--</dd>
+        <dt>Patient receiving medication</dt>
+        <dd id="meta-recipient">--</dd>
+      </dl>
+
+      <p class="success-note" id="success-note" hidden>
+        The pharmacy team has been notified and can match your payment to your
+        phone call right away. Please keep this reference if you need to ring
+        about your order.
+      </p>
 
       <div class="success-actions">
         <a href="./index.html" class="btn btn-primary">Back to homepage</a>
-        <a href="./service-payment.html" class="btn">Pay for another service</a>
+        <a href="./service-payment.html" class="btn">Make another payment</a>
       </div>
     </section>
   </main>
@@ -141,12 +171,9 @@
       const titleEl = document.getElementById("success-title");
       const messageEl = document.getElementById("success-message");
       const metaEl = document.getElementById("success-meta");
-      const serviceEl = document.getElementById("meta-service");
-      const statusEl = document.getElementById("meta-status");
-      const referenceEl = document.getElementById("meta-reference");
-      const amountEl = document.getElementById("meta-amount");
+      const noteEl = document.getElementById("success-note");
 
-      function setState(stateClass, title, message) {
+      function setState(stateClass, title, message, showNote) {
         card.classList.remove(
           "success-status-pending",
           "success-status-failed"
@@ -154,6 +181,12 @@
         if (stateClass) card.classList.add(stateClass);
         titleEl.textContent = title;
         messageEl.textContent = message;
+        if (noteEl) noteEl.hidden = !showNote;
+      }
+
+      function setMeta(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value || "--";
       }
 
       const params = new URLSearchParams(window.location.search);
@@ -162,7 +195,8 @@
         setState(
           "success-status-failed",
           "Order reference missing",
-          "We could not find a payment to confirm. If you were charged, please contact us with the time of your payment."
+          "We could not find a payment to confirm. If you were charged, please contact us with the time of your payment.",
+          false
         );
         return;
       }
@@ -177,33 +211,46 @@
         );
 
         metaEl.hidden = false;
-        serviceEl.textContent =
-          (paymentIntent.metadata && paymentIntent.metadata.service_name) || "Service";
-        statusEl.textContent = paymentIntent.status;
-        referenceEl.textContent = paymentIntent.id;
-        amountEl.textContent =
-          "GBP " + (paymentIntent.amount / 100).toFixed(2);
+        const m = (paymentIntent && paymentIntent.metadata) || {};
+
+        setMeta("meta-summary", m.summary || "Pharmacy service payment");
+        setMeta(
+          "meta-amount",
+          "GBP " + (paymentIntent.amount / 100).toFixed(2)
+        );
+        setMeta("meta-status", paymentIntent.status);
+        setMeta("meta-reference", paymentIntent.id);
+        setMeta("meta-customer-name", m.customer_name || "--");
+        setMeta(
+          "meta-recipient",
+          m.recipient_name && m.recipient_name !== "(same as customer)"
+            ? m.recipient_name
+            : "Same as customer"
+        );
 
         switch (paymentIntent.status) {
           case "succeeded":
             setState(
               null,
               "Payment received",
-              "Thank you. Your payment has been confirmed and the pharmacy team will be in touch shortly."
+              "Thank you. Your payment has been confirmed and the pharmacy team has been notified.",
+              true
             );
             break;
           case "processing":
             setState(
               "success-status-pending",
               "Payment processing",
-              "Your bank is finalising the payment. We will email a receipt as soon as it clears."
+              "Your bank is finalising the payment. We will email a receipt as soon as it clears.",
+              false
             );
             break;
           case "requires_payment_method":
             setState(
               "success-status-failed",
               "Payment not completed",
-              "Your payment was not successful. Please return to the service payment page and try again with a different payment method."
+              "Your payment was not successful. Please return to the payment page and try again with a different card.",
+              false
             );
             break;
           default:
@@ -212,14 +259,16 @@
               "Payment status unclear",
               "We received the payment with status \"" +
                 paymentIntent.status +
-                "\". Please contact us if you have any concerns."
+                "\". Please contact us if you have any concerns.",
+              false
             );
         }
       } catch (err) {
         setState(
           "success-status-failed",
           "Could not confirm payment",
-          "We could not reach Stripe to confirm. Reference: " + clientSecret
+          "We could not reach Stripe to confirm. Reference: " + clientSecret,
+          false
         );
       }
     })();

@@ -6,7 +6,7 @@
   <title>Service Payment | Five Ways Pharmacy</title>
   <meta
     name="description"
-    content="Pay securely for Five Ways Pharmacy services online."
+    content="Pay securely for Five Ways Pharmacy prescription items or a custom amount."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,9 +18,8 @@
   <link rel="stylesheet" href="./service-payment.css" />
 </head>
 <body>
-  <!-- Minimal checkout-chrome header. We deliberately strip search, mega-nav
-       and account UI here -- standard pattern on payment pages to reduce
-       distractions and abandonment. The footer is similarly trimmed. -->
+  <!-- Checkout-chrome header. Search/mega-nav stripped to reduce
+       distractions on a payment page. -->
   <header class="checkout-chrome-header">
     <div class="container checkout-chrome-header__inner">
       <a class="brand checkout-chrome-header__brand" href="./index.html" aria-label="Five Ways Pharmacy home">
@@ -50,123 +49,237 @@
         <span aria-current="page">Service Payment</span>
       </nav>
 
-      <!-- View 1: shown when no ?service= param is present. The JS swaps
-           between this view and the single-service view based on URL. -->
-      <section class="service-picker-view" id="service-picker-view" hidden>
-        <header class="service-payment-heading">
-          <span class="kicker">Secure pharmacy payments</span>
-          <h1>Pay for a pharmacy service</h1>
-          <p>
-            Choose the service you need and we will guide you through a secure
-            Stripe checkout. Your card details never touch our server.
-          </p>
-        </header>
+      <header class="service-payment-heading">
+        <span class="kicker">Secure pharmacy payment</span>
+        <h1>Make a payment</h1>
+        <p>
+          Pay for your prescription items or a custom amount agreed with the
+          pharmacy team. Your details go straight to the pharmacy so we can
+          process your order without delay.
+        </p>
+      </header>
 
-        <div class="service-picker-grid" id="service-picker-grid" role="list">
-          <!-- populated by service-payment.js -->
+      <!-- === STEP 1: Details form =================================== -->
+      <section class="payment-setup-card" id="setup-card" aria-labelledby="setup-card-title">
+        <h2 id="setup-card-title" class="payment-setup-card__title">What are you paying for?</h2>
+
+        <div class="payment-type-options" role="radiogroup" aria-label="Payment type">
+          <button
+            type="button"
+            class="payment-type-option is-active"
+            data-type="prescription"
+            role="radio"
+            aria-checked="true"
+          >
+            <span class="payment-type-option__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 7h14v12H5z" />
+                <path d="M9 11h6" />
+                <path d="M9 14h4" />
+                <path d="M8 7V5h8v2" />
+              </svg>
+            </span>
+            <span class="payment-type-option__copy">
+              <strong>Prescription items</strong>
+              <small>GBP 9.90 per item, free delivery</small>
+            </span>
+          </button>
+
+          <button
+            type="button"
+            class="payment-type-option"
+            data-type="custom"
+            role="radio"
+            aria-checked="false"
+          >
+            <span class="payment-type-option__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 5v14" />
+                <path d="M16 8.5a3.5 3.5 0 0 0-3.5-3h-1A2.5 2.5 0 0 0 10 8c0 1.5 1.2 2.5 3 2.5s3 1 3 2.5a2.5 2.5 0 0 1-2.5 2.5h-1A3.5 3.5 0 0 1 9 12.5" />
+              </svg>
+            </span>
+            <span class="payment-type-option__copy">
+              <strong>Custom amount</strong>
+              <small>Pay an amount agreed with the pharmacy</small>
+            </span>
+          </button>
         </div>
 
-        <p class="service-picker-empty" id="service-picker-empty" hidden>
-          Online service payments are being set up. Please call the pharmacy
-          to make a payment in the meantime.
+        <!-- Prescription details (shown when type=prescription) -->
+        <div class="amount-section" id="amount-section-prescription">
+          <label class="amount-label" for="prescription-counter">
+            How many items are on your prescription?
+          </label>
+          <div class="counter-control" id="prescription-counter">
+            <button type="button" data-counter-action="dec" aria-label="Decrease items">-</button>
+            <span class="counter-value" id="prescription-count">1</span>
+            <button type="button" data-counter-action="inc" aria-label="Increase items">+</button>
+          </div>
+
+          <dl class="amount-breakdown">
+            <div class="amount-row">
+              <dt>Subtotal</dt>
+              <dd id="prescription-subtotal">GBP 9.90</dd>
+            </div>
+            <div class="amount-row">
+              <dt>Delivery</dt>
+              <dd>FREE</dd>
+            </div>
+            <div class="amount-row amount-row--total">
+              <dt>Total</dt>
+              <dd id="prescription-total">GBP 9.90</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Custom amount (shown when type=custom) -->
+        <div class="amount-section" id="amount-section-custom" hidden>
+          <label class="amount-label" for="custom-amount-input">Amount to pay</label>
+          <div class="custom-amount-wrap">
+            <span class="custom-amount-prefix" aria-hidden="true">GBP</span>
+            <input
+              type="number"
+              id="custom-amount-input"
+              min="1"
+              max="500"
+              step="0.01"
+              placeholder="0.00"
+              inputmode="decimal"
+              autocomplete="off"
+            />
+          </div>
+          <p class="amount-hint">
+            Use this only if the pharmacy team gave you a specific amount
+            during your call.
+          </p>
+
+          <dl class="amount-breakdown">
+            <div class="amount-row amount-row--total">
+              <dt>Total</dt>
+              <dd id="custom-total">GBP 0.00</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Your details -->
+        <h2 class="payment-setup-card__subtitle">Your details</h2>
+        <p class="payment-setup-card__subtitle-hint">
+          Used by the pharmacy team to match your payment to your call.
         </p>
 
-        <p class="service-picker-helper">
-          Looking to book an appointment instead?
-          <a href="./book.html">Go to bookings</a>.
-        </p>
+        <div class="details-grid">
+          <div class="details-field">
+            <label for="customer-email">Email for receipt</label>
+            <input
+              type="email"
+              id="customer-email"
+              autocomplete="email"
+              required
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div class="details-field">
+            <label for="customer-name">Full name</label>
+            <input
+              type="text"
+              id="customer-name"
+              autocomplete="name"
+              required
+              placeholder="As it appears on your card"
+            />
+          </div>
+
+          <div class="details-field">
+            <label for="customer-dob">Date of birth</label>
+            <input
+              type="date"
+              id="customer-dob"
+              autocomplete="bday"
+              required
+            />
+          </div>
+
+          <div class="details-field">
+            <label for="customer-phone">Phone number</label>
+            <input
+              type="tel"
+              id="customer-phone"
+              autocomplete="tel"
+              required
+              placeholder="07..."
+            />
+          </div>
+        </div>
+
+        <label class="recipient-toggle">
+          <input type="checkbox" id="recipient-toggle-input" />
+          <span>The medication is for someone else</span>
+        </label>
+
+        <div class="details-field details-field--recipient" id="recipient-field" hidden>
+          <label for="recipient-name">Full name of the patient receiving the medication</label>
+          <input
+            type="text"
+            id="recipient-name"
+            autocomplete="off"
+            placeholder="Patient's full name"
+          />
+        </div>
+
+        <p class="payment-error" id="setup-error" hidden></p>
+
+        <button
+          type="button"
+          class="btn btn-primary payment-setup-cta"
+          id="continue-btn"
+        >
+          Continue to payment
+        </button>
       </section>
 
-      <!-- View 2: shown when ?service=xxx is present and valid. -->
-      <section class="service-payment-view" id="service-payment-view" hidden>
-        <header class="service-payment-heading">
-          <span class="kicker">Service payment</span>
-          <h1 id="payment-service-name">Service payment</h1>
-        </header>
-
-        <div class="service-payment-grid">
-          <aside class="service-summary-card" aria-labelledby="service-summary-title">
-            <h2 id="service-summary-title">Selected service</h2>
-            <p class="service-summary-name" id="service-summary-name"></p>
-            <p class="service-summary-description" id="service-summary-description"></p>
-            <dl class="service-summary-totals">
-              <div class="service-summary-row">
-                <dt>Amount</dt>
-                <dd id="service-summary-amount">GBP 0.00</dd>
-              </div>
-              <div class="service-summary-row service-summary-row--total">
-                <dt>Total to charge</dt>
-                <dd id="service-summary-total">GBP 0.00</dd>
-              </div>
-            </dl>
-            <a href="./service-payment.html" class="service-summary-change">
-              Change service
-            </a>
-            <ul class="service-summary-trust" aria-label="Reassurance">
-              <li>Card details handled by Stripe</li>
-              <li>Receipt emailed instantly</li>
-              <li>Pharmacy team in touch shortly</li>
-            </ul>
-          </aside>
-
-          <section class="service-payment-form-card" aria-labelledby="payment-form-title">
-            <h2 id="payment-form-title">Payment &amp; contact</h2>
-
-            <p class="payment-test-banner" id="payment-test-banner" hidden>
-              <strong>Test mode</strong> &mdash; use card
-              <code>4242 4242 4242 4242</code> with any future expiry and any
-              CVC. No real card will be charged.
+      <!-- === STEP 2: Stripe payment ================================ -->
+      <section class="payment-step-card" id="payment-step-card" hidden aria-labelledby="payment-step-title">
+        <div class="payment-step-card__head">
+          <div>
+            <span class="kicker">Step 2 of 2</span>
+            <h2 id="payment-step-title">Secure payment</h2>
+            <p class="payment-step-card__amount">
+              You are paying <strong id="payment-step-amount">GBP 0.00</strong>
             </p>
-
-            <form id="service-payment-form" class="service-payment-form" novalidate>
-              <fieldset class="payment-fieldset">
-                <legend>Contact</legend>
-                <label for="payment-email">Email for receipt and updates</label>
-                <input
-                  type="email"
-                  id="payment-email"
-                  name="email"
-                  required
-                  autocomplete="email"
-                  placeholder="you@example.com"
-                />
-              </fieldset>
-
-              <fieldset class="payment-fieldset">
-                <legend>Billing address</legend>
-                <div id="address-element"><!-- Stripe AddressElement --></div>
-              </fieldset>
-
-              <fieldset class="payment-fieldset">
-                <legend>Payment</legend>
-                <div id="payment-element"><!-- Stripe PaymentElement --></div>
-              </fieldset>
-
-              <p class="payment-error" id="payment-error" hidden></p>
-
-              <button
-                type="submit"
-                class="btn btn-primary service-payment-pay-btn"
-                id="pay-btn"
-                disabled
-              >
-                <span class="pay-btn-label">Loading payment...</span>
-              </button>
-            </form>
-          </section>
+          </div>
+          <button type="button" class="payment-back-btn" id="back-btn">
+            Back to details
+          </button>
         </div>
-      </section>
 
-      <!-- View 3: shown when ?service=xxx is present but the service is not
-           found, not enabled, or not payable. -->
-      <section class="service-payment-error-view" id="service-payment-error-view" hidden>
-        <header class="service-payment-heading">
-          <h1>Service unavailable</h1>
-          <p id="service-payment-error-message">
-            This service is not currently available for online payment.
-          </p>
-        </header>
-        <a href="./service-payment.html" class="btn btn-primary">See available services</a>
+        <p class="payment-test-banner" id="payment-test-banner" hidden>
+          <strong>Test mode</strong> &mdash; use card
+          <code>4242 4242 4242 4242</code> with any future expiry and any CVC.
+          No real card will be charged.
+        </p>
+
+        <form id="stripe-payment-form" class="stripe-payment-form" novalidate>
+          <fieldset class="payment-fieldset">
+            <legend>Billing address</legend>
+            <div id="address-element"><!-- Stripe AddressElement --></div>
+          </fieldset>
+
+          <fieldset class="payment-fieldset">
+            <legend>Card details</legend>
+            <div id="payment-element"><!-- Stripe PaymentElement --></div>
+          </fieldset>
+
+          <p class="payment-error" id="payment-error" hidden></p>
+
+          <button
+            type="submit"
+            class="btn btn-primary service-payment-pay-btn"
+            id="pay-btn"
+          >
+            <span class="pay-btn-label">Pay now</span>
+          </button>
+        </form>
       </section>
     </section>
   </main>
@@ -182,7 +295,7 @@
     </div>
   </footer>
 
-  <script src="./services.js"></script>
+  <script src="./payment-config.js"></script>
   <script src="https://js.stripe.com/v3/"></script>
   <script src="./service-payment.js"></script>
 </body>
