@@ -501,7 +501,7 @@
         </p>
       </div>
       <div class="service-detail-conditions-grid">
-        <a class="service-detail-condition-card" href="#sinusitis">
+        <a class="service-detail-condition-card" href="#sinusitis" aria-controls="pharmacy-first-guidance-section" aria-expanded="false">
           <span class="service-detail-condition-media">
             <img
               src="../assets/images/pharmacy-first-conditions/sinusitis.webp"
@@ -514,7 +514,7 @@
           <h3>Sinusitis</h3>
           <p>Tap to view what the pharmacist may ask and the next-step guidance.</p>
         </a>
-        <a class="service-detail-condition-card" href="#sore-throat">
+        <a class="service-detail-condition-card" href="#sore-throat" aria-controls="pharmacy-first-guidance-section" aria-expanded="false">
           <span class="service-detail-condition-media">
             <img
               src="../assets/images/pharmacy-first-conditions/sore-throat.webp"
@@ -527,7 +527,7 @@
           <h3>Sore throat</h3>
           <p>Tap to view assessment guidance, support options, and referral notes.</p>
         </a>
-        <a class="service-detail-condition-card" href="#infected-insect-bites">
+        <a class="service-detail-condition-card" href="#infected-insect-bites" aria-controls="pharmacy-first-guidance-section" aria-expanded="false">
           <span class="service-detail-condition-media">
             <img
               src="../assets/images/pharmacy-first-conditions/infected-insect-bites.webp"
@@ -540,7 +540,7 @@
           <h3>Infected insect bites</h3>
           <p>Tap to view what support may include when the clinical pathway is suitable.</p>
         </a>
-        <a class="service-detail-condition-card" href="#impetigo">
+        <a class="service-detail-condition-card" href="#impetigo" aria-controls="pharmacy-first-guidance-section" aria-expanded="false">
           <span class="service-detail-condition-media">
             <img
               src="../assets/images/pharmacy-first-conditions/impetigo.webp"
@@ -553,7 +553,7 @@
           <h3>Impetigo</h3>
           <p>Tap to view how the pharmacist may assess symptoms and advise on next steps.</p>
         </a>
-        <a class="service-detail-condition-card" href="#shingles">
+        <a class="service-detail-condition-card" href="#shingles" aria-controls="pharmacy-first-guidance-section" aria-expanded="false">
           <span class="service-detail-condition-media service-detail-condition-media--shingles">
             <img
               src="../assets/images/pharmacy-first-conditions/shingles.png"
@@ -566,7 +566,7 @@
           <h3>Shingles</h3>
           <p>Tap to view what the pharmacist may ask and when urgent follow-up may be needed.</p>
         </a>
-        <a class="service-detail-condition-card" href="#uti-women">
+        <a class="service-detail-condition-card" href="#uti-women" aria-controls="pharmacy-first-guidance-section" aria-expanded="false">
           <span class="service-detail-condition-media">
             <img
               src="../assets/images/pharmacy-first-conditions/uti-women.webp"
@@ -581,6 +581,8 @@
         </a>
       </div>
     </section>
+
+    <div id="pharmacy-first-inline-guide-anchor" aria-hidden="true"></div>
 
     <section class="service-detail-section container">
       <div class="service-detail-info-grid">
@@ -612,14 +614,13 @@
       </div>
     </section>
 
-    <section class="service-detail-section container">
+    <section class="service-detail-section container pharmacy-first-guidance-section" id="pharmacy-first-guidance-section" hidden>
       <div class="service-detail-panel">
         <div class="service-detail-section-head service-detail-section-head--compact">
           <span class="section-kicker">Condition guidance</span>
           <h2>Condition guidance</h2>
           <p>
-            Richer support guides for the Pharmacy First conditions we offer, subject to pharmacist assessment and the
-            relevant NHS clinical pathway.
+            Select a condition above to open the relevant guidance here without jumping down the page.
           </p>
         </div>
         <div class="pharmacy-first-guide-stack">
@@ -1457,6 +1458,88 @@
         mobileViewport.addEventListener("change", reorderMobileSections);
       } else if (typeof mobileViewport.addListener === "function") {
         mobileViewport.addListener(reorderMobileSections);
+      }
+    })();
+
+    (() => {
+      const inlineGuideAnchor = document.getElementById("pharmacy-first-inline-guide-anchor");
+      const guidanceSection = document.getElementById("pharmacy-first-guidance-section");
+      const conditionCards = Array.from(document.querySelectorAll('.service-detail-page--pharmacy-first .service-detail-condition-card[href^="#"]'));
+      const guides = guidanceSection ? Array.from(guidanceSection.querySelectorAll(".pharmacy-first-guide")) : [];
+
+      if (!inlineGuideAnchor || !guidanceSection || !conditionCards.length || !guides.length) return;
+
+      inlineGuideAnchor.parentNode.insertBefore(guidanceSection, inlineGuideAnchor.nextSibling);
+      inlineGuideAnchor.remove();
+
+      const guidesById = new Map(
+        guides.map((guide) => [guide.id, guide])
+      );
+      let activeGuideId = null;
+
+      const renderGuides = () => {
+        const hasActiveGuide = Boolean(activeGuideId && guidesById.has(activeGuideId));
+
+        guidanceSection.hidden = !hasActiveGuide;
+        guidanceSection.style.display = hasActiveGuide ? "" : "none";
+
+        guides.forEach((guide) => {
+          const shouldHideGuide = !hasActiveGuide || guide.id !== activeGuideId;
+          guide.hidden = shouldHideGuide;
+          guide.style.display = shouldHideGuide ? "none" : "";
+        });
+
+        conditionCards.forEach((card) => {
+          const targetId = (card.getAttribute("href") || "").replace(/^#/, "");
+          const isActive = hasActiveGuide && targetId === activeGuideId;
+          card.classList.toggle("is-active", isActive);
+          card.setAttribute("aria-expanded", isActive ? "true" : "false");
+        });
+      };
+
+      const setActiveGuide = (nextGuideId) => {
+        if (!nextGuideId || !guidesById.has(nextGuideId)) {
+          activeGuideId = null;
+          renderGuides();
+          return;
+        }
+
+        activeGuideId = activeGuideId === nextGuideId ? null : nextGuideId;
+        renderGuides();
+      };
+
+      conditionCards.forEach((card) => {
+        card.addEventListener("click", (event) => {
+          const nextGuideId = (card.getAttribute("href") || "").replace(/^#/, "");
+          if (!nextGuideId) return;
+
+          event.preventDefault();
+          setActiveGuide(nextGuideId);
+        });
+      });
+
+      const initialGuideId = window.location.hash.replace(/^#/, "");
+      const shouldRestoreInitialGuide = initialGuideId && guidesById.has(initialGuideId);
+      if (initialGuideId && guidesById.has(initialGuideId)) {
+        activeGuideId = initialGuideId;
+      }
+
+      renderGuides();
+
+      if (shouldRestoreInitialGuide) {
+        window.requestAnimationFrame(() => {
+          const stickyOffset = 96;
+          const targetTop = Math.max(
+            0,
+            Math.round(guidanceSection.getBoundingClientRect().top + window.scrollY - stickyOffset)
+          );
+
+          window.scrollTo({ top: targetTop, behavior: "auto" });
+
+          if (typeof window.history.replaceState === "function") {
+            window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+          }
+        });
       }
     })();
 

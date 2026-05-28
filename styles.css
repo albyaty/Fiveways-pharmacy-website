@@ -130,13 +130,17 @@ svg {
   }
 
   .home-showcase--service-led > .hero-side > .side-card {
-    flex: 1 1 0;
+    /* Let cards expand to share spare height, but never shrink below their
+       content. This prevents the primary CTA from being clipped on narrower
+       desktop/tablet widths where the sidebar becomes shorter than its natural
+       content stack. */
+    flex: 1 0 auto;
     align-content: center;
   }
 
   /* The promo card is the visual anchor, so it takes a larger share. */
   .home-showcase--service-led > .hero-side > .side-card-primary {
-    flex: 2 1 0;
+    flex: 2 0 auto;
   }
 }
 
@@ -3965,6 +3969,7 @@ main {
   box-shadow: var(--shadow-soft);
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
 
@@ -3978,6 +3983,22 @@ main {
 .service-detail-condition-card:focus-visible {
   outline: 3px solid rgba(var(--secondary-rgb), 0.22);
   outline-offset: 3px;
+}
+
+.service-detail-page--pharmacy-first .service-detail-condition-card.is-active {
+  border-color: rgba(var(--secondary-rgb), 0.42);
+  background:
+    radial-gradient(circle at 88% 14%, rgba(var(--primary-rgb), 0.1), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.995), rgba(var(--bgsoft-rgb), 0.62));
+  box-shadow: 0 18px 34px rgba(var(--textdark-rgb), 0.09);
+}
+
+.service-detail-page--pharmacy-first .service-detail-condition-card.is-active h3 {
+  color: var(--deep-teal);
+}
+
+.service-detail-page--pharmacy-first .service-detail-condition-card.is-active .service-detail-condition-media {
+  box-shadow: inset 0 0 0 1px rgba(var(--secondary-rgb), 0.22);
 }
 
 .service-detail-condition-media {
@@ -4080,6 +4101,15 @@ main {
   display: grid;
   gap: 0.92rem;
   margin-top: 0.94rem;
+}
+
+.pharmacy-first-guidance-section {
+  scroll-margin-top: calc(var(--sticky-header-height) + 1rem);
+}
+
+.service-detail-page--pharmacy-first .pharmacy-first-guidance-section[hidden],
+.service-detail-page--pharmacy-first .pharmacy-first-guide[hidden] {
+  display: none !important;
 }
 
 .pharmacy-first-guide {
