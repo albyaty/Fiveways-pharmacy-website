@@ -452,7 +452,7 @@
               </article>
             </div>
             <div class="service-detail-action-row service-detail-action-row--hero-process">
-              <a href="../book.html" class="service-detail-button service-detail-button--primary" data-cal-link="albayatilabs/flu-vaccine" data-cal-namespace="fw-book" data-cal-config='{"layout":"month_view"}'>Book flu vaccine</a>
+              <a href="../book.html" class="service-detail-button service-detail-button--primary" data-cal-link="albayatilabs/flu-vaccine" data-cal-config='{"layout":"month_view"}'>Book flu vaccine</a>
             </div>
             <p class="service-detail-action-note">
               If you are not sure whether you may qualify for a free NHS flu vaccine, check the NHS guidance below or speak to the pharmacy team first.
@@ -562,7 +562,7 @@
           </p>
         </div>
         <div class="service-detail-action-row service-detail-action-row--cta">
-          <a href="../book.html" class="service-detail-button service-detail-button--primary" data-cal-link="albayatilabs/flu-vaccine" data-cal-namespace="fw-book" data-cal-config='{"layout":"month_view"}'>Book flu vaccine</a>
+          <a href="../book.html" class="service-detail-button service-detail-button--primary" data-cal-link="albayatilabs/flu-vaccine" data-cal-config='{"layout":"month_view"}'>Book flu vaccine</a>
         </div>
       </div>
     </section>
@@ -1013,13 +1013,16 @@
       }
     })();
   </script>
-  <!-- cal.eu modal embed runtime. Opens the calendar for THIS specific
-       service's event type when a Book button is clicked. No popup card
-       picker -- this page is already about one service. -->
+  <!-- cal.eu modal embed runtime + explicit click handler.
+       Opens the calendar for this page's specific service event when
+       any [data-cal-link] element is clicked. The explicit handler
+       below is a safety net for cases where cal.eu's automatic
+       interceptor doesn't catch an <a> tag fast enough and the href
+       fallback (/book.html) gets followed instead. -->
   <script type="text/javascript">
     (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.eu/embed/embed.js", "init");
-    Cal("init", "fw-book", { origin: "https://cal.eu" });
-    Cal.ns["fw-book"]("ui", {
+    Cal("init", { origin: "https://cal.eu" });
+    Cal("ui", {
       theme: "light",
       hideEventTypeDetails: false,
       layout: "month_view",
@@ -1037,6 +1040,17 @@
           "cal-border-emphasis": "#89b7bc"
         }
       }
+    });
+
+    document.addEventListener("click", function (e) {
+      var trigger = e.target.closest && e.target.closest("[data-cal-link]");
+      if (!trigger || !window.Cal) return;
+      e.preventDefault();
+      var calLink = trigger.getAttribute("data-cal-link");
+      var rawConfig = trigger.getAttribute("data-cal-config");
+      var config = { layout: "month_view" };
+      if (rawConfig) { try { config = JSON.parse(rawConfig); } catch (err) {} }
+      window.Cal("modal", { calLink: calLink, config: config });
     });
   </script>
 </body>
