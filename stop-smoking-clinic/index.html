@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -174,7 +174,7 @@
                   </svg>
                   <span>Prescriptions &amp; care</span>
                 </p>
-                <a href="#" class="category-pill-dropdown-link">Repeat Prescriptions</a>
+                <a href="../repeat-prescriptions/" class="category-pill-dropdown-link">Repeat Prescriptions</a>
                 <a href="#" class="category-pill-dropdown-link">Private Consultations</a>
                 <a href="#" class="category-pill-dropdown-link">Medicine Advice</a>
               </div>
@@ -204,7 +204,7 @@
             </div>
           </div>
           <div class="category-pill-dropdown category-pill-dropdown--compact category-pill-dropdown--prescriptions">
-            <a href="../prescriptions.html" aria-haspopup="true">
+            <button type="button" aria-haspopup="true" aria-expanded="false">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M8 5.5h8v13H8z" />
                 <path d="M10 3.75h4" />
@@ -212,11 +212,11 @@
                 <path d="M10 13h4" />
               </svg>
               <span>Prescriptions</span>
-            </a>
+            </button>
 
             <div class="category-pill-dropdown-menu category-pill-dropdown-menu--compact" aria-label="Prescriptions menu">
-              <a href="../emergency-prescriptions.html" class="category-pill-dropdown-link">Emergency prescriptions</a>
-              <a href="../repeat-prescriptions.html" class="category-pill-dropdown-link">Repeat prescriptions</a>
+              <a href="../emergency-prescriptions/" class="category-pill-dropdown-link">Emergency supply</a>
+              <a href="../repeat-prescriptions/" class="category-pill-dropdown-link">Repeat prescriptions</a>
             </div>
           </div>
           <a href="../health-advice/">
@@ -312,7 +312,13 @@
               <a href="../umbrella-services/" class="mobile-menu-link">Umbrella Services</a>
               <a href="../weight-loss-support/" class="mobile-menu-link">Weight Loss</a>
               <a href="../nhs-contraception-services/" class="mobile-menu-link">NHS Contraception Services</a>
-              <a href="../prescriptions.html" class="mobile-menu-link">Prescriptions</a>
+              <details class="mobile-menu-group">
+                <summary class="mobile-menu-link mobile-menu-link--toggle">Prescriptions</summary>
+                <div class="mobile-menu-submenu">
+                  <a href="../emergency-prescriptions/" class="mobile-menu-link">Emergency supply</a>
+                  <a href="../repeat-prescriptions/" class="mobile-menu-link">Repeat prescriptions</a>
+                </div>
+              </details>
               <a href="../health-advice/" class="mobile-menu-link">Health Advice</a>
               <a href="../index.html#shop-by-category" class="mobile-menu-link service-led-hidden" hidden>Over-the-counter Purchases</a>
               <a href="../covid-vaccines/" class="mobile-menu-link">COVID Vaccines (Spring / Autumn)</a>
@@ -414,142 +420,217 @@
         <span class="section-kicker">Free service</span>
         <h1>Stop Smoking Clinic</h1>
         <p>
-          Free, supportive stop smoking advice from Five Ways Pharmacy, with telephone or Zoom consultations available.
-          We&rsquo;ll talk through your smoking habits, help you build a practical quit plan, and offer pharmacist-led
-          support around cravings, triggers, and nicotine replacement options where suitable.
+          Free, friendly support to help you stop smoking with a personalised quit plan from the Five Ways Pharmacy team.
+          Telephone or Zoom consultations are available, with help to understand your smoking habits, manage cravings,
+          and agree the next step at a pace that feels realistic for you.
         </p>
         <div class="service-detail-pill-row" aria-label="Service highlights">
           <span>Free service</span>
-          <span>Telephone or Zoom consultation</span>
-          <span>Personalised quit support</span>
-          <span>Pharmacist-led advice</span>
+          <span>Telephone or Zoom</span>
+          <span>Personalised quit plan</span>
+          <span>Non-judgemental support</span>
         </div>
-        <div class="service-detail-hero-process" aria-labelledby="stop-smoking-how-it-works">
-          <div class="service-detail-hero-process__intro">
-            <h2 id="stop-smoking-how-it-works">How it works</h2>
-            <p>We&rsquo;ll keep the process simple, supportive, and focused on the next realistic step for you.</p>
-          </div>
-          <div class="service-detail-hero-steps">
-            <article class="service-detail-step-card service-detail-step-card--hero">
-              <span class="service-detail-step-number">1</span>
-              <h3>Book your consultation</h3>
-              <p>Choose a convenient time for a free telephone or Zoom consultation.</p>
-            </article>
-            <article class="service-detail-step-card service-detail-step-card--hero">
-              <span class="service-detail-step-number">2</span>
-              <h3>Tell us about your smoking habits</h3>
-              <p>We&rsquo;ll ask about your routine, triggers, and what you have tried before.</p>
-            </article>
-            <article class="service-detail-step-card service-detail-step-card--hero">
-              <span class="service-detail-step-number">3</span>
-              <h3>Build a quit plan with the pharmacy team</h3>
-              <p>We&rsquo;ll agree a practical approach that fits your goals and circumstances.</p>
-            </article>
-            <article class="service-detail-step-card service-detail-step-card--hero">
-              <span class="service-detail-step-number">4</span>
-              <h3>Get ongoing support where suitable</h3>
-              <p>Follow-up encouragement and advice may be offered based on your needs and suitability.</p>
-            </article>
-          </div>
-          <div class="service-detail-action-row service-detail-action-row--hero-process">
-            <a href="../book.html" class="service-detail-button service-detail-button--primary" data-cal-link="albayatilabs/stop-smoking-clinic" data-cal-config='{"layout":"month_view"}'>Book a free Stop Smoking consultation</a>
-          </div>
+        <div class="service-detail-action-row service-detail-action-row--hero-process">
+          <a href="../book.html" class="service-detail-button service-detail-button--primary" data-cal-link="albayatilabs/stop-smoking-clinic" data-cal-config='{"layout":"month_view"}'>Book a free Stop Smoking consultation</a>
         </div>
       </div>
 
-      <aside class="service-detail-hero-card" aria-label="Stop Smoking Clinic overview">
-        <div class="service-detail-hero-card__media">
-          <img
-            src="../assets/images/pharmacy-services-made-simple/service-stop-smoking-clinic.png"
-            alt="Stop Smoking Clinic support illustration"
-            loading="eager"
-            decoding="async"
-          />
-        </div>
-        <div class="service-detail-hero-card__body">
-          <p class="service-detail-hero-card__eyebrow">At a glance</p>
-          <ul class="service-detail-checklist">
-            <li>Free consultation with Five Ways Pharmacy</li>
-            <li>Telephone or Zoom appointments available</li>
-            <li>Practical quit planning tailored to you</li>
-            <li>Support may continue where suitable</li>
-          </ul>
-        </div>
-      </aside>
+      <div class="service-detail-hero-rail">
+        <aside class="service-detail-hero-card" aria-label="Stop Smoking Clinic overview">
+          <div class="service-detail-hero-card__body">
+            <p class="service-detail-hero-card__eyebrow">At a glance</p>
+            <ul class="service-detail-checklist">
+              <li>Free stop smoking support</li>
+              <li>Telephone or Zoom consultation</li>
+              <li>Personalised plan based on your smoking habits</li>
+              <li>Ongoing support where suitable</li>
+            </ul>
+          </div>
+        </aside>
+        <aside class="service-detail-hero-card" aria-label="First consultation overview">
+          <div class="service-detail-hero-card__body">
+            <p class="service-detail-hero-card__eyebrow">Your first consultation</p>
+            <ul class="service-detail-checklist">
+              <li>Talk about how much you smoke and when you usually smoke</li>
+              <li>Discuss cravings, routines, triggers, and previous quit attempts</li>
+              <li>Agree practical next steps and the kind of support that suits you</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
     </div>
   </section>
 
   <section class="service-detail-section container">
     <div class="service-detail-panel">
       <div class="service-detail-section-head service-detail-section-head--compact">
-        <span class="section-kicker">Quit support</span>
-        <h2>What can the Stop Smoking Clinic help with?</h2>
+        <span class="section-kicker">Understanding support</span>
+        <h2>Understanding your smoking habit</h2>
         <p>
-          Support is practical and non-judgemental, with the aim of helping you make a safe, realistic plan that suits you.
+          Stopping smoking is not only about willpower. Cravings, routines, stress, and certain situations can all make
+          quitting harder, which is why the first consultation looks at what smoking currently does for you.
+        </p>
+      </div>
+      <div class="stop-smoking-understanding-grid">
+        <article class="service-detail-guidance-card">
+          <h3>Nicotine cravings</h3>
+          <div class="service-detail-guidance-item">
+            <h4>Why this can feel hard</h4>
+            <p>Urges can feel strongest at certain times of day or when you are tired, stressed, or used to smoking regularly.</p>
+          </div>
+          <div class="service-detail-guidance-item">
+            <h4>How support may help</h4>
+            <p>We can help you plan for difficult moments and talk through suitable ways to handle cravings where appropriate.</p>
+          </div>
+        </article>
+
+        <article class="service-detail-guidance-card">
+          <h3>Habit and routine</h3>
+          <div class="service-detail-guidance-item">
+            <h4>Why this can feel hard</h4>
+            <p>Smoking can become part of daily routines such as breaks, travel, meals, or winding down at the end of the day.</p>
+          </div>
+          <div class="service-detail-guidance-item">
+            <h4>How support may help</h4>
+            <p>We can help you spot routine-based smoking patterns and agree practical swaps that make your quit plan easier to follow.</p>
+          </div>
+        </article>
+
+        <article class="service-detail-guidance-card">
+          <h3>Triggers and motivation</h3>
+          <div class="service-detail-guidance-item">
+            <h4>Why this can feel hard</h4>
+            <p>Stress, certain activities, and social situations can all affect when you want to smoke and how confident you feel about quitting.</p>
+          </div>
+          <div class="service-detail-guidance-item">
+            <h4>How support may help</h4>
+            <p>We can help you build motivation around your own reasons for quitting and prepare for moments that might otherwise set you back.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-detail-section container">
+    <div class="service-detail-panel">
+      <div class="service-detail-section-head service-detail-section-head--compact">
+        <span class="section-kicker">Your next steps</span>
+        <h2>Your quit plan</h2>
+        <p>
+          Together we build a plan that feels practical, not overwhelming. That may include ways to manage cravings,
+          routines, triggers, and the next steps that feel realistic for you.
+        </p>
+      </div>
+      <div class="service-detail-steps-grid">
+        <article class="service-detail-step-card">
+          <span class="service-detail-step-number">1</span>
+          <h3>Book your free consultation</h3>
+          <p>Choose a telephone or Zoom appointment that fits around your week.</p>
+        </article>
+        <article class="service-detail-step-card">
+          <span class="service-detail-step-number">2</span>
+          <h3>Talk through your smoking habits and goals</h3>
+          <p>We ask about your routine, cravings, triggers, and what you want from support.</p>
+        </article>
+        <article class="service-detail-step-card">
+          <span class="service-detail-step-number">3</span>
+          <h3>Agree a quit date and practical plan</h3>
+          <p>We help you set a realistic next step and prepare for the moments that may feel most difficult.</p>
+        </article>
+        <article class="service-detail-step-card">
+          <span class="service-detail-step-number">4</span>
+          <h3>Receive ongoing support where suitable</h3>
+          <p>Follow-up encouragement and advice may be offered depending on your needs and suitability.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-detail-section container">
+    <div class="service-detail-panel">
+      <div class="service-detail-section-head service-detail-section-head--compact">
+        <span class="section-kicker">Flexible support</span>
+        <h2>Support that fits around you</h2>
+        <p>
+          Support can be adapted to how you smoke and what usually makes quitting harder, without overcomplicating the plan.
         </p>
       </div>
       <div class="service-detail-guidance-grid">
         <article class="service-detail-guidance-card">
-          <h3>Cravings and withdrawal</h3>
+          <h3>Behaviour and routine support</h3>
           <div class="service-detail-guidance-item">
-            <h4>What we may cover</h4>
-            <p>Common cravings, withdrawal symptoms, and ways to prepare for difficult moments during your quit attempt.</p>
-          </div>
-          <div class="service-detail-guidance-item">
-            <h4>How support may help</h4>
-            <p>Simple techniques, routine changes, and advice that can make your quit plan feel more manageable day to day.</p>
-          </div>
-          <div class="service-detail-guidance-item">
-            <h4>Important note</h4>
-            <p>Everyone responds differently, so support is tailored to your needs rather than a fixed script.</p>
+            <p>Help to spot triggers in your day and plan around the moments that usually lead to smoking.</p>
           </div>
         </article>
-
         <article class="service-detail-guidance-card">
-          <h3>Triggers and smoking routines</h3>
+          <h3>Craving support</h3>
           <div class="service-detail-guidance-item">
-            <h4>What we may cover</h4>
-            <p>Times, situations, or habits that make smoking more likely, including stress, social routines, and daily patterns.</p>
-          </div>
-          <div class="service-detail-guidance-item">
-            <h4>How support may help</h4>
-            <p>We can help you identify practical swaps, boundaries, and reminders to support a more confident quit attempt.</p>
-          </div>
-          <div class="service-detail-guidance-item">
-            <h4>Important note</h4>
-            <p>If you have tried to quit before, that can still be useful information for shaping a better next-step plan.</p>
+            <p>Advice on managing urges and common withdrawal symptoms in a way that feels realistic for you.</p>
           </div>
         </article>
-
         <article class="service-detail-guidance-card">
-          <h3>Nicotine replacement options</h3>
+          <h3>Practical planning support</h3>
           <div class="service-detail-guidance-item">
-            <h4>What we may cover</h4>
-            <p>Pharmacist-led information on nicotine replacement options and how they may fit into your overall quit plan.</p>
-          </div>
-          <div class="service-detail-guidance-item">
-            <h4>How support may help</h4>
-            <p>We can explain how different approaches may work and whether any option looks more suitable for your routine.</p>
-          </div>
-          <div class="service-detail-guidance-item">
-            <h4>Important note</h4>
-            <p>Advice and any product recommendations depend on individual needs, availability, and pharmacist suitability checks.</p>
+            <p>We can help you prepare for difficult times of day, social situations, and the moments when smoking feels most automatic.</p>
           </div>
         </article>
-
         <article class="service-detail-guidance-card">
-          <h3>Staying motivated and on track</h3>
+          <h3>Follow-up support</h3>
           <div class="service-detail-guidance-item">
-            <h4>What we may cover</h4>
-            <p>How to handle setbacks, stay focused on your reasons for quitting, and keep your plan realistic.</p>
+            <p>Ongoing encouragement by phone or online may be offered where suitable, so you do not have to manage the process alone.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-detail-section container">
+    <div class="service-detail-panel">
+      <div class="service-detail-section-head service-detail-section-head--compact">
+        <span class="section-kicker">Suitable options</span>
+        <h2>Treatment options we can discuss</h2>
+        <p>
+          If treatment support may help, the pharmacy team can talk through suitable options in a clear and practical way.
+        </p>
+      </div>
+      <div class="service-detail-guidance-grid">
+        <article class="service-detail-guidance-card">
+          <h3>Nicotine replacement therapy</h3>
+          <div class="service-detail-guidance-item">
+            <p>
+              Nicotine replacement therapy, often called NRT, gives your body a controlled amount of nicotine without tobacco
+              smoke. It can help reduce cravings and withdrawal symptoms while you work towards stopping smoking.
+            </p>
           </div>
           <div class="service-detail-guidance-item">
-            <h4>How support may help</h4>
-            <p>Ongoing encouragement may be available where suitable, so you do not have to manage every stage alone.</p>
+            <p>Patches, gum, lozenges, inhalators, mouth sprays, and nasal sprays may be discussed where suitable.</p>
           </div>
+        </article>
+        <article class="service-detail-guidance-card">
+          <h3>Combining support options</h3>
           <div class="service-detail-guidance-item">
-            <h4>Important note</h4>
-            <p>The service does not guarantee quit success, but it can help you build a stronger and more practical approach.</p>
+            <p>
+              Some people use a steady option such as a patch alongside a faster-acting option for sudden cravings. The most
+              suitable approach depends on your smoking pattern, preferences, and health background.
+            </p>
+          </div>
+        </article>
+        <article class="service-detail-guidance-card">
+          <h3>Vaping as a quit aid</h3>
+          <div class="service-detail-guidance-item">
+            <p>
+              For some adults who smoke, vaping may be discussed as a way to help stop smoking. It is generally considered
+              less harmful than smoking, but it is not risk-free and is not suitable for children or people who do not smoke.
+            </p>
+          </div>
+        </article>
+        <article class="service-detail-guidance-card">
+          <h3>Choosing what is right for you</h3>
+          <div class="service-detail-guidance-item">
+            <p>
+              Your age, pregnancy or breastfeeding status, medical conditions, current medicines, and previous quit attempts
+              can all affect what may be suitable. The pharmacy team can help you agree a safe next step.
+            </p>
           </div>
         </article>
       </div>
@@ -559,38 +640,51 @@
   <section class="service-detail-section container">
     <div class="service-detail-info-grid">
       <article class="service-detail-info-card">
-        <span class="section-kicker">Suitability</span>
-        <h2>Who it is for</h2>
-        <p>
-          The Stop Smoking Clinic may suit adults who want structured support to stop smoking, feel ready to make a plan,
-          or want help after previous quit attempts. You do not need to feel fully confident before asking for support.
-        </p>
-        <p>
-          Whether follow-up advice, nicotine replacement guidance, or extra encouragement is suitable will depend on your
-          needs, preferences, and pharmacist assessment.
-        </p>
+        <span class="section-kicker">First consultation</span>
+        <h2>What happens in your consultation?</h2>
+        <ul class="service-detail-bullet-list">
+          <li>We ask about how much you smoke and when you usually smoke</li>
+          <li>We talk about previous quit attempts if relevant</li>
+          <li>We ask about your goals and what support you prefer</li>
+          <li>We discuss suitable next steps</li>
+          <li>We help you prepare for difficult moments and cravings</li>
+        </ul>
       </article>
 
       <article class="service-detail-info-card">
-        <span class="section-kicker">Be prepared</span>
-        <h2>What to expect or what we may ask</h2>
-        <ul class="service-detail-bullet-list">
-          <li>How much you currently smoke and your usual smoking pattern</li>
-          <li>What tends to trigger cravings or make quitting harder</li>
-          <li>Any previous quit attempts and what did or did not help</li>
-          <li>Current medicines, medical history, and relevant health information</li>
-          <li>Whether you would prefer telephone or Zoom support where available</li>
-        </ul>
+        <span class="section-kicker">Consultation format</span>
+        <h2>Telephone or Zoom support</h2>
+        <p>
+          The consultation can be by telephone or Zoom, making it easier to ask for support in a way that fits around your
+          routine.
+        </p>
+        <p>
+          If you have tried to quit before, that is still useful information. Many people need more than one attempt before
+          they find a plan that feels right for them.
+        </p>
       </article>
+    </div>
+  </section>
+
+  <section class="service-detail-section container">
+    <div class="service-detail-panel">
+      <div class="service-detail-section-head service-detail-section-head--compact">
+        <span class="section-kicker">Encouragement</span>
+        <h2>You do not have to quit alone</h2>
+        <p>
+          Quitting can feel easier with structured support, encouragement, and a plan that suits you. The Five Ways Pharmacy
+          team can help you take the next step at your own pace.
+        </p>
+      </div>
     </div>
   </section>
 
   <section class="service-detail-section container" id="stop-smoking-start">
     <div class="service-detail-cta-panel">
       <div class="service-detail-cta-copy">
-        <span class="section-kicker">Need support?</span>
-        <h2>Ready to plan your next quit attempt?</h2>
-        <p>Speak to the Five Ways Pharmacy team for calm, practical stop smoking support tailored to you.</p>
+        <span class="section-kicker">Ready when you are</span>
+        <h2>Ready to start your quit journey?</h2>
+        <p>Book a free Stop Smoking consultation with Five Ways Pharmacy and we&rsquo;ll help you plan the next step.</p>
       </div>
       <div class="service-detail-action-row service-detail-action-row--cta">
         <a href="../book.html" class="service-detail-button service-detail-button--primary" data-cal-link="albayatilabs/stop-smoking-clinic" data-cal-config='{"layout":"month_view"}'>Book a free Stop Smoking consultation</a>
@@ -598,7 +692,7 @@
     </div>
   </section>
 
-  <section class="service-detail-section container">
+  <section class="service-detail-section service-detail-section--mobile-offset container">
     <div class="service-detail-section-head">
       <span class="section-kicker">Questions</span>
       <h2>Stop Smoking Clinic FAQs</h2>
@@ -607,8 +701,8 @@
       <details class="service-detail-faq-item">
         <summary>Is the Stop Smoking Clinic free?</summary>
         <p>
-          Yes. The consultation is offered as a free support service, giving you the chance to speak to the pharmacy team
-          about your quit plan and the next suitable step.
+          Yes. The Stop Smoking Clinic consultation is a free support service, giving you the chance to speak to the
+          pharmacy team about a suitable next step.
         </p>
       </details>
       <details class="service-detail-faq-item">
@@ -619,30 +713,44 @@
         </p>
       </details>
       <details class="service-detail-faq-item">
-        <summary>Will I be judged if I have tried to quit before?</summary>
+        <summary>Do I need to be ready to quit before I book?</summary>
         <p>
-          No. The service is supportive and non-judgemental. Previous quit attempts can help us understand what support may
-          work better for you this time.
+          No. You do not need a perfect plan before booking. The consultation is there to help you talk through your habits,
+          your goals, and what kind of support might suit you.
         </p>
       </details>
       <details class="service-detail-faq-item">
-        <summary>Will I be offered stop smoking products?</summary>
+        <summary>What happens in the first consultation?</summary>
         <p>
-          The pharmacist may discuss nicotine replacement options or other appropriate support where suitable, but the same
-          approach will not be right for everyone.
+          We ask about how much you smoke, what tends to trigger cravings, any previous quit attempts, and what support you
+          would find most helpful. We then agree practical next steps together.
         </p>
       </details>
       <details class="service-detail-faq-item">
-        <summary>How long does support last?</summary>
+        <summary>Will I be offered stop-smoking products?</summary>
         <p>
-          Support can vary depending on individual needs and suitability. Some patients may benefit from follow-up advice or
-          encouragement where that is appropriate.
+          Suitable options such as nicotine replacement therapy or other stop-smoking support can be discussed where
+          appropriate and available, but the same approach will not be right for everyone.
+        </p>
+      </details>
+      <details class="service-detail-faq-item">
+        <summary>What if I have tried to quit before?</summary>
+        <p>
+          That is completely fine. The service is non-judgemental, and previous quit attempts can help the team understand
+          what may work better for you this time.
+        </p>
+      </details>
+      <details class="service-detail-faq-item">
+        <summary>Is support guaranteed to work?</summary>
+        <p>
+          No service can guarantee quit outcomes. Support can help you build a stronger plan and feel more prepared, but
+          results vary from person to person.
         </p>
       </details>
     </div>
   </section>
 
-  <section class="service-detail-section container">
+  <section class="service-detail-section service-detail-section--mobile-offset container">
     <div class="service-detail-alert">
       <span class="service-detail-alert__icon" aria-hidden="true">
         <svg viewBox="0 0 24 24">
@@ -654,8 +762,7 @@
       <div class="service-detail-alert__copy">
         <h2>Important guidance</h2>
         <p>
-          Stop smoking support depends on your individual needs and suitability, and quit outcomes cannot be guaranteed.
-          If you feel very unwell or need urgent medical advice, use NHS 111, contact your GP, or call 999 in an emergency.
+          If you feel unwell or have urgent symptoms, use NHS 111, contact your GP, or call 999 in an emergency.
         </p>
       </div>
     </div>
@@ -1022,6 +1129,7 @@
       const menuOverlay = document.querySelector(".mobile-menu-overlay");
       const menuClose = document.querySelector(".mobile-menu-close");
       const menuCloseButton = document.querySelector(".mobile-menu-close-button");
+      const menuGroups = menuShell.querySelectorAll(".mobile-menu-group");
 
       if (!menuToggle || !menuShell || !menuDrawer || !menuOverlay || !menuClose) return;
 
@@ -1033,6 +1141,11 @@
         menuShell.setAttribute("aria-hidden", "true");
         menuDrawer.setAttribute("aria-hidden", "true");
         menuToggle.setAttribute("aria-expanded", "false");
+        menuGroups.forEach((group) => {
+          if (group instanceof HTMLDetailsElement) {
+            group.open = false;
+          }
+        });
 
         if (restoreFocus && lastFocusedElement instanceof HTMLElement) {
           lastFocusedElement.focus();
@@ -1353,3 +1466,5 @@
   </script>
 </body>
 </html>
+
+

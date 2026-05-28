@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -174,7 +174,7 @@
                   </svg>
                   <span>Prescriptions &amp; care</span>
                 </p>
-                <a href="#" class="category-pill-dropdown-link">Repeat Prescriptions</a>
+                <a href="../repeat-prescriptions/" class="category-pill-dropdown-link">Repeat Prescriptions</a>
                 <a href="#" class="category-pill-dropdown-link">Private Consultations</a>
                 <a href="#" class="category-pill-dropdown-link">Medicine Advice</a>
               </div>
@@ -204,7 +204,7 @@
             </div>
           </div>
           <div class="category-pill-dropdown category-pill-dropdown--compact category-pill-dropdown--prescriptions">
-            <a href="../prescriptions.html" aria-haspopup="true">
+            <button type="button" aria-haspopup="true" aria-expanded="false">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M8 5.5h8v13H8z" />
                 <path d="M10 3.75h4" />
@@ -212,11 +212,11 @@
                 <path d="M10 13h4" />
               </svg>
               <span>Prescriptions</span>
-            </a>
+            </button>
 
             <div class="category-pill-dropdown-menu category-pill-dropdown-menu--compact" aria-label="Prescriptions menu">
-              <a href="../emergency-prescriptions.html" class="category-pill-dropdown-link">Emergency prescriptions</a>
-              <a href="../repeat-prescriptions.html" class="category-pill-dropdown-link">Repeat prescriptions</a>
+              <a href="../emergency-prescriptions/" class="category-pill-dropdown-link">Emergency supply</a>
+              <a href="../repeat-prescriptions/" class="category-pill-dropdown-link">Repeat prescriptions</a>
             </div>
           </div>
           <a href="../health-advice/">
@@ -305,7 +305,13 @@
               <a href="../umbrella-services/" class="mobile-menu-link">Umbrella Services</a>
               <a href="../weight-loss-support/" class="mobile-menu-link">Weight Loss</a>
               <a href="../nhs-contraception-services/" class="mobile-menu-link">NHS Contraception Services</a>
-              <a href="../prescriptions.html" class="mobile-menu-link">Prescriptions</a>
+              <details class="mobile-menu-group">
+                <summary class="mobile-menu-link mobile-menu-link--toggle">Prescriptions</summary>
+                <div class="mobile-menu-submenu">
+                  <a href="../emergency-prescriptions/" class="mobile-menu-link">Emergency supply</a>
+                  <a href="../repeat-prescriptions/" class="mobile-menu-link">Repeat prescriptions</a>
+                </div>
+              </details>
               <a href="../health-advice/" class="mobile-menu-link">Health Advice</a>
               <a href="../index.html#shop-by-category" class="mobile-menu-link service-led-hidden" hidden>Over-the-counter Purchases</a>
               <a href="../covid-vaccines/" class="mobile-menu-link">COVID Vaccines (Spring / Autumn)</a>
@@ -888,6 +894,7 @@
       const menuOverlay = document.querySelector(".mobile-menu-overlay");
       const menuClose = document.querySelector(".mobile-menu-close");
       const menuCloseButton = document.querySelector(".mobile-menu-close-button");
+      const menuGroups = menuShell.querySelectorAll(".mobile-menu-group");
 
       if (!menuToggle || !menuShell || !menuDrawer || !menuOverlay || !menuClose) return;
 
@@ -899,6 +906,11 @@
         menuShell.setAttribute("aria-hidden", "true");
         menuDrawer.setAttribute("aria-hidden", "true");
         menuToggle.setAttribute("aria-expanded", "false");
+        menuGroups.forEach((group) => {
+          if (group instanceof HTMLDetailsElement) {
+            group.open = false;
+          }
+        });
 
         if (restoreFocus && lastFocusedElement instanceof HTMLElement) {
           lastFocusedElement.focus();
@@ -960,3 +972,5 @@
   </script>
 </body>
 </html>
+
+
