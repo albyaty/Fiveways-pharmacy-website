@@ -3606,7 +3606,11 @@ main {
 
 .service-detail-hero,
 .service-detail-section {
-  margin: 0;
+  /* margin: 0 auto keeps these centered. They also carry the .container
+     class (width: min(1360px, calc(100% - 1.8rem))); using plain
+     "margin: 0" here would override .container's auto centering and pin
+     the content to the left edge on wide screens. */
+  margin: 0 auto;
 }
 
 .service-detail-hero-shell {
