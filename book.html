@@ -6,7 +6,7 @@
   <title>Book an appointment | Five Ways Pharmacy</title>
   <meta
     name="description"
-    content="Book an appointment with the Five Ways Pharmacy team."
+    content="Book a 30-minute appointment with the Five Ways Pharmacy team."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -50,35 +50,25 @@
 
       <header class="service-payment-heading">
         <span class="kicker">Pharmacy bookings</span>
-        <h1>Book a service appointment</h1>
+        <h1>What would you like to book with us?</h1>
         <p>
-          Choose a service and pick a time that suits you. Bookings are
-          handled through cal.com; you will receive a calendar invite and
-          confirmation email instantly.
+          Choose a service below, pick a 30-minute slot that suits you, and
+          confirm in seconds. You will get a calendar invite and confirmation
+          email instantly.
         </p>
       </header>
 
-      <!-- The booking flow uses cal.com's modal embed. Each "Book" button
-           below has a data-cal-link attribute; cal.com intercepts the
-           click and opens the calendar in a polished modal overlay. No
-           inline calendar widget needed -- the modal lets the customer
-           pick a time on top of our site rather than redirecting them
-           away. -->
-
-      <h2 class="bookable-services-heading">Services available to book</h2>
-      <p class="bookable-services-intro">
-        Pick a service below to open the booking calendar. Each appointment
-        is a free 30-minute slot.
-      </p>
-      <div class="bookable-services-grid" id="bookable-services-grid"></div>
-
-      <p class="bookable-empty" id="bookable-empty" hidden>
-        No bookable services are configured yet. Please call the pharmacy
-        to schedule an appointment.
-      </p>
+      <!-- The whole booking flow lives inside this cal.eu inline embed.
+           It loads the user's profile page (cal.eu/albayatilabs), which
+           shows all available event types in cal.com's polished UI, and
+           drops the customer into the time picker as soon as they choose
+           a service. No modals, no redirects. -->
+      <section class="cal-inline-shell">
+        <div id="cal-inline-embed" class="cal-inline-embed"></div>
+      </section>
 
       <p class="service-picker-helper">
-        Need to pay for a service without booking?
+        Need to pay for a prescription instead?
         <a href="./service-payment.html">Go to service payments</a>.
       </p>
     </section>
@@ -95,15 +85,30 @@
     </div>
   </footer>
 
-  <!-- cal.com embed runtime. Initialises the global Cal() function and
-       auto-binds to any element with a data-cal-link attribute, opening
-       the booking calendar in a modal. -->
+  <!-- cal.eu inline embed runtime.
+       Uses the EU instance (cal.eu / app.cal.eu) for data residency.
+       Loads the username profile so the customer sees all event types in
+       one unified UI; picking one drops them into that event's calendar. -->
   <script type="text/javascript">
-    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-    Cal("init", {origin:"https://cal.com"});
-  </script>
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.eu/embed/embed.js", "init");
 
-  <script src="./services.js"></script>
-  <script src="./book.js"></script>
+    Cal("init", "fiveways", { origin: "https://cal.eu" });
+
+    Cal.ns.fiveways("inline", {
+      elementOrSelector: "#cal-inline-embed",
+      calLink: "albayatilabs",
+      config: { layout: "month_view" }
+    });
+
+    Cal.ns.fiveways("ui", {
+      hideEventTypeDetails: false,
+      layout: "month_view",
+      cssVarsPerTheme: {
+        light: {
+          "cal-brand": "#0f757b"
+        }
+      }
+    });
+  </script>
 </body>
 </html>

@@ -2,17 +2,16 @@
 // at the configured per-item rate) or a custom amount agreed by phone.
 //
 // SECURITY MODEL
-//   - The amount is always re-derived from payment-config.js on the server.
-//     Client-supplied numbers are only used as hints (item count or custom
-//     amount). The client cannot tamper with what Stripe is told to charge.
-//   - All free-text fields are trimmed and length-capped before being put
-//     into Stripe metadata so a malicious client cannot blow up the
-//     metadata payload (Stripe rejects keys >500 chars).
-//   - UK postcode is regex-validated when a delivery address is supplied.
-//   - All other customer fields (name, DOB, phone, recipient) are validated
-//     for presence and basic format. Lying about your name/DOB is still
-//     possible (any payment form has this limit) -- the pharmacy verifies
-//     when the customer phones in.
+//   - Amount is always re-derived from payment-config.js on the server.
+//     Client-supplied numbers are only used as hints (item count or
+//     custom amount). The client cannot tamper with the charged amount.
+//   - All free-text fields are trimmed and length-capped before going into
+//     Stripe metadata so a malicious client cannot blow up the metadata
+//     payload (Stripe rejects values >500 chars).
+//   - UK postcode is regex-validated when a delivery address is required.
+//   - Customer-supplied identity fields (name, DOB, phone, email) are
+//     validated for format/presence. Lying about identity is still possible
+//     -- that's verified by the pharmacy team when the customer phones in.
 
 const Stripe = require("stripe");
 const PAYMENT_CONFIG = require("../payment-config.js");
@@ -51,7 +50,6 @@ module.exports = async (req, res) => {
       .json({ error: "Stripe is not configured on the server." });
   }
 
-  // Parse body.
   let body = req.body;
   if (typeof body === "string") {
     try {
@@ -69,7 +67,7 @@ module.exports = async (req, res) => {
       .json({ error: "Payment type must be 'prescription' or 'custom'." });
   }
 
-  // ---- Compute authoritative amount, server-side --------------------------
+  // ---- Authoritative amount, server-side --------------------------------
   let amountPence = 0;
   let description = "";
   let summary = "";
@@ -121,36 +119,34 @@ module.exports = async (req, res) => {
     summary = "Custom payment of GBP " + (amountPence / 100).toFixed(2);
   }
 
-  // ---- Validate customer info --------------------------------------------
-  const customer = body.customer || {};
-  const customerEmail = trimString(customer.email, 200);
-  const customerName = trimString(customer.name, 120);
-  const customerDob = trimString(customer.dob, 20);
-  const customerPhone = trimString(customer.phone, 40);
-  const recipientName = trimString(customer.recipientName, 120);
+  // ---- Validate patient identity ----------------------------------------
+  const patient = body.patient || {};
+  const patientName = trimString(patient.name, 120);
+  const patientDob = trimString(patient.dob, 20);
+  const patientPhone = trimString(patient.phone, 40);
+  const patientEmail = trimString(patient.email, 200);
 
-  if (!isValidEmail(customerEmail)) {
-    return res.status(400).json({ error: "A valid email is required." });
+  if (!patientName) {
+    return res.status(400).json({ error: "Patient's full name is required." });
   }
-  if (!customerName) {
-    return res.status(400).json({ error: "Your full name is required." });
-  }
-  if (!isValidDob(customerDob)) {
+  if (!isValidDob(patientDob)) {
     return res
       .status(400)
       .json({ error: "Date of birth must be a valid past date (YYYY-MM-DD)." });
   }
-  if (!customerPhone || customerPhone.replace(/\D/g, "").length < 7) {
+  if (!patientPhone || patientPhone.replace(/\D/g, "").length < 7) {
     return res
       .status(400)
       .json({ error: "A contact phone number is required." });
   }
+  if (!isValidEmail(patientEmail)) {
+    return res
+      .status(400)
+      .json({ error: "A valid email is required for the receipt." });
+  }
 
-  // ---- Validate delivery info --------------------------------------------
-  // Only meaningful for prescription type; ignored for custom.
-  const useDifferentDelivery =
-    type === "prescription" && body.useDifferentDelivery === true;
-  let deliverySummary = "(use billing address from Stripe)";
+  // ---- Validate delivery (prescription only) ----------------------------
+  let deliverySummary = "";
   let deliveryMeta = {
     delivery_line1: "",
     delivery_line2: "",
@@ -158,7 +154,7 @@ module.exports = async (req, res) => {
     delivery_postcode: "",
   };
 
-  if (useDifferentDelivery) {
+  if (type === "prescription") {
     const d = body.delivery || {};
     const line1 = trimString(d.line1, 200);
     const line2 = trimString(d.line2, 200);
@@ -182,11 +178,12 @@ module.exports = async (req, res) => {
         .json({ error: "Delivery postcode must be a valid UK postcode." });
     }
 
+    const postcodeUpper = postcode.toUpperCase();
     deliveryMeta = {
       delivery_line1: line1,
       delivery_line2: line2,
       delivery_city: city,
-      delivery_postcode: postcode.toUpperCase(),
+      delivery_postcode: postcodeUpper,
     };
     deliverySummary =
       line1 +
@@ -194,7 +191,7 @@ module.exports = async (req, res) => {
       ", " +
       city +
       ", " +
-      postcode.toUpperCase();
+      postcodeUpper;
   }
 
   // ---- Create the PaymentIntent ------------------------------------------
@@ -205,17 +202,14 @@ module.exports = async (req, res) => {
       currency: PAYMENT_CONFIG.CURRENCY,
       automatic_payment_methods: { enabled: true },
       description,
-      receipt_email: customerEmail,
-      // Metadata appears in the Stripe Dashboard and in the per-payment
-      // email the pharmacy receives. Keep keys short and values <500 chars.
+      receipt_email: patientEmail,
       metadata: {
         payment_type: type,
         summary: summary.slice(0, 480),
         items_count: type === "prescription" ? String(itemCount) : "",
-        customer_name: customerName.slice(0, 480),
-        customer_dob: customerDob,
-        customer_phone: customerPhone.slice(0, 480),
-        recipient_name: recipientName || "(same as customer)",
+        patient_name: patientName.slice(0, 480),
+        patient_dob: patientDob,
+        patient_phone: patientPhone.slice(0, 480),
         delivery: deliverySummary.slice(0, 480),
         delivery_line1: deliveryMeta.delivery_line1.slice(0, 480),
         delivery_line2: deliveryMeta.delivery_line2.slice(0, 480),

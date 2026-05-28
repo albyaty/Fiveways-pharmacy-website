@@ -113,19 +113,22 @@ The client cannot tamper with what Stripe is told to charge.
 
 ### Why all the customer fields, and how the pharmacy sees them
 
-The pharmacy needs to match the online payment to the customer who phoned
-in. We collect:
+The pharmacy needs to match the online payment to the patient who phoned
+in. The form is framed as "Who is this medication for?" -- it captures
+**the patient**, not the cardholder. Cardholder name + billing address are
+collected separately by Stripe's Address Element in step 2.
 
-- **Email** — so Stripe can email a receipt automatically.
-- **Full name** — billing identity.
-- **Date of birth** — verifying the patient against their records.
+Fields collected on step 1:
+
+- **Full name** — the patient (not the cardholder).
+- **Date of birth** — verifying the patient against pharmacy records.
 - **Phone number** — so the team can call back if something's unclear.
-- **Recipient name** (optional) — for cases where the medication is for a
-  family member or dependent, not the cardholder.
-- **Delivery address** (prescription flow only) — defaults to the card's
-  billing address (which the pharmacy reads from the Stripe Dashboard);
-  customer can opt-in to a separate delivery address via a checkbox. UK
-  postcode is regex-validated server-side.
+- **Email** — for the Stripe receipt.
+- **Delivery address** (prescription flow only) — always required. We
+  don't try to copy from the Stripe billing address because that address
+  is collected later in the flow and the customer might be paying with
+  someone else's card. The pharmacy reads the delivery address from the
+  payment's metadata, not from the Stripe billing fields.
 
 All of these go into Stripe **metadata** on the PaymentIntent. The
 pharmacy team sees them three ways without us writing any extra code:
@@ -182,26 +185,31 @@ Edit `MAX_CUSTOM_PENCE` in `payment-config.js`.
 
 Set `enabled: false` in `services.js`.
 
-### Cal.com setup (already wired)
+### Cal.eu setup (already wired)
 
-`CAL_USERNAME` in `book.js` is set to `albayatilabs`. The cal.com embed
-script is loaded in `book.html` (the official one-liner that exposes the
-global `Cal()` function). Buttons rendered by `book.js` have
-`data-cal-link="albayatilabs/<calEventSlug>"`; cal.com's embed runtime
-intercepts clicks and opens the calendar in a modal overlay on top of
-the page.
+Important: the pharmacy uses **cal.eu** (EU instance) not cal.com. The
+embed in `book.html` loads `https://app.cal.eu/embed/embed.js` and
+initialises with `origin: "https://cal.eu"`. If you ever wire this for a
+US pharmacy you'd change both to cal.com.
 
-**Slug matching is critical.** Each `calEventSlug` in `services.js` must
-exactly match the URL slug of the matching event type in cal.com. If a
-button opens a "Event not found" modal, the slugs don't match -- either
-rename the event in cal.com or update `services.js`.
+The booking page no longer renders our own service cards. Instead, one
+**inline embed** of the user's full cal.eu profile (`cal.eu/albayatilabs`)
+shows every event type in cal.com's native UI and walks the customer
+through service-then-time selection without leaving the page. This
+replaced an earlier modal-popup-on-cards design that the user disliked.
+`services.js` is still kept for reference (it's not used by book.html
+anymore, but a future change might wire it back in for a custom router).
 
-### Adding a new bookable service after cal.com is configured
+**Slug matching is critical.** If you ever switch back to per-service
+buttons (modal-style), each `calEventSlug` in `services.js` must exactly
+match the URL slug of the matching event type in cal.eu.
 
-1. Create the new event type in cal.com (30-minute slot, free).
-2. Add a matching entry to `services.js` with the same slug as
-   `calEventSlug`, plus `enabled: true`.
-3. Push.
+### Adding a new bookable service
+
+1. Create the new event type in cal.eu (30-minute slot, free). It will
+   automatically appear in the inline embed on book.html -- no code
+   change required.
+2. (Optional, for documentation) Add a matching entry to `services.js`.
 
 ### Connect Stripe (already done for test mode)
 

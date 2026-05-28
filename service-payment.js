@@ -48,6 +48,7 @@
     }
     el.hidden = false;
     el.textContent = message;
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   function showPaymentError(message) {
@@ -76,9 +77,7 @@
     document.getElementById("amount-section-custom").hidden =
       paymentType !== "custom";
 
-    // Delivery is only relevant for prescription payments. Custom payments are
-    // typically one-off (in-store collection, settling balance) -- no delivery
-    // needed.
+    // Delivery section only applies to prescription orders.
     const deliveryBlock = document.getElementById("delivery-block");
     if (deliveryBlock) {
       deliveryBlock.hidden = paymentType !== "prescription";
@@ -95,14 +94,14 @@
     const totEl = document.getElementById("prescription-total");
     if (totEl) totEl.textContent = formatGBP(subtotal);
 
-    document.querySelectorAll(
-      "#prescription-counter [data-counter-action]"
-    ).forEach((btn) => {
-      const action = btn.getAttribute("data-counter-action");
-      if (action === "dec") btn.disabled = prescriptionItems <= 1;
-      if (action === "inc")
-        btn.disabled = prescriptionItems >= CONFIG.MAX_PRESCRIPTION_ITEMS;
-    });
+    document
+      .querySelectorAll("#prescription-counter [data-counter-action]")
+      .forEach((btn) => {
+        const action = btn.getAttribute("data-counter-action");
+        if (action === "dec") btn.disabled = prescriptionItems <= 1;
+        if (action === "inc")
+          btn.disabled = prescriptionItems >= CONFIG.MAX_PRESCRIPTION_ITEMS;
+      });
   }
 
   function renderCustom() {
@@ -114,37 +113,22 @@
   // ---------------------------------------------------------------------------
   // Validation + payload assembly
   // ---------------------------------------------------------------------------
-  function collectCustomerInfo() {
-    const email = document.getElementById("customer-email").value.trim();
-    const name = document.getElementById("customer-name").value.trim();
-    const dob = document.getElementById("customer-dob").value.trim();
-    const phone = document.getElementById("customer-phone").value.trim();
-    const recipientChecked = document.getElementById(
-      "recipient-toggle-input"
-    ).checked;
-    const recipientName = recipientChecked
-      ? document.getElementById("recipient-name").value.trim()
-      : "";
-    return { email, name, dob, phone, recipientChecked, recipientName };
+  function collectPatient() {
+    return {
+      name: document.getElementById("patient-name").value.trim(),
+      dob: document.getElementById("patient-dob").value.trim(),
+      phone: document.getElementById("patient-phone").value.trim(),
+      email: document.getElementById("patient-email").value.trim(),
+    };
   }
 
-  function collectDeliveryInfo() {
-    if (paymentType !== "prescription") {
-      return { useDifferentDelivery: false };
-    }
-    const toggle = document.getElementById("separate-delivery-toggle");
-    const useDifferent = toggle ? !!toggle.checked : false;
-    if (!useDifferent) {
-      return { useDifferentDelivery: false };
-    }
+  function collectDelivery() {
+    if (paymentType !== "prescription") return null;
     return {
-      useDifferentDelivery: true,
-      delivery: {
-        line1: document.getElementById("delivery-line1").value.trim(),
-        line2: document.getElementById("delivery-line2").value.trim(),
-        city: document.getElementById("delivery-city").value.trim(),
-        postcode: document.getElementById("delivery-postcode").value.trim(),
-      },
+      line1: document.getElementById("delivery-line1").value.trim(),
+      line2: document.getElementById("delivery-line2").value.trim(),
+      city: document.getElementById("delivery-city").value.trim(),
+      postcode: document.getElementById("delivery-postcode").value.trim(),
     };
   }
 
@@ -170,30 +154,26 @@
       }
     }
 
-    const info = collectCustomerInfo();
-    if (!info.email || !/^\S+@\S+\.\S+$/.test(info.email)) {
-      return "Please enter a valid email address.";
+    const patient = collectPatient();
+    if (!patient.name) {
+      return "Please enter the patient's full name.";
     }
-    if (!info.name) {
-      return "Please enter your full name.";
+    if (!patient.dob) {
+      return "Please enter the patient's date of birth.";
     }
-    if (!info.dob) {
-      return "Please enter your date of birth.";
-    }
-    const dobTs = Date.parse(info.dob);
+    const dobTs = Date.parse(patient.dob);
     if (Number.isNaN(dobTs) || dobTs >= Date.now()) {
       return "Date of birth must be a valid past date.";
     }
-    if (!info.phone || info.phone.replace(/\D/g, "").length < 7) {
+    if (!patient.phone || patient.phone.replace(/\D/g, "").length < 7) {
       return "Please enter a contact phone number.";
     }
-    if (info.recipientChecked && !info.recipientName) {
-      return "Please enter the patient's name, or untick the box.";
+    if (!patient.email || !/^\S+@\S+\.\S+$/.test(patient.email)) {
+      return "Please enter a valid email address for the receipt.";
     }
 
-    const delivery = collectDeliveryInfo();
-    if (delivery.useDifferentDelivery) {
-      const d = delivery.delivery;
+    if (paymentType === "prescription") {
+      const d = collectDelivery();
       if (!d.line1) return "Please enter the first line of the delivery address.";
       if (!d.city) return "Please enter the delivery town or city.";
       if (!d.postcode) return "Please enter the delivery postcode.";
@@ -218,22 +198,15 @@
   }
 
   async function createPayment() {
-    const info = collectCustomerInfo();
-    const delivery = collectDeliveryInfo();
+    const patient = collectPatient();
+    const delivery = collectDelivery();
     const body = {
       type: paymentType,
       items: paymentType === "prescription" ? prescriptionItems : undefined,
       customAmountPence:
         paymentType === "custom" ? customAmountPence : undefined,
-      customer: {
-        email: info.email,
-        name: info.name,
-        dob: info.dob,
-        phone: info.phone,
-        recipientName: info.recipientChecked ? info.recipientName : "",
-      },
-      useDifferentDelivery: !!delivery.useDifferentDelivery,
-      delivery: delivery.delivery || null,
+      patient,
+      delivery: delivery || null,
     };
     const res = await fetch("/api/create-service-payment", {
       method: "POST",
@@ -365,7 +338,6 @@
           "Pay " + formatGBP(activeAmountPence);
       }
     }
-    // On success Stripe redirects to return_url.
   }
 
   // ---------------------------------------------------------------------------
@@ -398,33 +370,6 @@
     .getElementById("custom-amount-input")
     ?.addEventListener("input", () => {
       renderCustom();
-    });
-
-  document
-    .getElementById("recipient-toggle-input")
-    ?.addEventListener("change", (event) => {
-      const checked = event.target.checked;
-      const field = document.getElementById("recipient-field");
-      if (field) field.hidden = !checked;
-      if (!checked) {
-        const input = document.getElementById("recipient-name");
-        if (input) input.value = "";
-      }
-    });
-
-  document
-    .getElementById("separate-delivery-toggle")
-    ?.addEventListener("change", (event) => {
-      const checked = event.target.checked;
-      const fields = document.getElementById("delivery-fields");
-      if (fields) fields.hidden = !checked;
-      if (!checked) {
-        ["delivery-line1", "delivery-line2", "delivery-city", "delivery-postcode"]
-          .map((id) => document.getElementById(id))
-          .forEach((el) => {
-            if (el) el.value = "";
-          });
-      }
     });
 
   document

@@ -18,8 +18,6 @@
   <link rel="stylesheet" href="./service-payment.css" />
 </head>
 <body>
-  <!-- Checkout-chrome header. Search/mega-nav stripped to reduce
-       distractions on a payment page. -->
   <header class="checkout-chrome-header">
     <div class="container checkout-chrome-header__inner">
       <a class="brand checkout-chrome-header__brand" href="./index.html" aria-label="Five Ways Pharmacy home">
@@ -105,7 +103,7 @@
           </button>
         </div>
 
-        <!-- Prescription details (shown when type=prescription) -->
+        <!-- Prescription details: shown only when type=prescription -->
         <div class="amount-section" id="amount-section-prescription">
           <label class="amount-label" for="prescription-counter">
             How many items are on your prescription?
@@ -132,7 +130,7 @@
           </dl>
         </div>
 
-        <!-- Custom amount (shown when type=custom) -->
+        <!-- Custom amount: shown only when type=custom -->
         <div class="amount-section" id="amount-section-custom" hidden>
           <label class="amount-label" for="custom-amount-input">Amount to pay</label>
           <div class="custom-amount-wrap">
@@ -161,92 +159,78 @@
           </dl>
         </div>
 
-        <!-- Your details -->
-        <h2 class="payment-setup-card__subtitle">Your details</h2>
+        <!-- Patient identity -->
+        <h2 class="payment-setup-card__subtitle">Who is this medication for?</h2>
         <p class="payment-setup-card__subtitle-hint">
-          Used by the pharmacy team to match your payment to your call.
+          These details are used by the pharmacy team to match your payment
+          to your call. If you are paying on someone else's behalf, enter
+          the patient's information here.
         </p>
 
         <div class="details-grid">
-          <div class="details-field">
-            <label for="customer-email">Email for receipt</label>
-            <input
-              type="email"
-              id="customer-email"
-              autocomplete="email"
-              required
-              placeholder="you@example.com"
-            />
-          </div>
-
-          <div class="details-field">
-            <label for="customer-name">Full name</label>
+          <div class="details-field details-field--full">
+            <label for="patient-name">Full name</label>
             <input
               type="text"
-              id="customer-name"
+              id="patient-name"
               autocomplete="name"
               required
-              placeholder="As it appears on your card"
+              placeholder="Patient's full name"
             />
           </div>
 
           <div class="details-field">
-            <label for="customer-dob">Date of birth</label>
+            <label for="patient-dob">Date of birth</label>
             <input
               type="date"
-              id="customer-dob"
+              id="patient-dob"
               autocomplete="bday"
               required
             />
           </div>
 
           <div class="details-field">
-            <label for="customer-phone">Phone number</label>
+            <label for="patient-phone">Phone number</label>
             <input
               type="tel"
-              id="customer-phone"
+              id="patient-phone"
               autocomplete="tel"
               required
               placeholder="07..."
             />
           </div>
+
+          <div class="details-field details-field--full">
+            <label for="patient-email">Email for receipt</label>
+            <input
+              type="email"
+              id="patient-email"
+              autocomplete="email"
+              required
+              placeholder="you@example.com"
+            />
+          </div>
         </div>
 
-        <label class="recipient-toggle">
-          <input type="checkbox" id="recipient-toggle-input" />
-          <span>The medication is for someone else</span>
-        </label>
-
-        <div class="details-field details-field--recipient" id="recipient-field" hidden>
-          <label for="recipient-name">Full name of the patient receiving the medication</label>
-          <input
-            type="text"
-            id="recipient-name"
-            autocomplete="off"
-            placeholder="Patient's full name"
-          />
-        </div>
-
-        <!-- Delivery section -- only shown for prescription payments. -->
+        <!-- Delivery address: prescription flow only. Always visible (no
+             "same as billing" toggle, because the Stripe Address Element
+             below collects card billing info separately and we can't read
+             it before the customer fills the card form). -->
         <div class="delivery-block" id="delivery-block">
           <h2 class="payment-setup-card__subtitle">Delivery address</h2>
           <p class="payment-setup-card__subtitle-hint">
-            By default we deliver your medication to the billing address on
-            your card. Tick the box below to deliver somewhere else.
+            Where the pharmacy team should deliver this prescription. This
+            is captured separately from the billing address on your card.
           </p>
 
-          <label class="recipient-toggle">
-            <input type="checkbox" id="separate-delivery-toggle" />
-            <span>Use a different delivery address</span>
-          </label>
-
-          <div class="details-grid details-grid--delivery" id="delivery-fields" hidden>
+          <div class="details-grid">
             <div class="details-field details-field--full">
               <label for="delivery-line1">Address line 1</label>
               <input
                 type="text"
                 id="delivery-line1"
                 autocomplete="shipping address-line1"
+                required
                 placeholder="Street and number"
               />
             </div>
@@ -265,6 +249,7 @@
                 type="text"
                 id="delivery-city"
                 autocomplete="shipping address-level2"
+                required
               />
             </div>
             <div class="details-field">
@@ -273,6 +258,7 @@
                 type="text"
                 id="delivery-postcode"
                 autocomplete="shipping postal-code"
+                required
                 placeholder="e.g. SW1A 1AA"
               />
             </div>
@@ -313,7 +299,7 @@
 
         <form id="stripe-payment-form" class="stripe-payment-form" novalidate>
           <fieldset class="payment-fieldset">
-            <legend>Billing address</legend>
+            <legend>Billing address (on your card)</legend>
             <div id="address-element"><!-- Stripe AddressElement --></div>
           </fieldset>
 
