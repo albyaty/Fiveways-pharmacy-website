@@ -115,6 +115,16 @@ svg {
     aspect-ratio: 1672 / 941;
     align-self: start;
   }
+
+  /* Sidebar stretches to the hero's (aspect-ratio-driven) height and
+     distributes its cards to fill it, so the last card's bottom lines up
+     with the hero's bottom at EVERY width. The inter-card gaps grow/shrink
+     with the hero automatically -- no fixed, screen-specific spacing that
+     would only align on one resolution. */
+  .home-showcase--service-led > .hero-side {
+    align-self: stretch;
+    align-content: space-between;
+  }
 }
 
 .container {
@@ -123,8 +133,12 @@ svg {
 }
 
 @media (min-width: 1500px) {
-  .site-header .container,
-  .home-showcase.hero.container {
+  /* Widen ALL containers together (header, hero, content sections, footer)
+     so they share one width and their edges align. Previously only the
+     header + hero widened here, leaving the content sections below at the
+     narrower 1360px -- which looked misaligned on screens >= 1500px while
+     looking fine on narrower screens. */
+  .container {
     width: min(1480px, calc(100% - 3rem));
   }
 
@@ -135,8 +149,7 @@ svg {
 }
 
 @media (min-width: 1800px) {
-  .site-header .container,
-  .home-showcase.hero.container {
+  .container {
     width: min(1560px, calc(100% - 4rem));
   }
 
