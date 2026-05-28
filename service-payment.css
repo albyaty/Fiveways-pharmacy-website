@@ -2,6 +2,16 @@
    consistency with the calm redesign. Only payment-specific layout lives
    here. */
 
+/* Force the `hidden` HTML attribute to actually hide elements.
+   Required because several of our containers below use `display: flex`,
+   which by default overrides the browser's built-in `[hidden] { display: none }`
+   rule. Without this, the custom amount section, the delivery block, and
+   the Step 2 payment card would all stay visible even when JS marks them
+   hidden. */
+[hidden] {
+  display: none !important;
+}
+
 /* Checkout-chrome header / footer ---------------------------------------- */
 
 .checkout-chrome-header {

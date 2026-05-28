@@ -97,15 +97,31 @@
     Cal.ns.fiveways("inline", {
       elementOrSelector: "#cal-inline-embed",
       calLink: "albayatilabs",
-      config: { layout: "month_view" }
+      config: {
+        layout: "month_view",
+        theme: "light"
+      }
     });
 
+    // Force light theme and push as much of the Five Ways brand into the
+    // embed as cal.eu's free-tier theming allows. Deeper branding (hiding
+    // cal.eu attribution, custom fonts, etc.) requires cal.eu's paid plan.
     Cal.ns.fiveways("ui", {
+      theme: "light",
       hideEventTypeDetails: false,
       layout: "month_view",
       cssVarsPerTheme: {
         light: {
-          "cal-brand": "#0f757b"
+          "cal-brand": "#0f757b",
+          "cal-bg-emphasis": "#eaf4f5",
+          "cal-bg": "#ffffff",
+          "cal-bg-muted": "#f7fbfb",
+          "cal-text": "#274b50",
+          "cal-text-emphasis": "#0a666b",
+          "cal-text-muted": "#5a7a7e",
+          "cal-border": "#bdd4d7",
+          "cal-border-subtle": "#e0eeef",
+          "cal-border-emphasis": "#89b7bc"
         }
       }
     });
