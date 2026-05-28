@@ -1289,5 +1289,31 @@
       });
     })();
   </script>
+  <!-- cal.eu modal embed runtime. Opens the calendar for THIS specific
+       service's event type when a Book button is clicked. No popup card
+       picker -- this page is already about one service. -->
+  <script type="text/javascript">
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.eu/embed/embed.js", "init");
+    Cal("init", "fw-book", { origin: "https://cal.eu" });
+    Cal.ns["fw-book"]("ui", {
+      theme: "light",
+      hideEventTypeDetails: false,
+      layout: "month_view",
+      cssVarsPerTheme: {
+        light: {
+          "cal-brand": "#0f757b",
+          "cal-bg-emphasis": "#eaf4f5",
+          "cal-bg": "#ffffff",
+          "cal-bg-muted": "#f7fbfb",
+          "cal-text": "#274b50",
+          "cal-text-emphasis": "#0a666b",
+          "cal-text-muted": "#5a7a7e",
+          "cal-border": "#bdd4d7",
+          "cal-border-subtle": "#e0eeef",
+          "cal-border-emphasis": "#89b7bc"
+        }
+      }
+    });
+  </script>
 </body>
 </html>
