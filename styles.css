@@ -106,8 +106,14 @@ svg {
   }
 
   .home-showcase--service-led > .home-main-stack > .hero-panel.hero-carousel {
-    height: 100%;
-    aspect-ratio: auto;
+    /* Keep the hero at the image's own 1672x941 ratio so object-fit:cover
+       fills it WITHOUT cropping. Previously this forced height:100% +
+       aspect-ratio:auto, which stretched the hero to the sidebar's height
+       and cropped the image by a screen-dependent amount. align-self:start
+       stops the grid from stretching it; the sidebar simply matches up. */
+    height: auto;
+    aspect-ratio: 1672 / 941;
+    align-self: start;
   }
 }
 
