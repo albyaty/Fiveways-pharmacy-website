@@ -4130,6 +4130,229 @@ main {
   white-space: nowrap;
 }
 
+.prescriptions-anchor-section {
+  scroll-margin-top: 8rem;
+}
+
+.prescriptions-route-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.82rem;
+  margin-top: 0.94rem;
+}
+
+.prescriptions-route-card {
+  display: grid;
+  gap: 0.44rem;
+  padding: 1rem;
+  border: 1px solid rgba(var(--bordersoft-rgb), 0.78);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 88% 16%, rgba(var(--primary-rgb), 0.12), transparent 24%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(var(--bgsoft-rgb), 0.52));
+  box-shadow: var(--shadow-soft);
+  text-decoration: none;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.prescriptions-route-card:hover,
+.prescriptions-route-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(var(--secondary-rgb), 0.28);
+  box-shadow: 0 18px 32px rgba(var(--textdark-rgb), 0.07);
+}
+
+.prescriptions-route-card:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring), 0 18px 32px rgba(var(--textdark-rgb), 0.07);
+}
+
+.prescriptions-route-card h2 {
+  margin: 0;
+  color: var(--text-dark);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.08rem;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.prescriptions-route-card p,
+.prescriptions-inline-note,
+.prescriptions-address span {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.56;
+}
+
+.prescriptions-inline-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.72rem;
+  margin-top: 0.88rem;
+}
+
+.prescriptions-inline-note {
+  margin-top: 0.76rem;
+}
+
+.prescriptions-subpanel {
+  margin-top: 0.92rem;
+}
+
+.prescriptions-details-card p {
+  margin-bottom: 0.76rem;
+}
+
+.prescriptions-address {
+  display: grid;
+  gap: 0.18rem;
+}
+
+.prescriptions-address strong {
+  color: var(--text-dark);
+  font-size: 0.98rem;
+  font-weight: 800;
+  line-height: 1.28;
+}
+
+.service-detail-page--repeat-prescriptions .service-detail-steps-grid--repeat {
+  margin-top: 0.8rem;
+}
+
+.service-detail-page--repeat-prescriptions .service-detail-step-card {
+  min-height: 148px;
+}
+
+.service-detail-page--repeat-prescriptions .prescriptions-hero-support-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) auto;
+  align-items: center;
+  gap: 0.9rem 1rem;
+  margin-top: 0.92rem;
+}
+
+.service-detail-page--repeat-prescriptions .prescriptions-hero-support-copy {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.service-detail-page--repeat-prescriptions .prescriptions-hero-support-copy h2 {
+  margin: 0;
+  color: var(--text-dark);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.38rem;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+}
+
+.service-detail-page--repeat-prescriptions .prescriptions-hero-support-copy p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.58;
+}
+
+.service-detail-page--repeat-prescriptions .prescriptions-form-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.82fr);
+  gap: 0.88rem;
+  align-items: start;
+}
+
+.service-detail-page--repeat-prescriptions .prescriptions-follow-up-card {
+  margin-top: 0;
+  padding: 0.96rem 1rem;
+}
+
+.service-detail-page--repeat-prescriptions .prescriptions-follow-up-card h2 {
+  font-size: 1.18rem;
+}
+
+.service-detail-page--repeat-prescriptions .prescriptions-follow-up-card .service-detail-bullet-list {
+  margin-top: 0.62rem;
+}
+
+.service-detail-page--emergency-prescriptions .prescriptions-emergency-pharmacy-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.12fr);
+  align-items: stretch;
+  gap: 0.92rem 1rem;
+  margin-top: 0.92rem;
+}
+
+.service-detail-page--emergency-prescriptions .prescriptions-emergency-pharmacy-copy {
+  display: grid;
+  gap: 0.3rem;
+  max-width: 25rem;
+}
+
+.service-detail-page--emergency-prescriptions .prescriptions-emergency-pharmacy-copy h2 {
+  margin: 0;
+  color: var(--text-dark);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.38rem;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+.service-detail-page--emergency-prescriptions .prescriptions-emergency-pharmacy-copy p {
+  margin: 0;
+  max-width: 29rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.service-detail-page--emergency-prescriptions .prescriptions-emergency-address-card {
+  height: 100%;
+  padding: 1rem 1.04rem;
+}
+
+.service-detail-page--emergency-prescriptions .prescriptions-emergency-address-card {
+  display: grid;
+  align-content: start;
+}
+
+.service-detail-page--emergency-prescriptions .prescriptions-emergency-address-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 0.92rem;
+}
+
+.service-detail-page--emergency-prescriptions .prescriptions-address--emergency {
+  min-width: 0;
+  justify-self: stretch;
+  gap: 0.24rem;
+}
+
+.service-detail-page--emergency-prescriptions .prescriptions-emergency-postcode-chip {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 0.28rem;
+  min-width: 8.9rem;
+  padding: 0.82rem 0.9rem;
+  border: 1px solid rgba(var(--secondary-rgb), 0.16);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(var(--bgsoft-rgb), 0.96), rgba(255, 255, 255, 0.98));
+  box-shadow: inset 0 0 0 1px rgba(var(--secondary-rgb), 0.08);
+  text-align: left;
+}
+
+.service-detail-page--emergency-prescriptions .prescriptions-emergency-postcode-chip strong {
+  color: var(--text-dark);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.34rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.service-detail-page--emergency-prescriptions .support-inline-links--emergency {
+  padding-left: 0.62rem;
+}
+
 .service-detail-panel,
 .service-detail-info-card,
 .service-detail-cta-panel {
@@ -4561,6 +4784,31 @@ main {
     grid-template-columns: 1fr;
   }
 
+  .prescriptions-route-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-detail-page--repeat-prescriptions .prescriptions-hero-support-strip,
+  .service-detail-page--repeat-prescriptions .prescriptions-form-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .service-detail-page--emergency-prescriptions .prescriptions-emergency-pharmacy-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .service-detail-page--emergency-prescriptions .prescriptions-address--emergency {
+    justify-self: stretch;
+  }
+
+  .service-detail-page--emergency-prescriptions .prescriptions-emergency-address-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .service-detail-page--emergency-prescriptions .prescriptions-emergency-postcode-chip {
+    min-width: 0;
+  }
+
   .pharmacy-first-guide__cta {
     justify-content: flex-start;
   }
@@ -4592,7 +4840,10 @@ main {
   .service-detail-page--speak-to-our-team .service-detail-section--mobile-offset .service-detail-faq-list,
   .service-detail-page--delivery-privacy .service-detail-section--mobile-offset .service-detail-alert,
   .service-detail-page--delivery-privacy .service-detail-section--mobile-offset .service-detail-section-head,
-  .service-detail-page--delivery-privacy .service-detail-section--mobile-offset .service-detail-faq-list {
+  .service-detail-page--delivery-privacy .service-detail-section--mobile-offset .service-detail-faq-list,
+  .service-detail-page--prescriptions .service-detail-section--mobile-offset .service-detail-alert,
+  .service-detail-page--prescriptions .service-detail-section--mobile-offset .service-detail-section-head,
+  .service-detail-page--prescriptions .service-detail-section--mobile-offset .service-detail-faq-list {
     margin-inline-start: 0.42rem;
   }
 
@@ -4653,6 +4904,15 @@ main {
 
   .pharmacy-first-guide__grid {
     grid-template-columns: 1fr;
+  }
+
+  .prescriptions-inline-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .prescriptions-inline-actions .service-detail-button {
+    width: 100%;
   }
 
   .pharmacy-first-guide__mini-card,
@@ -4740,7 +5000,10 @@ main {
   .service-detail-page--speak-to-our-team .service-detail-section--mobile-offset .service-detail-faq-list,
   .service-detail-page--delivery-privacy .service-detail-section--mobile-offset .service-detail-alert,
   .service-detail-page--delivery-privacy .service-detail-section--mobile-offset .service-detail-section-head,
-  .service-detail-page--delivery-privacy .service-detail-section--mobile-offset .service-detail-faq-list {
+  .service-detail-page--delivery-privacy .service-detail-section--mobile-offset .service-detail-faq-list,
+  .service-detail-page--prescriptions .service-detail-section--mobile-offset .service-detail-alert,
+  .service-detail-page--prescriptions .service-detail-section--mobile-offset .service-detail-section-head,
+  .service-detail-page--prescriptions .service-detail-section--mobile-offset .service-detail-faq-list {
     margin-inline-start: 0.34rem;
   }
 
@@ -4836,6 +5099,16 @@ main {
   .pharmacy-first-guide__list {
     font-size: 0.84rem;
     line-height: 1.52;
+  }
+
+  .prescriptions-route-card {
+    padding: 0.92rem;
+    border-radius: 22px;
+  }
+
+  .prescriptions-route-card h2,
+  .prescriptions-address strong {
+    font-size: 1rem;
   }
 
   .service-detail-alert {
