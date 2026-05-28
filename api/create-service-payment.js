@@ -195,13 +195,28 @@ module.exports = async (req, res) => {
   }
 
   // ---- Create the PaymentIntent ------------------------------------------
+  // The patient name is set in THREE places so it always shows up
+  // prominently in the Stripe dashboard and on receipts:
+  //   1. `description`           -- shown right at the top of the payment
+  //                                  detail page and on the email receipt.
+  //   2. `shipping.name` (+ addr) -- shown in the Shipping section of the
+  //                                  payment page (only for prescription,
+  //                                  because we have a delivery address).
+  //   3. `metadata.patient_name`  -- shown in the Metadata section and
+  //                                  read by our own success.html page.
+  // Stripe's "Customer" column otherwise shows the cardholder's name from
+  // their billing address -- that is NOT necessarily the patient, which is
+  // why we need to surface our captured patient name explicitly.
   try {
     const stripe = new Stripe(secretKey);
-    const paymentIntent = await stripe.paymentIntents.create({
+
+    const descriptionWithPatient = description + " - patient: " + patientName;
+
+    const paymentIntentParams = {
       amount: amountPence,
       currency: PAYMENT_CONFIG.CURRENCY,
       automatic_payment_methods: { enabled: true },
-      description,
+      description: descriptionWithPatient.slice(0, 999),
       receipt_email: patientEmail,
       metadata: {
         payment_type: type,
@@ -216,7 +231,29 @@ module.exports = async (req, res) => {
         delivery_city: deliveryMeta.delivery_city.slice(0, 480),
         delivery_postcode: deliveryMeta.delivery_postcode.slice(0, 480),
       },
-    });
+    };
+
+    // Shipping field: only attach when prescription (we have a real
+    // delivery address). For custom payments we leave it off rather than
+    // sending a stub address.
+    if (type === "prescription") {
+      const shippingAddress = {
+        line1: deliveryMeta.delivery_line1,
+        city: deliveryMeta.delivery_city,
+        postal_code: deliveryMeta.delivery_postcode,
+        country: "GB",
+      };
+      if (deliveryMeta.delivery_line2) {
+        shippingAddress.line2 = deliveryMeta.delivery_line2;
+      }
+      paymentIntentParams.shipping = {
+        name: patientName,
+        phone: patientPhone,
+        address: shippingAddress,
+      };
+    }
+
+    const paymentIntent = await stripe.paymentIntents.create(paymentIntentParams);
 
     return res.status(200).json({
       clientSecret: paymentIntent.client_secret,
