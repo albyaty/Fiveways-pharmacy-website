@@ -6,7 +6,7 @@
   <title>Book an appointment | Five Ways Pharmacy</title>
   <meta
     name="description"
-    content="Book a 30-minute appointment with the Five Ways Pharmacy team."
+    content="Book a free 30-minute appointment with the Five Ways Pharmacy team."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -41,7 +41,7 @@
   </header>
 
   <main class="service-payment-main">
-    <section class="container service-payment-shell">
+    <section class="container service-payment-shell book-shell">
       <nav class="service-payment-breadcrumb" aria-label="Breadcrumb">
         <a href="./index.html">Home</a>
         <span aria-hidden="true">/</span>
@@ -52,20 +52,23 @@
         <span class="kicker">Pharmacy bookings</span>
         <h1>What would you like to book with us?</h1>
         <p>
-          Choose a service below, pick a 30-minute slot that suits you, and
-          confirm in seconds. You will get a calendar invite and confirmation
-          email instantly.
+          Every appointment is a free 30-minute slot with a member of our
+          pharmacy team. Pick a service and we will open the calendar for it
+          right here on the page.
         </p>
       </header>
 
-      <!-- The whole booking flow lives inside this cal.eu inline embed.
-           It loads the user's profile page (cal.eu/albayatilabs), which
-           shows all available event types in cal.com's polished UI, and
-           drops the customer into the time picker as soon as they choose
-           a service. No modals, no redirects. -->
-      <section class="cal-inline-shell">
-        <div id="cal-inline-embed" class="cal-inline-embed"></div>
-      </section>
+      <!-- Service cards. Rendered by book.js from services.js. Each card's
+           "Book" button carries a data-cal-link attribute; the click
+           handler at the bottom of this file opens the cal.eu modal for
+           just that one service -- no full-profile picker, no leaving
+           the page. -->
+      <div class="book-grid" id="book-grid" role="list"></div>
+
+      <p class="book-empty" id="book-empty" hidden>
+        Online bookings are being set up. Please call the pharmacy in the
+        meantime.
+      </p>
 
       <p class="service-picker-helper">
         Need to pay for a prescription instead?
@@ -85,28 +88,14 @@
     </div>
   </footer>
 
-  <!-- cal.eu inline embed runtime.
-       Uses the EU instance (cal.eu / app.cal.eu) for data residency.
-       Loads the username profile so the customer sees all event types in
-       one unified UI; picking one drops them into that event's calendar. -->
+  <!-- cal.eu modal embed + explicit click handler. Same pattern as the
+       service info pages: clicks on any [data-cal-link] element open a
+       cal.eu modal for that specific event slug, themed teal. -->
   <script type="text/javascript">
     (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.eu/embed/embed.js", "init");
 
-    Cal("init", "fiveways", { origin: "https://cal.eu" });
-
-    Cal.ns.fiveways("inline", {
-      elementOrSelector: "#cal-inline-embed",
-      calLink: "albayatilabs",
-      config: {
-        layout: "month_view",
-        theme: "light"
-      }
-    });
-
-    // Force light theme and push as much of the Five Ways brand into the
-    // embed as cal.eu's free-tier theming allows. Deeper branding (hiding
-    // cal.eu attribution, custom fonts, etc.) requires cal.eu's paid plan.
-    Cal.ns.fiveways("ui", {
+    Cal("init", { origin: "https://cal.eu" });
+    Cal("ui", {
       theme: "light",
       hideEventTypeDetails: false,
       layout: "month_view",
@@ -125,6 +114,20 @@
         }
       }
     });
+
+    document.addEventListener("click", function (e) {
+      var trigger = e.target.closest && e.target.closest("[data-cal-link]");
+      if (!trigger || !window.Cal) return;
+      e.preventDefault();
+      var calLink = trigger.getAttribute("data-cal-link");
+      var rawConfig = trigger.getAttribute("data-cal-config");
+      var config = { layout: "month_view" };
+      if (rawConfig) { try { config = JSON.parse(rawConfig); } catch (err) {} }
+      window.Cal("modal", { calLink: calLink, config: config });
+    });
   </script>
+
+  <script src="./services.js"></script>
+  <script src="./book.js"></script>
 </body>
 </html>
