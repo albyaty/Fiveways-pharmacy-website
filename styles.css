@@ -116,14 +116,27 @@ svg {
     align-self: start;
   }
 
-  /* Sidebar stretches to the hero's (aspect-ratio-driven) height and
-     distributes its cards to fill it, so the last card's bottom lines up
-     with the hero's bottom at EVERY width. The inter-card gaps grow/shrink
-     with the hero automatically -- no fixed, screen-specific spacing that
-     would only align on one resolution. */
+  /* Sidebar stretches to the hero's (aspect-ratio-driven) height. Instead
+     of distributing the extra height into big sparse gaps, the cards
+     themselves grow to share the height (content centered), with tight
+     fixed gaps. This is fully adaptive: cards scale up on tall/wide heroes
+     and shrink on smaller screens (never fixed-bulky), the gaps stay tight
+     at every size, and the last card always meets the hero's bottom. */
   .home-showcase--service-led > .hero-side {
     align-self: stretch;
-    align-content: space-between;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .home-showcase--service-led > .hero-side > .side-card {
+    flex: 1 1 0;
+    align-content: center;
+  }
+
+  /* The promo card is the visual anchor, so it takes a larger share. */
+  .home-showcase--service-led > .hero-side > .side-card-primary {
+    flex: 2 1 0;
   }
 }
 
