@@ -145,13 +145,32 @@ All three happen within seconds of a successful payment. That gives the
 "customer calls and we can verify they paid" guarantee without any custom
 notification code.
 
-### Why no custom email-to-pharmacy webhook (yet)?
+### Custom email-to-pharmacy webhook (BUILT — `api/stripe-webhook.js`)
 
-It's nice but not necessary for v1. The native Stripe email + dashboard
-+ mobile app cover the brief. Adding a Stripe webhook + a transactional
-email service (Resend / Postmark) is a future enhancement — see "Open
-items" below. The webhook would let us send a formatted email to multiple
-pharmacy staff with all fields in the body, plus optionally an SMS.
+Stripe's own notification emails only show the payer (cardholder) name +
+amount, and don't fire in test mode. So the pharmacy was never actively
+told the *patient* details we capture. `api/stripe-webhook.js` fixes this:
+on `payment_intent.succeeded` it re-fetches the PaymentIntent from Stripe
+and emails the pharmacy a formatted message with the patient name, DOB,
+phone, email, what they paid for, and delivery address. Works in test and
+live mode.
+
+Email is sent via Resend's REST API (no SDK dependency — plain `fetch`).
+Security: rather than raw-body Stripe signature verification (fragile on
+Vercel, which pre-parses the body), the endpoint is guarded by a secret
+URL token (`STRIPE_WEBHOOK_TOKEN`) AND it re-fetches authentic data from
+Stripe, so the email content can never be spoofed by the request body.
+
+Setup (one-time):
+1. Create a free Resend account; register it with the pharmacy's inbox so
+   you can send to that inbox without verifying a domain.
+2. Vercel env vars: `RESEND_API_KEY`, `PHARMACY_NOTIFY_EMAIL` (the inbox),
+   `STRIPE_WEBHOOK_TOKEN` (any random string), optional `NOTIFY_FROM_EMAIL`.
+3. Stripe Dashboard -> Developers -> Webhooks -> Add endpoint:
+   URL `https://<site>/api/stripe-webhook?token=<STRIPE_WEBHOOK_TOKEN>`,
+   event `payment_intent.succeeded`. Redeploy.
+Once a custom domain exists, verify it in Resend and set `NOTIFY_FROM_EMAIL`
+to a branded address; you can then also send to multiple staff addresses.
 
 ### Why cal.com for booking?
 
@@ -266,12 +285,8 @@ page.
 
 ## Open items / future work
 
-- **Custom webhook + pharmacy email.** Add `api/stripe-webhook.js` that
-  subscribes to `payment_intent.succeeded`, verifies the
-  `STRIPE_WEBHOOK_SECRET`, formats a friendly email, and sends it to a
-  shared pharmacy inbox via Resend or Postmark. Nice-to-have on top of
-  Stripe's built-in notifications.
-- **SMS notification to pharmacist on duty.** Same webhook, plus Twilio.
+- **SMS notification to pharmacist on duty.** Extend `api/stripe-webhook.js`
+  with Twilio.
   Useful if the pharmacy wants instant phone alerts during opening hours.
 - **Move services to a database** so the pharmacy owner can manage them
   without a code deploy. Supabase + a simple admin page would work. Only
