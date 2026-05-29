@@ -85,6 +85,38 @@ module.exports = async (req, res) => {
     const m = pi.metadata || {};
     const amount = "GBP " + (pi.amount / 100).toFixed(2);
 
+    // Record the order in Supabase (best-effort) so it shows in the
+    // customer's account payment history. Uses the service role key and is
+    // idempotent on the payment-intent id (safe if the webhook retries).
+    if (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_KEY) {
+      try {
+        await fetch(
+          process.env.SUPABASE_URL +
+            "/rest/v1/orders?on_conflict=stripe_payment_intent",
+          {
+            method: "POST",
+            headers: {
+              apikey: process.env.SUPABASE_SERVICE_KEY,
+              Authorization: "Bearer " + process.env.SUPABASE_SERVICE_KEY,
+              "Content-Type": "application/json",
+              Prefer: "resolution=ignore-duplicates,return=minimal",
+            },
+            body: JSON.stringify({
+              email: pi.receipt_email || "",
+              amount_pence: pi.amount,
+              currency: pi.currency || "gbp",
+              summary: m.summary || "",
+              payment_type: m.payment_type || "",
+              patient_name: m.patient_name || "",
+              stripe_payment_intent: pi.id,
+            }),
+          }
+        );
+      } catch (e) {
+        /* non-fatal: the notification email still sends */
+      }
+    }
+
     const charge =
       pi.latest_charge && typeof pi.latest_charge === "object"
         ? pi.latest_charge
