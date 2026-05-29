@@ -24,7 +24,8 @@
 window.AUTH_CONFIG = {
   AUTH_ENABLED: true,
 
-  // Paste your Supabase values here:
-  SUPABASE_URL: "",        // e.g. "https://abcdxyz.supabase.co"
-  SUPABASE_ANON_KEY: "",   // the anon / public key (safe to expose)
+  // Supabase project values. The publishable key (sb_publishable_...) is the
+  // browser-safe key -- safe to expose, protected by Row Level Security.
+  SUPABASE_URL: "https://dyfnqmxkwgeiimydtywk.supabase.co",
+  SUPABASE_ANON_KEY: "sb_publishable_QZZJlS9uLQwTCoDqHWIEnw_gf07fstE",
 };
