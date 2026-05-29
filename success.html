@@ -133,13 +133,14 @@
       <h1 id="success-title">Confirming your payment...</h1>
       <p id="success-message">Hang tight while we verify with Stripe.</p>
 
+      <!-- This page runs in the customer's browser with the PUBLISHABLE key,
+           which Stripe does NOT expose metadata to. So we only show fields
+           that are available client-side (amount, status, reference). The
+           private details (patient name, DOB, delivery) are confirmed to the
+           pharmacy via the server-side webhook email, not echoed here. -->
       <dl class="success-meta" id="success-meta" hidden>
         <div>
-          <dt>Paying for</dt>
-          <dd id="meta-summary">--</dd>
-        </div>
-        <div>
-          <dt>Amount</dt>
+          <dt>Amount paid</dt>
           <dd id="meta-amount">--</dd>
         </div>
         <div>
@@ -149,14 +150,6 @@
         <div>
           <dt>Payment reference</dt>
           <dd id="meta-reference">--</dd>
-        </div>
-        <div>
-          <dt>Patient name</dt>
-          <dd id="meta-patient-name">--</dd>
-        </div>
-        <div id="meta-delivery-wrap">
-          <dt>Deliver to</dt>
-          <dd id="meta-delivery">--</dd>
         </div>
       </dl>
 
@@ -226,26 +219,16 @@
         );
 
         metaEl.hidden = false;
-        const m = (paymentIntent && paymentIntent.metadata) || {};
 
-        setMeta("meta-summary", m.summary || "Pharmacy payment");
+        // Only amount/status/id are available with the publishable key.
+        // Metadata (patient name, delivery) is intentionally not exposed
+        // client-side -- it reaches the pharmacy via the webhook email.
         setMeta(
           "meta-amount",
           "GBP " + (paymentIntent.amount / 100).toFixed(2)
         );
         setMeta("meta-status", paymentIntent.status);
         setMeta("meta-reference", paymentIntent.id);
-        setMeta("meta-patient-name", m.patient_name || "--");
-
-        // Only show the delivery row when there's a real delivery address
-        // (i.e. prescription orders). Custom payments have no delivery.
-        const deliveryWrap = document.getElementById("meta-delivery-wrap");
-        if (m.delivery) {
-          if (deliveryWrap) deliveryWrap.hidden = false;
-          setMeta("meta-delivery", m.delivery);
-        } else if (deliveryWrap) {
-          deliveryWrap.hidden = true;
-        }
 
         switch (paymentIntent.status) {
           case "succeeded":

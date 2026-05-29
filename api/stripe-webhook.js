@@ -69,24 +69,58 @@ module.exports = async (req, res) => {
   try {
     const stripe = new Stripe(secretKey);
     // (2) Re-fetch authentic data from Stripe -- never trust the payload body.
-    const pi = await stripe.paymentIntents.retrieve(piId);
+    //     Expand the charge so we can read the cardholder name + card used.
+    const pi = await stripe.paymentIntents.retrieve(piId, {
+      expand: ["latest_charge"],
+    });
     const m = pi.metadata || {};
     const amount = "GBP " + (pi.amount / 100).toFixed(2);
 
+    const charge =
+      pi.latest_charge && typeof pi.latest_charge === "object"
+        ? pi.latest_charge
+        : null;
+    const cardholder =
+      (charge && charge.billing_details && charge.billing_details.name) || "-";
+    const card =
+      charge &&
+      charge.payment_method_details &&
+      charge.payment_method_details.card
+        ? charge.payment_method_details.card
+        : null;
+    const cardLabel = card ? `${card.brand} ****${card.last4}` : "-";
+    const paidAt = new Date(
+      (pi.created || Math.floor(Date.now() / 1000)) * 1000
+    ).toLocaleString("en-GB", {
+      timeZone: "Europe/London",
+      dateStyle: "medium",
+      timeStyle: "short",
+    });
+    const dashUrl =
+      "https://dashboard.stripe.com/" +
+      (pi.livemode ? "" : "test/") +
+      "payments/" +
+      pi.id;
+
     const rows = [
       ["Amount", amount],
+      ["Paid at", paidAt + " (UK time)"],
       ["Paying for", m.summary || "Pharmacy payment"],
       ["Patient name", m.patient_name || "-"],
       ["Date of birth", m.patient_dob || "-"],
       ["Phone", m.patient_phone || "-"],
       ["Email", pi.receipt_email || "-"],
       ["Deliver to", m.delivery || "-"],
+      ["Cardholder name", cardholder],
+      ["Card used", cardLabel],
       ["Payment type", m.payment_type || "-"],
       ["Stripe reference", pi.id],
     ];
 
     const esc = (v) => String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;");
-    const text = rows.map(([k, v]) => `${k}: ${v}`).join("\n");
+    const text =
+      rows.map(([k, v]) => `${k}: ${v}`).join("\n") +
+      `\n\nView this payment in Stripe: ${dashUrl}`;
     const html =
       `<h2 style="font-family:Arial,sans-serif;color:#0a666b">New payment received &mdash; ${esc(amount)}</h2>` +
       `<table style="font-family:Arial,sans-serif;font-size:14px;border-collapse:collapse">` +
@@ -98,6 +132,8 @@ module.exports = async (req, res) => {
         )
         .join("") +
       `</table>` +
+      `<p style="font-family:Arial,sans-serif;font-size:14px;margin-top:16px">` +
+      `<a href="${dashUrl}" style="color:#0f757b;font-weight:700">View this payment in Stripe &rarr;</a></p>` +
       `<p style="font-family:Arial,sans-serif;font-size:12px;color:#8aa">Five Ways Pharmacy &middot; automated payment notification</p>`;
 
     const resp = await fetch("https://api.resend.com/emails", {
