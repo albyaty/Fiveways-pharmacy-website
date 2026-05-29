@@ -67,3 +67,36 @@ create policy "addresses_delete_own"
   on public.addresses for delete
   to authenticated
   using (auth.uid() = user_id);
+
+-- ---------------------------------------------------------------------------
+-- PROFILES (editable personal details: name, phone, date of birth)
+-- One row per user, keyed to their auth id. Each user manages only their own.
+-- ---------------------------------------------------------------------------
+create table if not exists public.profiles (
+  id            uuid primary key references auth.users(id) on delete cascade,
+  full_name     text,
+  phone         text,
+  date_of_birth date,
+  updated_at    timestamptz not null default now()
+);
+
+alter table public.profiles enable row level security;
+
+drop policy if exists "profiles_select_own" on public.profiles;
+create policy "profiles_select_own"
+  on public.profiles for select
+  to authenticated
+  using (auth.uid() = id);
+
+drop policy if exists "profiles_insert_own" on public.profiles;
+create policy "profiles_insert_own"
+  on public.profiles for insert
+  to authenticated
+  with check (auth.uid() = id);
+
+drop policy if exists "profiles_update_own" on public.profiles;
+create policy "profiles_update_own"
+  on public.profiles for update
+  to authenticated
+  using (auth.uid() = id)
+  with check (auth.uid() = id);

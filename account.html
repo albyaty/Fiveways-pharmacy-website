@@ -38,17 +38,41 @@
       </div>
 
       <div class="account-grid">
-        <!-- Profile -->
-        <section class="account-card">
+        <!-- Profile (editable) -->
+        <section class="account-card account-card--wide">
           <h2 class="account-card__title">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.25" r="3.25"/><path d="M5.75 19.5c1.35-3.05 4.05-4.6 6.25-4.6s4.9 1.55 6.25 4.6"/></svg>
             Profile
           </h2>
-          <dl style="margin:0">
-            <div class="auth-account-row"><dt>Email</dt><dd id="profile-email">--</dd></div>
-            <div class="auth-account-row"><dt>Member since</dt><dd id="profile-since">--</dd></div>
-          </dl>
-          <a class="account-card__link" href="./reset-password.html">Change password</a>
+          <p class="account-card__hint">Your personal details. We use these to process your orders, and they can speed up checkout later.</p>
+
+          <form id="profile-form" class="account-profile-grid">
+            <div class="auth-field account-field--full">
+              <label for="pf-email">Email</label>
+              <input type="email" id="pf-email" disabled />
+            </div>
+            <div class="auth-field account-field--full">
+              <label for="pf-name">Full name</label>
+              <input type="text" id="pf-name" autocomplete="name" placeholder="Your full name" />
+            </div>
+            <div class="auth-field">
+              <label for="pf-phone">Phone number</label>
+              <input type="tel" id="pf-phone" autocomplete="tel" placeholder="07..." />
+            </div>
+            <div class="auth-field">
+              <label for="pf-dob">Date of birth</label>
+              <input type="date" id="pf-dob" autocomplete="bday" />
+            </div>
+
+            <p class="auth-message auth-message--error account-field--full" id="pf-error" hidden></p>
+            <p class="auth-message auth-message--success account-field--full" id="pf-success" hidden></p>
+
+            <div class="account-profile-actions account-field--full">
+              <button type="submit" class="btn btn-primary" id="pf-submit" style="min-height:44px">Save changes</button>
+              <a class="account-card__link" href="./reset-password.html">Change password</a>
+              <span class="account-profile-since">Member since <span id="profile-since">--</span></span>
+            </div>
+          </form>
         </section>
 
         <!-- Quick actions -->
@@ -263,6 +287,44 @@
         }
       });
 
+      // ---- Profile (editable name / phone / DOB) ---------------------------
+      async function loadProfile() {
+        try {
+          var res = await db.from("profiles").select("*").eq("id", currentUser.id).maybeSingle();
+          if (res.error) return;
+          var p = res.data || {};
+          if (p.full_name) document.getElementById("pf-name").value = p.full_name;
+          if (p.phone) document.getElementById("pf-phone").value = p.phone;
+          if (p.date_of_birth) document.getElementById("pf-dob").value = p.date_of_birth;
+        } catch (e) { /* no profile row yet -> fields stay empty */ }
+      }
+
+      document.getElementById("profile-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        var errEl = document.getElementById("pf-error");
+        var okEl = document.getElementById("pf-success");
+        errEl.hidden = true; okEl.hidden = true;
+        var btn = document.getElementById("pf-submit");
+        btn.disabled = true; btn.textContent = "Saving...";
+        try {
+          var res = await db.from("profiles").upsert({
+            id: currentUser.id,
+            full_name: document.getElementById("pf-name").value.trim() || null,
+            phone: document.getElementById("pf-phone").value.trim() || null,
+            date_of_birth: document.getElementById("pf-dob").value || null,
+            updated_at: new Date().toISOString(),
+          });
+          if (res.error) throw res.error;
+          okEl.textContent = "Profile saved.";
+          okEl.hidden = false;
+        } catch (err) {
+          errEl.textContent = (err && err.message) || "Could not save your profile.";
+          errEl.hidden = false;
+        } finally {
+          btn.disabled = false; btn.textContent = "Save changes";
+        }
+      });
+
       // ---- Boot -------------------------------------------------------------
       (async function () {
         var user = await window.FWAuth.requireAuth("./login.html");
@@ -271,7 +333,7 @@
 
         var email = user.email || "--";
         document.getElementById("account-email").textContent = email;
-        document.getElementById("profile-email").textContent = email;
+        document.getElementById("pf-email").value = email;
         if (user.created_at) {
           document.getElementById("profile-since").textContent =
             new Date(user.created_at).toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" });
@@ -279,6 +341,7 @@
         loading.hidden = true;
         dash.hidden = false;
 
+        loadProfile();
         loadOrders();
         loadAddresses();
       })();

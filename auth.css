@@ -406,3 +406,43 @@
   .account-addr-grid { grid-template-columns: 1fr; }
   .account-addr-grid input { grid-column: 1 / -1; }
 }
+
+/* Editable profile */
+.account-card__hint {
+  margin: -0.2rem 0 0.4rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.account-profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.account-field--full { grid-column: 1 / -1; }
+
+.account-profile-grid input:disabled {
+  background: var(--background-soft);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.account-profile-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.2rem;
+}
+
+.account-profile-since {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-left: auto;
+}
+
+@media (max-width: 560px) {
+  .account-profile-grid { grid-template-columns: 1fr; }
+  .account-profile-since { margin-left: 0; }
+}
