@@ -56,6 +56,28 @@ Rules of thumb for any image that should show fully:
   `object-fit: contain` (shows the whole image, may letterbox) over
   `cover` (crops) unless you're certain the ratios match.
 
+## Images: use WebP, keep them small
+
+The site once shipped **82MB of images** (photos saved as multi-MB PNGs),
+making the homepage download ~42MB on first load — terrible for mobile,
+SEO/Core Web Vitals, and Vercel bandwidth. It's now ~3MB total.
+
+When adding or replacing images:
+- **Use WebP** for photos and illustrations (`.webp`), not PNG/JPEG.
+  WebP is ~10-20x smaller at the same visible quality and is supported by
+  every modern browser. PNG is only appropriate for tiny icons that need
+  it; prefer inline SVG for icons (most icons here are inline SVG).
+- **Target < ~200KB per image.** A full-width hero can be a bit more; a
+  small card image should be well under 100KB.
+- Don't commit a raster image that isn't referenced anywhere. Dead image
+  files are pure repo bloat.
+- Quick local conversion (Python Pillow is available):
+  `Image.open("x.png").convert("RGB").save("x.webp","WEBP",quality=82,method=6)`
+  then update the reference and delete the original.
+- Remember `<img>` elements inside a `display:none`/`hidden` section
+  **still download** in most browsers — don't leave heavy images in
+  hidden/dead markup.
+
 ## Adding a new service / info page
 
 - Copy the structure of an existing page in the same family (e.g.
