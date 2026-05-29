@@ -40,13 +40,22 @@ module.exports = async (req, res) => {
 
   const secretKey = process.env.STRIPE_SECRET_KEY;
   const resendKey = process.env.RESEND_API_KEY;
-  const notifyTo = process.env.PHARMACY_NOTIFY_EMAIL;
+  // PHARMACY_NOTIFY_EMAIL accepts ONE address or a comma-separated list, e.g.
+  // "owner@x.com, pharmacist@x.com". Set it as a single Vercel variable --
+  // you cannot add the same variable name twice.
+  // NOTE: Resend only delivers to arbitrary addresses once you've verified a
+  // sending domain. Until then it can reliably send only to the inbox you
+  // registered the Resend account with (see ARCHITECTURE.md).
+  const notifyList = (process.env.PHARMACY_NOTIFY_EMAIL || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
   const notifyFrom =
     process.env.NOTIFY_FROM_EMAIL ||
     "Five Ways Pharmacy <onboarding@resend.dev>";
 
   // Always return 200 so Stripe doesn't retry-storm while setup is incomplete.
-  if (!secretKey || !resendKey || !notifyTo) {
+  if (!secretKey || !resendKey || notifyList.length === 0) {
     return res
       .status(200)
       .json({ ok: true, skipped: "notifications not fully configured" });
@@ -144,7 +153,7 @@ module.exports = async (req, res) => {
       },
       body: JSON.stringify({
         from: notifyFrom,
-        to: [notifyTo],
+        to: notifyList,
         subject: `New payment ${amount} - ${m.patient_name || "patient"}`,
         text,
         html,
