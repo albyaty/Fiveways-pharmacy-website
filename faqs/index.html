@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQs | Five Ways Pharmacy</title>
+  <meta name="description" content="Answers to common questions about Five Ways Pharmacy services, bookings, prescriptions, payments and delivery." />
+  <meta name="robots" content="index,follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../service-payment.css" />
+  <link rel="stylesheet" href="../faq.css" />
+</head>
+<body>
+  <header class="checkout-chrome-header">
+    <div class="container checkout-chrome-header__inner">
+      <a class="brand checkout-chrome-header__brand" href="../index.html" aria-label="Five Ways Pharmacy home">
+        <img class="brand-logo" src="../assets/brand/fiveways-logo-new.svg" alt="Five Ways Pharmacy" width="454" height="227" />
+      </a>
+      <div class="checkout-chrome-header__secure" aria-label="Help centre">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M9.5 9.5a2.5 2.5 0 0 1 4.5 1.5c0 1.5-2 1.8-2 3" /><path d="M12 17h.01" /></svg>
+        <span>Help centre</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="faq-main">
+    <section class="faq-hero">
+      <div class="container faq-hero__inner">
+        <span class="kicker">Help centre</span>
+        <h1>How can we help?</h1>
+        <p>Answers about our services, bookings, prescriptions, payments and delivery.</p>
+        <div class="faq-search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6" /><path d="M16 16l5 5" /></svg>
+          <label class="sr-only" for="faq-search-input">Search questions</label>
+          <input type="search" id="faq-search-input" placeholder="Search questions, e.g. delivery, refund, booking..." autocomplete="off" />
+        </div>
+      </div>
+    </section>
+
+    <div class="container faq-body" id="faq-body">
+      <nav class="faq-jump" aria-label="Jump to category">
+        <a href="#cat-services">Services &amp; bookings</a>
+        <a href="#cat-payments">Prescriptions &amp; payments</a>
+        <a href="#cat-delivery">Delivery</a>
+        <a href="#cat-accounts">Accounts</a>
+        <a href="#cat-general">General</a>
+      </nav>
+
+      <!-- SERVICES -->
+      <section class="faq-category" id="cat-services" data-faq-category>
+        <h2 class="faq-category__title">Services &amp; bookings</h2>
+
+        <details class="faq-item">
+          <summary><span>What services do you offer?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">We offer NHS Pharmacy First, NHS contraception, stop smoking support, weight management, flu and COVID vaccinations, health advice and more. You can <a href="../book.html">see everything and book an appointment here</a>.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>How do I book an appointment?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">Go to our <a href="../book.html">booking page</a>, choose a service, and pick a 30-minute slot that suits you. You&rsquo;ll get a confirmation and calendar invite by email.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>Do appointments cost anything?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">The services listed on our booking page are free 30-minute appointments. If a private service has a fee, we&rsquo;ll always make that clear before you book or pay.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>Can I get advice without booking?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">Yes &mdash; you can <a href="../speak-to-our-team/">speak to our team</a> for everyday pharmacy questions. For anything clinical, our pharmacist will advise you directly.</div>
+        </details>
+      </section>
+
+      <!-- PAYMENTS -->
+      <section class="faq-category" id="cat-payments" data-faq-category>
+        <h2 class="faq-category__title">Prescriptions &amp; payments</h2>
+
+        <details class="faq-item">
+          <summary><span>How do I pay for my prescription?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">Call us about your prescription, then use our <a href="../service-payment.html">secure payment page</a>. Choose how many items are on your prescription (charged per item, with free UK delivery) and pay by card.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>Is paying online secure?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">Yes. Payments are handled by Stripe, a leading global payment provider. Your card details are entered directly into Stripe&rsquo;s secure form &mdash; we never see or store your full card number.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>Can I pay a custom amount?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">Yes. On the <a href="../service-payment.html">payment page</a> choose &ldquo;Custom amount&rdquo; and enter the figure agreed with our pharmacy team.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>What if the medication is for someone else?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">When you pay, enter the details of the patient the medication is for. You can pay with any card &mdash; the patient&rsquo;s details and the delivery address are what we use to fulfil the order.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>Will I get a receipt?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">Yes &mdash; a receipt is emailed to the address you provide at checkout.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>Can I get a refund?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">For safety reasons, medicines can&rsquo;t be returned once supplied unless they&rsquo;re faulty or sent in error. If something&rsquo;s wrong, contact us and we&rsquo;ll put it right. See our <a href="../terms/#cancellations">cancellations &amp; refunds terms</a>.</div>
+        </details>
+      </section>
+
+      <!-- DELIVERY -->
+      <section class="faq-category" id="cat-delivery" data-faq-category>
+        <h2 class="faq-category__title">Delivery</h2>
+
+        <details class="faq-item">
+          <summary><span>Do you deliver, and is it free?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">Yes &mdash; prescription orders include <strong>free UK delivery</strong>. You enter your delivery address securely at checkout.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>How long does delivery take?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">Most orders are dispatched promptly and typically arrive within <span class="faq-fill">[delivery timeframe, e.g. 2&ndash;3 working days]</span>. We&rsquo;ll contact you if there&rsquo;s any delay.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>Is the packaging discreet?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">Yes &mdash; orders are sent in plain, discreet packaging. See our <a href="../delivery-privacy/">delivery &amp; privacy</a> page.</div>
+        </details>
+      </section>
+
+      <!-- ACCOUNTS -->
+      <section class="faq-category" id="cat-accounts" data-faq-category>
+        <h2 class="faq-category__title">Accounts</h2>
+
+        <details class="faq-item">
+          <summary><span>Do I need an account to pay or book?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">No &mdash; you can pay and book as a guest. An account is optional and just makes future visits faster.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>How do I reset my password?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">Use the <a href="../reset-password.html">reset password page</a> &mdash; enter your email and we&rsquo;ll send you a secure link to set a new password.</div>
+        </details>
+      </section>
+
+      <!-- GENERAL -->
+      <section class="faq-category" id="cat-general" data-faq-category>
+        <h2 class="faq-category__title">General</h2>
+
+        <details class="faq-item">
+          <summary><span>Are you a registered pharmacy?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">Yes. Five Ways Pharmacy is registered with the General Pharmaceutical Council (GPhC premises number <span class="faq-fill">[GPhC number]</span>) and operates to UK pharmacy standards.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>How do I contact you?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">Call us on <span class="faq-fill">[phone number]</span> or use our <a href="../speak-to-our-team/">contact page</a>. We&rsquo;re open <span class="faq-fill">[opening hours]</span>.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>How is my personal data handled?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">We handle your data confidentially and in line with UK data protection law. Read our <a href="../privacy/">Privacy Policy</a> for the full detail.</div>
+        </details>
+
+        <details class="faq-item">
+          <summary><span>How do I make a complaint?</span><span class="faq-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span></summary>
+          <div class="faq-item__answer">We want to hear if something&rsquo;s wrong. See our <a href="../terms/#complaints">complaints process</a>, or contact the team directly and we&rsquo;ll investigate.</div>
+        </details>
+      </section>
+
+      <p class="faq-noresults" id="faq-noresults" hidden>
+        No questions match your search. Try a different word, or
+        <a href="../speak-to-our-team/">contact our team</a>.
+      </p>
+    </div>
+
+    <section class="container">
+      <div class="faq-cta">
+        <h2>Still have a question?</h2>
+        <p>Our pharmacy team is happy to help with anything we haven&rsquo;t covered.</p>
+        <div class="faq-cta__actions">
+          <a class="faq-cta__btn faq-cta__btn--solid" href="../speak-to-our-team/">Contact the team</a>
+          <a class="faq-cta__btn faq-cta__btn--ghost" href="../book.html">Book an appointment</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="checkout-chrome-footer">
+    <div class="container checkout-chrome-footer__inner">
+      <p>&copy; 2026 Five Ways Pharmacy. Registered UK pharmacy.</p>
+      <p>
+        <a href="../privacy/">Privacy</a><span aria-hidden="true">&middot;</span>
+        <a href="../terms/">Terms</a><span aria-hidden="true">&middot;</span>
+        <a href="../cookies/">Cookies</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var input = document.getElementById("faq-search-input");
+      var items = Array.prototype.slice.call(document.querySelectorAll(".faq-item"));
+      var categories = Array.prototype.slice.call(document.querySelectorAll("[data-faq-category]"));
+      var noResults = document.getElementById("faq-noresults");
+      var jump = document.querySelector(".faq-jump");
+
+      function normalize(s) { return (s || "").toLowerCase().trim(); }
+
+      input.addEventListener("input", function () {
+        var q = normalize(input.value);
+        var anyVisible = false;
+
+        items.forEach(function (item) {
+          var match = q === "" || normalize(item.textContent).indexOf(q) !== -1;
+          item.hidden = !match;
+          if (match) anyVisible = true;
+          if (q !== "" && match) item.open = true;
+          if (q === "") item.open = false;
+        });
+
+        // Hide categories that have no visible items.
+        categories.forEach(function (cat) {
+          var visible = cat.querySelector(".faq-item:not([hidden])");
+          cat.hidden = !visible;
+        });
+
+        if (jump) jump.style.display = q === "" ? "" : "none";
+        if (noResults) noResults.hidden = anyVisible;
+      });
+    })();
+  </script>
+  <script src="/cookie-consent.js" defer></script>
+</body>
+</html>
