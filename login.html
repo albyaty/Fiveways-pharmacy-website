@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in | Five Ways Pharmacy</title>
+  <meta name="description" content="Sign in to your Five Ways Pharmacy account." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./service-payment.css" />
+  <link rel="stylesheet" href="./auth.css" />
+</head>
+<body>
+  <header class="checkout-chrome-header">
+    <div class="container checkout-chrome-header__inner">
+      <a class="brand checkout-chrome-header__brand" href="./index.html" aria-label="Five Ways Pharmacy home">
+        <img class="brand-logo" src="./assets/brand/fiveways-logo-new.svg" alt="Five Ways Pharmacy" width="454" height="227" />
+      </a>
+      <div class="checkout-chrome-header__secure" aria-label="Secure account">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.5 11h11v8H6.5z" /><path d="M9 11V8a3 3 0 0 1 6 0v3" />
+        </svg>
+        <span>Secure account</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <section class="auth-card" aria-labelledby="login-title">
+      <h1 id="login-title">Sign in</h1>
+      <p class="auth-card__intro">Welcome back. Sign in to your account.</p>
+
+      <form id="login-form" class="auth-form" novalidate>
+        <div class="auth-field">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" autocomplete="email" required placeholder="you@example.com" />
+        </div>
+        <div class="auth-field">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" autocomplete="current-password" required placeholder="Your password" />
+        </div>
+
+        <p class="auth-message auth-message--error" id="login-error" hidden></p>
+        <p class="auth-message auth-message--success" id="login-success" hidden></p>
+
+        <button type="submit" class="btn btn-primary auth-submit" id="login-submit">Sign in</button>
+      </form>
+
+      <div class="auth-alt">
+        <span><a href="./reset-password.html">Forgot your password?</a></span>
+        <span>New here? <a href="./register.html">Create an account</a></span>
+        <span><a href="./index.html">Back to homepage</a></span>
+      </div>
+    </section>
+    <p class="auth-disabled-note" id="auth-disabled-note" hidden>
+      Online accounts aren't available yet. Please continue as a guest.
+    </p>
+  </main>
+
+  <footer class="checkout-chrome-footer">
+    <div class="container checkout-chrome-footer__inner">
+      <p>&copy; 2026 Five Ways Pharmacy. Registered UK pharmacy.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./auth-config.js"></script>
+  <script src="./auth.js"></script>
+  <script>
+    (function () {
+      var form = document.getElementById("login-form");
+      var errEl = document.getElementById("login-error");
+      var okEl = document.getElementById("login-success");
+      var btn = document.getElementById("login-submit");
+
+      if (!window.FWAuth || !window.FWAuth.enabled) {
+        form.hidden = true;
+        document.querySelector(".auth-alt").hidden = true;
+        document.getElementById("auth-disabled-note").hidden = false;
+        return;
+      }
+
+      function show(el, msg) { el.textContent = msg; el.hidden = false; }
+      function hide(el) { el.hidden = true; el.textContent = ""; }
+
+      // Show a confirmation if the user just verified their email.
+      if (new URLSearchParams(location.search).get("verified") === "1") {
+        show(okEl, "Email confirmed. You can now sign in.");
+      }
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        hide(errEl); hide(okEl);
+        var email = document.getElementById("login-email").value.trim();
+        var pw = document.getElementById("login-password").value;
+        if (!email || !pw) return show(errEl, "Please enter your email and password.");
+
+        btn.disabled = true; btn.textContent = "Signing in...";
+        try {
+          var res = await window.FWAuth.signIn(email, pw);
+          if (res.error) throw res.error;
+          window.location.href = "./account.html";
+        } catch (err) {
+          show(errEl, (err && err.message) || "Could not sign in.");
+          btn.disabled = false; btn.textContent = "Sign in";
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

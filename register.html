@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create an account | Five Ways Pharmacy</title>
+  <meta name="description" content="Create a Five Ways Pharmacy account." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./service-payment.css" />
+  <link rel="stylesheet" href="./auth.css" />
+</head>
+<body>
+  <header class="checkout-chrome-header">
+    <div class="container checkout-chrome-header__inner">
+      <a class="brand checkout-chrome-header__brand" href="./index.html" aria-label="Five Ways Pharmacy home">
+        <img class="brand-logo" src="./assets/brand/fiveways-logo-new.svg" alt="Five Ways Pharmacy" width="454" height="227" />
+      </a>
+      <div class="checkout-chrome-header__secure" aria-label="Secure account">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.5 11h11v8H6.5z" /><path d="M9 11V8a3 3 0 0 1 6 0v3" />
+        </svg>
+        <span>Secure account</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <section class="auth-card" aria-labelledby="register-title">
+      <h1 id="register-title">Create your account</h1>
+      <p class="auth-card__intro">
+        Save your details for faster checkout and to keep track of your orders.
+      </p>
+
+      <form id="register-form" class="auth-form" novalidate>
+        <div class="auth-field">
+          <label for="reg-email">Email</label>
+          <input type="email" id="reg-email" autocomplete="email" required placeholder="you@example.com" />
+        </div>
+        <div class="auth-field">
+          <label for="reg-password">Password (at least 8 characters)</label>
+          <input type="password" id="reg-password" autocomplete="new-password" required minlength="8" placeholder="Create a password" />
+        </div>
+        <div class="auth-field">
+          <label for="reg-confirm">Confirm password</label>
+          <input type="password" id="reg-confirm" autocomplete="new-password" required minlength="8" placeholder="Re-enter your password" />
+        </div>
+
+        <p class="auth-message auth-message--error" id="reg-error" hidden></p>
+        <p class="auth-message auth-message--success" id="reg-success" hidden></p>
+
+        <button type="submit" class="btn btn-primary auth-submit" id="reg-submit">Create account</button>
+      </form>
+
+      <div class="auth-alt">
+        <span>Already have an account? <a href="./login.html">Sign in</a></span>
+        <span><a href="./index.html">Back to homepage</a></span>
+      </div>
+    </section>
+    <p class="auth-disabled-note" id="auth-disabled-note" hidden>
+      Online accounts aren't available yet. Please continue as a guest.
+    </p>
+  </main>
+
+  <footer class="checkout-chrome-footer">
+    <div class="container checkout-chrome-footer__inner">
+      <p>&copy; 2026 Five Ways Pharmacy. Registered UK pharmacy.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./auth-config.js"></script>
+  <script src="./auth.js"></script>
+  <script>
+    (function () {
+      var form = document.getElementById("register-form");
+      var errEl = document.getElementById("reg-error");
+      var okEl = document.getElementById("reg-success");
+      var btn = document.getElementById("reg-submit");
+
+      // If accounts are disabled, show a note and hide the form.
+      if (!window.FWAuth || !window.FWAuth.enabled) {
+        form.hidden = true;
+        document.querySelector(".auth-alt").hidden = true;
+        document.getElementById("auth-disabled-note").hidden = false;
+        return;
+      }
+
+      function show(el, msg) { el.textContent = msg; el.hidden = false; }
+      function hide(el) { el.hidden = true; el.textContent = ""; }
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        hide(errEl); hide(okEl);
+        var email = document.getElementById("reg-email").value.trim();
+        var pw = document.getElementById("reg-password").value;
+        var confirm = document.getElementById("reg-confirm").value;
+
+        if (!/^\S+@\S+\.\S+$/.test(email)) return show(errEl, "Please enter a valid email address.");
+        if (pw.length < 8) return show(errEl, "Password must be at least 8 characters.");
+        if (pw !== confirm) return show(errEl, "Passwords do not match.");
+
+        btn.disabled = true; btn.textContent = "Creating account...";
+        try {
+          var res = await window.FWAuth.signUp(email, pw);
+          if (res.error) throw res.error;
+          form.reset();
+          show(okEl, "Account created. Check your email to confirm your address, then sign in.");
+        } catch (err) {
+          show(errEl, (err && err.message) || "Could not create the account.");
+        } finally {
+          btn.disabled = false; btn.textContent = "Create account";
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

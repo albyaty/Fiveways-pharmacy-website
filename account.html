@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My account | Five Ways Pharmacy</title>
+  <meta name="description" content="Your Five Ways Pharmacy account." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./service-payment.css" />
+  <link rel="stylesheet" href="./auth.css" />
+</head>
+<body>
+  <header class="checkout-chrome-header">
+    <div class="container checkout-chrome-header__inner">
+      <a class="brand checkout-chrome-header__brand" href="./index.html" aria-label="Five Ways Pharmacy home">
+        <img class="brand-logo" src="./assets/brand/fiveways-logo-new.svg" alt="Five Ways Pharmacy" width="454" height="227" />
+      </a>
+      <div class="checkout-chrome-header__secure" aria-label="Secure account">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.5 11h11v8H6.5z" /><path d="M9 11V8a3 3 0 0 1 6 0v3" />
+        </svg>
+        <span>Your account</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <section class="auth-card" id="account-card" aria-labelledby="account-title" hidden>
+      <h1 id="account-title">My account</h1>
+      <p class="auth-card__intro">Manage your Five Ways Pharmacy account.</p>
+
+      <dl>
+        <div class="auth-account-row">
+          <dt>Email</dt>
+          <dd id="account-email">--</dd>
+        </div>
+        <div class="auth-account-row">
+          <dt>Member since</dt>
+          <dd id="account-since">--</dd>
+        </div>
+      </dl>
+
+      <!-- Order history can hook in here later (read from Supabase once we
+           store orders against the user). Placeholder for now. -->
+
+      <button type="button" class="btn btn-primary auth-submit" id="logout-btn" style="margin-top:1.5rem">Log out</button>
+
+      <div class="auth-alt">
+        <span><a href="./index.html">Back to homepage</a></span>
+        <span><a href="./service-payment.html">Make a payment</a> &middot; <a href="./book.html">Book an appointment</a></span>
+      </div>
+    </section>
+
+    <p class="auth-disabled-note" id="auth-loading">Loading your account...</p>
+    <p class="auth-disabled-note" id="auth-disabled-note" hidden>
+      Online accounts aren't available yet. Please continue as a guest.
+    </p>
+  </main>
+
+  <footer class="checkout-chrome-footer">
+    <div class="container checkout-chrome-footer__inner">
+      <p>&copy; 2026 Five Ways Pharmacy. Registered UK pharmacy.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./auth-config.js"></script>
+  <script src="./auth.js"></script>
+  <script>
+    (function () {
+      var card = document.getElementById("account-card");
+      var loading = document.getElementById("auth-loading");
+
+      if (!window.FWAuth || !window.FWAuth.enabled) {
+        loading.hidden = true;
+        document.getElementById("auth-disabled-note").hidden = false;
+        return;
+      }
+
+      (async function () {
+        // Protect the page: bounce to login if not signed in.
+        var user = await window.FWAuth.requireAuth("./login.html");
+        if (!user) return;
+
+        document.getElementById("account-email").textContent = user.email || "--";
+        if (user.created_at) {
+          document.getElementById("account-since").textContent =
+            new Date(user.created_at).toLocaleDateString("en-GB", {
+              year: "numeric", month: "long", day: "numeric",
+            });
+        }
+        loading.hidden = true;
+        card.hidden = false;
+      })();
+
+      document.getElementById("logout-btn").addEventListener("click", async function () {
+        try { await window.FWAuth.signOut(); } catch (e) {}
+        window.location.href = "./index.html";
+      });
+    })();
+  </script>
+</body>
+</html>
