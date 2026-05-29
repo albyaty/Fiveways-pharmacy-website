@@ -85,15 +85,15 @@
 
         <nav class="header-actions" aria-label="User actions">
           <div class="header-account">
-            <a class="header-action header-account__link" href="../account.html" aria-label="Login or register">
+            <a class="header-action header-account__link" href="../account.html" aria-label="Login or register" data-auth-login-link data-auth-account-href="/account.html">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="12" cy="8.25" r="3.25" />
                 <path d="M5.75 19.5c1.35-3.05 4.05-4.6 6.25-4.6s4.9 1.55 6.25 4.6" />
               </svg>
-              <span class="header-account__label">Login / Register</span>
+              <span class="header-account__label" data-auth-label>Login / Register</span>
             </a>
 
-            <a class="header-action header-account__mobile-link" href="../account.html" aria-label="Login / Register">
+            <a class="header-action header-account__mobile-link" href="../account.html" aria-label="Login / Register" data-auth-login-link data-auth-account-href="/account.html">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="12" cy="8.25" r="3.25" />
                 <path d="M5.75 19.5c1.35-3.05 4.05-4.6 6.25-4.6s4.9 1.55 6.25 4.6" />
@@ -1465,6 +1465,8 @@
     });
   </script>
   <script src="/cookie-consent.js" defer></script>
+  <script src="/auth-config.js"></script>
+  <script src="/auth-header.js" defer></script>
 </body>
 </html>
 
