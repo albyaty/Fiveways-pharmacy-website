@@ -39,12 +39,15 @@
   }
 
   // --- Auth actions -------------------------------------------------------
-  FWAuth.signUp = function (email, password) {
+  FWAuth.signUp = function (email, password, meta) {
     return client().auth.signUp({
       email: email,
       password: password,
       options: {
         emailRedirectTo: window.location.origin + "/login.html?verified=1",
+        // Stored on the auth user; a DB trigger copies these into the
+        // profiles table on signup (see supabase-setup.sql).
+        data: meta || {},
       },
     });
   };
