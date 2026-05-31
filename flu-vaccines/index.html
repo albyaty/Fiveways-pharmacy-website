@@ -1061,6 +1061,7 @@
 
     function openCal(calLink, extraConfig) {
       var config = Object.assign({ layout: "month_view", theme: "light" }, extraConfig || {});
+      if (window.FW_SESSION_USER) { if (window.FW_SESSION_USER.name) config.name = window.FW_SESSION_USER.name; if (window.FW_SESSION_USER.email) config.email = window.FW_SESSION_USER.email; }
       window.Cal("modal", { calLink: calLink, config: config });
     }
 

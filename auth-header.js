@@ -1,15 +1,12 @@
 /*
- * Lightweight header auth-state toggle. Flips any element marked
- * [data-auth-login-link] from "Login / Register" to "My account" when the
- * visitor has a Supabase session -- WITHOUT loading the full supabase-js
- * library, so it's cheap to include on every page.
+ * Lightweight auth-state helper. Without loading the full supabase-js
+ * library, it reads the Supabase session from localStorage and:
+ *   1. Flips [data-auth-login-link] from "Login / Register" to "My account".
+ *   2. Exposes window.FW_SESSION_USER = { name, email } when signed in (used
+ *      to prefill the booking form). null/undefined when signed out.
  *
- * It reads the session Supabase stores in localStorage (key
- * "sb-<project-ref>-auth-token"). This is a best-effort UI hint: clicking
- * through still hits account.html, which does the real (validated) auth
- * check and redirects to login if the session isn't actually valid.
- *
- * Load order on a page:  auth-config.js  then  auth-header.js
+ * Best-effort UI only; pages that handle real data still validate via
+ * supabase-js. Load order: auth-config.js then auth-header.js.
  */
 (function () {
   "use strict";
@@ -22,24 +19,32 @@
   if (!m) return;
   var storageKey = "sb-" + m[1] + "-auth-token";
 
-  function signedIn() {
+  function readSession() {
     try {
       var raw = localStorage.getItem(storageKey);
-      if (!raw) return false;
+      if (!raw) return null;
       var obj = JSON.parse(raw);
       var sess = obj && obj.currentSession ? obj.currentSession : obj;
-      var token = sess && sess.access_token;
-      if (!token) return false;
-      var exp = sess && sess.expires_at; // unix seconds
-      if (exp && exp * 1000 < Date.now()) return false; // expired
-      return true;
+      if (!sess || !sess.access_token) return null;
+      if (sess.expires_at && sess.expires_at * 1000 < Date.now()) return null;
+      return sess;
     } catch (e) {
-      return false;
+      return null;
     }
   }
 
+  var sess = readSession();
+  if (sess) {
+    var u = sess.user || {};
+    var meta = u.user_metadata || {};
+    window.FW_SESSION_USER = {
+      name: meta.full_name || "",
+      email: u.email || "",
+    };
+  }
+
   function apply() {
-    if (!signedIn()) return;
+    if (!sess) return;
     var els = document.querySelectorAll("[data-auth-login-link]");
     for (var i = 0; i < els.length; i++) {
       var el = els[i];

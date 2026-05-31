@@ -4,16 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Service Payment | Five Ways Pharmacy</title>
-  <meta
-    name="description"
-    content="Pay securely for Five Ways Pharmacy prescription items or a custom amount."
-  />
+  <meta name="description" content="Pay securely for Five Ways Pharmacy prescription items or a custom amount." />
+  <meta name="robots" content="noindex" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./service-payment.css" />
 </head>
@@ -21,19 +16,10 @@
   <header class="checkout-chrome-header">
     <div class="container checkout-chrome-header__inner">
       <a class="brand checkout-chrome-header__brand" href="./index.html" aria-label="Five Ways Pharmacy home">
-        <img
-          class="brand-logo"
-          src="./assets/brand/fiveways-logo-new.svg"
-          alt="Five Ways Pharmacy"
-          width="454"
-          height="227"
-        />
+        <img class="brand-logo" src="./assets/brand/fiveways-logo-new.svg" alt="Five Ways Pharmacy" width="454" height="227" />
       </a>
       <div class="checkout-chrome-header__secure" aria-label="Secure checkout">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M6.5 11h11v8H6.5z" />
-          <path d="M9 11V8a3 3 0 0 1 6 0v3" />
-        </svg>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 11h11v8H6.5z" /><path d="M9 11V8a3 3 0 0 1 6 0v3" /></svg>
         <span>Secure checkout</span>
       </div>
     </div>
@@ -57,44 +43,23 @@
         </p>
       </header>
 
-      <!-- === STEP 1: Details form =================================== -->
+      <!-- STEP 1: details -->
       <section class="payment-setup-card" id="setup-card" aria-labelledby="setup-card-title">
         <h2 id="setup-card-title" class="payment-setup-card__title">What are you paying for?</h2>
 
         <div class="payment-type-options" role="radiogroup" aria-label="Payment type">
-          <button
-            type="button"
-            class="payment-type-option is-active"
-            data-type="prescription"
-            role="radio"
-            aria-checked="true"
-          >
+          <button type="button" class="payment-type-option is-active" data-type="prescription" role="radio" aria-checked="true">
             <span class="payment-type-option__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M5 7h14v12H5z" />
-                <path d="M9 11h6" />
-                <path d="M9 14h4" />
-                <path d="M8 7V5h8v2" />
-              </svg>
+              <svg viewBox="0 0 24 24"><path d="M5 7h14v12H5z" /><path d="M9 11h6" /><path d="M9 14h4" /><path d="M8 7V5h8v2" /></svg>
             </span>
             <span class="payment-type-option__copy">
               <strong>Prescription items</strong>
               <small>GBP 9.90 per item, free delivery</small>
             </span>
           </button>
-
-          <button
-            type="button"
-            class="payment-type-option"
-            data-type="custom"
-            role="radio"
-            aria-checked="false"
-          >
+          <button type="button" class="payment-type-option" data-type="custom" role="radio" aria-checked="false">
             <span class="payment-type-option__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 5v14" />
-                <path d="M16 8.5a3.5 3.5 0 0 0-3.5-3h-1A2.5 2.5 0 0 0 10 8c0 1.5 1.2 2.5 3 2.5s3 1 3 2.5a2.5 2.5 0 0 1-2.5 2.5h-1A3.5 3.5 0 0 1 9 12.5" />
-              </svg>
+              <svg viewBox="0 0 24 24"><path d="M12 5v14" /><path d="M16 8.5a3.5 3.5 0 0 0-3.5-3h-1A2.5 2.5 0 0 0 10 8c0 1.5 1.2 2.5 3 2.5s3 1 3 2.5a2.5 2.5 0 0 1-2.5 2.5h-1A3.5 3.5 0 0 1 9 12.5" /></svg>
             </span>
             <span class="payment-type-option__copy">
               <strong>Custom amount</strong>
@@ -103,218 +68,125 @@
           </button>
         </div>
 
-        <!-- Prescription details: shown only when type=prescription -->
+        <!-- Prescription -->
         <div class="amount-section" id="amount-section-prescription">
-          <label class="amount-label" for="prescription-counter">
-            How many items are on your prescription?
-          </label>
+          <label class="amount-label" for="prescription-counter">How many items are on your prescription?</label>
           <div class="counter-control" id="prescription-counter">
             <button type="button" data-counter-action="dec" aria-label="Decrease items">-</button>
             <span class="counter-value" id="prescription-count">1</span>
             <button type="button" data-counter-action="inc" aria-label="Increase items">+</button>
           </div>
-
           <dl class="amount-breakdown">
-            <div class="amount-row">
-              <dt>Subtotal</dt>
-              <dd id="prescription-subtotal">GBP 9.90</dd>
-            </div>
-            <div class="amount-row">
-              <dt>Delivery</dt>
-              <dd>FREE</dd>
-            </div>
-            <div class="amount-row amount-row--total">
-              <dt>Total</dt>
-              <dd id="prescription-total">GBP 9.90</dd>
-            </div>
+            <div class="amount-row"><dt>Subtotal</dt><dd id="prescription-subtotal">GBP 9.90</dd></div>
+            <div class="amount-row"><dt>Delivery</dt><dd>FREE</dd></div>
+            <div class="amount-row amount-row--total"><dt>Total</dt><dd id="prescription-total">GBP 9.90</dd></div>
           </dl>
         </div>
 
-        <!-- Custom amount: shown only when type=custom -->
+        <!-- Custom -->
         <div class="amount-section" id="amount-section-custom" hidden>
           <label class="amount-label" for="custom-amount-input">Amount to pay</label>
           <div class="custom-amount-wrap">
             <span class="custom-amount-prefix" aria-hidden="true">GBP</span>
-            <input
-              type="number"
-              id="custom-amount-input"
-              min="1"
-              max="500"
-              step="0.01"
-              placeholder="0.00"
-              inputmode="decimal"
-              autocomplete="off"
-            />
+            <input type="number" id="custom-amount-input" min="1" max="500" step="0.01" placeholder="0.00" inputmode="decimal" autocomplete="off" />
           </div>
-          <p class="amount-hint">
-            Use this only if the pharmacy team gave you a specific amount
-            during your call.
-          </p>
-
+          <p class="amount-hint">Use this only if the pharmacy team gave you a specific amount during your call.</p>
           <dl class="amount-breakdown">
-            <div class="amount-row amount-row--total">
-              <dt>Total</dt>
-              <dd id="custom-total">GBP 0.00</dd>
-            </div>
+            <div class="amount-row amount-row--total"><dt>Total</dt><dd id="custom-total">GBP 0.00</dd></div>
           </dl>
         </div>
 
-        <!-- Patient identity -->
+        <!-- Patient -->
         <h2 class="payment-setup-card__subtitle">Who is this medication for?</h2>
         <p class="payment-setup-card__subtitle-hint">
-          These details are used by the pharmacy team to match your payment
-          to your call. If you are paying on someone else's behalf, enter
-          the patient's information here.
+          These details are used by the pharmacy team to match your payment to
+          your call. If you are paying on someone else's behalf, enter the
+          patient's information here.
         </p>
-
         <div class="details-grid">
           <div class="details-field details-field--full">
             <label for="patient-name">Full name</label>
-            <input
-              type="text"
-              id="patient-name"
-              autocomplete="name"
-              required
-              placeholder="Patient's full name"
-            />
+            <input type="text" id="patient-name" autocomplete="name" required placeholder="Patient's full name" />
           </div>
-
           <div class="details-field">
             <label for="patient-dob">Date of birth</label>
-            <input
-              type="date"
-              id="patient-dob"
-              autocomplete="bday"
-              required
-            />
+            <input type="date" id="patient-dob" autocomplete="bday" required />
           </div>
-
           <div class="details-field">
             <label for="patient-phone">Phone number</label>
-            <input
-              type="tel"
-              id="patient-phone"
-              autocomplete="tel"
-              required
-              placeholder="07..."
-            />
+            <input type="tel" id="patient-phone" autocomplete="tel" required placeholder="07..." />
           </div>
-
           <div class="details-field details-field--full">
             <label for="patient-email">Email for receipt</label>
-            <input
-              type="email"
-              id="patient-email"
-              autocomplete="email"
-              required
-              placeholder="you@example.com"
-            />
+            <input type="email" id="patient-email" autocomplete="email" required placeholder="you@example.com" />
           </div>
         </div>
 
-        <!-- Delivery address: prescription flow only. Always visible (no
-             "same as billing" toggle, because the Stripe Address Element
-             below collects card billing info separately and we can't read
-             it before the customer fills the card form). -->
+        <!-- Delivery (prescription only) -->
         <div class="delivery-block" id="delivery-block">
           <h2 class="payment-setup-card__subtitle">Delivery address</h2>
           <p class="payment-setup-card__subtitle-hint">
-            Where the pharmacy team should deliver this prescription. This
-            is captured separately from the billing address on your card.
+            Where the pharmacy team should deliver this prescription. This is
+            captured separately from the billing address on your card.
           </p>
 
-          <div class="details-grid">
+          <div class="details-field details-field--full" id="saved-address-wrap" hidden>
+            <label for="saved-address-picker">Use a saved address</label>
+            <select id="saved-address-picker">
+              <option value="">Enter a new address&hellip;</option>
+            </select>
+          </div>
+
+          <div class="details-grid" id="delivery-fields">
             <div class="details-field details-field--full">
               <label for="delivery-line1">Address line 1</label>
-              <input
-                type="text"
-                id="delivery-line1"
-                autocomplete="shipping address-line1"
-                required
-                placeholder="Street and number"
-              />
+              <input type="text" id="delivery-line1" autocomplete="shipping address-line1" required placeholder="Street and number" />
             </div>
             <div class="details-field details-field--full">
               <label for="delivery-line2">Address line 2 <small>(optional)</small></label>
-              <input
-                type="text"
-                id="delivery-line2"
-                autocomplete="shipping address-line2"
-                placeholder="Flat, building, etc."
-              />
+              <input type="text" id="delivery-line2" autocomplete="shipping address-line2" placeholder="Flat, building, etc." />
             </div>
             <div class="details-field">
               <label for="delivery-city">Town / city</label>
-              <input
-                type="text"
-                id="delivery-city"
-                autocomplete="shipping address-level2"
-                required
-              />
+              <input type="text" id="delivery-city" autocomplete="shipping address-level2" required />
             </div>
             <div class="details-field">
               <label for="delivery-postcode">Postcode</label>
-              <input
-                type="text"
-                id="delivery-postcode"
-                autocomplete="shipping postal-code"
-                required
-                placeholder="e.g. SW1A 1AA"
-              />
+              <input type="text" id="delivery-postcode" autocomplete="shipping postal-code" required placeholder="e.g. SW1A 1AA" />
             </div>
           </div>
         </div>
 
         <p class="payment-error" id="setup-error" hidden></p>
-
-        <button
-          type="button"
-          class="btn btn-primary payment-setup-cta"
-          id="continue-btn"
-        >
-          Continue to payment
-        </button>
+        <button type="button" class="btn btn-primary payment-setup-cta" id="continue-btn">Continue to payment</button>
       </section>
 
-      <!-- === STEP 2: Stripe payment ================================ -->
+      <!-- STEP 2: Stripe -->
       <section class="payment-step-card" id="payment-step-card" hidden aria-labelledby="payment-step-title">
         <div class="payment-step-card__head">
           <div>
             <span class="kicker">Step 2 of 2</span>
             <h2 id="payment-step-title">Secure payment</h2>
-            <p class="payment-step-card__amount">
-              You are paying <strong id="payment-step-amount">GBP 0.00</strong>
-            </p>
+            <p class="payment-step-card__amount">You are paying <strong id="payment-step-amount">GBP 0.00</strong></p>
           </div>
-          <button type="button" class="payment-back-btn" id="back-btn">
-            Back to details
-          </button>
+          <button type="button" class="payment-back-btn" id="back-btn">Back to details</button>
         </div>
 
         <p class="payment-test-banner" id="payment-test-banner" hidden>
-          <strong>Test mode</strong> &mdash; use card
-          <code>4242 4242 4242 4242</code> with any future expiry and any CVC.
-          No real card will be charged.
+          <strong>Test mode</strong> &mdash; use card <code>4242 4242 4242 4242</code> with any future expiry and any CVC. No real card will be charged.
         </p>
 
         <form id="stripe-payment-form" class="stripe-payment-form" novalidate>
           <fieldset class="payment-fieldset">
             <legend>Billing address (on your card)</legend>
-            <div id="address-element"><!-- Stripe AddressElement --></div>
+            <div id="address-element"></div>
           </fieldset>
-
           <fieldset class="payment-fieldset">
             <legend>Card details</legend>
-            <div id="payment-element"><!-- Stripe PaymentElement --></div>
+            <div id="payment-element"></div>
           </fieldset>
-
           <p class="payment-error" id="payment-error" hidden></p>
-
-          <button
-            type="submit"
-            class="btn btn-primary service-payment-pay-btn"
-            id="pay-btn"
-          >
+          <button type="submit" class="btn btn-primary service-payment-pay-btn" id="pay-btn">
             <span class="pay-btn-label">Pay now</span>
           </button>
         </form>
@@ -326,16 +198,22 @@
     <div class="container checkout-chrome-footer__inner">
       <p>&copy; 2026 Five Ways Pharmacy. Registered UK pharmacy.</p>
       <p>
-        <a href="./delivery-privacy/">Privacy</a>
-        <span aria-hidden="true">&middot;</span>
-        <a href="./speak-to-our-team/">Contact</a>
+        <a href="./privacy/">Privacy</a><span aria-hidden="true">&middot;</span>
+        <a href="./terms/">Terms</a><span aria-hidden="true">&middot;</span>
+        <a href="./cookies/">Cookies</a>
       </p>
     </div>
   </footer>
 
+  <!-- Supabase + auth so we can prefill the form for signed-in customers. -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./auth-config.js"></script>
+  <script src="./auth.js"></script>
+
   <script src="./payment-config.js"></script>
   <script src="https://js.stripe.com/v3/"></script>
   <script src="./service-payment.js"></script>
+  <script src="./payment-prefill.js" defer></script>
   <script src="/cookie-consent.js" defer></script>
 </body>
 </html>
