@@ -499,6 +499,43 @@
             <li>Clinical suitability comes before any next step</li>
             <li>Support may include lifestyle and assessment guidance</li>
           </ul>
+          <details class="weight-loss-bmi-card">
+            <summary class="weight-loss-bmi-card__summary">
+              <span class="weight-loss-bmi-card__copy">
+                <span class="weight-loss-bmi-card__title">Check your BMI</span>
+                <span class="weight-loss-bmi-card__text">Estimate your BMI before your free consultation.</span>
+              </span>
+              <span class="weight-loss-bmi-card__toggle">
+                <span>Open BMI checker</span>
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+            </summary>
+            <div class="weight-loss-bmi-card__panel">
+              <div class="weight-loss-bmi-card__fields">
+                <label class="weight-loss-bmi-card__field">
+                  <span>Height in cm</span>
+                  <input type="number" inputmode="decimal" min="50" max="250" step="0.1" name="bmi-height" />
+                </label>
+                <label class="weight-loss-bmi-card__field">
+                  <span>Weight in kg</span>
+                  <input type="number" inputmode="decimal" min="20" max="400" step="0.1" name="bmi-weight" />
+                </label>
+              </div>
+              <div class="weight-loss-bmi-card__result" aria-live="polite">
+                <span class="weight-loss-bmi-card__result-label">Estimated BMI</span>
+                <strong class="weight-loss-bmi-card__result-value">--</strong>
+              </div>
+              <p class="weight-loss-bmi-card__note">
+                This is a general guide only. A pharmacist consultation is needed to review your health, medicines and suitability.
+              </p>
+              <div class="weight-loss-bmi-card__utility">
+                <button type="button" class="weight-loss-bmi-card__clear">Clear</button>
+              </div>
+              <a href="#footer-help-card" class="service-detail-button service-detail-button--primary weight-loss-bmi-card__cta">Book a free weight loss consultation</a>
+            </div>
+          </details>
         </div>
       </aside>
     </div>
@@ -1336,6 +1373,59 @@
         hoursDropdowns.forEach((dropdown) => {
           if (!dropdown.open || dropdown.contains(target)) return;
           dropdown.open = false;
+        });
+      });
+    })();
+  </script>
+  <script>
+    (() => {
+      const bmiCards = Array.from(document.querySelectorAll(".weight-loss-bmi-card"));
+      if (!bmiCards.length) return;
+
+      bmiCards.forEach((card) => {
+        const heightInput = card.querySelector('input[name="bmi-height"]');
+        const weightInput = card.querySelector('input[name="bmi-weight"]');
+        const resultValue = card.querySelector(".weight-loss-bmi-card__result-value");
+        const clearButton = card.querySelector(".weight-loss-bmi-card__clear");
+
+        if (!(heightInput instanceof HTMLInputElement) || !(weightInput instanceof HTMLInputElement) || !(resultValue instanceof HTMLElement)) {
+          return;
+        }
+
+        const resetBmi = () => {
+          heightInput.value = "";
+          weightInput.value = "";
+          resultValue.textContent = "--";
+        };
+
+        const updateBmi = () => {
+          const heightCm = Number.parseFloat(heightInput.value);
+          const weightKg = Number.parseFloat(weightInput.value);
+
+          if (!Number.isFinite(heightCm) || !Number.isFinite(weightKg) || heightCm <= 0 || weightKg <= 0) {
+            resultValue.textContent = "--";
+            return;
+          }
+
+          const heightM = heightCm / 100;
+          const bmi = weightKg / (heightM * heightM);
+          resultValue.textContent = bmi.toFixed(1);
+        };
+
+        heightInput.addEventListener("input", updateBmi);
+        weightInput.addEventListener("input", updateBmi);
+
+        if (clearButton instanceof HTMLButtonElement) {
+          clearButton.addEventListener("click", () => {
+            resetBmi();
+            heightInput.focus();
+          });
+        }
+
+        card.addEventListener("toggle", () => {
+          if (!card.open) {
+            resetBmi();
+          }
         });
       });
     })();
