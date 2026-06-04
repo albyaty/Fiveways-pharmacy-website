@@ -10,3 +10,13 @@
 /capture-*.png
 /walkthrough-*.png
 /assets/images/hero-target.png
+
+# Secrets & local env -- NEVER commit. Real keys live in Vercel env vars,
+# and all customer/profile data lives in Supabase/Stripe, never in this repo.
+.env
+.env.*
+*.env
+secrets.json
+*-service-key*
+*.pem
+*.key
