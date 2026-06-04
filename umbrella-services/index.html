@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -131,6 +131,17 @@
             <span class="cart-pill-label">Cart</span>
             <span class="cart-pill-count">2</span>
           </a>
+          <details class="header-phone-dropdown header-phone-dropdown--main">
+            <summary class="header-phone-trigger" aria-label="Show pharmacy phone number">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62 10.79a15.5 15.5 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c.84.28 1.73.43 2.58.43a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.85 21 3 13.15 3 4a1 1 0 0 1 1-1h3.43a1 1 0 0 1 1 1c0 .85.15 1.74.43 2.58a1 1 0 0 1-.24 1.01Z" />
+              </svg>
+              <span class="sr-only">Show pharmacy phone number</span>
+            </summary>
+            <div class="header-phone-popover">
+              <a href="tel:+441216302680" aria-label="Call Five Ways Pharmacy on 0121 630 2680">0121 630 2680</a>
+            </div>
+          </details>
         </nav>
       </div>
 
@@ -237,6 +248,7 @@
             <div class="category-pill-dropdown-menu category-pill-dropdown-menu--compact" aria-label="Prescriptions menu">
               <a href="../emergency-prescriptions/" class="category-pill-dropdown-link">Emergency supply</a>
               <a href="../repeat-prescriptions/" class="category-pill-dropdown-link">Repeat prescriptions</a>
+              <a href="../#private-prescriptions" class="category-pill-dropdown-link">Private prescriptions</a>
             </div>
           </div>
           <a href="../health-advice/">
@@ -337,6 +349,14 @@
                 <div class="mobile-menu-submenu">
                   <a href="../emergency-prescriptions/" class="mobile-menu-link">Emergency supply</a>
                   <a href="../repeat-prescriptions/" class="mobile-menu-link">Repeat prescriptions</a>
+                  <details class="mobile-menu-group mobile-menu-group--nested">
+                    <summary class="mobile-menu-link mobile-menu-link--toggle">Private prescriptions</summary>
+                    <div class="mobile-menu-subpanel" role="group" aria-label="Private prescriptions information">
+                      <p class="mobile-menu-subpanel-title">Private prescriptions</p>
+                      <p class="mobile-menu-subpanel-text">Need a price for a private prescription? Tell our pharmacy team what is on your prescription and we&rsquo;ll explain availability, pricing and next steps.</p>
+                      <a href="tel:+441216302680" class="mobile-menu-subpanel-button">Call Five Ways Pharmacy</a>
+                    </div>
+                  </details>
                 </div>
               </details>
               <a href="../health-advice/" class="mobile-menu-link">Health Advice</a>
@@ -424,6 +444,17 @@
         <span class="compact-cart-label">Cart</span>
         <span class="compact-cart-count">2</span>
       </a>
+      <details class="header-phone-dropdown header-phone-dropdown--compact">
+        <summary class="header-phone-trigger" aria-label="Show pharmacy phone number">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.62 10.79a15.5 15.5 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c.84.28 1.73.43 2.58.43a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.85 21 3 13.15 3 4a1 1 0 0 1 1-1h3.43a1 1 0 0 1 1 1c0 .85.15 1.74.43 2.58a1 1 0 0 1-.24 1.01Z" />
+          </svg>
+          <span class="sr-only">Show pharmacy phone number</span>
+        </summary>
+        <div class="header-phone-popover header-phone-popover--compact">
+          <a href="tel:+441216302680" aria-label="Call Five Ways Pharmacy on 0121 630 2680">0121 630 2680</a>
+        </div>
+      </details>
     </div>
   </div>
   <div class="compact-header-sentinel" aria-hidden="true"></div>
@@ -839,17 +870,24 @@
                   <a href="#">Careers</a>
                 </div>
               </details>
-              <details class="footer-nav-column footer-nav-accordion" open>
+              <details class="footer-nav-column footer-nav-column--leadership footer-nav-accordion" open>
                 <summary class="footer-nav-toggle">
-                  <span>Account</span>
+                  <span>Pharmacy leadership</span>
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M7 10.5 12 15l5-4.5" />
                   </svg>
                 </summary>
-                <div class="footer-nav-links">
-                  <a href="#">Login</a>
-                  <a href="#">Sign up</a>
-                  <a href="#">Account help</a>
+                <div class="footer-nav-links footer-nav-links--leadership">
+                  <div class="footer-leadership-person">
+                    <p class="footer-leadership-name">Mrs Parminder Kaur Chand</p>
+                    <p class="footer-leadership-role">Superintendent Pharmacist / Director</p>
+                    <p class="footer-leadership-registration">MPharm MRPharmS &middot; GPhC Reg. <a class="footer-gphc-link" href="https://www.pharmacyregulation.org/registers/pharmacist/registrationnumber/2059120" target="_blank" rel="noopener noreferrer" aria-label="View Mrs Parminder Kaur Chand GPhC registration">2059120</a></p>
+                  </div>
+                  <div class="footer-leadership-person">
+                    <p class="footer-leadership-name">Zaineb Mouaid Hassen</p>
+                    <p class="footer-leadership-role">Pharmacist Manager</p>
+                    <p class="footer-leadership-registration">MPharm MRPharmS &middot; GPhC Reg. <a class="footer-gphc-link" href="https://www.pharmacyregulation.org/registers/pharmacist/registrationnumber/2229136" target="_blank" rel="noopener noreferrer" aria-label="View Zaineb Mouaid Hassen GPhC registration">2229136</a></p>
+                  </div>
                 </div>
               </details>
             </div>
@@ -889,7 +927,7 @@
             </span>
             <div class="footer-strip-copy footer-strip-copy--registered">
               <strong>Registered pharmacy</strong>
-              <small>GPhC Reg. 1119029</small>
+              <small>GPhC Reg. <a class="footer-gphc-link" href="https://inspections.pharmacyregulation.org/pharmacy/detail/five-ways-pharmacy-1119029" target="_blank" rel="noopener noreferrer" aria-label="View Five Ways Pharmacy GPhC premises registration">1119029</a></small>
             </div>
           </article>
           <article class="footer-strip-feature">
@@ -1420,18 +1458,172 @@
   </script>
   <script>
     (() => {
-      const hoursDropdowns = Array.from(document.querySelectorAll(".top-strip-hours-dropdown"));
-      if (!hoursDropdowns.length) return;
+      const closableDetails = Array.from(document.querySelectorAll(".top-strip-hours-dropdown, .header-phone-dropdown"));
+      if (!closableDetails.length) return;
+      const phoneDropdowns = closableDetails.filter((dropdown) => dropdown.classList.contains("header-phone-dropdown"));
+      const phoneTimers = new WeakMap();
+
+      const clearPhoneTimer = (dropdown) => {
+        const timer = phoneTimers.get(dropdown);
+        if (typeof timer === "number") {
+          window.clearTimeout(timer);
+          phoneTimers.delete(dropdown);
+        }
+      };
+
+      const queuePhoneAutoClose = (dropdown) => {
+        clearPhoneTimer(dropdown);
+        if (!dropdown.open) return;
+
+        const timer = window.setTimeout(() => {
+          dropdown.open = false;
+          phoneTimers.delete(dropdown);
+        }, 5000);
+
+        phoneTimers.set(dropdown, timer);
+      };
+
+      const closeOpenDetails = (target) => {
+        closableDetails.forEach((dropdown) => {
+          if (!dropdown.open) return;
+          if (target instanceof Node && dropdown.contains(target)) return;
+          clearPhoneTimer(dropdown);
+          dropdown.open = false;
+        });
+      };
+
+      phoneDropdowns.forEach((dropdown) => {
+        dropdown.addEventListener("toggle", () => {
+          if (!dropdown.open) {
+            clearPhoneTimer(dropdown);
+            return;
+          }
+
+          queuePhoneAutoClose(dropdown);
+        });
+      });
 
       document.addEventListener("pointerdown", (event) => {
         const target = event.target;
         if (!(target instanceof Node)) return;
-
-        hoursDropdowns.forEach((dropdown) => {
-          if (!dropdown.open || dropdown.contains(target)) return;
-          dropdown.open = false;
-        });
+        closeOpenDetails(target);
       });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        closeOpenDetails(null);
+      });
+    })();
+  </script>
+  <script>
+    (() => {
+      const desktopMedia = window.matchMedia("(min-width: 981px)");
+      const dropdown = document.querySelector(".category-pill-dropdown--prescriptions");
+      const trigger = dropdown?.querySelector("button");
+      if (!dropdown || !(trigger instanceof HTMLButtonElement)) return;
+
+      let autoCloseTimer = null;
+
+      const clearAutoClose = () => {
+        if (typeof autoCloseTimer === "number") {
+          window.clearTimeout(autoCloseTimer);
+          autoCloseTimer = null;
+        }
+      };
+
+      const setExpanded = (expanded) => {
+        trigger.setAttribute("aria-expanded", expanded ? "true" : "false");
+      };
+
+      const closeDropdown = () => {
+        clearAutoClose();
+        setExpanded(false);
+
+        if (
+          desktopMedia.matches &&
+          dropdown.contains(document.activeElement) &&
+          document.activeElement instanceof HTMLElement
+        ) {
+          document.activeElement.blur();
+        }
+      };
+
+      const queueAutoClose = () => {
+        clearAutoClose();
+        if (!desktopMedia.matches || dropdown.matches(":hover")) return;
+
+        autoCloseTimer = window.setTimeout(() => {
+          closeDropdown();
+        }, 5000);
+      };
+
+      trigger.addEventListener("click", () => {
+        if (!desktopMedia.matches) return;
+        setExpanded(true);
+        queueAutoClose();
+      });
+
+      dropdown.addEventListener("focusin", () => {
+        if (!desktopMedia.matches) return;
+        setExpanded(true);
+        queueAutoClose();
+      });
+
+      dropdown.addEventListener("focusout", () => {
+        if (!desktopMedia.matches) return;
+
+        window.setTimeout(() => {
+          if (dropdown.contains(document.activeElement)) return;
+          if (dropdown.matches(":hover")) {
+            setExpanded(true);
+            return;
+          }
+
+          setExpanded(false);
+        }, 0);
+      });
+
+      dropdown.addEventListener("pointerenter", () => {
+        if (!desktopMedia.matches) return;
+        clearAutoClose();
+        setExpanded(true);
+      });
+
+      dropdown.addEventListener("pointerleave", () => {
+        if (!desktopMedia.matches) return;
+        closeDropdown();
+      });
+
+      document.addEventListener("pointerdown", (event) => {
+        if (!desktopMedia.matches) return;
+        const target = event.target;
+        if (!(target instanceof Node)) return;
+        if (dropdown.contains(target)) return;
+        closeDropdown();
+      });
+
+      window.addEventListener("scroll", () => {
+        if (!desktopMedia.matches) return;
+        closeDropdown();
+      }, { passive: true });
+
+      document.addEventListener("keydown", (event) => {
+        if (!desktopMedia.matches) return;
+        if (event.key !== "Escape") return;
+        closeDropdown();
+      });
+
+      if (typeof desktopMedia.addEventListener === "function") {
+        desktopMedia.addEventListener("change", (event) => {
+          if (event.matches) return;
+          closeDropdown();
+        });
+      } else if (typeof desktopMedia.addListener === "function") {
+        desktopMedia.addListener((event) => {
+          if (event.matches) return;
+          closeDropdown();
+        });
+      }
     })();
   </script>
 </body>
