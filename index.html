@@ -3,15 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Five Ways Pharmacy | NHS &amp; Private Pharmacy Services</title>
+  <title>Five Ways Pharmacy | Trusted Online Pharmacy</title>
   <meta
     name="description"
-    content="Five Ways Pharmacy offers NHS Pharmacy First, flu &amp; COVID vaccines, stop smoking support, weight management and more. Book an appointment, or pay securely for your prescription online with free UK delivery."
+    content="Five Ways Pharmacy online shop for trusted healthcare essentials, vitamins, personal care and family wellbeing."
   />
-  <meta property="og:title" content="Five Ways Pharmacy | NHS &amp; Private Pharmacy Services" />
-  <meta property="og:description" content="Book NHS and private pharmacy services, or pay securely for your prescription online with free UK delivery." />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -26,18 +22,38 @@
       <div class="top-strip-inner container">
         <p class="top-strip-message">
           <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M3 7.5h11v7H3z" />
-            <path d="M14 10h3.2l2.3 2.6V14H14z" />
-            <circle cx="7.5" cy="17" r="1.75" />
-            <circle cx="17.5" cy="17" r="1.75" />
-            <path d="M5.75 17H3V9.25" />
+            <path d="M12 21s-5.2-5.07-5.2-10a5.2 5.2 0 1 1 10.4 0c0 4.93-5.2 10-5.2 10Z" />
+            <circle cx="12" cy="11" r="1.9" />
           </svg>
-          <span><strong>Free next-day UK delivery over GBP 25</strong> with discreet packaging</span>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Five%20Ways%20Pharmacy%2C%20192A%20Saint%20Vincent%20Street%20West%2C%20Ladywood%2C%20Birmingham%2C%20West%20Midlands%2C%20B16%208RP"
+            class="top-strip-message-link--desktop"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Find Five Ways Pharmacy on Google Maps"
+          >192A Saint Vincent Street West, Ladywood, Birmingham, West Midlands, B16 8RP</a>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Five%20Ways%20Pharmacy%2C%20192A%20Saint%20Vincent%20Street%20West%2C%20Ladywood%2C%20Birmingham%2C%20West%20Midlands%2C%20B16%208RP"
+            class="top-strip-message-link--mobile"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Find Five Ways Pharmacy on Google Maps"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 21s-5.2-5.07-5.2-10a5.2 5.2 0 1 1 10.4 0c0 4.93-5.2 10-5.2 10Z" />
+            <circle cx="12" cy="11" r="1.9" />
+          </svg><span>Find us</span></a>
         </p>
         <div class="top-strip-links">
-          <span class="top-strip-hours" aria-label="Opening hours">
+          <span class="top-strip-hours top-strip-hours--desktop" aria-label="Opening hours">
             Open Mon&ndash;Fri, 09:00&ndash;17:00 &middot; Closed bank holidays
           </span>
+          <details class="top-strip-hours-dropdown">
+            <summary class="top-strip-hours top-strip-hours--mobile">Opening hours</summary>
+            <div class="top-strip-hours-panel">
+              <span>Open Mon&ndash;Fri, 09:00&ndash;17:00</span>
+              <span>Closed bank holidays</span>
+            </div>
+          </details>
           <a href="/faqs/" aria-label="Customer support">Help Centre</a>
         </div>
       </div>
@@ -89,7 +105,7 @@
 
         <nav class="header-actions" aria-label="User actions">
           <div class="header-account">
-            <a class="header-action header-account__link" href="account.html" aria-label="Login or register" data-auth-login-link data-auth-account-href="account.html">
+            <a class="header-action header-account__link" href="account.html" aria-label="Login or register" data-auth-login-link data-auth-account-href="/account.html">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="12" cy="8.25" r="3.25" />
                 <path d="M5.75 19.5c1.35-3.05 4.05-4.6 6.25-4.6s4.9 1.55 6.25 4.6" />
@@ -97,7 +113,7 @@
               <span class="header-account__label" data-auth-label>Login / Register</span>
             </a>
 
-            <a class="header-action header-account__mobile-link" href="account.html" aria-label="Login / Register" data-auth-login-link data-auth-account-href="account.html">
+            <a class="header-action header-account__mobile-link" href="account.html" aria-label="Login / Register" data-auth-login-link data-auth-account-href="/account.html">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="12" cy="8.25" r="3.25" />
                 <path d="M5.75 19.5c1.35-3.05 4.05-4.6 6.25-4.6s4.9 1.55 6.25 4.6" />
@@ -115,6 +131,17 @@
             <span class="cart-pill-label">Book</span>
             
           </a>
+          <details class="header-phone-dropdown header-phone-dropdown--main">
+            <summary class="header-phone-trigger" aria-label="Show pharmacy phone number">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62 10.79a15.5 15.5 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c.84.28 1.73.43 2.58.43a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.85 21 3 13.15 3 4a1 1 0 0 1 1-1h3.43a1 1 0 0 1 1 1c0 .85.15 1.74.43 2.58a1 1 0 0 1-.24 1.01Z" />
+              </svg>
+              <span class="sr-only">Show pharmacy phone number</span>
+            </summary>
+            <div class="header-phone-popover">
+              <a href="tel:+441216302680" aria-label="Call Five Ways Pharmacy on 0121 630 2680">0121 630 2680</a>
+            </div>
+          </details>
         </nav>
       </div>
 
@@ -221,6 +248,7 @@
             <div class="category-pill-dropdown-menu category-pill-dropdown-menu--compact" aria-label="Prescriptions menu">
               <a href="emergency-prescriptions/" class="category-pill-dropdown-link">Emergency supply</a>
               <a href="repeat-prescriptions/" class="category-pill-dropdown-link">Repeat prescriptions</a>
+              <a href="#private-prescriptions" class="category-pill-dropdown-link">Private prescriptions</a>
             </div>
           </div>
           <a href="health-advice/">
@@ -230,6 +258,14 @@
               <path d="M8.5 13.25h4.5" />
             </svg>
             <span>Health Advice</span>
+          </a>
+          <a href="#shop-by-category" class="service-led-hidden" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3.5 5h2l1.7 9.25h9.9L19 8H6.2" />
+              <circle cx="9.25" cy="18.25" r="1.35" />
+              <circle cx="16.7" cy="18.25" r="1.35" />
+            </svg>
+            <span>Over-the-counter Purchases</span>
           </a>
           <a href="covid-vaccines/">
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -313,9 +349,18 @@
                 <div class="mobile-menu-submenu">
                   <a href="emergency-prescriptions/" class="mobile-menu-link">Emergency supply</a>
                   <a href="repeat-prescriptions/" class="mobile-menu-link">Repeat prescriptions</a>
+                  <details class="mobile-menu-group mobile-menu-group--nested">
+                    <summary class="mobile-menu-link mobile-menu-link--toggle">Private prescriptions</summary>
+                    <div class="mobile-menu-subpanel" role="group" aria-label="Private prescriptions information">
+                      <p class="mobile-menu-subpanel-title">Private prescriptions</p>
+                      <p class="mobile-menu-subpanel-text">Need a price for a private prescription? Tell our pharmacy team what is on your prescription and we&rsquo;ll explain availability, pricing and next steps.</p>
+                      <a href="tel:+441216302680" class="mobile-menu-subpanel-button">Call Five Ways Pharmacy</a>
+                    </div>
+                  </details>
                 </div>
               </details>
               <a href="health-advice/" class="mobile-menu-link">Health Advice</a>
+              <a href="#shop-by-category" class="mobile-menu-link service-led-hidden" hidden>Over-the-counter Purchases</a>
               <a href="covid-vaccines/" class="mobile-menu-link">COVID Vaccines (Spring / Autumn)</a>
               <a href="flu-vaccines/" class="mobile-menu-link">Flu Vaccines (Autumn)</a>
             </div>
@@ -334,9 +379,9 @@
             <h2 class="mobile-menu-section-title" id="mobile-menu-support">Support</h2>
             <div class="mobile-menu-links">
               <a href="delivery-privacy/" class="mobile-menu-link">Delivery info</a>
-              <a href="#" class="mobile-menu-link">Returns</a>
-              <a href="#" class="mobile-menu-link">FAQs</a>
-              <a href="#" class="mobile-menu-link">Complaints</a>
+              <a href="/terms/#cancellations" class="mobile-menu-link">Returns</a>
+              <a href="/faqs/" class="mobile-menu-link">FAQs</a>
+              <a href="/terms/#complaints" class="mobile-menu-link">Complaints</a>
             </div>
           </section>
 
@@ -399,6 +444,17 @@
         <span class="compact-cart-label">Book</span>
         
       </a>
+      <details class="header-phone-dropdown header-phone-dropdown--compact">
+        <summary class="header-phone-trigger" aria-label="Show pharmacy phone number">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.62 10.79a15.5 15.5 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c.84.28 1.73.43 2.58.43a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.85 21 3 13.15 3 4a1 1 0 0 1 1-1h3.43a1 1 0 0 1 1 1c0 .85.15 1.74.43 2.58a1 1 0 0 1-.24 1.01Z" />
+          </svg>
+          <span class="sr-only">Show pharmacy phone number</span>
+        </summary>
+        <div class="header-phone-popover header-phone-popover--compact">
+          <a href="tel:+441216302680" aria-label="Call Five Ways Pharmacy on 0121 630 2680">0121 630 2680</a>
+        </div>
+      </details>
     </div>
   </div>
   <div class="compact-header-sentinel" aria-hidden="true"></div>
@@ -406,12 +462,12 @@
   <main>
     <section class="home-showcase hero home-showcase--service-led container">
       <div class="home-main-stack">
-        <a href="service-payment.html" class="mobile-service-payment-banner" aria-label="Service Payment - pay securely for pharmacy services">
+        <a href="service-payment.html" class="mobile-service-payment-banner" aria-label="Service &amp; Prescription Payments - pay securely for pharmacy services">
           <span class="mobile-service-payment-banner__icon" aria-hidden="true">
             <img src="./assets/images/right-icon-service-payment.svg" alt="" decoding="async" />
           </span>
           <span class="mobile-service-payment-banner__copy">
-            <strong>Service Payment</strong>
+            <strong>Service &amp; Prescription Payments</strong>
             <small>Pay securely for pharmacy services.</small>
           </span>
           <span class="mobile-service-payment-banner__arrow" aria-hidden="true">
@@ -495,6 +551,83 @@
           <p class="sr-only hero-carousel__status" aria-live="polite">Showing Pharmacy First Services slide</p>
         </section>
 
+        <div class="hero-carousel-disclaimer hero-carousel-disclaimer--mobile" aria-label="Hero service disclaimer">
+          <span class="hero-carousel-disclaimer__accent" aria-hidden="true">*</span>
+          <p class="hero-carousel-disclaimer__text">Free applies to Pharmacy First and Stop Smoking Clinic if you are exempt from NHS prescription charges; charges may apply if treatment is supplied.</p>
+        </div>
+
+        <section class="mobile-prescriptions-chooser" aria-label="Prescription support shortcuts">
+          <div class="mobile-prescriptions-chooser__head">
+            <h2 class="mobile-prescriptions-chooser__title">Prescriptions</h2>
+            <p class="mobile-prescriptions-chooser__intro">Emergency, repeat and private prescription support.</p>
+          </div>
+
+          <div class="mobile-prescriptions-chooser__options">
+            <a href="emergency-prescriptions/" class="mobile-prescriptions-chooser__option" aria-label="Emergency supply - Urgent one-off support through NHS 111">
+              <span class="mobile-prescriptions-chooser__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M8 4h7l5 5v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" />
+                  <path d="M15 4v5h5" />
+                  <path d="M9 13h6" />
+                  <path d="M9 17h4" />
+                </svg>
+              </span>
+              <span class="mobile-prescriptions-chooser__copy">
+                <strong>Emergency supply</strong>
+                <small>Urgent one-off support through NHS 111.</small>
+              </span>
+              <span class="mobile-prescriptions-chooser__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M7 12h10" />
+                  <path d="M12 7l5 5-5 5" />
+                </svg>
+              </span>
+            </a>
+
+            <a href="repeat-prescriptions/" class="mobile-prescriptions-chooser__option" aria-label="Repeat prescriptions - Nominate Five Ways Pharmacy for repeat medication delivery">
+              <span class="mobile-prescriptions-chooser__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M8 4h7l5 5v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" />
+                  <path d="M15 4v5h5" />
+                  <path d="M9 13h6" />
+                  <path d="M9 17h4" />
+                </svg>
+              </span>
+              <span class="mobile-prescriptions-chooser__copy">
+                <strong>Repeat prescriptions</strong>
+                <small>Nominate Five Ways Pharmacy for repeat medication delivery.</small>
+              </span>
+              <span class="mobile-prescriptions-chooser__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M7 12h10" />
+                  <path d="M12 7l5 5-5 5" />
+                </svg>
+              </span>
+            </a>
+
+            <a href="tel:+441216302680" class="mobile-prescriptions-chooser__option" aria-label="Private prescriptions - Call us with your prescription details for a competitive quote">
+              <span class="mobile-prescriptions-chooser__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M8 4h7l5 5v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" />
+                  <path d="M15 4v5h5" />
+                  <path d="M9 13h6" />
+                  <path d="M9 17h4" />
+                </svg>
+              </span>
+              <span class="mobile-prescriptions-chooser__copy">
+                <strong>Private prescriptions</strong>
+                <small>Call us with your prescription details for a competitive quote.</small>
+              </span>
+              <span class="mobile-prescriptions-chooser__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M7 12h10" />
+                  <path d="M12 7l5 5-5 5" />
+                </svg>
+              </span>
+            </a>
+          </div>
+        </section>
+
         <section class="mobile-service-cards" aria-label="Mobile service shortcuts">
           <a href="pharmacy-first/" class="mobile-service-card" aria-label="Pharmacy First - Free NHS support">
             <img
@@ -530,6 +663,204 @@
           </a>
         </section>
 
+        <section class="category-section category-section--compact service-led-hidden" id="shop-by-category" hidden>
+          <div class="section-head section-head--compact">
+            <h2>Shop by category</h2>
+            <a href="#">
+              <span>View all categories</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 12h12" />
+                <path d="M13 7l5 5-5 5" />
+              </svg>
+            </a>
+          </div>
+
+          <div class="category-grid">
+            <a href="#" class="category-card">
+              <div class="category-media">
+                <img
+                  class="category-photo"
+                  src="assets/brand/fiveways-logo-new.svg"
+                  alt="Pain Relief category image"
+                  width="1254"
+                  height="1254"
+                />
+              </div>
+              <div class="category-copy">
+                <h3>Pain Relief</h3>
+                <span class="category-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 12h8" />
+                    <path d="M13 7l5 5-5 5" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+
+            <a href="#" class="category-card">
+              <div class="category-media">
+                <img
+                  class="category-photo"
+                  src="assets/brand/fiveways-logo-new.svg"
+                  alt="Cold and Flu category image"
+                  width="1254"
+                  height="1254"
+                />
+              </div>
+              <div class="category-copy">
+                <h3>Cold &amp; Flu</h3>
+                <span class="category-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 12h8" />
+                    <path d="M13 7l5 5-5 5" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+
+            <a href="#" class="category-card">
+              <div class="category-media">
+                <img
+                  class="category-photo"
+                  src="assets/brand/fiveways-logo-new.svg"
+                  alt="Vitamins category image"
+                  width="1254"
+                  height="1254"
+                />
+              </div>
+              <div class="category-copy">
+                <h3>Vitamins</h3>
+                <span class="category-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 12h8" />
+                    <path d="M13 7l5 5-5 5" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+
+            <a href="#" class="category-card">
+              <div class="category-media">
+                <img
+                  class="category-photo"
+                  src="assets/brand/fiveways-logo-new.svg"
+                  alt="Skincare category image"
+                  width="1254"
+                  height="1254"
+                />
+              </div>
+              <div class="category-copy">
+                <h3>Skincare</h3>
+                <span class="category-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 12h8" />
+                    <path d="M13 7l5 5-5 5" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+
+            <a href="#" class="category-card">
+              <div class="category-media">
+                <img
+                  class="category-photo"
+                  src="assets/brand/fiveways-logo-new.svg"
+                  alt="Baby and Mum category image"
+                  width="1254"
+                  height="1254"
+                />
+              </div>
+              <div class="category-copy">
+                <h3>Baby &amp; Mum</h3>
+                <span class="category-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 12h8" />
+                    <path d="M13 7l5 5-5 5" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+
+            <a href="#" class="category-card">
+              <div class="category-media">
+                <img
+                  class="category-photo"
+                  src="assets/brand/fiveways-logo-new.svg"
+                  alt="Travel Health category image"
+                  width="1254"
+                  height="1254"
+                />
+              </div>
+              <div class="category-copy">
+                <h3>Travel Health</h3>
+                <span class="category-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M8 12h8" />
+                    <path d="M13 7l5 5-5 5" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+          </div>
+
+          <div class="category-grid-desktop-preview" aria-label="Desktop shop by category preview">
+            <a href="#" class="category-desktop-preview-card category-desktop-preview-card--mens" aria-label="Men's Health">
+              <img
+                class="category-desktop-preview-card__image"
+                src="./assets/images/shop-category-redesign/desktop/mens-health.webp"
+                alt=""
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </a>
+
+            <a href="#" class="category-desktop-preview-card category-desktop-preview-card--womens" aria-label="Women's Health">
+              <img
+                class="category-desktop-preview-card__image"
+                src="./assets/images/shop-category-redesign/desktop/womens-health.webp"
+                alt=""
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </a>
+
+            <a href="#shop-by-category" class="category-desktop-preview-card category-desktop-preview-card--over-the-counter" aria-label="Over-the-counter Purchases">
+              <img
+                class="category-desktop-preview-card__image"
+                src="./assets/images/shop-category-redesign/desktop/over-the-counter-purchases.webp"
+                alt=""
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </a>
+          </div>
+
+          <div class="category-grid-mobile-preview" hidden aria-label="Mobile shop by category preview">
+            <a href="#" class="category-mobile-preview-card category-mobile-preview-card--mens" aria-label="Men's Health">
+              <span class="category-mobile-preview-card__media" aria-hidden="true">
+                <img class="category-mobile-preview-card__image" src="./assets/images/shop-category-redesign/mobile/mens-health.webp" alt="" decoding="async" loading="lazy">
+              </span>
+              <span class="category-mobile-preview-card__title">Men&rsquo;s Health</span>
+            </a>
+
+            <a href="#" class="category-mobile-preview-card category-mobile-preview-card--womens" aria-label="Women's Health">
+              <span class="category-mobile-preview-card__media" aria-hidden="true">
+                <img class="category-mobile-preview-card__image" src="./assets/images/shop-category-redesign/mobile/womens-health.webp" alt="" decoding="async" loading="lazy">
+              </span>
+              <span class="category-mobile-preview-card__title">Women&rsquo;s Health</span>
+            </a>
+
+            <a href="#shop-by-category" class="category-mobile-preview-card category-mobile-preview-card--over-the-counter" aria-label="Over-the-counter Purchases">
+              <span class="category-mobile-preview-card__media" aria-hidden="true">
+                <img class="category-mobile-preview-card__image" src="./assets/images/shop-category-redesign/mobile/over-the-counter-purchases.webp" alt="" decoding="async" loading="lazy">
+              </span>
+              <span class="category-mobile-preview-card__title">Over-the-counter Purchases</span>
+            </a>
+          </div>
+        </section>
       </div>
 
       <aside class="hero-side" aria-label="Service shortcuts">
@@ -551,12 +882,12 @@
           </a>
         </article>
 
-        <a href="service-payment.html" class="side-card side-card--service-payment" aria-label="Service Payment - Pay securely for pharmacy services.">
+        <a href="service-payment.html" class="side-card side-card--service-payment" aria-label="Service &amp; Prescription Payments - Pay securely for pharmacy services.">
           <div class="side-card-icon" aria-hidden="true">
             <img src="./assets/images/right-icon-service-payment.svg" alt="" decoding="async" />
           </div>
           <div class="side-card-copy">
-            <h3>Service Payment</h3>
+            <h3>Service &amp; Prescription Payments</h3>
             <p>Pay securely for pharmacy services.</p>
           </div>
         </a>
@@ -581,10 +912,26 @@
           </div>
         </a>
 
+        <article class="side-card side-card--trusted-products service-led-hidden" hidden>
+          <div class="side-card-icon" aria-hidden="true">
+            <img src="assets/brand/fiveways-logo-new.svg" alt="" decoding="async" />
+          </div>
+          <div class="side-card-copy">
+            <h3>Trusted products</h3>
+            <p>Genuine pharmacy products from trusted brands.</p>
+          </div>
+        </article>
       </aside>
     </section>
 
-    <section class="section service-section container" id="services">
+    <div class="hero-carousel-disclaimer-shell container">
+      <div class="hero-carousel-disclaimer" aria-label="Hero service disclaimer">
+        <span class="hero-carousel-disclaimer__accent" aria-hidden="true">*</span>
+        <p class="hero-carousel-disclaimer__text">Free applies to Pharmacy First and Stop Smoking Clinic if you are exempt from NHS prescription charges; charges may apply if treatment is supplied.</p>
+      </div>
+    </div>
+
+    <section class="section service-section container">
       <div class="service-shell">
         <div class="section-head service-head">
           <div>
@@ -671,7 +1018,7 @@
           />
         </a>
 
-        <a href="prescriptions/" class="service-mobile-card">
+        <a href="prescriptions/" class="service-mobile-card service-mobile-card--prescriptions">
           <img
             class="service-mobile-card__image"
             src="./assets/images/pharmacy-services-mobile/06-prescriptions.webp"
@@ -691,6 +1038,15 @@
           />
         </a>
 
+        <a href="#shop-by-category" class="service-mobile-card service-led-hidden" hidden>
+          <img
+            class="service-mobile-card__image"
+            src="assets/brand/fiveways-logo-new.svg"
+            alt="Over-the-counter Purchases"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
       </div>
       <div class="service-grid">
         <article class="service-card service-card--featured service-card--nhs">
@@ -809,7 +1165,7 @@
           </div>
         </article>
 
-        <article class="service-card service-card--standard service-card--consultation">
+        <article class="service-card service-card--standard service-card--consultation" id="private-prescriptions">
           <div class="service-card__visual" aria-hidden="true">
             <img class="service-card__image" src="./assets/images/pharmacy-services-made-simple/service-private-consultations.webp" alt="" loading="lazy" decoding="async">
           </div>
@@ -821,11 +1177,11 @@
               </svg>
             </span>
             <div class="service-card__copy">
-              <h3>Private Consultations</h3>
-              <p>Speak with our pharmacy team about your health concerns, in confidence.</p>
+              <h3>Private Prescriptions</h3>
+              <p>Call us with your prescription details for a competitive quote.</p>
             </div>
-            <a class="service-card__cta" href="#">
-              <span>Start consultation</span>
+            <a class="service-card__cta" href="tel:+441216302680">
+              <span>Call us now</span>
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M6 12h12" />
                 <path d="M13 7l5 5-5 5" />
@@ -909,6 +1265,21 @@
           </div>
           <div class="footer-nav-shell">
             <div class="footer-nav">
+              <details class="footer-nav-column footer-nav-column--shop footer-nav-accordion service-led-hidden" open hidden>
+                <summary class="footer-nav-toggle">
+                  <span>Shop</span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 10.5 12 15l5-4.5" />
+                  </svg>
+                </summary>
+                <div class="footer-nav-links">
+                  <a href="#">All products</a>
+                  <a href="#">Best sellers</a>
+                  <a href="#">Offers</a>
+                  <a href="#">Pharmacy services</a>
+                  <a href="#">Prescriptions</a>
+                </div>
+              </details>
               <details class="footer-nav-column footer-nav-accordion" open>
                 <summary class="footer-nav-toggle">
                   <span>Support</span>
@@ -938,17 +1309,24 @@
                   <a href="#">Careers</a>
                 </div>
               </details>
-              <details class="footer-nav-column footer-nav-accordion" open>
+              <details class="footer-nav-column footer-nav-column--leadership footer-nav-accordion" open>
                 <summary class="footer-nav-toggle">
-                  <span>Account</span>
+                  <span>Pharmacy leadership</span>
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M7 10.5 12 15l5-4.5" />
                   </svg>
                 </summary>
-                <div class="footer-nav-links">
-                  <a href="#">Login</a>
-                  <a href="#">Sign up</a>
-                  <a href="#">Account help</a>
+                <div class="footer-nav-links footer-nav-links--leadership">
+                  <div class="footer-leadership-person">
+                    <p class="footer-leadership-name">Mrs Parminder Kaur Chand</p>
+                    <p class="footer-leadership-role">Superintendent Pharmacist / Director</p>
+                    <p class="footer-leadership-registration">MPharm MRPharmS &middot; GPhC Reg. <a class="footer-gphc-link" href="https://www.pharmacyregulation.org/registers/pharmacist/registrationnumber/2059120" target="_blank" rel="noopener noreferrer" aria-label="View Mrs Parminder Kaur Chand GPhC registration">2059120</a></p>
+                  </div>
+                  <div class="footer-leadership-person">
+                    <p class="footer-leadership-name">Zaineb Mouaid Hassen</p>
+                    <p class="footer-leadership-role">Pharmacist Manager</p>
+                    <p class="footer-leadership-registration">MPharm MRPharmS &middot; GPhC Reg. <a class="footer-gphc-link" href="https://www.pharmacyregulation.org/registers/pharmacist/registrationnumber/2229136" target="_blank" rel="noopener noreferrer" aria-label="View Zaineb Mouaid Hassen GPhC registration">2229136</a></p>
+                  </div>
                 </div>
               </details>
             </div>
@@ -988,7 +1366,7 @@
             </span>
             <div class="footer-strip-copy footer-strip-copy--registered">
               <strong>Registered pharmacy</strong>
-              <small>GPhC Reg. 1119029</small>
+              <small>GPhC Reg. <a class="footer-gphc-link" href="https://inspections.pharmacyregulation.org/pharmacy/detail/five-ways-pharmacy-1119029" target="_blank" rel="noopener noreferrer" aria-label="View Five Ways Pharmacy GPhC premises registration">1119029</a></small>
             </div>
           </article>
           <article class="footer-strip-feature">
@@ -1075,7 +1453,6 @@
               <a href="/terms/">Terms</a>
               <a href="/cookies/">Cookies</a>
               <a href="/terms/#complaints">Complaints</a>
-              <a href="#">Sitemap</a>
             </div>
             <div class="footer-address">
               <span class="footer-address-icon" aria-hidden="true">
@@ -1090,6 +1467,19 @@
               <p>&copy; 2026 Five Ways Pharmacy. All rights reserved.</p>
             </div>
           </div>
+          <a
+            href="https://what3words.com/kick.wounds.neon"
+            class="footer-legal-link--exact-location"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Five Ways Pharmacy precise what3words location"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21s-5.2-5.07-5.2-10a5.2 5.2 0 1 1 10.4 0c0 4.93-5.2 10-5.2 10Z" />
+              <circle cx="12" cy="11" r="1.9" />
+            </svg>
+            <span>Exact location</span>
+          </a>
           <p class="footer-company-details">Owned by P Chand Ltd <span aria-hidden="true">&bull;</span> Company No. 08464319 <span aria-hidden="true">&bull;</span> VAT No. 165-9328-77</p>
         </div>
       </div>
@@ -1509,6 +1899,227 @@
       queueAutoplay();
     })();
 
+  </script>
+  <script>
+    (() => {
+      const closableDetails = Array.from(document.querySelectorAll(".top-strip-hours-dropdown, .header-phone-dropdown"));
+      if (!closableDetails.length) return;
+      const phoneDropdowns = closableDetails.filter((dropdown) => dropdown.classList.contains("header-phone-dropdown"));
+      const phoneTimers = new WeakMap();
+
+      const clearPhoneTimer = (dropdown) => {
+        const timer = phoneTimers.get(dropdown);
+        if (typeof timer === "number") {
+          window.clearTimeout(timer);
+          phoneTimers.delete(dropdown);
+        }
+      };
+
+      const queuePhoneAutoClose = (dropdown) => {
+        clearPhoneTimer(dropdown);
+        if (!dropdown.open) return;
+
+        const timer = window.setTimeout(() => {
+          dropdown.open = false;
+          phoneTimers.delete(dropdown);
+        }, 5000);
+
+        phoneTimers.set(dropdown, timer);
+      };
+
+      const closeOpenDetails = (target) => {
+        closableDetails.forEach((dropdown) => {
+          if (!dropdown.open) return;
+          if (target instanceof Node && dropdown.contains(target)) return;
+          clearPhoneTimer(dropdown);
+          dropdown.open = false;
+        });
+      };
+
+      phoneDropdowns.forEach((dropdown) => {
+        dropdown.addEventListener("toggle", () => {
+          if (!dropdown.open) {
+            clearPhoneTimer(dropdown);
+            return;
+          }
+
+          queuePhoneAutoClose(dropdown);
+        });
+      });
+
+      document.addEventListener("pointerdown", (event) => {
+        const target = event.target;
+        if (!(target instanceof Node)) return;
+        closeOpenDetails(target);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        closeOpenDetails(null);
+      });
+    })();
+  </script>
+  <script>
+    (() => {
+      const targetCard = document.getElementById("private-prescriptions");
+      if (!targetCard) return;
+
+      const spotlightClass = "service-card--spotlight";
+      let spotlightTimer = null;
+
+      const clearSpotlight = () => {
+        if (typeof spotlightTimer === "number") {
+          window.clearTimeout(spotlightTimer);
+          spotlightTimer = null;
+        }
+        targetCard.classList.remove(spotlightClass);
+      };
+
+      const spotlightCard = () => {
+        clearSpotlight();
+        targetCard.classList.add(spotlightClass);
+        spotlightTimer = window.setTimeout(() => {
+          targetCard.classList.remove(spotlightClass);
+          spotlightTimer = null;
+        }, 2600);
+      };
+
+      const scrollToCard = () => {
+        targetCard.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      };
+
+      document.querySelectorAll('a[href="#private-prescriptions"]').forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          if (window.location.hash !== "#private-prescriptions") {
+            window.history.replaceState(null, "", "#private-prescriptions");
+          }
+          scrollToCard();
+          spotlightCard();
+        });
+      });
+
+      if (window.location.hash === "#private-prescriptions") {
+        window.requestAnimationFrame(() => {
+          scrollToCard();
+          spotlightCard();
+        });
+      }
+    })();
+  </script>
+  <script>
+    (() => {
+      const desktopMedia = window.matchMedia("(min-width: 981px)");
+      const dropdown = document.querySelector(".category-pill-dropdown--prescriptions");
+      const trigger = dropdown?.querySelector("button");
+      if (!dropdown || !(trigger instanceof HTMLButtonElement)) return;
+
+      let autoCloseTimer = null;
+
+      const clearAutoClose = () => {
+        if (typeof autoCloseTimer === "number") {
+          window.clearTimeout(autoCloseTimer);
+          autoCloseTimer = null;
+        }
+      };
+
+      const setExpanded = (expanded) => {
+        trigger.setAttribute("aria-expanded", expanded ? "true" : "false");
+      };
+
+      const closeDropdown = () => {
+        clearAutoClose();
+        setExpanded(false);
+
+        if (
+          desktopMedia.matches &&
+          dropdown.contains(document.activeElement) &&
+          document.activeElement instanceof HTMLElement
+        ) {
+          document.activeElement.blur();
+        }
+      };
+
+      const queueAutoClose = () => {
+        clearAutoClose();
+        if (!desktopMedia.matches || dropdown.matches(":hover")) return;
+
+        autoCloseTimer = window.setTimeout(() => {
+          closeDropdown();
+        }, 5000);
+      };
+
+      trigger.addEventListener("click", () => {
+        if (!desktopMedia.matches) return;
+        setExpanded(true);
+        queueAutoClose();
+      });
+
+      dropdown.addEventListener("focusin", () => {
+        if (!desktopMedia.matches) return;
+        setExpanded(true);
+        queueAutoClose();
+      });
+
+      dropdown.addEventListener("focusout", () => {
+        if (!desktopMedia.matches) return;
+
+        window.setTimeout(() => {
+          if (dropdown.contains(document.activeElement)) return;
+          if (dropdown.matches(":hover")) {
+            setExpanded(true);
+            return;
+          }
+
+          setExpanded(false);
+        }, 0);
+      });
+
+      dropdown.addEventListener("pointerenter", () => {
+        if (!desktopMedia.matches) return;
+        clearAutoClose();
+        setExpanded(true);
+      });
+
+      dropdown.addEventListener("pointerleave", () => {
+        if (!desktopMedia.matches) return;
+        closeDropdown();
+      });
+
+      document.addEventListener("pointerdown", (event) => {
+        if (!desktopMedia.matches) return;
+        const target = event.target;
+        if (!(target instanceof Node)) return;
+        if (dropdown.contains(target)) return;
+        closeDropdown();
+      });
+
+      window.addEventListener("scroll", () => {
+        if (!desktopMedia.matches) return;
+        closeDropdown();
+      }, { passive: true });
+
+      document.addEventListener("keydown", (event) => {
+        if (!desktopMedia.matches) return;
+        if (event.key !== "Escape") return;
+        closeDropdown();
+      });
+
+      if (typeof desktopMedia.addEventListener === "function") {
+        desktopMedia.addEventListener("change", (event) => {
+          if (event.matches) return;
+          closeDropdown();
+        });
+      } else if (typeof desktopMedia.addListener === "function") {
+        desktopMedia.addListener((event) => {
+          if (event.matches) return;
+          closeDropdown();
+        });
+      }
+    })();
   </script>
   <script src="/cookie-consent.js" defer></script>
   <script src="/auth-config.js"></script>

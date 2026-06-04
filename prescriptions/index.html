@@ -22,18 +22,38 @@
       <div class="top-strip-inner container">
         <p class="top-strip-message">
           <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M3 7.5h11v7H3z" />
-            <path d="M14 10h3.2l2.3 2.6V14H14z" />
-            <circle cx="7.5" cy="17" r="1.75" />
-            <circle cx="17.5" cy="17" r="1.75" />
-            <path d="M5.75 17H3V9.25" />
+            <path d="M12 21s-5.2-5.07-5.2-10a5.2 5.2 0 1 1 10.4 0c0 4.93-5.2 10-5.2 10Z" />
+            <circle cx="12" cy="11" r="1.9" />
           </svg>
-          <span><strong>Free next-day UK delivery over GBP 25</strong> with discreet packaging</span>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Five%20Ways%20Pharmacy%2C%20192A%20Saint%20Vincent%20Street%20West%2C%20Ladywood%2C%20Birmingham%2C%20West%20Midlands%2C%20B16%208RP"
+            class="top-strip-message-link--desktop"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Find Five Ways Pharmacy on Google Maps"
+          >192A Saint Vincent Street West, Ladywood, Birmingham, West Midlands, B16 8RP</a>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Five%20Ways%20Pharmacy%2C%20192A%20Saint%20Vincent%20Street%20West%2C%20Ladywood%2C%20Birmingham%2C%20West%20Midlands%2C%20B16%208RP"
+            class="top-strip-message-link--mobile"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Find Five Ways Pharmacy on Google Maps"
+          ><svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 21s-5.2-5.07-5.2-10a5.2 5.2 0 1 1 10.4 0c0 4.93-5.2 10-5.2 10Z" />
+            <circle cx="12" cy="11" r="1.9" />
+          </svg><span>Find us</span></a>
         </p>
         <div class="top-strip-links">
-          <span class="top-strip-hours" aria-label="Opening hours">
+          <span class="top-strip-hours top-strip-hours--desktop" aria-label="Opening hours">
             Open Mon&ndash;Fri, 09:00&ndash;17:00 &middot; Closed bank holidays
           </span>
+          <details class="top-strip-hours-dropdown">
+            <summary class="top-strip-hours top-strip-hours--mobile">Opening hours</summary>
+            <div class="top-strip-hours-panel">
+              <span>Open Mon&ndash;Fri, 09:00&ndash;17:00</span>
+              <span>Closed bank holidays</span>
+            </div>
+          </details>
           <a href="/faqs/" aria-label="Customer support">Help Centre</a>
         </div>
       </div>
@@ -111,6 +131,17 @@
             <span class="cart-pill-label">Book</span>
             
           </a>
+          <details class="header-phone-dropdown header-phone-dropdown--main">
+            <summary class="header-phone-trigger" aria-label="Show pharmacy phone number">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62 10.79a15.5 15.5 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c.84.28 1.73.43 2.58.43a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.85 21 3 13.15 3 4a1 1 0 0 1 1-1h3.43a1 1 0 0 1 1 1c0 .85.15 1.74.43 2.58a1 1 0 0 1-.24 1.01Z" />
+              </svg>
+              <span class="sr-only">Show pharmacy phone number</span>
+            </summary>
+            <div class="header-phone-popover">
+              <a href="tel:+441216302680" aria-label="Call Five Ways Pharmacy on 0121 630 2680">0121 630 2680</a>
+            </div>
+          </details>
         </nav>
       </div>
 
@@ -217,6 +248,7 @@
             <div class="category-pill-dropdown-menu category-pill-dropdown-menu--compact" aria-label="Prescriptions menu">
               <a href="../emergency-prescriptions/" class="category-pill-dropdown-link">Emergency supply</a>
               <a href="../repeat-prescriptions/" class="category-pill-dropdown-link">Repeat prescriptions</a>
+              <a href="../#private-prescriptions" class="category-pill-dropdown-link">Private prescriptions</a>
             </div>
           </div>
           <a href="../health-advice/">
@@ -317,6 +349,14 @@
                 <div class="mobile-menu-submenu">
                   <a href="../emergency-prescriptions/" class="mobile-menu-link">Emergency supply</a>
                   <a href="../repeat-prescriptions/" class="mobile-menu-link">Repeat prescriptions</a>
+                  <details class="mobile-menu-group mobile-menu-group--nested">
+                    <summary class="mobile-menu-link mobile-menu-link--toggle">Private prescriptions</summary>
+                    <div class="mobile-menu-subpanel" role="group" aria-label="Private prescriptions information">
+                      <p class="mobile-menu-subpanel-title">Private prescriptions</p>
+                      <p class="mobile-menu-subpanel-text">Need a price for a private prescription? Tell our pharmacy team what is on your prescription and we&rsquo;ll explain availability, pricing and next steps.</p>
+                      <a href="tel:+441216302680" class="mobile-menu-subpanel-button">Call Five Ways Pharmacy</a>
+                    </div>
+                  </details>
                 </div>
               </details>
               <a href="../health-advice/" class="mobile-menu-link">Health Advice</a>
@@ -339,9 +379,9 @@
             <h2 class="mobile-menu-section-title" id="mobile-menu-support">Support</h2>
             <div class="mobile-menu-links">
               <a href="../delivery-privacy/" class="mobile-menu-link">Delivery info</a>
-              <a href="#" class="mobile-menu-link">Returns</a>
-              <a href="#" class="mobile-menu-link">FAQs</a>
-              <a href="#" class="mobile-menu-link">Complaints</a>
+              <a href="/terms/#cancellations" class="mobile-menu-link">Returns</a>
+              <a href="/faqs/" class="mobile-menu-link">FAQs</a>
+              <a href="/terms/#complaints" class="mobile-menu-link">Complaints</a>
             </div>
           </section>
 
@@ -404,6 +444,17 @@
         <span class="compact-cart-label">Book</span>
         
       </a>
+      <details class="header-phone-dropdown header-phone-dropdown--compact">
+        <summary class="header-phone-trigger" aria-label="Show pharmacy phone number">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6.62 10.79a15.5 15.5 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c.84.28 1.73.43 2.58.43a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.85 21 3 13.15 3 4a1 1 0 0 1 1-1h3.43a1 1 0 0 1 1 1c0 .85.15 1.74.43 2.58a1 1 0 0 1-.24 1.01Z" />
+          </svg>
+          <span class="sr-only">Show pharmacy phone number</span>
+        </summary>
+        <div class="header-phone-popover header-phone-popover--compact">
+          <a href="tel:+441216302680" aria-label="Call Five Ways Pharmacy on 0121 630 2680">0121 630 2680</a>
+        </div>
+      </details>
     </div>
   </div>
   <div class="compact-header-sentinel" aria-hidden="true"></div>
@@ -421,22 +472,22 @@
           <h1>Prescriptions</h1>
           <p>
             Choose the prescription route you need. Use repeat prescription support if you want to nominate Five Ways
-            Pharmacy for regular medication and free delivery, or use the emergency supply route for one-off urgent
-            supply through NHS 111 online.
+            Pharmacy for regular medication and free delivery of prescriptions within two working days, or use the
+            emergency supply route for one-off urgent supply through NHS 111 online.
           </p>
           <div class="service-detail-pill-row" aria-label="Prescription service highlights">
-            <span>Free repeat prescription delivery</span>
+            <span>Free delivery of prescriptions within two working days</span>
             <span>Online pharmacy support</span>
             <span>NHS urgent supply signposting</span>
-            <span>Delivery-only service</span>
+            <span>Choose the right route</span>
           </div>
           <div class="prescriptions-route-grid" aria-label="Prescription support routes">
             <a href="../repeat-prescriptions/" class="prescriptions-route-card">
               <span class="section-kicker">Repeat prescriptions</span>
               <h2>Nominate Five Ways Pharmacy</h2>
               <p>
-                Choose Five Ways Pharmacy for repeat prescription medication and free delivery through the online pharmacy
-                service.
+                Choose Five Ways Pharmacy for repeat prescription medication and free delivery of prescriptions within two
+                working days.
               </p>
               <span class="service-detail-condition-pill">Go to repeat support</span>
             </a>
@@ -460,7 +511,7 @@
               <ul class="service-detail-checklist">
                 <li>Repeat prescriptions are for regular ongoing medication support</li>
                 <li>Emergency supply is for one-off urgent NHS 111 supply requests</li>
-                <li>Free delivery applies to repeat prescription medication through the online pharmacy service</li>
+                <li>Free delivery of prescriptions within two working days</li>
                 <li>Choose the route that best matches the help you need today</li>
               </ul>
             </div>
@@ -478,7 +529,7 @@
             <ul class="service-detail-bullet-list">
               <li>Repeat support is reviewed by the pharmacy team</li>
               <li>Urgent supply requests are handled through NHS 111 online</li>
-              <li>Delivery support is provided through a delivery-only website service</li>
+              <li>Repeat prescription support includes nomination help from the pharmacy team</li>
             </ul>
           </div>
         </div>
@@ -568,17 +619,24 @@
                   <a href="#">Careers</a>
                 </div>
               </details>
-              <details class="footer-nav-column footer-nav-accordion" open>
+              <details class="footer-nav-column footer-nav-column--leadership footer-nav-accordion" open>
                 <summary class="footer-nav-toggle">
-                  <span>Account</span>
+                  <span>Pharmacy leadership</span>
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M7 10.5 12 15l5-4.5" />
                   </svg>
                 </summary>
-                <div class="footer-nav-links">
-                  <a href="#">Login</a>
-                  <a href="#">Sign up</a>
-                  <a href="#">Account help</a>
+                <div class="footer-nav-links footer-nav-links--leadership">
+                  <div class="footer-leadership-person">
+                    <p class="footer-leadership-name">Mrs Parminder Kaur Chand</p>
+                    <p class="footer-leadership-role">Superintendent Pharmacist / Director</p>
+                    <p class="footer-leadership-registration">MPharm MRPharmS &middot; GPhC Reg. <a class="footer-gphc-link" href="https://www.pharmacyregulation.org/registers/pharmacist/registrationnumber/2059120" target="_blank" rel="noopener noreferrer" aria-label="View Mrs Parminder Kaur Chand GPhC registration">2059120</a></p>
+                  </div>
+                  <div class="footer-leadership-person">
+                    <p class="footer-leadership-name">Zaineb Mouaid Hassen</p>
+                    <p class="footer-leadership-role">Pharmacist Manager</p>
+                    <p class="footer-leadership-registration">MPharm MRPharmS &middot; GPhC Reg. <a class="footer-gphc-link" href="https://www.pharmacyregulation.org/registers/pharmacist/registrationnumber/2229136" target="_blank" rel="noopener noreferrer" aria-label="View Zaineb Mouaid Hassen GPhC registration">2229136</a></p>
+                  </div>
                 </div>
               </details>
             </div>
@@ -618,7 +676,7 @@
             </span>
             <div class="footer-strip-copy footer-strip-copy--registered">
               <strong>Registered pharmacy</strong>
-              <small>GPhC Reg. 1119029</small>
+              <small>GPhC Reg. <a class="footer-gphc-link" href="https://inspections.pharmacyregulation.org/pharmacy/detail/five-ways-pharmacy-1119029" target="_blank" rel="noopener noreferrer" aria-label="View Five Ways Pharmacy GPhC premises registration">1119029</a></small>
             </div>
           </article>
           <article class="footer-strip-feature">
@@ -705,7 +763,6 @@
               <a href="/terms/">Terms</a>
               <a href="/cookies/">Cookies</a>
               <a href="/terms/#complaints">Complaints</a>
-              <a href="#">Sitemap</a>
             </div>
             <div class="footer-address">
               <span class="footer-address-icon" aria-hidden="true">
@@ -720,6 +777,19 @@
               <p>&copy; 2026 Five Ways Pharmacy. All rights reserved.</p>
             </div>
           </div>
+          <a
+            href="https://what3words.com/kick.wounds.neon"
+            class="footer-legal-link--exact-location"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Five Ways Pharmacy precise what3words location"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21s-5.2-5.07-5.2-10a5.2 5.2 0 1 1 10.4 0c0 4.93-5.2 10-5.2 10Z" />
+              <circle cx="12" cy="11" r="1.9" />
+            </svg>
+            <span>Exact location</span>
+          </a>
           <p class="footer-company-details">
             Owned by P Chand Ltd <span>&bull;</span> Company No. 08464319 <span>&bull;</span> VAT No. 165-9328-77
           </p>
@@ -890,6 +960,176 @@
         mobileViewport.addEventListener("change", syncMenuToViewport);
       } else if (typeof mobileViewport.addListener === "function") {
         mobileViewport.addListener(syncMenuToViewport);
+      }
+    })();
+  </script>
+  <script>
+    (() => {
+      const closableDetails = Array.from(document.querySelectorAll(".top-strip-hours-dropdown, .header-phone-dropdown"));
+      if (!closableDetails.length) return;
+      const phoneDropdowns = closableDetails.filter((dropdown) => dropdown.classList.contains("header-phone-dropdown"));
+      const phoneTimers = new WeakMap();
+
+      const clearPhoneTimer = (dropdown) => {
+        const timer = phoneTimers.get(dropdown);
+        if (typeof timer === "number") {
+          window.clearTimeout(timer);
+          phoneTimers.delete(dropdown);
+        }
+      };
+
+      const queuePhoneAutoClose = (dropdown) => {
+        clearPhoneTimer(dropdown);
+        if (!dropdown.open) return;
+
+        const timer = window.setTimeout(() => {
+          dropdown.open = false;
+          phoneTimers.delete(dropdown);
+        }, 5000);
+
+        phoneTimers.set(dropdown, timer);
+      };
+
+      const closeOpenDetails = (target) => {
+        closableDetails.forEach((dropdown) => {
+          if (!dropdown.open) return;
+          if (target instanceof Node && dropdown.contains(target)) return;
+          clearPhoneTimer(dropdown);
+          dropdown.open = false;
+        });
+      };
+
+      phoneDropdowns.forEach((dropdown) => {
+        dropdown.addEventListener("toggle", () => {
+          if (!dropdown.open) {
+            clearPhoneTimer(dropdown);
+            return;
+          }
+
+          queuePhoneAutoClose(dropdown);
+        });
+      });
+
+      document.addEventListener("pointerdown", (event) => {
+        const target = event.target;
+        if (!(target instanceof Node)) return;
+        closeOpenDetails(target);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        closeOpenDetails(null);
+      });
+    })();
+  </script>
+  <script>
+    (() => {
+      const desktopMedia = window.matchMedia("(min-width: 981px)");
+      const dropdown = document.querySelector(".category-pill-dropdown--prescriptions");
+      const trigger = dropdown?.querySelector("button");
+      if (!dropdown || !(trigger instanceof HTMLButtonElement)) return;
+
+      let autoCloseTimer = null;
+
+      const clearAutoClose = () => {
+        if (typeof autoCloseTimer === "number") {
+          window.clearTimeout(autoCloseTimer);
+          autoCloseTimer = null;
+        }
+      };
+
+      const setExpanded = (expanded) => {
+        trigger.setAttribute("aria-expanded", expanded ? "true" : "false");
+      };
+
+      const closeDropdown = () => {
+        clearAutoClose();
+        setExpanded(false);
+
+        if (
+          desktopMedia.matches &&
+          dropdown.contains(document.activeElement) &&
+          document.activeElement instanceof HTMLElement
+        ) {
+          document.activeElement.blur();
+        }
+      };
+
+      const queueAutoClose = () => {
+        clearAutoClose();
+        if (!desktopMedia.matches || dropdown.matches(":hover")) return;
+
+        autoCloseTimer = window.setTimeout(() => {
+          closeDropdown();
+        }, 5000);
+      };
+
+      trigger.addEventListener("click", () => {
+        if (!desktopMedia.matches) return;
+        setExpanded(true);
+        queueAutoClose();
+      });
+
+      dropdown.addEventListener("focusin", () => {
+        if (!desktopMedia.matches) return;
+        setExpanded(true);
+        queueAutoClose();
+      });
+
+      dropdown.addEventListener("focusout", () => {
+        if (!desktopMedia.matches) return;
+
+        window.setTimeout(() => {
+          if (dropdown.contains(document.activeElement)) return;
+          if (dropdown.matches(":hover")) {
+            setExpanded(true);
+            return;
+          }
+
+          setExpanded(false);
+        }, 0);
+      });
+
+      dropdown.addEventListener("pointerenter", () => {
+        if (!desktopMedia.matches) return;
+        clearAutoClose();
+        setExpanded(true);
+      });
+
+      dropdown.addEventListener("pointerleave", () => {
+        if (!desktopMedia.matches) return;
+        closeDropdown();
+      });
+
+      document.addEventListener("pointerdown", (event) => {
+        if (!desktopMedia.matches) return;
+        const target = event.target;
+        if (!(target instanceof Node)) return;
+        if (dropdown.contains(target)) return;
+        closeDropdown();
+      });
+
+      window.addEventListener("scroll", () => {
+        if (!desktopMedia.matches) return;
+        closeDropdown();
+      }, { passive: true });
+
+      document.addEventListener("keydown", (event) => {
+        if (!desktopMedia.matches) return;
+        if (event.key !== "Escape") return;
+        closeDropdown();
+      });
+
+      if (typeof desktopMedia.addEventListener === "function") {
+        desktopMedia.addEventListener("change", (event) => {
+          if (event.matches) return;
+          closeDropdown();
+        });
+      } else if (typeof desktopMedia.addListener === "function") {
+        desktopMedia.addListener((event) => {
+          if (event.matches) return;
+          closeDropdown();
+        });
       }
     })();
   </script>
