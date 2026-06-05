@@ -671,7 +671,7 @@
             relevant NHS clinical pathway.
           </p>
         </div>
-        <div class="pharmacy-first-guide-stack">
+        <div class="pharmacy-first-guide-stack" id="pharmacy-first-guide-stack">
           <article class="pharmacy-first-guide" id="sinusitis">
             <div class="pharmacy-first-guide__header">
               <div class="pharmacy-first-guide__intro">
@@ -2027,6 +2027,74 @@
     });
     document.addEventListener("keydown", function (e) { if (e.key !== "Escape") return; var m = document.querySelector("cal-modal-box"); if (m && m.remove) { m.remove(); document.body.style.overflow = ""; } });
     document.addEventListener("click", function (e) { var t = e.target; if (!t || !t.tagName) return; if (t.tagName.toLowerCase() === "cal-modal-box") { var m = document.querySelector("cal-modal-box"); if (m && m.remove) { m.remove(); document.body.style.overflow = ""; } } });
+  </script>
+  <!-- Pharmacy First condition guides: hidden until a condition card is
+       clicked, then only the chosen condition's guide is shown (click again
+       to collapse). Restores the earlier toggle behaviour. Works on mobile
+       and desktop; degrades gracefully (guides simply all show) if JS is off. -->
+  <script>
+    (function () {
+      var stack = document.getElementById("pharmacy-first-guide-stack");
+      if (!stack) return;
+      var section = stack.closest("section");
+      var guides = Array.prototype.slice.call(stack.querySelectorAll(".pharmacy-first-guide"));
+      var cards = Array.prototype.slice.call(
+        document.querySelectorAll('.service-detail-condition-card[href^="#"]')
+      );
+      if (!section || !guides.length || !cards.length) return;
+
+      var byId = {};
+      guides.forEach(function (g) { if (g.id) byId[g.id] = g; });
+
+      var activeId = null;
+
+      function render() {
+        var has = activeId && byId[activeId];
+        // Hide the whole guidance section until something is active.
+        section.hidden = !has;
+        guides.forEach(function (g) {
+          var show = has && g.id === activeId;
+          g.hidden = !show;
+          g.style.display = show ? "" : "none";
+        });
+        cards.forEach(function (c) {
+          var id = (c.getAttribute("href") || "").replace(/^#/, "");
+          var on = has && id === activeId;
+          c.classList.toggle("is-active", on);
+          c.setAttribute("aria-expanded", on ? "true" : "false");
+        });
+      }
+
+      function setActive(id) {
+        if (!id || !byId[id]) { activeId = null; render(); return; }
+        activeId = (activeId === id) ? null : id; // toggle off if same card
+        render();
+        if (activeId && byId[activeId]) {
+          byId[activeId].scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }
+
+      cards.forEach(function (c) {
+        c.setAttribute("aria-controls", "pharmacy-first-guide-stack");
+        c.setAttribute("aria-expanded", "false");
+        c.addEventListener("click", function (e) {
+          var id = (c.getAttribute("href") || "").replace(/^#/, "");
+          if (!byId[id]) return; // not a guide card, let it behave normally
+          e.preventDefault();
+          setActive(id);
+        });
+      });
+
+      // If the page is opened with a #condition in the URL, show that one.
+      var initial = window.location.hash.replace(/^#/, "");
+      if (initial && byId[initial]) {
+        activeId = initial;
+        render();
+        byId[initial].scrollIntoView({ block: "start" });
+      } else {
+        render(); // hidden by default
+      }
+    })();
   </script>
 </body>
 </html>
