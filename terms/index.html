@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Health Advice | Five Ways Pharmacy</title>
+  <title>Terms &amp; Conditions | Five Ways Pharmacy</title>
   <meta
     name="description"
-    content="Find trusted NHS health information and general pharmacy support from Five Ways Pharmacy for medicines, minor illness guidance, and everyday healthcare questions."
+    content="Read the Five Ways Pharmacy website terms and conditions, including service information, prescriptions, delivery, complaints, and website use."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,23 +15,6 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="../styles.css" />
-  <style>
-    @media (max-width: 720px) {
-      .service-detail-page--health-advice .service-detail-section--mobile-offset .service-detail-alert,
-      .service-detail-page--health-advice .service-detail-section--mobile-offset .service-detail-section-head,
-      .service-detail-page--health-advice .service-detail-section--mobile-offset .service-detail-faq-list {
-        margin-inline-start: 0.42rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .service-detail-page--health-advice .service-detail-section--mobile-offset .service-detail-alert,
-      .service-detail-page--health-advice .service-detail-section--mobile-offset .service-detail-section-head,
-      .service-detail-page--health-advice .service-detail-section--mobile-offset .service-detail-faq-list {
-        margin-inline-start: 0.34rem;
-      }
-    }
-  </style>
 </head>
 <body>
   <header class="site-header">
@@ -189,7 +172,7 @@
                   <span>NHS Pharmacy First</span>
                   <span class="category-pill-free-badge">FREE</span>
                 </a>
-                <a href="#" class="category-pill-dropdown-link">
+                <a href="../stop-smoking-clinic/" class="category-pill-dropdown-link">
                   <span>Stop Smoking Clinic</span>
                   <span class="category-pill-free-badge">FREE</span>
                 </a>
@@ -310,40 +293,18 @@
             <span>Popular now</span>
           </a>
         </nav>
-
-        <div class="quick-nav" aria-label="Popular shortcuts">
-          <p>Popular now:</p>
-          <a href="../pharmacy-first/" class="quick-pill quick-pill--featured">Pharmacy First</a>
-          <a href="../nhs-contraception-services/" class="quick-pill">NHS Contraception Services</a>
-          <a href="../stop-smoking-clinic/" class="quick-pill">Smoking Cessation Services</a>
-          <a href="../umbrella-services/" class="quick-pill">Umbrella Services</a>
-          <a href="../weight-loss-support/" class="quick-pill">Weight Loss</a>
-        </div>
       </div>
     </div>
   </header>
 
   <div class="mobile-menu-shell" aria-hidden="true">
-    <button class="mobile-menu-overlay" type="button" aria-label="Close menu"></button>
-    <aside
-      class="mobile-menu-drawer"
-      id="mobile-menu-drawer"
-      role="dialog"
-      aria-modal="true"
-      aria-hidden="true"
-      aria-labelledby="mobile-menu-title"
-    >
-      <div class="mobile-menu-drawer-inner">
+    <button class="mobile-menu-overlay" type="button" tabindex="-1" aria-label="Close menu"></button>
+    <aside class="mobile-menu-drawer" id="mobile-menu-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+      <div class="mobile-menu-panel">
         <div class="mobile-menu-header">
-          <div class="mobile-menu-header-copy">
-            <img
-              class="mobile-menu-logo"
-              src="../assets/brand/fiveways-logo-new.svg"
-              alt="Five Ways Pharmacy"
-              width="454"
-              height="227"
-            />
-          </div>
+          <a class="brand mobile-menu-brand" href="../index.html" aria-label="Five Ways Pharmacy home">
+            <img class="brand-logo" src="../assets/brand/fiveways-logo-new.svg" alt="Five Ways Pharmacy" width="454" height="227" />
+          </a>
           <button class="mobile-menu-close" type="button" aria-label="Close menu">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M6.5 6.5 17.5 17.5" />
@@ -395,7 +356,7 @@
           <section class="mobile-menu-section" aria-labelledby="mobile-menu-support">
             <h2 class="mobile-menu-section-title" id="mobile-menu-support">Support</h2>
             <div class="mobile-menu-links">
-              <a href="#" class="mobile-menu-link">Delivery info</a>
+              <a href="../delivery-privacy/" class="mobile-menu-link">Delivery info</a>
               <a href="#" class="mobile-menu-link">Returns</a>
               <a href="#" class="mobile-menu-link">FAQs</a>
               <a href="/complaints/" class="mobile-menu-link">Complaints</a>
@@ -405,7 +366,7 @@
           <aside class="mobile-menu-help-card" aria-label="Need help">
             <p class="mobile-menu-help-kicker">Need help?</p>
             <h3>Call or message our pharmacy team.</h3>
-            <a href="#footer-help-card" class="mobile-menu-help-link">
+            <a href="../speak-to-our-team/" class="mobile-menu-help-link">
               <span>Contact us</span>
               <span aria-hidden="true">&rarr;</span>
             </a>
@@ -421,22 +382,11 @@
   <div class="compact-header" aria-label="Compact sticky site tools">
     <div class="compact-header-inner container">
       <a class="compact-brand" href="../index.html" aria-label="Five Ways Pharmacy home">
-        <img
-          class="compact-brand-logo"
-          src="../assets/brand/fiveways-logo-new.svg"
-          alt="Five Ways Pharmacy"
-          width="454"
-          height="227"
-        />
+        <img class="compact-brand-logo" src="../assets/brand/fiveways-logo-new.svg" alt="Five Ways Pharmacy" width="454" height="227" />
       </a>
       <form class="compact-search" role="search" aria-label="Compact site search">
         <label class="sr-only" for="compact-site-search">Search services or health advice</label>
-        <input
-          id="compact-site-search"
-          type="search"
-          placeholder="Search services or health advice"
-          aria-label="Search services or health advice"
-        />
+        <input id="compact-site-search" type="search" placeholder="Search services or health advice" aria-label="Search services or health advice" />
         <button type="submit">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="11" cy="11" r="6" />
@@ -476,146 +426,129 @@
   </div>
   <div class="compact-header-sentinel" aria-hidden="true"></div>
 
-  <main class="service-detail-page service-detail-page--health-advice">
+  <main class="service-detail-page service-detail-page--terms">
     <section class="service-detail-hero container">
       <div class="service-detail-hero-shell">
         <div class="service-detail-hero-copy">
           <nav class="service-detail-breadcrumb" aria-label="Breadcrumb">
             <a href="../index.html">Home</a>
             <span aria-hidden="true">/</span>
-            <span aria-current="page">Health Advice</span>
+            <span aria-current="page">Terms</span>
           </nav>
-          <span class="section-kicker">Trusted support</span>
-          <h1>Health Advice</h1>
+          <span class="section-kicker">Website terms</span>
+          <h1>Terms &amp; conditions</h1>
           <p>
-            Trusted NHS health information and pharmacy support, all in one place. Find trusted NHS health information,
-            medicines guidance and support for everyday healthcare questions, or speak to the Five Ways Pharmacy team for
-            help with medicines and general next-step support.
+            These terms explain how the Five Ways Pharmacy website and pharmacy support routes are intended to be used,
+            and what patients can expect from enquiries, service information, prescriptions, and delivery support.
           </p>
-          <div class="service-detail-pill-row" aria-label="Health Advice highlights">
-            <span>NHS guidance</span>
-            <span>Medicines advice</span>
-            <span>Pharmacy support</span>
-            <span>Urgent help signposting</span>
+          <div class="service-detail-pill-row" aria-label="Terms highlights">
+            <span>Professional discretion</span>
+            <span>Safe pharmacy use</span>
+            <span>Clear complaints route</span>
+            <span>Updated 5 June 2026</span>
           </div>
-          <div class="service-detail-action-row">
-            <a href="https://www.nhs.uk/health-a-to-z/" class="service-detail-button service-detail-button--primary">Search NHS Health A to Z</a>
-            <a href="#footer-help-card" class="service-detail-button service-detail-button--secondary">Speak to our pharmacy team</a>
+          <div class="service-detail-panel support-hero-reassurance">
+            <div class="service-detail-section-head service-detail-section-head--compact">
+              <span class="section-kicker">Important point</span>
+              <h2>Information on the site supports, but does not replace, pharmacist assessment</h2>
+              <p>
+                Website wording is provided for general guidance. Pharmacy advice, supply decisions, and service next
+                steps remain subject to professional judgement, eligibility, and suitability where appropriate.
+              </p>
+            </div>
           </div>
-          <p class="service-detail-action-note">NHS guidance links on this page take you to trusted external NHS resources.</p>
         </div>
 
-        <aside class="service-detail-hero-card" aria-label="Health Advice overview">
-          <div class="service-detail-hero-card__body">
-            <p class="service-detail-hero-card__eyebrow">At a glance</p>
-            <ul class="service-detail-checklist">
-              <li>Trusted NHS resources for conditions, symptoms, medicines, tests, and treatments</li>
-              <li>General support from Five Ways Pharmacy for medicines and everyday healthcare questions</li>
-              <li>Useful signposting when you may need NHS 111, a GP, urgent care, or emergency help</li>
-            </ul>
+        <div class="service-detail-hero-rail">
+          <aside class="service-detail-hero-card" aria-label="Terms overview">
+            <div class="service-detail-hero-card__body">
+              <p class="service-detail-hero-card__eyebrow">At a glance</p>
+              <ul class="service-detail-checklist">
+                <li>Five Ways Pharmacy</li>
+                <li><a href="https://inspections.pharmacyregulation.org/pharmacy/detail/five-ways-pharmacy-1119029" target="_blank" rel="noopener noreferrer">GPhC premises registration 1119029</a></li>
+                <li>192A Saint Vincent Street West, Ladywood, Birmingham, West Midlands, B16 8RP</li>
+                <li><a href="mailto:pharmacy.frk99@nhs.net">pharmacy.frk99@nhs.net</a></li>
+              </ul>
+            </div>
+          </aside>
+
+          <div class="service-detail-panel">
+            <div class="service-detail-section-head service-detail-section-head--compact">
+              <span class="section-kicker">Need help?</span>
+              <h2>Contact the pharmacy before relying on general website information alone</h2>
+              <p>
+                If you are unsure whether a service is suitable, whether a prescription can be supplied, or what next
+                step applies, contact the pharmacy team directly.
+              </p>
+            </div>
+            <div class="service-detail-action-row">
+              <a href="tel:+441216302680" class="service-detail-button service-detail-button--primary">Call Five Ways Pharmacy</a>
+              <a href="mailto:pharmacy.frk99@nhs.net" class="service-detail-button service-detail-button--secondary">Email the pharmacy</a>
+            </div>
           </div>
-        </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="service-detail-section container">
+      <div class="service-detail-info-grid">
+        <article class="service-detail-info-card">
+          <span class="section-kicker">Using the website</span>
+          <h2>General terms for visitors and patients</h2>
+          <ul class="service-detail-bullet-list">
+            <li>Use the website lawfully and provide accurate information when contacting the pharmacy</li>
+            <li>Do not misuse the site, attempt unauthorised access, or interfere with its operation</li>
+            <li>Website content is for general information and does not replace personal clinical advice</li>
+            <li>Links, services, and availability may change from time to time</li>
+          </ul>
+        </article>
+
+        <article class="service-detail-info-card">
+          <span class="section-kicker">Pharmacy services</span>
+          <h2>Suitability, supply, and service decisions</h2>
+          <ul class="service-detail-bullet-list">
+            <li>Services and advice are offered where appropriate and subject to professional assessment</li>
+            <li>Prescription-only medicines are supplied only against a valid prescription and where lawful and suitable</li>
+            <li>No medicine supply or treatment outcome is guaranteed by general website wording alone</li>
+            <li>The pharmacy team may decline or defer a request if more information or another route is needed</li>
+          </ul>
+        </article>
       </div>
     </section>
 
     <section class="service-detail-section container">
       <div class="service-detail-panel">
         <div class="service-detail-section-head service-detail-section-head--compact">
-          <span class="section-kicker">Trusted NHS guidance</span>
-          <h2>Start with trusted NHS information</h2>
-          <p>
-            Use these NHS resources for general health information, then speak to Five Ways Pharmacy if you need help with
-            medicines, self-care questions, or choosing the right next step.
-          </p>
-        </div>
-        <div class="service-detail-guidance-grid">
-          <a class="service-detail-condition-card" href="https://www.nhs.uk/health-a-to-z/" aria-label="Open NHS Health A to Z on the NHS website">
-            <span class="section-kicker">External NHS link</span>
-            <h3>NHS Health A to Z</h3>
-            <p>Conditions, symptoms, medicines, tests and treatments.</p>
-            <span class="service-detail-condition-pill">NHS website</span>
-          </a>
-
-          <a class="service-detail-condition-card" href="https://www.nhs.uk/conditions/" aria-label="Open NHS Conditions A to Z on the NHS website">
-            <span class="section-kicker">External NHS link</span>
-            <h3>NHS Conditions A to Z</h3>
-            <p>Find health conditions, symptoms and treatment information.</p>
-            <span class="service-detail-condition-pill">NHS website</span>
-          </a>
-
-          <a class="service-detail-condition-card" href="https://www.nhs.uk/medicines/" aria-label="Open NHS Medicines A to Z on the NHS website">
-            <span class="section-kicker">External NHS link</span>
-            <h3>NHS Medicines A to Z</h3>
-            <p>Learn about medicines, how to take them and possible side effects.</p>
-            <span class="service-detail-condition-pill">NHS website</span>
-          </a>
-
-          <a class="service-detail-condition-card" href="https://111.nhs.uk/" aria-label="Open NHS 111 on the NHS website">
-            <span class="section-kicker">External NHS link</span>
-            <h3>NHS 111</h3>
-            <p>Get urgent medical help online when it is not a 999 emergency.</p>
-            <span class="service-detail-condition-pill">NHS website</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="service-detail-section container">
-      <div class="service-detail-panel">
-        <div class="service-detail-section-head service-detail-section-head--compact">
-          <span class="section-kicker">Pharmacy support</span>
-          <h2>How Five Ways Pharmacy can help</h2>
-          <p>
-            The pharmacy team can help with general medicines advice, everyday minor illness questions, and safe
-            signposting when another NHS service may be more appropriate.
-          </p>
+          <span class="section-kicker">Key practical terms</span>
+          <h2>Prescriptions, delivery, appointments, and enquiries</h2>
         </div>
         <div class="service-detail-guidance-grid">
           <article class="service-detail-guidance-card">
-            <h3>Medicines and side effects</h3>
+            <h3>Prescriptions</h3>
             <div class="service-detail-guidance-item">
-              <h4>How we help</h4>
-              <p>We can offer general advice on taking medicines, common side effects, and when further advice may be needed.</p>
-            </div>
-            <div class="service-detail-guidance-item">
-              <h4>Important note</h4>
-              <p>Severe reactions, breathing problems, or sudden worsening symptoms need urgent medical help.</p>
+              <h4>What applies</h4>
+              <p>Prescription information must be accurate. The pharmacy may need to review additional details before confirming availability, next steps, or supply.</p>
             </div>
           </article>
-
           <article class="service-detail-guidance-card">
-            <h3>Minor illness and Pharmacy First guidance</h3>
+            <h3>Delivery</h3>
             <div class="service-detail-guidance-item">
-              <h4>How we help</h4>
-              <p>We can explain when pharmacist advice may be suitable and when Pharmacy First, your GP, or another NHS service may be the better route.</p>
-            </div>
-            <div class="service-detail-guidance-item">
-              <h4>Important note</h4>
-              <p>Support depends on your symptoms, age, medicines, and pharmacist assessment.</p>
+              <h4>What applies</h4>
+              <p>Where prescription delivery is offered, the site wording applies: free delivery of prescriptions within two working days.</p>
             </div>
           </article>
-
           <article class="service-detail-guidance-card">
-            <h3>Everyday self-care advice</h3>
+            <h3>Appointments and enquiries</h3>
             <div class="service-detail-guidance-item">
-              <h4>How we help</h4>
-              <p>We can support with general self-care guidance for everyday health concerns, including practical measures and over-the-counter options where suitable.</p>
-            </div>
-            <div class="service-detail-guidance-item">
-              <h4>Important note</h4>
-              <p>Self-care advice does not replace assessment for symptoms that are persistent, severe, or unusual for you.</p>
+              <h4>What applies</h4>
+              <p>Appointment or support routes may involve follow-up questions so the pharmacy team can identify the safest and most appropriate next step.</p>
             </div>
           </article>
-
           <article class="service-detail-guidance-card">
-            <h3>When to speak to a pharmacist</h3>
+            <h3>Urgent concerns</h3>
             <div class="service-detail-guidance-item">
-              <h4>How we help</h4>
-              <p>Speak to us if you need help understanding medicines guidance, choosing the next NHS service, or deciding whether a pharmacy consultation may help.</p>
-            </div>
-            <div class="service-detail-guidance-item">
-              <h4>Important note</h4>
-              <p>If symptoms are urgent, severe, or rapidly worsening, use NHS 111, contact your GP, attend urgent care, or call 999 as appropriate.</p>
+              <h4>What applies</h4>
+              <p>If symptoms are severe, worsening, or urgent, use NHS 111, contact your GP, or call 999 in an emergency rather than relying on a website enquiry.</p>
             </div>
           </article>
         </div>
@@ -623,64 +556,37 @@
     </section>
 
     <section class="service-detail-section service-detail-section--mobile-offset container">
-      <div class="service-detail-alert">
-        <span class="service-detail-alert__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 3.9 3.85 18.2A1.2 1.2 0 0 0 4.9 20h14.2a1.2 1.2 0 0 0 1.05-1.8Z" />
-            <path d="M12 9v4.75" />
-            <circle cx="12" cy="17.3" r="0.9" fill="currentColor" stroke="none" />
-          </svg>
-        </span>
-        <div class="service-detail-alert__copy">
-          <h2>When to seek urgent help</h2>
+      <div class="service-detail-panel">
+        <div class="service-detail-section-head service-detail-section-head--compact">
+          <span class="section-kicker">Complaints and concerns</span>
+          <h2>How to raise a concern</h2>
           <p>
-            If symptoms are severe, worsening, or urgent, use NHS 111, contact your GP, or call 999 in an emergency.
-            Five Ways Pharmacy can help with general support and signposting, but it does not replace urgent or emergency care.
+            If you are unhappy with a service, communication, or support experience, contact Five Ways Pharmacy first so
+            the concern can be reviewed promptly and fairly.
           </p>
         </div>
+        <ul class="service-detail-bullet-list">
+          <li>Phone: <a href="tel:+441216302680">0121 630 2680</a></li>
+          <li>Email: <a href="mailto:pharmacy.frk99@nhs.net">pharmacy.frk99@nhs.net</a></li>
+          <li>Complaints page: <a href="/complaints/">/complaints/</a></li>
+          <li>Professional regulation: <a href="https://www.pharmacyregulation.org" target="_blank" rel="noopener noreferrer">General Pharmaceutical Council</a></li>
+        </ul>
       </div>
     </section>
 
     <section class="service-detail-section service-detail-section--mobile-offset container">
-      <div class="service-detail-section-head">
-        <span class="section-kicker">Questions</span>
-        <h2>Health Advice FAQs</h2>
-      </div>
       <div class="service-detail-faq-list">
         <details class="service-detail-faq-item">
-          <summary>Can the pharmacy give health advice?</summary>
-          <p>
-            Yes. Five Ways Pharmacy can help with general medicines advice, everyday healthcare questions, minor illness
-            support, and signposting to the right NHS service when needed.
-          </p>
+          <summary>Do these terms guarantee that a medicine will be supplied?</summary>
+          <p>No. Supply decisions depend on the prescription, the information provided, legal requirements, stock, and professional judgement.</p>
         </details>
         <details class="service-detail-faq-item">
-          <summary>Should I use NHS Health A to Z?</summary>
-          <p>
-            Yes. NHS Health A to Z is a trusted starting point for general information on conditions, symptoms, medicines,
-            tests, and treatments. It is an external NHS resource.
-          </p>
+          <summary>Do these terms replace personalised advice?</summary>
+          <p>No. Website information is general guidance only and does not replace individual pharmacist assessment.</p>
         </details>
         <details class="service-detail-faq-item">
-          <summary>Can the pharmacist help with medicines?</summary>
-          <p>
-            Yes. The pharmacy team can help with general questions about medicines, common side effects, and when to seek
-            more help. If symptoms are serious or urgent, another NHS service may be more appropriate.
-          </p>
-        </details>
-        <details class="service-detail-faq-item">
-          <summary>What should I do if symptoms are urgent?</summary>
-          <p>
-            If symptoms are urgent or worsening, use NHS 111, contact your GP, or attend urgent care. Call 999 if it is an
-            emergency.
-          </p>
-        </details>
-        <details class="service-detail-faq-item">
-          <summary>Can I use this page instead of seeing a GP?</summary>
-          <p>
-            No. This page offers trusted general information and pharmacy signposting, but it does not diagnose conditions
-            or replace GP, NHS 111, urgent care, or emergency services.
-          </p>
+          <summary>What law applies to the website?</summary>
+          <p>These terms are intended to be read under the law of England and Wales.</p>
         </details>
       </div>
     </section>
@@ -692,13 +598,7 @@
         <div class="footer-top">
           <div class="footer-brand-block">
             <a class="brand footer-brand" href="../index.html" aria-label="Five Ways Pharmacy home">
-              <img
-                class="brand-logo"
-                src="../assets/brand/fiveways-logo-new.svg"
-                alt="Five Ways Pharmacy"
-                width="454"
-                height="227"
-              />
+              <img class="brand-logo" src="../assets/brand/fiveways-logo-new.svg" alt="Five Ways Pharmacy" width="454" height="227" />
             </a>
             <p>Trusted pharmacy products and care for every household.</p>
           </div>
@@ -727,8 +627,8 @@
                   </svg>
                 </summary>
                 <div class="footer-nav-links">
-                  <a href="#">Contact us</a>
-                  <a href="#">Delivery info</a>
+                  <a href="../speak-to-our-team/">Contact us</a>
+                  <a href="../delivery-privacy/">Delivery info</a>
                   <a href="#">Returns</a>
                   <a href="#">FAQs</a>
                 </div>
@@ -845,12 +745,12 @@
                   </svg>
                   <svg class="footer-review-star footer-review-star--half" viewBox="0 0 24 24">
                     <defs>
-                      <clipPath id="footer-review-half-clip">
+                      <clipPath id="footer-review-half-clip-terms">
                         <rect x="0" y="0" width="12" height="24" />
                       </clipPath>
                     </defs>
                     <path class="footer-review-star-outline" d="m12 4.7 2.15 4.43 4.9.72-3.53 3.45.83 4.8L12 16l-4.35 2.1.83-4.8-3.53-3.45 4.9-.72Z" />
-                    <path class="footer-review-star-half-fill" clip-path="url(#footer-review-half-clip)" d="m12 4.7 2.15 4.43 4.9.72-3.53 3.45.83 4.8L12 16l-4.35 2.1.83-4.8-3.53-3.45 4.9-.72Z" />
+                    <path class="footer-review-star-half-fill" clip-path="url(#footer-review-half-clip-terms)" d="m12 4.7 2.15 4.43 4.9.72-3.53 3.45.83 4.8L12 16l-4.35 2.1.83-4.8-3.53-3.45 4.9-.72Z" />
                   </svg>
                 </span>
               </small>
@@ -918,348 +818,14 @@
             </svg>
             <span>Exact location</span>
           </a>
-          <p class="footer-company-details">Owned by P Chand Ltd <span aria-hidden="true">&bull;</span> Company No. 08464319 <span aria-hidden="true">&bull;</span> VAT No. 165-9328-77</p>
+          <p class="footer-company-details">
+            Owned by P Chand Ltd <span>&bull;</span> Company No. 08464319 <span>&bull;</span> VAT No. 165-9328-77
+          </p>
         </div>
       </div>
     </div>
   </footer>
 
-  <script>
-    (() => {
-      const sentinel = document.querySelector(".compact-header-sentinel");
-      if (!sentinel) return;
-
-      const stickyOffset = 10;
-      let stickyThreshold = 0;
-      let scrollFrame = null;
-      let measureFrame = null;
-
-      const toggleStickyHeader = (active) => {
-        document.body.classList.toggle("compact-header-active", active);
-      };
-
-      const measureStickyThreshold = () => {
-        stickyThreshold = Math.max(0, Math.round(sentinel.getBoundingClientRect().top + window.scrollY - stickyOffset));
-      };
-
-      const syncStickyHeader = () => {
-        toggleStickyHeader(window.scrollY >= stickyThreshold);
-      };
-
-      const requestStickySync = () => {
-        if (scrollFrame !== null) return;
-
-        scrollFrame = window.requestAnimationFrame(() => {
-          scrollFrame = null;
-          syncStickyHeader();
-        });
-      };
-
-      const requestStickyMeasure = () => {
-        if (measureFrame !== null) return;
-
-        measureFrame = window.requestAnimationFrame(() => {
-          measureFrame = null;
-          measureStickyThreshold();
-          syncStickyHeader();
-        });
-      };
-
-      measureStickyThreshold();
-      syncStickyHeader();
-
-      window.addEventListener("scroll", requestStickySync, { passive: true });
-      window.addEventListener("resize", requestStickyMeasure);
-      window.addEventListener("orientationchange", requestStickyMeasure);
-      window.addEventListener("load", requestStickyMeasure, { once: true });
-    })();
-
-    (() => {
-      const footerAccordions = Array.from(document.querySelectorAll(".footer-nav-accordion"));
-      const footerAccordionViewport = window.matchMedia("(max-width: 980px)");
-      let accordionMode = null;
-
-      if (!footerAccordions.length) return;
-
-      const syncFooterAccordions = () => {
-        const nextMode = footerAccordionViewport.matches ? "mobile" : "desktop";
-        if (nextMode === accordionMode) return;
-
-        accordionMode = nextMode;
-
-        footerAccordions.forEach((accordion) => {
-          if (nextMode === "desktop") {
-            accordion.setAttribute("open", "");
-            return;
-          }
-
-          accordion.removeAttribute("open");
-        });
-      };
-
-      syncFooterAccordions();
-
-      if (typeof footerAccordionViewport.addEventListener === "function") {
-        footerAccordionViewport.addEventListener("change", syncFooterAccordions);
-      } else if (typeof footerAccordionViewport.addListener === "function") {
-        footerAccordionViewport.addListener(syncFooterAccordions);
-      }
-    })();
-
-    (() => {
-      const menuToggle = document.querySelector(".mobile-menu-toggle");
-      const menuShell = document.querySelector(".mobile-menu-shell");
-      const menuDrawer = document.querySelector(".mobile-menu-drawer");
-      const menuOverlay = document.querySelector(".mobile-menu-overlay");
-      const menuClose = document.querySelector(".mobile-menu-close");
-      const menuCloseButton = document.querySelector(".mobile-menu-close-button");
-      const menuGroups = menuShell.querySelectorAll(".mobile-menu-group");
-
-      if (!menuToggle || !menuShell || !menuDrawer || !menuOverlay || !menuClose) return;
-
-      const mobileViewport = window.matchMedia("(max-width: 768px)");
-      let lastFocusedElement = null;
-
-      const closeMenu = ({ restoreFocus = true } = {}) => {
-        document.body.classList.remove("mobile-menu-open");
-        menuShell.setAttribute("aria-hidden", "true");
-        menuDrawer.setAttribute("aria-hidden", "true");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuGroups.forEach((group) => {
-          if (group instanceof HTMLDetailsElement) {
-            group.open = false;
-          }
-        });
-
-        if (restoreFocus && lastFocusedElement instanceof HTMLElement) {
-          lastFocusedElement.focus();
-        }
-
-        lastFocusedElement = null;
-      };
-
-      const openMenu = () => {
-        if (!mobileViewport.matches) return;
-
-        lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-
-        document.body.classList.add("mobile-menu-open");
-        menuShell.setAttribute("aria-hidden", "false");
-        menuDrawer.setAttribute("aria-hidden", "false");
-        menuToggle.setAttribute("aria-expanded", "true");
-
-        requestAnimationFrame(() => {
-          menuClose.focus();
-        });
-      };
-
-      const toggleMenu = () => {
-        if (document.body.classList.contains("mobile-menu-open")) {
-          closeMenu();
-          return;
-        }
-
-        openMenu();
-      };
-
-      menuToggle.addEventListener("click", toggleMenu);
-      menuClose.addEventListener("click", () => closeMenu());
-      menuCloseButton?.addEventListener("click", () => closeMenu());
-      menuOverlay.addEventListener("click", () => closeMenu({ restoreFocus: false }));
-
-      menuShell.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => closeMenu({ restoreFocus: false }));
-      });
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && document.body.classList.contains("mobile-menu-open")) {
-          closeMenu();
-        }
-      });
-
-      const syncMenuToViewport = () => {
-        if (mobileViewport.matches) return;
-        closeMenu({ restoreFocus: false });
-      };
-
-      if (typeof mobileViewport.addEventListener === "function") {
-        mobileViewport.addEventListener("change", syncMenuToViewport);
-      } else if (typeof mobileViewport.addListener === "function") {
-        mobileViewport.addListener(syncMenuToViewport);
-      }
-    })();
-  </script>
-  <script>
-    (() => {
-      const closableDetails = Array.from(document.querySelectorAll(".top-strip-hours-dropdown, .header-phone-dropdown"));
-      if (!closableDetails.length) return;
-      const phoneDropdowns = closableDetails.filter((dropdown) => dropdown.classList.contains("header-phone-dropdown"));
-      const phoneTimers = new WeakMap();
-
-      const clearPhoneTimer = (dropdown) => {
-        const timer = phoneTimers.get(dropdown);
-        if (typeof timer === "number") {
-          window.clearTimeout(timer);
-          phoneTimers.delete(dropdown);
-        }
-      };
-
-      const queuePhoneAutoClose = (dropdown) => {
-        clearPhoneTimer(dropdown);
-        if (!dropdown.open) return;
-
-        const timer = window.setTimeout(() => {
-          dropdown.open = false;
-          phoneTimers.delete(dropdown);
-        }, 5000);
-
-        phoneTimers.set(dropdown, timer);
-      };
-
-      const closeOpenDetails = (target) => {
-        closableDetails.forEach((dropdown) => {
-          if (!dropdown.open) return;
-          if (target instanceof Node && dropdown.contains(target)) return;
-          clearPhoneTimer(dropdown);
-          dropdown.open = false;
-        });
-      };
-
-      phoneDropdowns.forEach((dropdown) => {
-        dropdown.addEventListener("toggle", () => {
-          if (!dropdown.open) {
-            clearPhoneTimer(dropdown);
-            return;
-          }
-
-          queuePhoneAutoClose(dropdown);
-        });
-      });
-
-      document.addEventListener("pointerdown", (event) => {
-        const target = event.target;
-        if (!(target instanceof Node)) return;
-        closeOpenDetails(target);
-      });
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key !== "Escape") return;
-        closeOpenDetails(null);
-      });
-    })();
-  </script>
-  <script>
-    (() => {
-      const desktopMedia = window.matchMedia("(min-width: 981px)");
-      const dropdown = document.querySelector(".category-pill-dropdown--prescriptions");
-      const trigger = dropdown?.querySelector("button");
-      if (!dropdown || !(trigger instanceof HTMLButtonElement)) return;
-
-      let autoCloseTimer = null;
-
-      const clearAutoClose = () => {
-        if (typeof autoCloseTimer === "number") {
-          window.clearTimeout(autoCloseTimer);
-          autoCloseTimer = null;
-        }
-      };
-
-      const setExpanded = (expanded) => {
-        trigger.setAttribute("aria-expanded", expanded ? "true" : "false");
-      };
-
-      const closeDropdown = () => {
-        clearAutoClose();
-        setExpanded(false);
-
-        if (
-          desktopMedia.matches &&
-          dropdown.contains(document.activeElement) &&
-          document.activeElement instanceof HTMLElement
-        ) {
-          document.activeElement.blur();
-        }
-      };
-
-      const queueAutoClose = () => {
-        clearAutoClose();
-        if (!desktopMedia.matches || dropdown.matches(":hover")) return;
-
-        autoCloseTimer = window.setTimeout(() => {
-          closeDropdown();
-        }, 5000);
-      };
-
-      trigger.addEventListener("click", () => {
-        if (!desktopMedia.matches) return;
-        setExpanded(true);
-        queueAutoClose();
-      });
-
-      dropdown.addEventListener("focusin", () => {
-        if (!desktopMedia.matches) return;
-        setExpanded(true);
-        queueAutoClose();
-      });
-
-      dropdown.addEventListener("focusout", () => {
-        if (!desktopMedia.matches) return;
-
-        window.setTimeout(() => {
-          if (dropdown.contains(document.activeElement)) return;
-          if (dropdown.matches(":hover")) {
-            setExpanded(true);
-            return;
-          }
-
-          setExpanded(false);
-        }, 0);
-      });
-
-      dropdown.addEventListener("pointerenter", () => {
-        if (!desktopMedia.matches) return;
-        clearAutoClose();
-        setExpanded(true);
-      });
-
-      dropdown.addEventListener("pointerleave", () => {
-        if (!desktopMedia.matches) return;
-        closeDropdown();
-      });
-
-      document.addEventListener("pointerdown", (event) => {
-        if (!desktopMedia.matches) return;
-        const target = event.target;
-        if (!(target instanceof Node)) return;
-        if (dropdown.contains(target)) return;
-        closeDropdown();
-      });
-
-      window.addEventListener("scroll", () => {
-        if (!desktopMedia.matches) return;
-        closeDropdown();
-      }, { passive: true });
-
-      document.addEventListener("keydown", (event) => {
-        if (!desktopMedia.matches) return;
-        if (event.key !== "Escape") return;
-        closeDropdown();
-      });
-
-      if (typeof desktopMedia.addEventListener === "function") {
-        desktopMedia.addEventListener("change", (event) => {
-          if (event.matches) return;
-          closeDropdown();
-        });
-      } else if (typeof desktopMedia.addListener === "function") {
-        desktopMedia.addListener((event) => {
-          if (event.matches) return;
-          closeDropdown();
-        });
-      }
-    })();
-  </script>
+  <script src="../legal-page.js"></script>
 </body>
 </html>
-
-
