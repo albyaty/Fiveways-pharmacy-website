@@ -1,7 +1,7 @@
 # Notes for coding agents
 
 Read this before adding a new page or editing layout CSS. These are real
-bugs that have already happened once — please don't reintroduce them.
+bugs that have already happened once, please don't reintroduce them.
 For the payments + booking system, see `ARCHITECTURE.md`.
 
 ## Always test responsive at 3+ widths before committing
@@ -11,7 +11,7 @@ After any layout/CSS change, check the page at **mobile (~375px)**,
 site have been "looks fine on the screen I built it on, broken
 elsewhere." Don't trust a single viewport.
 
-## Gotcha 1 — Don't kill `.container` centering
+## Gotcha 1, Don't kill `.container` centering
 
 `.container` is the site-wide centered wrapper:
 
@@ -32,9 +32,9 @@ right at desktop widths.
 - ✅ `.service-detail-hero { margin: 0 auto; }` (or `margin-block: 0`)
 
 If you need zero vertical margin, use `margin: 0 auto` or `margin-block: 0`
-— never plain `margin: 0` on anything that also has `.container`.
+, never plain `margin: 0` on anything that also has `.container`.
 
-## Gotcha 2 — Full-bleed / hero images: keep the container at the image ratio
+## Gotcha 2, Full-bleed / hero images: keep the container at the image ratio
 
 The homepage hero carousel images are exactly **1672×941** and the
 carousel container is set to `aspect-ratio: 1672 / 941` with
@@ -42,7 +42,7 @@ carousel container is set to `aspect-ratio: 1672 / 941` with
 it with **no cropping**.
 
 It broke once because a desktop media query forced the hero to
-`height: 100%; aspect-ratio: auto` to match the sidebar's height — that
+`height: 100%; aspect-ratio: auto` to match the sidebar's height, that
 stretched the container to a different ratio, so `object-fit: cover`
 cropped the image by a screen-dependent amount (fine on the dev's screen,
 ugly on others).
@@ -50,7 +50,7 @@ ugly on others).
 Rules of thumb for any image that should show fully:
 - Keep the container's `aspect-ratio` equal to the image's real ratio.
 - Don't force `height: 100%` + `aspect-ratio: auto` on an image box just
-  to match a neighbouring column — use `align-self: start` and let the
+  to match a neighbouring column, use `align-self: start` and let the
   other column match up instead.
 - If an image genuinely must fill a variable-size box, prefer
   `object-fit: contain` (shows the whole image, may letterbox) over
@@ -59,7 +59,7 @@ Rules of thumb for any image that should show fully:
 ## Images: use WebP, keep them small
 
 The site once shipped **82MB of images** (photos saved as multi-MB PNGs),
-making the homepage download ~42MB on first load — terrible for mobile,
+making the homepage download ~42MB on first load, terrible for mobile,
 SEO/Core Web Vitals, and Vercel bandwidth. It's now ~3MB total.
 
 When adding or replacing images:
@@ -75,7 +75,7 @@ When adding or replacing images:
   `Image.open("x.png").convert("RGB").save("x.webp","WEBP",quality=82,method=6)`
   then update the reference and delete the original.
 - Remember `<img>` elements inside a `display:none`/`hidden` section
-  **still download** in most browsers — don't leave heavy images in
+  **still download** in most browsers, don't leave heavy images in
   hidden/dead markup.
 
 ## Adding a new service / info page

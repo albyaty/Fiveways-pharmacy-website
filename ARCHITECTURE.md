@@ -1,4 +1,4 @@
-# Service Payments & Booking — Architecture
+# Service Payments & Booking, Architecture
 
 This document is for the next agent (or developer) who picks up the Five Ways
 Pharmacy site. Read this before touching `service-payment.*`, `book.*`,
@@ -9,12 +9,12 @@ Pharmacy site. Read this before touching `service-payment.*`, `book.*`,
 Five Ways Pharmacy is a service business, not a shop. There are no products
 and no cart. Two separate customer flows need to work:
 
-1. **Booking** — customers can book a 30-minute appointment with the
+1. **Booking**, customers can book a 30-minute appointment with the
    pharmacy for one of several free NHS / pharmacy services (Pharmacy First,
    Stop Smoking, Flu Vaccine, Weight Loss Support, etc.). No payment.
    Handled end-to-end by cal.com (embedded on `book.html`).
 
-2. **Payment** — customers who phoned the pharmacy and were told to pay
+2. **Payment**, customers who phoned the pharmacy and were told to pay
    (e.g. for prescription items, or a one-off amount agreed by the team) go
    to `service-payment.html` and either:
      a. Count their prescription items (£9.90 each, free delivery), or
@@ -47,14 +47,14 @@ chrome (header/footer) and the design tokens in `styles.css`.
 ┌────────────────────────┐                ┌──────────────────────────┐
 │ service-payment.html   │                │ api/create-service-      │
 │ + .css + .js           │  ───────────►  │ payment.js               │
-│ (prescription / custom │  POST with     │ (validates server-side,  │
+│ (prescription / custom │  POST with     │ (validates server-side, │
 │ + customer details +   │  type, amount, │  creates PaymentIntent   │
 │ Stripe Element)        │  customer info │  with metadata)          │
 └──────────┬─────────────┘                └────────────┬─────────────┘
            │                                           │
            ▼                                           ▼
      success.html                              Stripe Dashboard
-     (verifies PI with Stripe,                 + emailed receipt
+     (verifies PI with Stripe,                + emailed receipt
       shows summary + reference)               + Stripe mobile push
                                                (pharmacy team is notified
                                                instantly with all metadata)
@@ -78,7 +78,7 @@ chrome (header/footer) and the design tokens in `styles.css`.
 | `package.json` | Declares `stripe` Node SDK | New backend deps only |
 
 Everything else in the repo is the marketing site and is owned by the
-homepage redesign — do not edit those files for payment/booking work.
+homepage redesign, do not edit those files for payment/booking work.
 
 ## Reasoning summary
 
@@ -120,11 +120,11 @@ collected separately by Stripe's Address Element in step 2.
 
 Fields collected on step 1:
 
-- **Full name** — the patient (not the cardholder).
-- **Date of birth** — verifying the patient against pharmacy records.
-- **Phone number** — so the team can call back if something's unclear.
-- **Email** — for the Stripe receipt.
-- **Delivery address** (prescription flow only) — always required. We
+- **Full name**, the patient (not the cardholder).
+- **Date of birth**, verifying the patient against pharmacy records.
+- **Phone number**, so the team can call back if something's unclear.
+- **Email**, for the Stripe receipt.
+- **Delivery address** (prescription flow only), always required. We
   don't try to copy from the Stripe billing address because that address
   is collected later in the flow and the customer might be paying with
   someone else's card. The pharmacy reads the delivery address from the
@@ -145,7 +145,7 @@ All three happen within seconds of a successful payment. That gives the
 "customer calls and we can verify they paid" guarantee without any custom
 notification code.
 
-### Custom email-to-pharmacy webhook (BUILT — `api/stripe-webhook.js`)
+### Custom email-to-pharmacy webhook (BUILT, `api/stripe-webhook.js`)
 
 Stripe's own notification emails only show the payer (cardholder) name +
 amount, and don't fire in test mode. So the pharmacy was never actively
@@ -155,7 +155,7 @@ and emails the pharmacy a formatted message with the patient name, DOB,
 phone, email, what they paid for, and delivery address. Works in test and
 live mode.
 
-Email is sent via Resend's REST API (no SDK dependency — plain `fetch`).
+Email is sent via Resend's REST API (no SDK dependency, plain `fetch`).
 Security: rather than raw-body Stripe signature verification (fragile on
 Vercel, which pre-parses the body), the endpoint is guarded by a secret
 URL token (`STRIPE_WEBHOOK_TOKEN`) AND it re-fetches authentic data from
@@ -234,8 +234,8 @@ match the URL slug of the matching event type in cal.eu.
 
 The system uses two environment variables in Vercel:
 
-- `STRIPE_PUBLISHABLE_KEY` — `pk_test_...` for testing, `pk_live_...` for production
-- `STRIPE_SECRET_KEY` — `sk_test_...` for testing, `sk_live_...` for production
+- `STRIPE_PUBLISHABLE_KEY`, `pk_test_...` for testing, `pk_live_...` for production
+- `STRIPE_SECRET_KEY`, `sk_test_...` for testing, `sk_live_...` for production
 
 **Going live** is a three-step change with no code edits:
 
@@ -254,9 +254,9 @@ they would only see payments by opening the dashboard themselves.
 
 Stripe test cards:
 
-- `4242 4242 4242 4242` — succeeds
-- `4000 0000 0000 9995` — insufficient funds (declines)
-- `4000 0000 0000 0002` — generic decline
+- `4242 4242 4242 4242`, succeeds
+- `4000 0000 0000 9995`, insufficient funds (declines)
+- `4000 0000 0000 0002`, generic decline
 - Expiry: any future date. CVC: any 3 digits.
 - Address: any valid UK postcode (try `SW1A 1AA`).
 
@@ -281,7 +281,7 @@ page.
   were going to copy into.
 - **Don't add an account/login system to the payment page.** Pharmacy
   payments are infrequent, often one-off. The customer's identifying info
-  is collected on the form itself — no signup needed.
+  is collected on the form itself, no signup needed.
 
 ## Open items / future work
 

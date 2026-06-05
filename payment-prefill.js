@@ -57,7 +57,7 @@
         var opt = document.createElement("option");
         opt.value = a.id;
         opt.textContent =
-          (a.label ? a.label + " — " : "") +
+          (a.label ? a.label + ", " : "") +
           [a.line1, a.city, a.postcode].filter(Boolean).join(", ");
         opt.dataset.line1 = a.line1 || "";
         opt.dataset.line2 = a.line2 || "";

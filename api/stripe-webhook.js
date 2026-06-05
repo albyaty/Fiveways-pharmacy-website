@@ -163,7 +163,7 @@ module.exports = async (req, res) => {
       rows.map(([k, v]) => `${k}: ${v}`).join("\n") +
       `\n\nView this payment in Stripe: ${dashUrl}`;
     const html =
-      `<h2 style="font-family:Arial,sans-serif;color:#0a666b">New payment received &mdash; ${esc(amount)}</h2>` +
+      `<h2 style="font-family:Arial,sans-serif;color:#0a666b">New payment received, ${esc(amount)}</h2>` +
       `<table style="font-family:Arial,sans-serif;font-size:14px;border-collapse:collapse">` +
       rows
         .map(
