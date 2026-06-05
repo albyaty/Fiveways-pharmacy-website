@@ -1576,6 +1576,17 @@ main {
   transform: scale(1.015);
 }
 
+@media (min-width: 769px) {
+  .hero-carousel__slide img {
+    object-position: left center;
+    transform-origin: left center;
+  }
+
+  .hero-carousel__slide.is-active img {
+    transform: scale(1.008);
+  }
+}
+
 .hero-carousel__controls {
   position: absolute;
   inset: 0;
