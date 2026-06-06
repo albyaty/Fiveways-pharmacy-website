@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Health Advice | Five Ways Pharmacy</title>
+  <title>About us | Five Ways Pharmacy</title>
   <meta
     name="description"
-    content="Find trusted NHS health information and general pharmacy support from Five Ways Pharmacy for medicines, minor illness guidance, and everyday healthcare questions."
+    content="Learn more about Five Ways Pharmacy, an independent pharmacy in Ladywood, Birmingham offering prescriptions, pharmacy services, advice, and confidential support from a real pharmacy team."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,23 +15,6 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="../styles.css" />
-  <style>
-    @media (max-width: 720px) {
-      .service-detail-page--health-advice .service-detail-section--mobile-offset .service-detail-alert,
-      .service-detail-page--health-advice .service-detail-section--mobile-offset .service-detail-section-head,
-      .service-detail-page--health-advice .service-detail-section--mobile-offset .service-detail-faq-list {
-        margin-inline-start: 0.42rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .service-detail-page--health-advice .service-detail-section--mobile-offset .service-detail-alert,
-      .service-detail-page--health-advice .service-detail-section--mobile-offset .service-detail-section-head,
-      .service-detail-page--health-advice .service-detail-section--mobile-offset .service-detail-faq-list {
-        margin-inline-start: 0.34rem;
-      }
-    }
-  </style>
 </head>
 <body>
   <header class="site-header">
@@ -146,7 +129,7 @@
               <circle cx="16.7" cy="18.25" r="1.35" />
             </svg>
             <span class="cart-pill-label">Book</span>
-            
+
           </a>
           <details class="header-phone-dropdown header-phone-dropdown--main">
             <summary class="header-phone-trigger" aria-label="Show pharmacy phone number">
@@ -189,7 +172,7 @@
                   <span>NHS Pharmacy First</span>
                   <span class="category-pill-free-badge">FREE</span>
                 </a>
-                <a href="#" class="category-pill-dropdown-link">
+                <a href="../stop-smoking-clinic/" class="category-pill-dropdown-link">
                   <span>Stop Smoking Clinic</span>
                   <span class="category-pill-free-badge">FREE</span>
                 </a>
@@ -310,40 +293,24 @@
             <span>Popular now</span>
           </a>
         </nav>
-
-        <div class="quick-nav" aria-label="Popular shortcuts">
-          <p>Popular now:</p>
-          <a href="../pharmacy-first/" class="quick-pill quick-pill--featured">Pharmacy First</a>
-          <a href="../nhs-contraception-services/" class="quick-pill">NHS Contraception Services</a>
-          <a href="../stop-smoking-clinic/" class="quick-pill">Smoking Cessation Services</a>
-          <a href="../umbrella-services/" class="quick-pill">Umbrella Services</a>
-          <a href="../weight-loss-support/" class="quick-pill">Weight Loss</a>
-        </div>
       </div>
     </div>
   </header>
 
   <div class="mobile-menu-shell" aria-hidden="true">
-    <button class="mobile-menu-overlay" type="button" aria-label="Close menu"></button>
-    <aside
-      class="mobile-menu-drawer"
-      id="mobile-menu-drawer"
-      role="dialog"
-      aria-modal="true"
-      aria-hidden="true"
-      aria-labelledby="mobile-menu-title"
-    >
-      <div class="mobile-menu-drawer-inner">
+    <button class="mobile-menu-overlay" type="button" tabindex="-1" aria-label="Close menu"></button>
+    <aside class="mobile-menu-drawer" id="mobile-menu-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
+      <div class="mobile-menu-panel">
         <div class="mobile-menu-header">
-          <div class="mobile-menu-header-copy">
+          <a class="brand mobile-menu-brand" href="../index.html" aria-label="Five Ways Pharmacy home">
             <img
-              class="mobile-menu-logo"
+              class="brand-logo"
               src="../assets/brand/fiveways-logo-new.svg"
               alt="Five Ways Pharmacy"
               width="454"
               height="227"
             />
-          </div>
+          </a>
           <button class="mobile-menu-close" type="button" aria-label="Close menu">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M6.5 6.5 17.5 17.5" />
@@ -395,7 +362,7 @@
           <section class="mobile-menu-section" aria-labelledby="mobile-menu-support">
             <h2 class="mobile-menu-section-title" id="mobile-menu-support">Support</h2>
             <div class="mobile-menu-links">
-              <a href="#" class="mobile-menu-link">Delivery info</a>
+              <a href="../delivery-privacy/" class="mobile-menu-link">Delivery info</a>
               <a href="/faqs/" class="mobile-menu-link">FAQs</a>
             </div>
           </section>
@@ -403,7 +370,7 @@
           <aside class="mobile-menu-help-card" aria-label="Need help">
             <p class="mobile-menu-help-kicker">Need help?</p>
             <h3>Call or message our pharmacy team.</h3>
-            <a href="#footer-help-card" class="mobile-menu-help-link">
+            <a href="../speak-to-our-team/" class="mobile-menu-help-link">
               <span>Contact us</span>
               <span aria-hidden="true">&rarr;</span>
             </a>
@@ -457,7 +424,7 @@
           <circle cx="16.7" cy="18.25" r="1.35" />
         </svg>
         <span class="compact-cart-label">Book</span>
-        
+
       </a>
       <details class="header-phone-dropdown header-phone-dropdown--compact">
         <summary class="header-phone-trigger" aria-label="Show pharmacy phone number">
@@ -474,149 +441,212 @@
   </div>
   <div class="compact-header-sentinel" aria-hidden="true"></div>
 
-  <main class="service-detail-page service-detail-page--health-advice">
+  <main class="service-detail-page service-detail-page--about-us">
     <section class="service-detail-hero container">
       <div class="service-detail-hero-shell">
         <div class="service-detail-hero-copy">
           <nav class="service-detail-breadcrumb" aria-label="Breadcrumb">
             <a href="../index.html">Home</a>
             <span aria-hidden="true">/</span>
-            <span aria-current="page">Health Advice</span>
+            <span aria-current="page">About us</span>
           </nav>
-          <span class="section-kicker">Trusted support</span>
-          <h1>Health Advice</h1>
+          <span class="section-kicker">About us</span>
+          <h1>Independent pharmacy support with a real team behind it</h1>
           <p>
-            Trusted NHS health information and pharmacy support, all in one place. Find trusted NHS health information,
-            medicines guidance and support for everyday healthcare questions, or speak to the Five Ways Pharmacy team for
-            help with medicines and general next-step support.
+            Five Ways Pharmacy is an independent pharmacy based in Ladywood, Birmingham. We combine local pharmacy care
+            with online, phone, and email support so patients can speak to a real pharmacy team about prescriptions,
+            pharmacy services, and everyday healthcare questions.
           </p>
-          <div class="service-detail-pill-row" aria-label="Health Advice highlights">
-            <span>NHS guidance</span>
-            <span>Medicines advice</span>
-            <span>Pharmacy support</span>
-            <span>Urgent help signposting</span>
+          <div class="service-detail-pill-row" aria-label="About Five Ways Pharmacy highlights">
+            <span>Independent pharmacy</span>
+            <span>NHS &amp; private prescriptions</span>
+            <span>Pharmacy First support</span>
+            <span>Phone &amp; email contact</span>
           </div>
           <div class="service-detail-action-row">
-            <a href="https://www.nhs.uk/health-a-to-z/" class="service-detail-button service-detail-button--primary">Search NHS Health A to Z</a>
-            <a href="tel:+441216302680" class="service-detail-button service-detail-button--secondary">Speak to our pharmacy team</a>
+            <a href="tel:+441216302680" class="service-detail-button service-detail-button--primary">Call Five Ways Pharmacy</a>
+            <a href="mailto:pharmacy.frk99@nhs.net" class="service-detail-button service-detail-button--secondary">Email our pharmacy team</a>
           </div>
-          <p class="service-detail-action-note">NHS guidance links on this page take you to trusted external NHS resources.</p>
-        </div>
-
-        <aside class="service-detail-hero-card" aria-label="Health Advice overview">
-          <div class="service-detail-hero-card__body">
-            <p class="service-detail-hero-card__eyebrow">At a glance</p>
-            <ul class="service-detail-checklist">
-              <li>Trusted NHS resources for conditions, symptoms, medicines, tests, and treatments</li>
-              <li>General support from Five Ways Pharmacy for medicines and everyday healthcare questions</li>
-              <li>Useful signposting when you may need NHS 111, a GP, urgent care, or emergency help</li>
+          <p class="service-detail-action-note">
+            Advice, services, and medicine supply remain subject to pharmacist assessment and suitability where relevant.
+          </p>
+          <div class="service-detail-panel support-hero-reassurance">
+            <div class="service-detail-section-head service-detail-section-head--compact">
+              <span class="section-kicker">Local pharmacy care</span>
+              <h2>Friendly, safe, and person-centred support</h2>
+              <p>
+                The team at Five Ways Pharmacy provides calm, professional support for patients who want advice, pharmacy
+                services, and prescription help from a trusted pharmacy with real premises in Birmingham.
+              </p>
+            </div>
+            <ul class="service-detail-bullet-list">
+              <li>Independent pharmacy based in Ladywood, Birmingham</li>
+              <li>Real pharmacy team available by phone and email during opening hours</li>
+              <li>Safe, confidential and person-centred care for everyday pharmacy needs</li>
             </ul>
           </div>
-        </aside>
+        </div>
+
+        <div class="service-detail-hero-rail">
+          <aside class="service-detail-hero-card" aria-label="About Five Ways Pharmacy overview">
+            <div class="service-detail-hero-card__body">
+              <p class="service-detail-hero-card__eyebrow">At a glance</p>
+              <ul class="service-detail-checklist">
+                <li>Independent pharmacy in Ladywood, Birmingham</li>
+                <li>Online pharmacy support with a real pharmacy team behind it</li>
+                <li>NHS and private prescription support</li>
+                <li>Phone and email contact routes for pharmacy support</li>
+              </ul>
+            </div>
+          </aside>
+
+          <div class="service-detail-panel">
+            <div class="service-detail-section-head service-detail-section-head--compact">
+              <span class="section-kicker">How we support patients</span>
+              <h2>Support shaped around pharmacy care</h2>
+              <p>
+                Patients can contact Five Ways Pharmacy for general advice, prescription support, Pharmacy First, and
+                other healthcare services where appropriate. The team can explain the most suitable next step and when
+                another NHS service may be more appropriate.
+              </p>
+            </div>
+            <ul class="service-detail-bullet-list">
+              <li>Support for NHS and private prescriptions</li>
+              <li>Pharmacy First and healthcare service guidance where relevant</li>
+              <li>Confidential communication by phone or email</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="service-detail-section container">
+      <div class="service-detail-info-grid">
+        <article class="service-detail-info-card">
+          <span class="section-kicker">Prescription and service support</span>
+          <h2>Help with NHS and private prescriptions</h2>
+          <p>
+            The pharmacy team can support patients with NHS prescriptions, private prescriptions, and healthcare services
+            such as Pharmacy First. Where relevant, services and medicine supply remain subject to pharmacist assessment
+            and suitability.
+          </p>
+          <ul class="service-detail-bullet-list">
+            <li>General guidance about prescription routes and next steps</li>
+            <li>Support with Pharmacy First and other pharmacy services where appropriate</li>
+            <li>Help understanding when another NHS route may be more suitable</li>
+            <li>Phone and email contact with the pharmacy team during opening hours</li>
+          </ul>
+        </article>
+
+        <article class="service-detail-info-card">
+          <span class="section-kicker">Care that stays personal</span>
+          <h2>Safe, confidential and person-centred care</h2>
+          <p>
+            Five Ways Pharmacy aims to make pharmacy care feel approachable and professional. The team focuses on clear
+            communication, confidentiality, and practical support for everyday healthcare questions.
+          </p>
+          <ul class="service-detail-bullet-list">
+            <li>Information is handled carefully and confidentially</li>
+            <li>The team explains next steps in a calm, straightforward way</li>
+            <li>Support is shaped around the patient, their medicines, and their circumstances</li>
+            <li>Assessment and suitability are considered where relevant to the service</li>
+          </ul>
+        </article>
       </div>
     </section>
 
     <section class="service-detail-section container">
       <div class="service-detail-panel">
         <div class="service-detail-section-head service-detail-section-head--compact">
-          <span class="section-kicker">Trusted NHS guidance</span>
-          <h2>Start with trusted NHS information</h2>
+          <span class="section-kicker">Ways we can help</span>
+          <h2>Useful routes for common pharmacy questions</h2>
           <p>
-            Use these NHS resources for general health information, then speak to Five Ways Pharmacy if you need help with
-            medicines, self-care questions, or choosing the right next step.
+            Patients contact Five Ways Pharmacy for a range of pharmacy needs. The team can explain what support may be
+            suitable and what information may be needed.
           </p>
         </div>
         <div class="service-detail-guidance-grid">
-          <a class="service-detail-condition-card" href="https://www.nhs.uk/health-a-to-z/" aria-label="Open NHS Health A to Z on the NHS website">
-            <span class="section-kicker">External NHS link</span>
-            <h3>NHS Health A to Z</h3>
-            <p>Conditions, symptoms, medicines, tests and treatments.</p>
-            <span class="service-detail-condition-pill">NHS website</span>
-          </a>
+          <article class="service-detail-guidance-card">
+            <h3>NHS prescriptions</h3>
+            <div class="service-detail-guidance-item">
+              <h4>How we help</h4>
+              <p>We can explain the most suitable route for NHS prescription support and help you understand the next step.</p>
+            </div>
+            <div class="support-inline-links">
+              <a href="tel:+441216302680">Call the pharmacy team</a>
+            </div>
+          </article>
 
-          <a class="service-detail-condition-card" href="https://www.nhs.uk/conditions/" aria-label="Open NHS Conditions A to Z on the NHS website">
-            <span class="section-kicker">External NHS link</span>
-            <h3>NHS Conditions A to Z</h3>
-            <p>Find health conditions, symptoms and treatment information.</p>
-            <span class="service-detail-condition-pill">NHS website</span>
-          </a>
+          <article class="service-detail-guidance-card">
+            <h3>Private prescriptions</h3>
+            <div class="service-detail-guidance-item">
+              <h4>How we help</h4>
+              <p>Tell the pharmacy team what is on your prescription and they can explain availability, pricing, and next steps.</p>
+            </div>
+            <div class="support-inline-links">
+              <a href="tel:+441216302680">Call about a private prescription</a>
+            </div>
+          </article>
 
-          <a class="service-detail-condition-card" href="https://www.nhs.uk/medicines/" aria-label="Open NHS Medicines A to Z on the NHS website">
-            <span class="section-kicker">External NHS link</span>
-            <h3>NHS Medicines A to Z</h3>
-            <p>Learn about medicines, how to take them and possible side effects.</p>
-            <span class="service-detail-condition-pill">NHS website</span>
-          </a>
+          <article class="service-detail-guidance-card">
+            <h3>Pharmacy First and healthcare services</h3>
+            <div class="service-detail-guidance-item">
+              <h4>How we help</h4>
+              <p>We can explain when pharmacist support may be suitable and when another NHS service may be more appropriate.</p>
+            </div>
+            <div class="support-inline-links">
+              <a href="mailto:pharmacy.frk99@nhs.net">Email about a pharmacy service</a>
+            </div>
+          </article>
 
-          <a class="service-detail-condition-card" href="https://111.nhs.uk/" aria-label="Open NHS 111 on the NHS website">
-            <span class="section-kicker">External NHS link</span>
-            <h3>NHS 111</h3>
-            <p>Get urgent medical help online when it is not a 999 emergency.</p>
-            <span class="service-detail-condition-pill">NHS website</span>
-          </a>
+          <article class="service-detail-guidance-card">
+            <h3>Confidential support</h3>
+            <div class="service-detail-guidance-item">
+              <h4>How we help</h4>
+              <p>Patients can contact the team discreetly by phone or email for practical support and general advice.</p>
+            </div>
+            <div class="support-inline-links">
+              <a href="mailto:pharmacy.frk99@nhs.net">Email the pharmacy team</a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="service-detail-section container">
-      <div class="service-detail-panel">
-        <div class="service-detail-section-head service-detail-section-head--compact">
-          <span class="section-kicker">Pharmacy support</span>
-          <h2>How Five Ways Pharmacy can help</h2>
+    <section class="service-detail-section service-detail-section--mobile-offset container">
+      <div class="service-detail-section-head">
+        <span class="section-kicker">Questions</span>
+        <h2>About Five Ways Pharmacy FAQs</h2>
+      </div>
+      <div class="service-detail-faq-list">
+        <details class="service-detail-faq-item">
+          <summary>Are you an online-only pharmacy?</summary>
           <p>
-            The pharmacy team can help with general medicines advice, everyday minor illness questions, and safe
-            signposting when another NHS service may be more appropriate.
+            No. Five Ways Pharmacy is an independent pharmacy with premises in Ladywood, Birmingham, and also offers
+            online, phone, and email support.
           </p>
-        </div>
-        <div class="service-detail-guidance-grid">
-          <article class="service-detail-guidance-card">
-            <h3>Medicines and side effects</h3>
-            <div class="service-detail-guidance-item">
-              <h4>How we help</h4>
-              <p>We can offer general advice on taking medicines, common side effects, and when further advice may be needed.</p>
-            </div>
-            <div class="service-detail-guidance-item">
-              <h4>Important note</h4>
-              <p>Severe reactions, breathing problems, or sudden worsening symptoms need urgent medical help.</p>
-            </div>
-          </article>
-
-          <article class="service-detail-guidance-card">
-            <h3>Minor illness and Pharmacy First guidance</h3>
-            <div class="service-detail-guidance-item">
-              <h4>How we help</h4>
-              <p>We can explain when pharmacist advice may be suitable and when Pharmacy First, your GP, or another NHS service may be the better route.</p>
-            </div>
-            <div class="service-detail-guidance-item">
-              <h4>Important note</h4>
-              <p>Support depends on your symptoms, age, medicines, and pharmacist assessment.</p>
-            </div>
-          </article>
-
-          <article class="service-detail-guidance-card">
-            <h3>Everyday self-care advice</h3>
-            <div class="service-detail-guidance-item">
-              <h4>How we help</h4>
-              <p>We can support with general self-care guidance for everyday health concerns, including practical measures and over-the-counter options where suitable.</p>
-            </div>
-            <div class="service-detail-guidance-item">
-              <h4>Important note</h4>
-              <p>Self-care advice does not replace assessment for symptoms that are persistent, severe, or unusual for you.</p>
-            </div>
-          </article>
-
-          <article class="service-detail-guidance-card">
-            <h3>When to speak to a pharmacist</h3>
-            <div class="service-detail-guidance-item">
-              <h4>How we help</h4>
-              <p>Speak to us if you need help understanding medicines guidance, choosing the next NHS service, or deciding whether a pharmacy consultation may help.</p>
-            </div>
-            <div class="service-detail-guidance-item">
-              <h4>Important note</h4>
-              <p>If symptoms are urgent, severe, or rapidly worsening, use NHS 111, contact your GP, attend urgent care, or call 999 as appropriate.</p>
-            </div>
-          </article>
-        </div>
+        </details>
+        <details class="service-detail-faq-item">
+          <summary>How can I contact the pharmacy team?</summary>
+          <p>
+            You can call Five Ways Pharmacy on <a href="tel:+441216302680">0121 630 2680</a> or email
+            <a href="mailto:pharmacy.frk99@nhs.net">pharmacy.frk99@nhs.net</a> during opening hours.
+          </p>
+        </details>
+        <details class="service-detail-faq-item">
+          <summary>What kinds of support do you offer?</summary>
+          <p>
+            The pharmacy team can help with prescriptions, Pharmacy First, healthcare services, and general pharmacy
+            guidance, with advice and supply subject to assessment where relevant.
+          </p>
+        </details>
+        <details class="service-detail-faq-item">
+          <summary>How is my information handled?</summary>
+          <p>
+            Five Ways Pharmacy handles patient information carefully and confidentially, and only asks for the details
+            needed to support your request or explain the most suitable next step.
+          </p>
+        </details>
       </div>
     </section>
 
@@ -630,56 +660,13 @@
           </svg>
         </span>
         <div class="service-detail-alert__copy">
-          <h2>When to seek urgent help</h2>
+          <h2>Important guidance</h2>
           <p>
-            If symptoms are severe, worsening, or urgent, use NHS 111, contact your GP, or call 999 in an emergency.
-            Five Ways Pharmacy can help with general support and signposting, but it does not replace urgent or emergency care.
+            Five Ways Pharmacy provides support for prescriptions, pharmacy services, and general healthcare questions.
+            Where relevant, advice, medicine supply, and service access remain subject to pharmacist assessment and
+            suitability.
           </p>
         </div>
-      </div>
-    </section>
-
-    <section class="service-detail-section service-detail-section--mobile-offset container">
-      <div class="service-detail-section-head">
-        <span class="section-kicker">Questions</span>
-        <h2>Health Advice FAQs</h2>
-      </div>
-      <div class="service-detail-faq-list">
-        <details class="service-detail-faq-item">
-          <summary>Can the pharmacy give health advice?</summary>
-          <p>
-            Yes. Five Ways Pharmacy can help with general medicines advice, everyday healthcare questions, minor illness
-            support, and signposting to the right NHS service when needed.
-          </p>
-        </details>
-        <details class="service-detail-faq-item">
-          <summary>Should I use NHS Health A to Z?</summary>
-          <p>
-            Yes. NHS Health A to Z is a trusted starting point for general information on conditions, symptoms, medicines,
-            tests, and treatments. It is an external NHS resource.
-          </p>
-        </details>
-        <details class="service-detail-faq-item">
-          <summary>Can the pharmacist help with medicines?</summary>
-          <p>
-            Yes. The pharmacy team can help with general questions about medicines, common side effects, and when to seek
-            more help. If symptoms are serious or urgent, another NHS service may be more appropriate.
-          </p>
-        </details>
-        <details class="service-detail-faq-item">
-          <summary>What should I do if symptoms are urgent?</summary>
-          <p>
-            If symptoms are urgent or worsening, use NHS 111, contact your GP, or attend urgent care. Call 999 if it is an
-            emergency.
-          </p>
-        </details>
-        <details class="service-detail-faq-item">
-          <summary>Can I use this page instead of seeing a GP?</summary>
-          <p>
-            No. This page offers trusted general information and pharmacy signposting, but it does not diagnose conditions
-            or replace GP, NHS 111, urgent care, or emergency services.
-          </p>
-        </details>
       </div>
     </section>
   </main>
@@ -725,8 +712,8 @@
                   </svg>
                 </summary>
                 <div class="footer-nav-links">
-                  <a href="#">Contact us</a>
-                  <a href="#">Delivery info</a>
+                  <a href="../speak-to-our-team/">Contact us</a>
+                  <a href="../delivery-privacy/">Delivery info</a>
                   <a href="/faqs/">FAQs</a>
                 </div>
               </details>
@@ -915,7 +902,9 @@
             </svg>
             <span>Exact location</span>
           </a>
-          <p class="footer-company-details">Owned by P Chand Ltd <span aria-hidden="true">&bull;</span> Company No. 08464319 <span aria-hidden="true">&bull;</span> VAT No. 165-9328-77</p>
+          <p class="footer-company-details">
+            Owned by P Chand Ltd <span>&bull;</span> Company No. 08464319 <span>&bull;</span> VAT No. 165-9328-77
+          </p>
         </div>
       </div>
     </div>
@@ -1259,29 +1248,5 @@
   <script src="/cookie-consent.js" defer></script>
   <script src="/auth-config.js"></script>
   <script src="/auth-header.js" defer></script>
-  <!-- cal.eu modal embed + click/close handlers (re-applied after merge). -->
-  <script type="text/javascript">
-    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.eu/embed/embed.js", "init");
-    var FIVEWAYS_CAL_VARS = { "cal-brand": "#0f757b", "cal-bg-emphasis": "#eaf4f5", "cal-bg": "#ffffff", "cal-bg-muted": "#f7fbfb", "cal-text": "#274b50", "cal-text-emphasis": "#0a666b", "cal-text-muted": "#5a7a7e", "cal-border": "#bdd4d7", "cal-border-subtle": "#e0eeef", "cal-border-emphasis": "#89b7bc" };
-    Cal("init", { origin: "https://cal.eu" });
-    Cal("ui", { theme: "light", hideEventTypeDetails: false, layout: "month_view", cssVarsPerTheme: { light: FIVEWAYS_CAL_VARS, dark: FIVEWAYS_CAL_VARS } });
-    function openCal(calLink, extraConfig) {
-      var config = Object.assign({ layout: "month_view", theme: "light" }, extraConfig || {});
-      if (window.FW_SESSION_USER) { if (window.FW_SESSION_USER.name) config.name = window.FW_SESSION_USER.name; if (window.FW_SESSION_USER.email) config.email = window.FW_SESSION_USER.email; }
-      window.Cal("modal", { calLink: calLink, config: config });
-    }
-    document.addEventListener("click", function (e) {
-      var trigger = e.target.closest && e.target.closest("[data-cal-link]");
-      if (!trigger || !window.Cal) return;
-      e.preventDefault();
-      var extra = null; var raw = trigger.getAttribute("data-cal-config");
-      if (raw) { try { extra = JSON.parse(raw); } catch (err) {} }
-      openCal(trigger.getAttribute("data-cal-link"), extra);
-    });
-    document.addEventListener("keydown", function (e) { if (e.key !== "Escape") return; var m = document.querySelector("cal-modal-box"); if (m && m.remove) { m.remove(); document.body.style.overflow = ""; } });
-    document.addEventListener("click", function (e) { var t = e.target; if (!t || !t.tagName) return; if (t.tagName.toLowerCase() === "cal-modal-box") { var m = document.querySelector("cal-modal-box"); if (m && m.remove) { m.remove(); document.body.style.overflow = ""; } } });
-  </script>
 </body>
 </html>
-
-

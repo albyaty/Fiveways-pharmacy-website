@@ -1696,11 +1696,11 @@ main {
 }
 
 .hero-carousel-disclaimer-shell {
-  margin-top: 0.68rem;
+  margin-top: -2.65rem;
 }
 
 .hero-carousel-disclaimer-shell + .service-section {
-  margin-top: 1.12rem;
+  margin-top: 0.96rem;
 }
 
 .hero-carousel-disclaimer {
@@ -1763,7 +1763,7 @@ main {
   }
 
   .hero-carousel-disclaimer-shell + .service-section {
-    margin-top: 0.98rem;
+    margin-top: 0.86rem;
   }
 
   .hero-carousel-disclaimer {
@@ -1782,6 +1782,7 @@ main {
 
   .hero-carousel-disclaimer.hero-carousel-disclaimer--mobile {
     display: flex;
+    margin-top: -0.28rem;
   }
 
   .mobile-service-payment-banner {
@@ -2057,7 +2058,7 @@ main {
   }
 
   .hero-carousel-disclaimer-shell {
-    margin-top: 0.52rem;
+    margin-top: -1rem;
   }
 
   .hero-carousel-disclaimer {
@@ -2075,6 +2076,10 @@ main {
   .hero-carousel-disclaimer__text {
     font-size: 0.69rem;
     line-height: 1.32;
+  }
+
+  .hero-carousel-disclaimer.hero-carousel-disclaimer--mobile {
+    margin-top: -0.2rem;
   }
 
   .hero-carousel__controls {
