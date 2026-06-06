@@ -1,10 +1,17 @@
 <!DOCTYPE html>
+<!--
+  REVIEW REQUIRED BEFORE PUBLISHING.
+  UK pharmacy template, not legal advice. Structure adapted from a UK
+  NHS-aligned health service. Replace every [bracketed] placeholder with the
+  pharmacy's real details and have it reviewed before relying on it.
+  Placeholders are highlighted on the page so they are easy to find.
+-->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Terms &amp; Conditions | Five Ways Pharmacy</title>
-  <meta name="description" content="The terms governing use of the Five Ways Pharmacy website, pharmacy services, prescriptions, delivery, and complaints." />
+  <meta name="description" content="The terms governing use of the Five Ways Pharmacy website, pharmacy services, bookings and online payments." />
   <meta name="robots" content="index,follow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,438 +21,13 @@
   <link rel="stylesheet" href="../legal.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="top-strip">
-      <div class="top-strip-inner container">
-        <p class="top-strip-message">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 21s-5.2-5.07-5.2-10a5.2 5.2 0 1 1 10.4 0c0 4.93-5.2 10-5.2 10Z" />
-            <circle cx="12" cy="11" r="1.9" />
-          </svg>
-          <a
-            href="https://www.google.com/maps/search/?api=1&query=Five%20Ways%20Pharmacy%2C%20192A%20Saint%20Vincent%20Street%20West%2C%20Ladywood%2C%20Birmingham%2C%20West%20Midlands%2C%20B16%208RP"
-            class="top-strip-message-link--desktop"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Find Five Ways Pharmacy on Google Maps"
-          >192A Saint Vincent Street West, Ladywood, Birmingham, West Midlands, B16 8RP</a>
-          <a
-            href="https://www.google.com/maps/search/?api=1&query=Five%20Ways%20Pharmacy%2C%20192A%20Saint%20Vincent%20Street%20West%2C%20Ladywood%2C%20Birmingham%2C%20West%20Midlands%2C%20B16%208RP"
-            class="top-strip-message-link--mobile"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Find Five Ways Pharmacy on Google Maps"
-          ><svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 21s-5.2-5.07-5.2-10a5.2 5.2 0 1 1 10.4 0c0 4.93-5.2 10-5.2 10Z" />
-            <circle cx="12" cy="11" r="1.9" />
-          </svg><span>Find us</span></a>
-        </p>
-        <div class="top-strip-links">
-          <span class="top-strip-hours top-strip-hours--desktop" aria-label="Opening hours">
-            Open Mon-Fri, 09:00-17:00 &middot; Closed bank holidays
-          </span>
-          <details class="top-strip-hours-dropdown">
-            <summary class="top-strip-hours top-strip-hours--mobile">Opening hours</summary>
-            <div class="top-strip-hours-panel">
-              <span>Open Mon-Fri, 09:00-17:00</span>
-              <span>Closed bank holidays</span>
-            </div>
-          </details>
-          <a href="/faqs/" aria-label="Customer support">Help Centre</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="header-shell container">
-      <div class="header-main">
-        <button
-          class="mobile-menu-toggle"
-          type="button"
-          aria-label="Open menu"
-          aria-expanded="false"
-          aria-controls="mobile-menu-drawer"
-          aria-haspopup="dialog"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4.5 7.25h15" />
-            <path d="M4.5 12h15" />
-            <path d="M4.5 16.75h15" />
-          </svg>
-        </button>
-
-        <a class="brand" href="../index.html" aria-label="Five Ways Pharmacy home">
-          <img
-            class="brand-logo"
-            src="../assets/brand/fiveways-logo-new.svg"
-            alt="Five Ways Pharmacy"
-            width="454"
-            height="227"
-          />
-        </a>
-
-        <form class="search-bar" role="search" aria-label="Site search">
-          <label class="sr-only" for="site-search">Search services or health advice</label>
-          <input
-            id="site-search"
-            type="search"
-            placeholder="Search services or health advice"
-            aria-label="Search services or health advice"
-          />
-          <button type="submit">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="11" cy="11" r="6" />
-              <path d="M16 16l5 5" />
-            </svg>
-            <span>Search</span>
-          </button>
-        </form>
-
-        <nav class="header-actions" aria-label="User actions">
-          <div class="header-account">
-            <a class="header-action header-account__link" href="../account.html" aria-label="Login or register" data-auth-login-link data-auth-account-href="/account.html">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="8.25" r="3.25" />
-                <path d="M5.75 19.5c1.35-3.05 4.05-4.6 6.25-4.6s4.9 1.55 6.25 4.6" />
-              </svg>
-              <span class="header-account__label" data-auth-label>Login / Register</span>
-            </a>
-
-            <a class="header-action header-account__mobile-link" href="../account.html" aria-label="Login / Register" data-auth-login-link data-auth-account-href="/account.html">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="8.25" r="3.25" />
-                <path d="M5.75 19.5c1.35-3.05 4.05-4.6 6.25-4.6s4.9 1.55 6.25 4.6" />
-              </svg>
-              <span class="sr-only">Login or register</span>
-            </a>
-          </div>
-
-          <a href="../book.html" class="cart-pill" aria-label="Book an appointment">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M3.5 5h2l1.7 9.25h9.9L19 8H6.2" />
-              <circle cx="9.25" cy="18.25" r="1.35" />
-              <circle cx="16.7" cy="18.25" r="1.35" />
-            </svg>
-            <span class="cart-pill-label">Book</span>
-
-          </a>
-          <details class="header-phone-dropdown header-phone-dropdown--main">
-            <summary class="header-phone-trigger" aria-label="Show pharmacy phone number">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6.62 10.79a15.5 15.5 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c.84.28 1.73.43 2.58.43a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.85 21 3 13.15 3 4a1 1 0 0 1 1-1h3.43a1 1 0 0 1 1 1c0 .85.15 1.74.43 2.58a1 1 0 0 1-.24 1.01Z" />
-              </svg>
-              <span class="sr-only">Show pharmacy phone number</span>
-            </summary>
-            <div class="header-phone-popover">
-              <a href="tel:+441216302680" aria-label="Call Five Ways Pharmacy on 0121 630 2680">0121 630 2680</a>
-            </div>
-          </details>
-        </nav>
-      </div>
-
-      <div class="header-browse">
-        <nav class="category-nav" aria-label="Main categories">
-          <div class="category-pill-dropdown category-pill-dropdown--desktop-hide">
-            <a href="/index.html#services" aria-haspopup="true">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M8 5.5h8v13H8z" />
-                <path d="M10 3.75h4" />
-                <path d="M10 9.5h4" />
-                <path d="M10 13h4" />
-              </svg>
-              <span>Pharmacy Services</span>
-            </a>
-
-            <div class="category-pill-dropdown-menu" aria-label="Pharmacy Services menu">
-              <div class="category-pill-dropdown-section">
-                <p>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 19.25c-4.1-2.4-6.75-4.85-6.75-8.2a3.8 3.8 0 0 1 3.95-3.8c1.25 0 2.2.5 2.8 1.35.6-.85 1.55-1.35 2.8-1.35a3.8 3.8 0 0 1 3.95 3.8c0 3.35-2.65 5.8-6.75 8.2Z" />
-                    <path d="M12 9.6v4.1" />
-                    <path d="M9.95 11.65h4.1" />
-                  </svg>
-                  <span>Free NHS services</span>
-                </p>
-                <a href="../pharmacy-first/" class="category-pill-dropdown-link">
-                  <span>NHS Pharmacy First</span>
-                  <span class="category-pill-free-badge">FREE</span>
-                </a>
-                <a href="../stop-smoking-clinic/" class="category-pill-dropdown-link">
-                  <span>Stop Smoking Clinic</span>
-                  <span class="category-pill-free-badge">FREE</span>
-                </a>
-                <a href="#" class="category-pill-dropdown-link">
-                  <span>Blood Pressure Check</span>
-                  <span class="category-pill-free-badge">FREE</span>
-                </a>
-              </div>
-
-              <div class="category-pill-dropdown-section">
-                <p>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M4.75 13.5h8.2l5.3-6.25c.45-.55 1.35-.55 1.8 0 .4.5.35 1.2-.1 1.65l-4.2 4.6h3.5c.8 0 1.45.65 1.45 1.45s-.65 1.45-1.45 1.45h-3.5l4.2 4.6c.45.45.5 1.15.1 1.65-.45.55-1.35.55-1.8 0l-5.3-6.25h-8.2" />
-                    <path d="M7.25 10.4l-2.5 2.1 2.5 2.1" />
-                  </svg>
-                  <span>Travel &amp; prevention</span>
-                </p>
-                <a href="#" class="category-pill-dropdown-link">Travel Vaccines</a>
-                <a href="../flu-vaccines/" class="category-pill-dropdown-link">Flu Vaccine</a>
-                <a href="#" class="category-pill-dropdown-link">Travel Health Advice</a>
-              </div>
-
-              <div class="category-pill-dropdown-section">
-                <p>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M8 5.5h8v13H8z" />
-                    <path d="M10 3.75h4" />
-                    <path d="M10 9.5h4" />
-                    <path d="M10 13h4" />
-                  </svg>
-                  <span>Prescriptions &amp; care</span>
-                </p>
-                <a href="../repeat-prescriptions/" class="category-pill-dropdown-link">Repeat Prescriptions</a>
-                <a href="#" class="category-pill-dropdown-link">Private Consultations</a>
-                <a href="#" class="category-pill-dropdown-link">Medicine Advice</a>
-              </div>
-
-              <div class="category-pill-dropdown-actions">
-                <a href="#" class="category-pill-dropdown-link">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <rect x="4.75" y="4.75" width="5.5" height="5.5" rx="1.1" />
-                    <rect x="13.75" y="4.75" width="5.5" height="5.5" rx="1.1" />
-                    <rect x="4.75" y="13.75" width="5.5" height="5.5" rx="1.1" />
-                    <rect x="13.75" y="13.75" width="5.5" height="5.5" rx="1.1" />
-                  </svg>
-                  <span>View all services</span>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M6 12h12" />
-                    <path d="M13 7l5 5-5 5" />
-                  </svg>
-                </a>
-                <a href="#" class="category-pill-dropdown-link">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 4.5 13.45 9l4.55 1.45-4.55 1.45L12 16.5l-1.45-4.6L6 10.45 10.55 9 12 4.5Z" />
-                    <path d="M18.5 4.75 19 6.25l1.5.5-1.5.5-.5 1.5-.5-1.5-1.5-.5 1.5-.5.5-1.5Z" />
-                  </svg>
-                  <span>Five Ways Pharmacy AI Assistant</span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="category-pill-dropdown category-pill-dropdown--compact category-pill-dropdown--prescriptions">
-            <button type="button" aria-haspopup="true" aria-expanded="false">
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M8 5.5h8v13H8z" />
-                <path d="M10 3.75h4" />
-                <path d="M10 9.5h4" />
-                <path d="M10 13h4" />
-              </svg>
-              <span>Prescriptions</span>
-            </button>
-
-            <div class="category-pill-dropdown-menu category-pill-dropdown-menu--compact" aria-label="Prescriptions menu">
-              <a href="../emergency-prescriptions/" class="category-pill-dropdown-link">Emergency supply</a>
-              <a href="../repeat-prescriptions/" class="category-pill-dropdown-link">Repeat prescriptions</a>
-              <a href="../#private-prescriptions" class="category-pill-dropdown-link">Private prescriptions</a>
-            </div>
-          </div>
-          <a href="../health-advice/">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6.5 7.25h11a2.25 2.25 0 0 1 2.25 2.25v5a2.25 2.25 0 0 1-2.25 2.25H11l-4 2v-2H6.5A2.25 2.25 0 0 1 4.25 14.5v-5A2.25 2.25 0 0 1 6.5 7.25Z" />
-              <path d="M8.5 10.75h7" />
-              <path d="M8.5 13.25h4.5" />
-            </svg>
-            <span>Health Advice</span>
-          </a>
-          <a href="../index.html#shop-by-category" class="service-led-hidden" hidden>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M3.5 5h2l1.7 9.25h9.9L19 8H6.2" />
-              <circle cx="9.25" cy="18.25" r="1.35" />
-              <circle cx="16.7" cy="18.25" r="1.35" />
-            </svg>
-            <span>Over-the-counter Purchases</span>
-          </a>
-          <a href="../covid-vaccines/">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 4.75c1.95 1 3.95 1.45 5.45 1.7 0 6.2-3.45 10.05-5.45 11.8-2-1.75-5.45-5.6-5.45-11.8 1.5-.25 3.5-.7 5.45-1.7Z" />
-              <path d="M12 8.75v5" />
-              <path d="M9.5 11.25h5" />
-            </svg>
-            <span>COVID Vaccines (Spring / Autumn)</span>
-          </a>
-          <a href="../flu-vaccines/">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M15.5 5.25 18.75 8.5" />
-              <path d="M8.4 15.85 15 9.25" />
-              <path d="M6.4 17.85 8.4 15.85" />
-              <path d="M12.9 7.35 16.65 11.1" />
-              <path d="M9.55 18.45 5.9 20.1l1.65-3.65" />
-            </svg>
-            <span>Flu Vaccines (Autumn)</span>
-          </a>
-          <a href="#" class="category-pill-popular">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 4.75 13.35 9l4.25 1.35-4.25 1.35L12 15.95 10.65 11.7 6.4 10.35 10.65 9 12 4.75Z" />
-              <path d="M18.4 5.35 18.8 6.6l1.25.4-1.25.4-.4 1.25-.4-1.25-1.25-.4 1.25-.4.4-1.25Z" />
-            </svg>
-            <span>Popular now</span>
-          </a>
-        </nav>
-
-        <div class="quick-nav" aria-label="Popular shortcuts">
-          <p>Popular now:</p>
-          <a href="../pharmacy-first/index.html" class="quick-pill quick-pill--featured">Pharmacy First</a>
-          <a href="../nhs-contraception-services/index.html" class="quick-pill">NHS Contraception Services</a>
-          <a href="../stop-smoking-clinic/index.html" class="quick-pill">Smoking Cessation Services</a>
-          <a href="../umbrella-services/index.html" class="quick-pill">Umbrella Services</a>
-          <a href="../weight-loss-support/index.html" class="quick-pill">Weight Loss</a>
-        </div>
-      </div>
+  <header class="checkout-chrome-header">
+    <div class="container checkout-chrome-header__inner">
+      <a class="brand checkout-chrome-header__brand" href="../index.html" aria-label="Five Ways Pharmacy home">
+        <img class="brand-logo" src="../assets/brand/fiveways-logo-new.svg" alt="Five Ways Pharmacy" width="454" height="227" />
+      </a>
     </div>
   </header>
-
-  <div class="mobile-menu-shell" aria-hidden="true">
-    <button class="mobile-menu-overlay" type="button" tabindex="-1" aria-label="Close menu"></button>
-    <aside class="mobile-menu-drawer" id="mobile-menu-drawer" role="dialog" aria-modal="true" aria-label="Site menu" aria-hidden="true">
-      <div class="mobile-menu-panel">
-        <div class="mobile-menu-header">
-          <a class="brand mobile-menu-brand" href="../index.html" aria-label="Five Ways Pharmacy home">
-            <img
-              class="brand-logo"
-              src="../assets/brand/fiveways-logo-new.svg"
-              alt="Five Ways Pharmacy"
-              width="454"
-              height="227"
-            />
-          </a>
-          <button class="mobile-menu-close" type="button" aria-label="Close menu">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6.5 6.5 17.5 17.5" />
-              <path d="M17.5 6.5 6.5 17.5" />
-            </svg>
-          </button>
-        </div>
-
-        <div class="mobile-menu-body">
-          <section class="mobile-menu-section" aria-labelledby="mobile-menu-services">
-            <h2 class="mobile-menu-section-title" id="mobile-menu-services">Services</h2>
-            <div class="mobile-menu-links">
-              <a href="../pharmacy-first/" class="mobile-menu-link">Pharmacy First</a>
-              <a href="../stop-smoking-clinic/" class="mobile-menu-link">Smoking Cessation Services</a>
-              <a href="../umbrella-services/" class="mobile-menu-link">Umbrella Services</a>
-              <a href="../weight-loss-support/" class="mobile-menu-link">Weight Loss</a>
-              <a href="../nhs-contraception-services/" class="mobile-menu-link">NHS Contraception Services</a>
-              <details class="mobile-menu-group">
-                <summary class="mobile-menu-link mobile-menu-link--toggle">Prescriptions</summary>
-                <div class="mobile-menu-submenu">
-                  <a href="../emergency-prescriptions/" class="mobile-menu-link">Emergency supply</a>
-                  <a href="../repeat-prescriptions/" class="mobile-menu-link">Repeat prescriptions</a>
-                  <details class="mobile-menu-group mobile-menu-group--nested">
-                    <summary class="mobile-menu-link mobile-menu-link--toggle">Private prescriptions</summary>
-                    <div class="mobile-menu-subpanel" role="group" aria-label="Private prescriptions information">
-                      <p class="mobile-menu-subpanel-title">Private prescriptions</p>
-                      <p class="mobile-menu-subpanel-text">Need a price for a private prescription? Tell our pharmacy team what is on your prescription and we&rsquo;ll explain availability, pricing and next steps.</p>
-                      <a href="tel:+441216302680" class="mobile-menu-subpanel-button">Call Five Ways Pharmacy</a>
-                    </div>
-                  </details>
-                </div>
-              </details>
-              <a href="../health-advice/" class="mobile-menu-link">Health Advice</a>
-              <a href="../index.html#shop-by-category" class="mobile-menu-link service-led-hidden" hidden>Over-the-counter Purchases</a>
-              <a href="../covid-vaccines/" class="mobile-menu-link">COVID Vaccines (Spring / Autumn)</a>
-              <a href="../flu-vaccines/" class="mobile-menu-link">Flu Vaccines (Autumn)</a>
-            </div>
-          </section>
-
-          <section class="mobile-menu-section" aria-labelledby="mobile-menu-account">
-            <h2 class="mobile-menu-section-title" id="mobile-menu-account">Account</h2>
-            <div class="mobile-menu-links">
-              <a href="../login.html" class="mobile-menu-link">Login</a>
-              <a href="../register.html" class="mobile-menu-link">Register</a>
-              <a href="#" class="mobile-menu-link">Account help</a>
-            </div>
-          </section>
-
-          <section class="mobile-menu-section" aria-labelledby="mobile-menu-support">
-            <h2 class="mobile-menu-section-title" id="mobile-menu-support">Support</h2>
-            <div class="mobile-menu-links">
-              <a href="../delivery-privacy/" class="mobile-menu-link">Delivery info</a>
-              <a href="/faqs/" class="mobile-menu-link">FAQs</a>
-            </div>
-          </section>
-
-          <aside class="mobile-menu-help-card" aria-label="Need help">
-            <p class="mobile-menu-help-kicker">Need help?</p>
-            <h3>Call or message our pharmacy team.</h3>
-            <a href="../speak-to-our-team/" class="mobile-menu-help-link">
-              <span>Contact us</span>
-              <span aria-hidden="true">&rarr;</span>
-            </a>
-          </aside>
-          <button class="mobile-menu-close-button" type="button" aria-label="Close menu">
-            Close menu
-          </button>
-        </div>
-      </div>
-    </aside>
-  </div>
-
-  <div class="compact-header" aria-label="Compact sticky site tools">
-    <div class="compact-header-inner container">
-      <a class="compact-brand" href="../index.html" aria-label="Five Ways Pharmacy home">
-        <img
-          class="compact-brand-logo"
-          src="../assets/brand/fiveways-logo-new.svg"
-          alt="Five Ways Pharmacy"
-          width="454"
-          height="227"
-        />
-      </a>
-      <form class="compact-search" role="search" aria-label="Compact site search">
-        <label class="sr-only" for="compact-site-search">Search services or health advice</label>
-        <input
-          id="compact-site-search"
-          type="search"
-          placeholder="Search services or health advice"
-          aria-label="Search services or health advice"
-        />
-        <button type="submit">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="11" cy="11" r="6" />
-            <path d="M16 16l5 5" />
-          </svg>
-          <span>Search</span>
-        </button>
-      </form>
-      <a href="../account.html" class="compact-account" aria-label="Login / Register">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="8.25" r="3.25" />
-          <path d="M5.75 19.5c1.35-3.05 4.05-4.6 6.25-4.6s4.9 1.55 6.25 4.6" />
-        </svg>
-        <span class="compact-account-label">Login / Register</span>
-      </a>
-      <a href="../book.html" class="compact-cart" aria-label="Book an appointment">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M3.5 5h2l1.7 9.25h9.9L19 8H6.2" />
-          <circle cx="9.25" cy="18.25" r="1.35" />
-          <circle cx="16.7" cy="18.25" r="1.35" />
-        </svg>
-        <span class="compact-cart-label">Book</span>
-
-      </a>
-      <details class="header-phone-dropdown header-phone-dropdown--compact">
-        <summary class="header-phone-trigger" aria-label="Show pharmacy phone number">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M6.62 10.79a15.5 15.5 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c.84.28 1.73.43 2.58.43a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.85 21 3 13.15 3 4a1 1 0 0 1 1-1h3.43a1 1 0 0 1 1 1c0 .85.15 1.74.43 2.58a1 1 0 0 1-.24 1.01Z" />
-          </svg>
-          <span class="sr-only">Show pharmacy phone number</span>
-        </summary>
-        <div class="header-phone-popover header-phone-popover--compact">
-          <a href="tel:+441216302680" aria-label="Call Five Ways Pharmacy on 0121 630 2680">0121 630 2680</a>
-        </div>
-      </details>
-    </div>
-  </div>
-  <div class="compact-header-sentinel" aria-hidden="true"></div>
 
   <main class="legal-main">
     <article class="container legal-doc">
@@ -454,27 +36,24 @@
       </nav>
 
       <h1>Terms &amp; Conditions</h1>
-      <p class="legal-updated">Last updated: June 2026</p>
+      <p class="legal-updated">Last updated: <span class="legal-fill">June 2026</span></p>
 
       <p>
         These terms govern your use of the Five Ways Pharmacy website and the
-        pharmacy services, appointment requests, and payment pages that may be
-        offered through it. By using the site or requesting a service, you
-        agree to these terms. Please read them alongside our
-        <a href="../privacy/index.html">Privacy Policy</a> and
-        <a href="../cookies/index.html">Cookie Policy</a>.
+        pharmacy services, appointment bookings and online payments offered
+        through it. By using the site, booking an appointment, or making a
+        payment, you agree to these terms. Please read them alongside our
+        <a href="../privacy/">Privacy Policy</a> and
+        <a href="../cookies/">Cookie Policy</a>.
       </p>
 
       <div class="legal-note">
         <strong>About us.</strong> Five Ways Pharmacy is a community pharmacy at
         192A Saint Vincent Street West, Ladywood, Birmingham, West Midlands,
-        B16 8RP. We are registered with the General Pharmaceutical Council under
-        premises registration
-        <a href="https://inspections.pharmacyregulation.org/pharmacy/detail/five-ways-pharmacy-1119029" target="_blank" rel="noopener noreferrer">1119029</a>.
-        Our Superintendent Pharmacist is Mrs Parminder Kaur Chand
-        (GPhC Reg. 2059120). Contact us at
-        <a href="mailto:pharmacy.frk99@nhs.net">pharmacy.frk99@nhs.net</a> or
-        <a href="tel:+441216302680">0121 630 2680</a>.
+        B16 8RP. We are registered with the General Pharmaceutical Council
+        (GPhC premises number 1119029); our Superintendent Pharmacist is
+        Mrs Parminder Kaur Chand (GPhC Reg. 2059120). VAT number 165 9328 77.
+        Contact: pharmacy.frk99@nhs.net / 0121 630 2680.
       </div>
 
       <div class="legal-toc">
@@ -500,26 +79,26 @@
       </div>
 
       <h2 id="services">1. About our services</h2>
-      <p>Five Ways Pharmacy provides a range of pharmacy services, which may include:</p>
+      <p>Five Ways Pharmacy provides a range of NHS and private pharmacy services, which may include:</p>
       <ul>
         <li>NHS Pharmacy First consultations for common conditions;</li>
-        <li>NHS and private vaccinations;</li>
+        <li>NHS and private vaccinations (such as flu and COVID-19);</li>
         <li>NHS contraception services;</li>
         <li>stop smoking support and weight management;</li>
-        <li>dispensing and support for prescription medicines;</li>
+        <li>dispensing and delivery of prescription medicines;</li>
         <li>general health advice and over-the-counter sales;</li>
-        <li>online enquiries, booking requests, and service information.</li>
+        <li>online appointment booking and secure online payment.</li>
       </ul>
       <p>
         The specific services available, and whether they are NHS-funded or
-        private, are shown on the website and may change from time to time.
+        private, are as shown on our website and may change from time to time.
       </p>
 
       <h2 id="eligibility">2. Eligibility</h2>
       <ul>
         <li>Our online services are intended for people in the United Kingdom.</li>
         <li>You must provide accurate information about yourself, or about the patient you are acting for.</li>
-        <li>Some services have their own eligibility criteria, which we will explain where relevant.</li>
+        <li>Some services have their own eligibility criteria (for example NHS service catchment, age, or clinical suitability), which we will explain where relevant.</li>
         <li>Our pharmacist may decline to provide a service or supply a medicine where it would not be safe, appropriate or lawful to do so.</li>
       </ul>
 
@@ -527,40 +106,39 @@
       <ul>
         <li>Prescription-only medicines are supplied only against a valid prescription and at the professional discretion of our pharmacist.</li>
         <li>Medicines are supplied for the named patient&rsquo;s personal use only and must not be resold or given to anyone else.</li>
-        <li>You are responsible for providing accurate patient details, including any relevant health information.</li>
-        <li>Always read the label and patient information leaflet, and use medicines as directed.</li>
+        <li>You are responsible for providing accurate patient details (including name, date of birth and any relevant health information).</li>
+        <li>Always read the label and the patient information leaflet, and use medicines as directed. Check expiry dates before use and do not use medicines beyond their expiry date.</li>
         <li>Our pharmacist may need a further conversation, or a face-to-face assessment, before supplying certain medicines.</li>
       </ul>
 
       <h2 id="payment">4. Pricing &amp; payment</h2>
       <ul>
-        <li>If a secure payment page is provided, use the payment route shown on the website at the time of payment.</li>
-        <li>Private service fees or private prescription charges will be explained before payment is taken.</li>
-        <li>NHS prescription charges are applied at the current NHS prescription charge unless you are entitled to an exemption.</li>
-        <li>Five Ways Pharmacy does not ask patients to send payment card details by ordinary email.</li>
-        <li>Prices may be updated from time to time; the price shown at the time of payment applies.</li>
+        <li>Online payments are processed securely by Stripe. We do not see or store your full card details.</li>
+        <li>Prescription items paid for online are charged at the rate shown at checkout (currently <span class="legal-fill">GBP 9.90</span> per item), or you may pay a specific amount agreed with our pharmacy team.</li>
+        <li>NHS prescription charges, exemptions and any service fees are applied in line with current NHS rules.</li>
+        <li>Prices include VAT where applicable. We may update prices from time to time; the price shown at the time of payment applies.</li>
       </ul>
 
       <h2 id="delivery">5. Delivery</h2>
       <ul>
-        <li>Where delivery is offered, free delivery of prescriptions is available within two working days.</li>
-        <li>This delivery wording applies to prescriptions only and does not mean every service or order is a delivery service.</li>
-        <li>Please give a complete and accurate delivery address. We are not responsible for delays caused by incorrect address details.</li>
-        <li>Medicines are sent in plain, discreet packaging where appropriate.</li>
+        <li>Where delivery is offered, prescription orders include free UK delivery to the address you provide at checkout.</li>
+        <li>Please give a complete, accurate delivery address. We are not responsible for delays or non-delivery caused by incorrect address details.</li>
+        <li>Medicines are sent in plain, discreet packaging.</li>
       </ul>
 
       <h2 id="bookings">6. Appointments &amp; bookings</h2>
       <ul>
-        <li>Appointments are offered subject to availability and may vary by service.</li>
-        <li>Please be available and on time for your appointment. If you cannot attend, cancel or rearrange as early as possible.</li>
-        <li>Repeated missed appointments without contact may affect whether we can continue to offer a particular service.</li>
-        <li>We may occasionally need to rearrange an appointment and will give as much notice as reasonably possible.</li>
+        <li>Appointments are booked through our scheduling tool as 30-minute slots unless stated otherwise.</li>
+        <li>Please be available and on time for your appointment. If you cannot attend, please cancel or reschedule in advance &mdash; ideally with at least 24 hours&rsquo; notice &mdash; so we can offer the slot to someone else.</li>
+        <li>Repeatedly missing appointments without contact may mean we are unable to continue offering you a particular service.</li>
+        <li>We may occasionally need to rearrange an appointment and will give you as much notice as possible.</li>
       </ul>
 
       <h2 id="accounts">7. Online accounts</h2>
       <ul>
-        <li>If you use an online account feature, you are responsible for keeping your password secure and for activity carried out under that account.</li>
-        <li>You must provide accurate details and use only accounts you are authorised to use.</li>
+        <li>You can use most of our services as a guest; creating an account is optional and simply makes future visits faster.</li>
+        <li>You are responsible for keeping your account password secure and for activity carried out under your account.</li>
+        <li>You must provide accurate details and register only on your own behalf (or, for a dependant, with appropriate authority).</li>
         <li>We may suspend or close an account that is misused or used in breach of these terms.</li>
       </ul>
 
@@ -568,55 +146,56 @@
       <p><strong>8.1 Professional standard of care.</strong> Our pharmacists and team provide care to the professional standards expected of a registered UK pharmacy and in line with GPhC standards.</p>
       <p><strong>8.2 Identification.</strong> Our pharmacy team will identify themselves and are happy to share their professional registration details on request.</p>
       <p><strong>8.3 Acting in your best interest.</strong> We will only supply a medicine or provide a service where, in our professional judgement, it is appropriate and safe for you. We will decline where it is not.</p>
-      <p><strong>8.4 Privacy &amp; confidentiality.</strong> We protect your information in line with our <a href="../privacy/index.html">Privacy Policy</a> and UK data protection law, and we handle health information confidentially.</p>
-      <p><strong>8.5 Liaison with your GP.</strong> We may contact your GP or other healthcare professionals where it is clinically necessary or required for safe care.</p>
+      <p><strong>8.4 Privacy &amp; confidentiality.</strong> We protect your information in line with our <a href="../privacy/">Privacy Policy</a> and UK data protection law, and we handle health information confidentially.</p>
+      <p><strong>8.5 Liaison with your GP.</strong> We will contact your GP or other healthcare professionals where it is clinically necessary or required by NHS guidance. In an emergency we may do so without first asking for your consent.</p>
       <p><strong>8.6 Respectful, non-judgemental care.</strong> We treat everyone with dignity and respect.</p>
 
       <h2 id="your-commitments">9. Your commitments to us</h2>
       <p><strong>9.1 Accurate information.</strong> Please answer health questions truthfully and as fully as you can, and tell us promptly if anything changes.</p>
-      <p><strong>9.2 Acting for yourself or with authority.</strong> Register, request services, and make payments only on your own behalf, or for someone you are authorised to act for.</p>
+      <p><strong>9.2 Acting for yourself or with authority.</strong> Register and pay on your own behalf, or for someone you are authorised to act for.</p>
       <p><strong>9.3 Following instructions.</strong> Read and follow the instructions provided with any medicine, and contact us if you are unsure.</p>
-      <p><strong>9.4 Accepting clinical decisions.</strong> If our pharmacist declines to supply a medicine or provide a service, that decision is made to protect patient safety.</p>
-      <p><strong>9.5 Respectful behaviour.</strong> Abusive, threatening, discriminatory, or harassing behaviour towards our team may result in us refusing service and, where appropriate, contacting the authorities.</p>
-      <p><strong>9.6 Looking after your medicines.</strong> Store medicines safely, do not share them, and check expiry dates before use.</p>
+      <p><strong>9.4 Accepting clinical decisions.</strong> If our pharmacist declines to supply a medicine or provide a service, please accept that decision &mdash; it is there to keep you safe.</p>
+      <p><strong>9.5 Respectful behaviour.</strong> Abusive, threatening, discriminatory or harassing behaviour towards our team may result in us refusing service and, where appropriate, contacting the authorities.</p>
+      <p><strong>9.6 Looking after your medicines.</strong> Store medicines safely and out of reach of children and others, do not share them, and check expiry dates before use.</p>
+      <p><strong>9.7 Reporting side effects.</strong> Tell us promptly about any side effects or concerns so we can advise you.</p>
 
       <h2 id="cancellations">10. Cancellations &amp; refunds</h2>
       <p>
-        Your statutory rights are not affected. However, for health and safety
-        reasons, medicines that have been supplied cannot usually be returned or
-        refunded once they have left the pharmacy, unless they are faulty,
-        damaged, or supplied in error.
+        Your statutory rights under the Consumer Contracts Regulations 2013 and
+        the Consumer Rights Act 2015 are not affected. However, for health and
+        safety reasons <strong>medicines that have been supplied cannot be
+        returned or refunded</strong> once they have left the pharmacy, unless
+        they are faulty, damaged or supplied in error.
       </p>
       <p>
-        If something is wrong with your order or payment, contact us promptly at
-        <a href="mailto:pharmacy.frk99@nhs.net">pharmacy.frk99@nhs.net</a> and
-        we will review the issue and explain the next step, including a refund
-        where appropriate.
+        If something is wrong with your order, or you paid in error, contact us
+        promptly at <span class="legal-fill">pharmacy.frk99@nhs.net</span> and we will put it
+        right, including a refund where appropriate. Refunds are made to your
+        original payment method.
       </p>
 
       <h2 id="health">11. Important health information</h2>
       <p>
-        Information on this website is for general guidance only and does not
-        replace personalised advice from a qualified healthcare professional. If
-        you have a serious or urgent health concern, contact your GP, call NHS
-        111, or call 999 in an emergency.
+        Information on this website is provided for general guidance and does
+        not replace personalised advice from a qualified healthcare
+        professional. If you have a serious or urgent health concern, contact
+        your GP, call NHS 111, or in an emergency call 999.
       </p>
 
       <h2 id="complaints">12. Complaints</h2>
       <p>
         We aim to provide a high standard of care. If you are not satisfied,
         please contact us in person, by phone on
-        <a href="tel:+441216302680">0121 630 2680</a>, or by email at
-        <a href="mailto:pharmacy.frk99@nhs.net">pharmacy.frk99@nhs.net</a>. We
-        will acknowledge your concern promptly and aim to respond within a
-        reasonable time.
+        <span class="legal-fill">0121 630 2680</span>, or by email at
+        <span class="legal-fill">pharmacy.frk99@nhs.net</span>. We will acknowledge your
+        complaint promptly and aim to respond fully within a reasonable time.
       </p>
       <p>
-        You can also read our standalone
-        <a href="../complaints/index.html">Complaints page</a>. If we cannot resolve a
-        concern, you can escalate professional standards concerns to the General
-        Pharmaceutical Council. If a concern relates to an NHS service, the
-        pharmacy can explain the appropriate next complaints route.
+        If we cannot resolve your complaint, you can escalate it to the General
+        Pharmaceutical Council
+        (<a href="https://www.pharmacyregulation.org" target="_blank" rel="noopener">pharmacyregulation.org</a>),
+        or &mdash; for NHS services &mdash; to
+        <span class="legal-fill">NHS England</span>.
       </p>
 
       <h2 id="website">13. Website terms of use</h2>
@@ -633,609 +212,40 @@
         misrepresentation, or for anything else that cannot be excluded or
         limited under English law. Subject to that, we provide our website and
         services on a reasonable-care basis and are not liable for losses that
-        are not reasonably foreseeable or that arise from your failure to
-        follow instructions or provide accurate information.
+        are not reasonably foreseeable or that arise from your failure to follow
+        instructions or to provide accurate information.
       </p>
 
       <h2 id="changes">15. Changes to these terms</h2>
       <p>
         We may update these terms from time to time. The version shown on this
-        page, with the last updated date above, applies to your use of the
-        site.
+        page, with the &ldquo;last updated&rdquo; date above, applies to your use
+        of the site. Material changes will be reflected here.
       </p>
 
       <h2 id="law">16. Governing law</h2>
       <p>
-        These terms are governed by the law of England and Wales, and the
-        courts of England and Wales have exclusive jurisdiction.
+        These terms are governed by the law of England and Wales, and the courts
+        of England and Wales have exclusive jurisdiction.
       </p>
 
       <p class="legal-updated" style="margin-top:2.5rem">
-        See also: <a href="../privacy/index.html">Privacy Policy</a> &middot;
-        <a href="../cookies/index.html">Cookie Policy</a> &middot;
-        <a href="../complaints/index.html">Complaints</a>
+        See also: <a href="../privacy/">Privacy Policy</a> &middot;
+        <a href="../cookies/">Cookie Policy</a>
       </p>
     </article>
   </main>
 
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-shell">
-        <div class="footer-top">
-          <div class="footer-brand-block">
-            <a class="brand footer-brand" href="../index.html" aria-label="Five Ways Pharmacy home">
-              <img
-                class="brand-logo"
-                src="../assets/brand/fiveways-logo-new.svg"
-                alt="Five Ways Pharmacy"
-                width="454"
-                height="227"
-              />
-            </a>
-            <p>Trusted pharmacy products and care for every household.</p>
-          </div>
-          <div class="footer-nav-shell">
-            <div class="footer-nav">
-              <details class="footer-nav-column footer-nav-column--shop footer-nav-accordion service-led-hidden" open hidden>
-                <summary class="footer-nav-toggle">
-                  <span>Shop</span>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M7 10.5 12 15l5-4.5" />
-                  </svg>
-                </summary>
-                <div class="footer-nav-links">
-                  <a href="#">All products</a>
-                  <a href="#">Best sellers</a>
-                  <a href="#">Offers</a>
-                  <a href="#">Pharmacy services</a>
-                  <a href="#">Prescriptions</a>
-                </div>
-              </details>
-              <details class="footer-nav-column footer-nav-accordion" open>
-                <summary class="footer-nav-toggle">
-                  <span>Support</span>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M7 10.5 12 15l5-4.5" />
-                  </svg>
-                </summary>
-                <div class="footer-nav-links">
-                  <a href="../speak-to-our-team/">Contact us</a>
-                  <a href="../delivery-privacy/">Delivery info</a>
-                  <a href="/faqs/">FAQs</a>
-                </div>
-              </details>
-              <details class="footer-nav-column footer-nav-accordion" open>
-                <summary class="footer-nav-toggle">
-                  <span>About</span>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M7 10.5 12 15l5-4.5" />
-                  </svg>
-                </summary>
-                <div class="footer-nav-links">
-                  <a href="../about-us/index.html">About us</a>
-                  <a href="../our-pharmacy/index.html">Our pharmacy</a>
-                  <a href="#" class="footer-link--desktop-hide">Blog</a>
-                  <a href="../careers/index.html">Careers</a>
-                </div>
-              </details>
-              <details class="footer-nav-column footer-nav-column--leadership footer-nav-accordion" open>
-                <summary class="footer-nav-toggle">
-                  <span>Pharmacy leadership</span>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M7 10.5 12 15l5-4.5" />
-                  </svg>
-                </summary>
-                <div class="footer-nav-links footer-nav-links--leadership">
-                  <div class="footer-leadership-person">
-                    <p class="footer-leadership-name">Mrs Parminder Kaur Chand</p>
-                    <p class="footer-leadership-role">Superintendent Pharmacist / Director</p>
-                    <p class="footer-leadership-registration">MPharm MRPharmS &middot; GPhC Reg. <a class="footer-gphc-link" href="https://www.pharmacyregulation.org/registers/pharmacist/registrationnumber/2059120" target="_blank" rel="noopener noreferrer" aria-label="View Mrs Parminder Kaur Chand GPhC registration">2059120</a></p>
-                  </div>
-                  <div class="footer-leadership-person">
-                    <p class="footer-leadership-name">Zaineb Mouaid Hassen</p>
-                    <p class="footer-leadership-role">Pharmacist Manager</p>
-                    <p class="footer-leadership-registration">MPharm &middot; GPhC Reg. <a class="footer-gphc-link" href="https://www.pharmacyregulation.org/registers/pharmacist/registrationnumber/2229136" target="_blank" rel="noopener noreferrer" aria-label="View Zaineb Mouaid Hassen GPhC registration">2229136</a></p>
-                  </div>
-                </div>
-              </details>
-            </div>
-          </div>
-          <aside class="footer-help-card" id="footer-help-card">
-            <div class="footer-help-head">
-              <span class="footer-help-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M4.8 12.6a7.2 7.2 0 0 1 14.4 0" />
-                  <path d="M6.3 12.55h-.1a1.9 1.9 0 0 0-1.9 1.9v2.35a1.9 1.9 0 0 0 1.9 1.9h.95a.95.95 0 0 0 .95-.95v-4.24a.95.95 0 0 0-.95-.95Z" />
-                  <path d="M17.7 12.55h.1a1.9 1.9 0 0 1 1.9 1.9v2.35a1.9 1.9 0 0 1-1.9 1.9h-.95a.95.95 0 0 1-.95-.95v-4.24a.95.95 0 0 1 .95-.95Z" />
-                  <path d="M8.55 19.05a4.7 4.7 0 0 0 6.9-.7" />
-                </svg>
-              </span>
-              <div class="footer-help-copy">
-                <h4>Need help?</h4>
-                <p class="footer-help-support">Call or message our pharmacy team.</p>
-                <p class="footer-help-hours">Mon-Fri, 09:00-17:00</p>
-              </div>
-            </div>
-            <a class="footer-help-cta" href="#footer-help-card">
-              <span>Contact us</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 12h12" />
-                <path d="M13 7l5 5-5 5" />
-              </svg>
-            </a>
-          </aside>
-        </div>
-        <div class="footer-middle-strip">
-          <article class="footer-strip-feature">
-            <span class="footer-strip-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M12 3.75 18.25 6v5.55c0 4.32-2.75 7.35-6.25 8.7-3.5-1.35-6.25-4.38-6.25-8.7V6Z" />
-                <path d="m9.45 12 1.8 1.8 3.9-4.05" />
-              </svg>
-            </span>
-            <div class="footer-strip-copy footer-strip-copy--registered">
-              <strong>Registered pharmacy</strong>
-              <small>GPhC Reg. <a class="footer-gphc-link" href="https://inspections.pharmacyregulation.org/pharmacy/detail/five-ways-pharmacy-1119029" target="_blank" rel="noopener noreferrer" aria-label="View Five Ways Pharmacy GPhC premises registration">1119029</a></small>
-            </div>
-          </article>
-          <article class="footer-strip-feature">
-            <span class="footer-strip-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <rect x="6.7" y="10.2" width="10.6" height="7.9" rx="2" />
-                <path d="M9.45 10.2V8.65a2.55 2.55 0 1 1 5.1 0v1.55" />
-                <path d="M12 13.3v1.8" />
-              </svg>
-            </span>
-            <div class="footer-strip-copy">
-              <strong>Secure online service</strong>
-              <small>Safe &amp; protected</small>
-            </div>
-          </article>
-          <article class="footer-strip-feature">
-            <span class="footer-strip-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="m12 4.7 2.15 4.43 4.9.72-3.53 3.45.83 4.8L12 16l-4.35 2.1.83-4.8-3.53-3.45 4.9-.72Z" />
-              </svg>
-            </span>
-            <div class="footer-strip-copy">
-              <strong>Customer reviews</strong>
-              <small class="footer-review-line">
-                <span class="footer-review-value">4.8</span>
-                <span class="footer-review-stars" aria-hidden="true">
-                  <svg class="footer-review-star footer-review-star--full" viewBox="0 0 24 24">
-                    <path class="footer-review-star-fill" d="m12 4.7 2.15 4.43 4.9.72-3.53 3.45.83 4.8L12 16l-4.35 2.1.83-4.8-3.53-3.45 4.9-.72Z" />
-                  </svg>
-                  <svg class="footer-review-star footer-review-star--full" viewBox="0 0 24 24">
-                    <path class="footer-review-star-fill" d="m12 4.7 2.15 4.43 4.9.72-3.53 3.45.83 4.8L12 16l-4.35 2.1.83-4.8-3.53-3.45 4.9-.72Z" />
-                  </svg>
-                  <svg class="footer-review-star footer-review-star--full" viewBox="0 0 24 24">
-                    <path class="footer-review-star-fill" d="m12 4.7 2.15 4.43 4.9.72-3.53 3.45.83 4.8L12 16l-4.35 2.1.83-4.8-3.53-3.45 4.9-.72Z" />
-                  </svg>
-                  <svg class="footer-review-star footer-review-star--full" viewBox="0 0 24 24">
-                    <path class="footer-review-star-fill" d="m12 4.7 2.15 4.43 4.9.72-3.53 3.45.83 4.8L12 16l-4.35 2.1.83-4.8-3.53-3.45 4.9-.72Z" />
-                  </svg>
-                  <svg class="footer-review-star footer-review-star--half" viewBox="0 0 24 24">
-                    <defs>
-                      <clipPath id="footer-review-half-clip">
-                        <rect x="0" y="0" width="12" height="24" />
-                      </clipPath>
-                    </defs>
-                    <path class="footer-review-star-outline" d="m12 4.7 2.15 4.43 4.9.72-3.53 3.45.83 4.8L12 16l-4.35 2.1.83-4.8-3.53-3.45 4.9-.72Z" />
-                    <path class="footer-review-star-half-fill" clip-path="url(#footer-review-half-clip)" d="m12 4.7 2.15 4.43 4.9.72-3.53 3.45.83 4.8L12 16l-4.35 2.1.83-4.8-3.53-3.45 4.9-.72Z" />
-                  </svg>
-                </span>
-              </small>
-            </div>
-          </article>
-          <div class="footer-strip-feature footer-strip-feature--payments">
-            <strong class="footer-strip-pay-label">We accept</strong>
-            <div class="footer-payment-badges" aria-label="Accepted payment methods">
-              <span class="footer-payment-badge footer-payment-badge--visa">
-                <span class="footer-payment-logo footer-payment-logo--visa" aria-hidden="true">VISA</span>
-              </span>
-              <span class="footer-payment-badge footer-payment-badge--mastercard">
-                <span class="footer-payment-mark footer-payment-mark--mc" aria-hidden="true"></span>
-                <span>Mastercard</span>
-              </span>
-              <span class="footer-payment-badge footer-payment-badge--apple">
-                <svg class="footer-payment-logo footer-payment-logo--apple" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M15.18 12.55c.02 2.2 1.93 2.93 1.95 2.94-.02.05-.31 1.04-.99 2.05-.59.88-1.21 1.76-2.19 1.78-.95.02-1.26-.56-2.35-.56-1.09 0-1.44.54-2.33.58-.94.04-1.66-.95-2.26-1.82-1.23-1.79-2.17-5.05-.91-7.22.63-1.08 1.75-1.76 2.97-1.78.92-.02 1.8.62 2.35.62.55 0 1.58-.77 2.66-.65.45.02 1.71.18 2.52 1.36-.07.04-1.49.87-1.47 2.7ZM13.87 6.1c.5-.6.85-1.42.76-2.24-.72.03-1.59.48-2.11 1.08-.46.54-.87 1.38-.76 2.19.79.06 1.6-.4 2.11-1.03Z" />
-                </svg>
-                <span>Apple Pay</span>
-              </span>
-              <span class="footer-payment-badge footer-payment-badge--google">
-                <svg class="footer-payment-logo footer-payment-logo--google" viewBox="0 0 24 24" aria-hidden="true">
-                  <path fill="#4285F4" d="M21.6 12.23c0-.67-.06-1.17-.18-1.7H12v3.21h5.53c-.11.8-.7 2-2.01 2.81l-.02.11 2.61 2.02.18.02c1.69-1.56 2.66-3.85 2.66-6.47Z" />
-                  <path fill="#34A853" d="M12 22c2.7 0 4.96-.9 6.62-2.45l-3.15-2.44c-.84.58-1.96.98-3.47.98-2.64 0-4.88-1.74-5.68-4.15l-.1.01-2.71 2.1-.03.1A10 10 0 0 0 12 22Z" />
-                  <path fill="#FBBC05" d="M6.32 13.94A5.99 5.99 0 0 1 6 12c0-.67.12-1.31.31-1.94l-.01-.13-2.75-2.14-.09.04A10 10 0 0 0 2 12c0 1.59.38 3.09 1.06 4.42l3.26-2.48Z" />
-                  <path fill="#EA4335" d="M12 5.91c1.92 0 3.21.83 3.95 1.52l2.88-2.81C16.96 2.88 14.7 2 12 2a10 10 0 0 0-8.94 5.58l3.18 2.47c.81-2.41 3.05-4.14 5.76-4.14Z" />
-                </svg>
-                <span>Google Pay</span>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <div class="footer-bottom-main">
-            <div class="footer-legal-links">
-              <a href="../privacy/index.html">Privacy</a>
-              <a href="../terms/index.html">Terms</a>
-              <a href="../cookies/index.html">Cookies</a>
-              <a href="../complaints/index.html">Complaints</a>
-            </div>
-            <div class="footer-address">
-              <span class="footer-address-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 21s-5.2-5.07-5.2-10a5.2 5.2 0 1 1 10.4 0c0 4.93-5.2 10-5.2 10Z" />
-                  <circle cx="12" cy="11" r="1.9" />
-                </svg>
-              </span>
-              <p>192A Saint Vincent Street West, Ladywood, Birmingham, West Midlands, B16 8RP</p>
-            </div>
-            <div class="footer-copyright">
-              <p>&copy; 2026 Five Ways Pharmacy. All rights reserved.</p>
-            </div>
-          </div>
-          <a
-            href="https://what3words.com/kick.wounds.neon"
-            class="footer-legal-link--exact-location"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open Five Ways Pharmacy precise what3words location"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 21s-5.2-5.07-5.2-10a5.2 5.2 0 1 1 10.4 0c0 4.93-5.2 10-5.2 10Z" />
-              <circle cx="12" cy="11" r="1.9" />
-            </svg>
-            <span>Exact location</span>
-          </a>
-          <p class="footer-company-details">
-            Owned by P Chand Ltd <span>&bull;</span> Company No. 08464319 <span>&bull;</span> VAT No. 165-9328-77
-          </p>
-        </div>
-      </div>
+  <footer class="checkout-chrome-footer">
+    <div class="container checkout-chrome-footer__inner">
+      <p>&copy; 2026 Five Ways Pharmacy. Registered UK pharmacy.</p>
+      <p>
+        <a href="../privacy/">Privacy</a><span aria-hidden="true">&middot;</span>
+        <a href="../terms/">Terms</a><span aria-hidden="true">&middot;</span>
+        <a href="../cookies/">Cookies</a>
+      </p>
     </div>
   </footer>
-
-  <script>
-    (() => {
-      const sentinel = document.querySelector(".compact-header-sentinel");
-      if (!sentinel) return;
-
-      const stickyOffset = 10;
-      let stickyThreshold = 0;
-      let scrollFrame = null;
-      let measureFrame = null;
-
-      const toggleStickyHeader = (active) => {
-        document.body.classList.toggle("compact-header-active", active);
-      };
-
-      const measureStickyThreshold = () => {
-        stickyThreshold = Math.max(0, Math.round(sentinel.getBoundingClientRect().top + window.scrollY - stickyOffset));
-      };
-
-      const syncStickyHeader = () => {
-        toggleStickyHeader(window.scrollY >= stickyThreshold);
-      };
-
-      const requestStickySync = () => {
-        if (scrollFrame !== null) return;
-
-        scrollFrame = window.requestAnimationFrame(() => {
-          scrollFrame = null;
-          syncStickyHeader();
-        });
-      };
-
-      const requestStickyMeasure = () => {
-        if (measureFrame !== null) return;
-
-        measureFrame = window.requestAnimationFrame(() => {
-          measureFrame = null;
-          measureStickyThreshold();
-          syncStickyHeader();
-        });
-      };
-
-      measureStickyThreshold();
-      syncStickyHeader();
-
-      window.addEventListener("scroll", requestStickySync, { passive: true });
-      window.addEventListener("resize", requestStickyMeasure);
-      window.addEventListener("orientationchange", requestStickyMeasure);
-      window.addEventListener("load", requestStickyMeasure, { once: true });
-    })();
-
-    (() => {
-      const footerAccordions = Array.from(document.querySelectorAll(".footer-nav-accordion"));
-      const footerAccordionViewport = window.matchMedia("(max-width: 980px)");
-      let accordionMode = null;
-
-      if (!footerAccordions.length) return;
-
-      const syncFooterAccordions = () => {
-        const nextMode = footerAccordionViewport.matches ? "mobile" : "desktop";
-        if (nextMode === accordionMode) return;
-
-        accordionMode = nextMode;
-
-        footerAccordions.forEach((accordion) => {
-          if (nextMode === "desktop") {
-            accordion.setAttribute("open", "");
-            return;
-          }
-
-          accordion.removeAttribute("open");
-        });
-      };
-
-      syncFooterAccordions();
-
-      if (typeof footerAccordionViewport.addEventListener === "function") {
-        footerAccordionViewport.addEventListener("change", syncFooterAccordions);
-      } else if (typeof footerAccordionViewport.addListener === "function") {
-        footerAccordionViewport.addListener(syncFooterAccordions);
-      }
-    })();
-
-    (() => {
-      const menuToggle = document.querySelector(".mobile-menu-toggle");
-      const menuShell = document.querySelector(".mobile-menu-shell");
-      const menuDrawer = document.querySelector(".mobile-menu-drawer");
-      const menuOverlay = document.querySelector(".mobile-menu-overlay");
-      const menuClose = document.querySelector(".mobile-menu-close");
-      const menuCloseButton = document.querySelector(".mobile-menu-close-button");
-      const menuGroups = menuShell.querySelectorAll(".mobile-menu-group");
-
-      if (!menuToggle || !menuShell || !menuDrawer || !menuOverlay || !menuClose) return;
-
-      const mobileViewport = window.matchMedia("(max-width: 768px)");
-      let lastFocusedElement = null;
-
-      const closeMenu = ({ restoreFocus = true } = {}) => {
-        document.body.classList.remove("mobile-menu-open");
-        menuShell.setAttribute("aria-hidden", "true");
-        menuDrawer.setAttribute("aria-hidden", "true");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuGroups.forEach((group) => {
-          if (group instanceof HTMLDetailsElement) {
-            group.open = false;
-          }
-        });
-
-        if (restoreFocus && lastFocusedElement instanceof HTMLElement) {
-          lastFocusedElement.focus();
-        }
-
-        lastFocusedElement = null;
-      };
-
-      const openMenu = () => {
-        if (!mobileViewport.matches) return;
-
-        lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-
-        document.body.classList.add("mobile-menu-open");
-        menuShell.setAttribute("aria-hidden", "false");
-        menuDrawer.setAttribute("aria-hidden", "false");
-        menuToggle.setAttribute("aria-expanded", "true");
-
-        requestAnimationFrame(() => {
-          menuClose.focus();
-        });
-      };
-
-      const toggleMenu = () => {
-        if (document.body.classList.contains("mobile-menu-open")) {
-          closeMenu();
-          return;
-        }
-
-        openMenu();
-      };
-
-      menuToggle.addEventListener("click", toggleMenu);
-      menuClose.addEventListener("click", () => closeMenu());
-      menuCloseButton?.addEventListener("click", () => closeMenu());
-      menuOverlay.addEventListener("click", () => closeMenu({ restoreFocus: false }));
-
-      menuShell.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => closeMenu({ restoreFocus: false }));
-      });
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && document.body.classList.contains("mobile-menu-open")) {
-          closeMenu();
-        }
-      });
-
-      const syncMenuToViewport = () => {
-        if (mobileViewport.matches) return;
-        closeMenu({ restoreFocus: false });
-      };
-
-      if (typeof mobileViewport.addEventListener === "function") {
-        mobileViewport.addEventListener("change", syncMenuToViewport);
-      } else if (typeof mobileViewport.addListener === "function") {
-        mobileViewport.addListener(syncMenuToViewport);
-      }
-    })();
-  </script>
-  <script>
-    (() => {
-      const closableDetails = Array.from(document.querySelectorAll(".top-strip-hours-dropdown, .header-phone-dropdown"));
-      if (!closableDetails.length) return;
-      const phoneDropdowns = closableDetails.filter((dropdown) => dropdown.classList.contains("header-phone-dropdown"));
-      const phoneTimers = new WeakMap();
-
-      const clearPhoneTimer = (dropdown) => {
-        const timer = phoneTimers.get(dropdown);
-        if (typeof timer === "number") {
-          window.clearTimeout(timer);
-          phoneTimers.delete(dropdown);
-        }
-      };
-
-      const queuePhoneAutoClose = (dropdown) => {
-        clearPhoneTimer(dropdown);
-        if (!dropdown.open) return;
-
-        const timer = window.setTimeout(() => {
-          dropdown.open = false;
-          phoneTimers.delete(dropdown);
-        }, 5000);
-
-        phoneTimers.set(dropdown, timer);
-      };
-
-      const closeOpenDetails = (target) => {
-        closableDetails.forEach((dropdown) => {
-          if (!dropdown.open) return;
-          if (target instanceof Node && dropdown.contains(target)) return;
-          clearPhoneTimer(dropdown);
-          dropdown.open = false;
-        });
-      };
-
-      phoneDropdowns.forEach((dropdown) => {
-        dropdown.addEventListener("toggle", () => {
-          if (!dropdown.open) {
-            clearPhoneTimer(dropdown);
-            return;
-          }
-
-          queuePhoneAutoClose(dropdown);
-        });
-      });
-
-      document.addEventListener("pointerdown", (event) => {
-        const target = event.target;
-        if (!(target instanceof Node)) return;
-        closeOpenDetails(target);
-      });
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key !== "Escape") return;
-        closeOpenDetails(null);
-      });
-    })();
-  </script>
-  <script>
-    (() => {
-      const desktopMedia = window.matchMedia("(min-width: 981px)");
-      const dropdown = document.querySelector(".category-pill-dropdown--prescriptions");
-      const trigger = dropdown?.querySelector("button");
-      if (!dropdown || !(trigger instanceof HTMLButtonElement)) return;
-
-      let autoCloseTimer = null;
-
-      const clearAutoClose = () => {
-        if (typeof autoCloseTimer === "number") {
-          window.clearTimeout(autoCloseTimer);
-          autoCloseTimer = null;
-        }
-      };
-
-      const setExpanded = (expanded) => {
-        trigger.setAttribute("aria-expanded", expanded ? "true" : "false");
-      };
-
-      const closeDropdown = () => {
-        clearAutoClose();
-        setExpanded(false);
-
-        if (
-          desktopMedia.matches &&
-          dropdown.contains(document.activeElement) &&
-          document.activeElement instanceof HTMLElement
-        ) {
-          document.activeElement.blur();
-        }
-      };
-
-      const queueAutoClose = () => {
-        clearAutoClose();
-        if (!desktopMedia.matches || dropdown.matches(":hover")) return;
-
-        autoCloseTimer = window.setTimeout(() => {
-          closeDropdown();
-        }, 5000);
-      };
-
-      trigger.addEventListener("click", () => {
-        if (!desktopMedia.matches) return;
-        setExpanded(true);
-        queueAutoClose();
-      });
-
-      dropdown.addEventListener("focusin", () => {
-        if (!desktopMedia.matches) return;
-        setExpanded(true);
-        queueAutoClose();
-      });
-
-      dropdown.addEventListener("focusout", () => {
-        if (!desktopMedia.matches) return;
-
-        window.setTimeout(() => {
-          if (dropdown.contains(document.activeElement)) return;
-          if (dropdown.matches(":hover")) {
-            setExpanded(true);
-            return;
-          }
-
-          setExpanded(false);
-        }, 0);
-      });
-
-      dropdown.addEventListener("pointerenter", () => {
-        if (!desktopMedia.matches) return;
-        clearAutoClose();
-        setExpanded(true);
-      });
-
-      dropdown.addEventListener("pointerleave", () => {
-        if (!desktopMedia.matches) return;
-        closeDropdown();
-      });
-
-      document.addEventListener("pointerdown", (event) => {
-        if (!desktopMedia.matches) return;
-        const target = event.target;
-        if (!(target instanceof Node)) return;
-        if (dropdown.contains(target)) return;
-        closeDropdown();
-      });
-
-      window.addEventListener("scroll", () => {
-        if (!desktopMedia.matches) return;
-        closeDropdown();
-      }, { passive: true });
-
-      document.addEventListener("keydown", (event) => {
-        if (!desktopMedia.matches) return;
-        if (event.key !== "Escape") return;
-        closeDropdown();
-      });
-
-      if (typeof desktopMedia.addEventListener === "function") {
-        desktopMedia.addEventListener("change", (event) => {
-          if (event.matches) return;
-          closeDropdown();
-        });
-      } else if (typeof desktopMedia.addListener === "function") {
-        desktopMedia.addListener((event) => {
-          if (event.matches) return;
-          closeDropdown();
-        });
-      }
-    })();
-  </script>
-
   <script src="/cookie-consent.js" defer></script>
-  <script src="/auth-config.js"></script>
-  <script src="/auth-header.js" defer></script>
 </body>
 </html>
