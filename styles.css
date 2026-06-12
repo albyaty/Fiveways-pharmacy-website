@@ -5757,6 +5757,16 @@ main {
   line-height: 1.56;
 }
 
+.support-form-status.is-success {
+  color: var(--deep-teal-strong);
+  font-weight: 600;
+}
+
+.support-form-status.is-error {
+  color: #b8423d;
+  font-weight: 600;
+}
+
 .support-form-note {
   margin-top: 0.88rem;
 }

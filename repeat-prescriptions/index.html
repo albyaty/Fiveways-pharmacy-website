@@ -575,10 +575,14 @@
           </article>
         </div>
         <p class="support-form-note">
-          Online nomination requests are not live yet. Please call or email Five Ways Pharmacy if you would like help with
-          your nomination request in the meantime.
+          Complete the form below and your nomination request is sent securely to the Five Ways Pharmacy team, who will be
+          in touch to confirm. You can also call or email us if you prefer.
         </p>
-        <form action="#" method="post" aria-describedby="prescription-nomination-status">
+        <form id="nomination-request-form" action="/api/submit-nomination" method="post" aria-describedby="prescription-nomination-status">
+          <!-- Honeypot: hidden from users, catches bots. Do not remove. -->
+          <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+            <label>Company<input type="text" name="company" tabindex="-1" autocomplete="off" /></label>
+          </div>
           <div class="support-form-grid">
             <div class="support-form-field">
               <label for="nomination-full-name">Full name</label>
@@ -647,7 +651,7 @@
             <div class="support-form-actions">
               <button class="service-detail-button service-detail-button--primary support-form-button" type="submit" disabled>Submit nomination request</button>
               <p class="support-form-status" id="prescription-nomination-status">
-                Online nomination requests are not live yet. Please call or email Five Ways Pharmacy for nomination support.
+                Your details are sent securely to the Five Ways Pharmacy team, who will contact you to confirm your nomination.
               </p>
             </div>
           </div>
@@ -1288,6 +1292,72 @@
   <script src="/cookie-consent.js" defer></script>
   <script src="/auth-config.js"></script>
   <script src="/auth-header.js" defer></script>
+  <!-- Nomination form submission: posts the fields to /api/submit-nomination
+       which emails them to the pharmacy. The submit button is enabled only
+       once both consent boxes are ticked. -->
+  <script>
+    (function () {
+      var form = document.getElementById("nomination-request-form");
+      if (!form) return;
+      var btn = form.querySelector('button[type="submit"]');
+      var status = document.getElementById("prescription-nomination-status");
+      var consent = form.querySelector("#nomination-consent");
+      var privacy = form.querySelector("#nomination-privacy");
+
+      function refreshEnabled() {
+        if (btn) btn.disabled = !(consent && consent.checked && privacy && privacy.checked);
+      }
+      [consent, privacy].forEach(function (c) {
+        if (c) c.addEventListener("change", refreshEnabled);
+      });
+      refreshEnabled();
+
+      function setStatus(msg, kind) {
+        if (!status) return;
+        status.textContent = msg;
+        status.classList.remove("is-error", "is-success");
+        if (kind) status.classList.add(kind === "error" ? "is-error" : "is-success");
+      }
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        var payload = {
+          form_name: "Repeat prescription nomination",
+          full_name: (form.full_name || {}).value || "",
+          date_of_birth: (form.date_of_birth || {}).value || "",
+          email: (form.email || {}).value || "",
+          phone: (form.phone || {}).value || "",
+          home_address: (form.home_address || {}).value || "",
+          postcode: (form.postcode || {}).value || "",
+          gp_surgery_name: (form.gp_surgery_name || {}).value || "",
+          current_nominated_pharmacy: (form.current_nominated_pharmacy || {}).value || "",
+          repeat_medication_names: (form.repeat_medication_names || {}).value || "",
+          preferred_contact: (form.preferred_contact || {}).value || "",
+          nomination_consent: !!(consent && consent.checked),
+          nomination_privacy: !!(privacy && privacy.checked),
+          company: (form.company || {}).value || "" // honeypot
+        };
+        if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+        setStatus("Sending your nomination request...");
+        try {
+          var res = await fetch("/api/submit-nomination", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          var data = await res.json().catch(function () { return {}; });
+          if (!res.ok) throw new Error(data.error || "Something went wrong.");
+          form.reset();
+          refreshEnabled();
+          if (btn) btn.textContent = "Submit nomination request";
+          setStatus("Thank you. Your nomination request has been sent. The pharmacy team will be in touch to confirm.", "success");
+        } catch (err) {
+          if (btn) { btn.disabled = false; btn.textContent = "Submit nomination request"; }
+          setStatus((err && err.message) || "Could not send your request. Please call the pharmacy.", "error");
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
 
