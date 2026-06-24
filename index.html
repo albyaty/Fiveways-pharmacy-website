@@ -286,6 +286,17 @@
             </svg>
             <span>Flu Vaccines (Autumn)</span>
           </a>
+          <a href="meningitis-vaccines/">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M15.5 5.25 18.75 8.5" />
+              <path d="M8.4 15.85 15 9.25" />
+              <path d="M6.4 17.85 8.4 15.85" />
+              <path d="M12.9 7.35 16.65 11.1" />
+              <path d="M9.55 18.45 5.9 20.1l1.65-3.65" />
+            </svg>
+            <span>Meningitis Vaccines</span>
+            <span class="category-pill-soon-badge">Soon</span>
+          </a>
           <a href="#" class="category-pill-popular">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 4.75 13.35 9l4.25 1.35-4.25 1.35L12 15.95 10.65 11.7 6.4 10.35 10.65 9 12 4.75Z" />
@@ -480,7 +491,7 @@
 
         <section class="hero-panel hero-carousel" role="region" aria-roledescription="carousel" aria-label="Featured pharmacy services">
           <div class="hero-carousel__slides">
-            <div class="hero-carousel__slide is-active" data-slide-title="Pharmacy First Services" aria-hidden="false">
+            <div class="hero-carousel__slide is-active" data-slide-title="Pharmacy First Services" data-show-disclaimer="true" aria-hidden="false">
               <a class="hero-carousel__slide-link" href="pharmacy-first/" aria-label="Pharmacy First Services">
                 <img
                   src="./assets/images/carousel/hero-pharmacy-first.webp"
@@ -494,7 +505,7 @@
               </a>
             </div>
 
-            <div class="hero-carousel__slide" data-slide-title="Stop Smoking Clinic" aria-hidden="true">
+            <div class="hero-carousel__slide" data-slide-title="Stop Smoking Clinic" data-show-disclaimer="true" aria-hidden="true">
               <img
                 src="./assets/images/carousel/hero-stop-smoking.webp"
                 alt="Stop Smoking Clinic support banner"
@@ -1714,6 +1725,7 @@
       const prevButton = carousel.querySelector(".hero-carousel__arrow--prev");
       const nextButton = carousel.querySelector(".hero-carousel__arrow--next");
       const status = carousel.querySelector(".hero-carousel__status");
+      const disclaimers = Array.from(document.querySelectorAll(".hero-carousel-disclaimer--mobile, .hero-carousel-disclaimer-shell"));
       const mobileCarouselViewport = window.matchMedia("(max-width: 768px)");
 
       if (!slides.length || !dots.length || !prevButton || !nextButton) return;
@@ -1738,6 +1750,8 @@
 
       const updateSlides = (nextIndex) => {
         activeIndex = (nextIndex + slides.length) % slides.length;
+        const activeSlide = slides[activeIndex];
+        const showDisclaimer = activeSlide.dataset.showDisclaimer === "true";
 
         slides.forEach((slide, index) => {
           const isActive = index === activeIndex;
@@ -1752,8 +1766,12 @@
         });
 
         if (status) {
-          status.textContent = `Showing ${slides[activeIndex].dataset.slideTitle} slide`;
+          status.textContent = `Showing ${activeSlide.dataset.slideTitle} slide`;
         }
+
+        disclaimers.forEach((element) => {
+          element.hidden = !showDisclaimer;
+        });
       };
 
       const clearAutoplay = () => {

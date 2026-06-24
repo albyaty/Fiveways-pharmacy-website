@@ -941,6 +941,21 @@ svg {
   letter-spacing: 0.03em;
 }
 
+.category-pill-soon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 18px;
+  padding: 0 0.38rem;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--secondary-rgb), 0.22);
+  background: rgba(var(--secondary-rgb), 0.1);
+  color: var(--deep-teal);
+  font-size: 0.61rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+}
+
 .category-pill-dropdown-actions .category-pill-dropdown-link {
   min-height: 34px;
   padding: 0 0.64rem;
@@ -1772,6 +1787,11 @@ main {
 
 .hero-carousel-disclaimer.hero-carousel-disclaimer--mobile {
   display: none;
+}
+
+.hero-carousel-disclaimer-shell[hidden],
+.home-showcase.hero .hero-carousel-disclaimer.hero-carousel-disclaimer--mobile[hidden] {
+  display: none !important;
 }
 
 .mobile-prescriptions-chooser {
@@ -5434,6 +5454,67 @@ main {
   margin-top: 0.62rem;
 }
 
+.service-detail-page--covid-vaccines .covid-vaccines-availability-note {
+  display: flex;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  padding: 1.02rem 1.28rem 1.08rem 1.4rem;
+}
+
+.service-detail-page--covid-vaccines .covid-vaccines-availability-note .hero-carousel-disclaimer__text {
+  margin-top: 0;
+}
+
+.service-detail-page--covid-vaccines .covid-vaccines-availability-note--desktop .hero-carousel-disclaimer__text {
+  font-size: 0.93rem;
+  line-height: 1.64;
+}
+
+.service-detail-page--covid-vaccines .covid-vaccines-availability-note--desktop {
+  border-radius: 18px;
+}
+
+.service-detail-page--covid-vaccines .covid-vaccines-availability-note--mobile {
+  display: none;
+}
+
+.service-detail-page--flu-vaccines .flu-vaccines-booking-windows-card {
+  display: grid;
+  gap: 0.86rem;
+}
+
+.service-detail-page--flu-vaccines .service-detail-hero > .flu-vaccines-booking-windows-card {
+  margin-top: 0.92rem;
+}
+
+.service-detail-page--flu-vaccines .flu-vaccines-booking-windows-card__columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.82rem;
+}
+
+.service-detail-page--flu-vaccines .flu-vaccines-booking-windows-card__group {
+  display: grid;
+  align-content: start;
+}
+
+.service-detail-page--flu-vaccines .flu-vaccines-booking-windows-card__footer {
+  display: grid;
+  gap: 0.82rem;
+}
+
+.service-detail-page--flu-vaccines .flu-vaccines-booking-windows-card .service-detail-bullet-list {
+  margin-top: 0.42rem;
+}
+
+.service-detail-page--flu-vaccines .flu-vaccines-booking-windows-card__note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.62;
+}
+
 .service-detail-page--emergency-prescriptions .prescriptions-emergency-pharmacy-strip {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.12fr);
@@ -5980,6 +6061,18 @@ main {
   .service-detail-page--repeat-prescriptions .prescriptions-hero-support-strip,
   .service-detail-page--repeat-prescriptions .prescriptions-form-intro {
     grid-template-columns: 1fr;
+  }
+
+  .service-detail-page--flu-vaccines .flu-vaccines-booking-windows-card__columns {
+    grid-template-columns: 1fr;
+  }
+
+  .service-detail-page--covid-vaccines .covid-vaccines-availability-note--desktop {
+    display: none;
+  }
+
+  .service-detail-page--covid-vaccines .covid-vaccines-availability-note--mobile {
+    display: flex;
   }
 
   .service-detail-page--emergency-prescriptions .prescriptions-emergency-pharmacy-strip {
