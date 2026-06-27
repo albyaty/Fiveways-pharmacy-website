@@ -5515,6 +5515,15 @@ main {
   line-height: 1.62;
 }
 
+.service-detail-page--flu-vaccines #flu-booking-options {
+  scroll-margin-top: 8rem;
+}
+
+.service-detail-page--flu-vaccines #flu-booking-options .service-detail-info-card .service-detail-action-row--cta {
+  justify-content: center;
+  margin-top: 1.1rem;
+}
+
 .service-detail-page--emergency-prescriptions .prescriptions-emergency-pharmacy-strip {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.12fr);
@@ -6285,6 +6294,12 @@ main {
 
   .service-detail-action-row--cta .service-detail-button {
     width: 100%;
+  }
+
+  .service-detail-page--flu-vaccines #flu-booking-options .service-detail-info-card .service-detail-action-row--cta .service-detail-button {
+    font-size: 0.8rem;
+    padding-inline: 0.84rem;
+    white-space: nowrap;
   }
 
   .service-detail-action-row--hero-process {
