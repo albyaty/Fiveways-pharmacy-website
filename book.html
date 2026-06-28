@@ -61,7 +61,7 @@
       </header>
 
       <!-- Service cards. Rendered by book.js from services.js. Each card's
-           "Book" button carries a data-cal-link attribute; the click
+           "Book" button carries a data-fw-cal attribute; the click
            handler at the bottom of this file opens the cal.eu modal for
            just that one service -- no full-profile picker, no leaving
            the page. -->
@@ -90,13 +90,16 @@
     </div>
   </footer>
 
-  <!-- cal.eu modal embed + improved click / close handlers.
-       - Forces light theme on Cal("ui") AND on every modal call so the
-         calendar can't fall back to dark mode from prefers-color-scheme.
-       - Also paints the same teal palette under the "dark" theme so the
-         appearance is identical even if cal.eu insists on dark.
-       - Adds Escape-to-close and click-on-backdrop-to-close handlers as
-         reliable single-click alternatives to cal.eu's own X button. -->
+  <!-- cal.eu modal embed (single handler).
+       - Our click handler is the ONLY opener: triggers use a data-fw-cal
+         attribute (not cal's data-cal-link) so cal.eu's built-in auto-binder
+         does not also fire and open a second, duplicate modal. The duplicate
+         was the cause of the leftover grey backdrop on close.
+       - Forces light theme and paints the teal palette so the calendar can't
+         fall back to dark mode from prefers-color-scheme.
+       - cal.eu only closes via its own X button, so we add Escape and
+         click-on-backdrop close that remove every modal box and restore page
+         scroll -- with a single modal this leaves no leftover grey layer. -->
   <script type="text/javascript">
     (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.eu/embed/embed.js", "init");
 
@@ -134,38 +137,29 @@
     }
 
     document.addEventListener("click", function (e) {
-      var trigger = e.target.closest && e.target.closest("[data-cal-link]");
+      var trigger = e.target.closest && e.target.closest("[data-fw-cal]");
       if (!trigger || !window.Cal) return;
       e.preventDefault();
-      var calLink = trigger.getAttribute("data-cal-link");
+      var calLink = trigger.getAttribute("data-fw-cal");
       var rawConfig = trigger.getAttribute("data-cal-config");
       var extra = null;
       if (rawConfig) { try { extra = JSON.parse(rawConfig); } catch (err) {} }
       openCal(calLink, extra);
     });
 
-    // ---- Single-click close helpers (work around cal.eu's double-click X) ----
-
-    // 1) Escape always closes the modal.
-    document.addEventListener("keydown", function (e) {
-      if (e.key !== "Escape") return;
-      var modal = document.querySelector("cal-modal-box, [data-cal-namespace] cal-modal-box, body > cal-modal-box");
-      if (modal && modal.remove) { modal.remove(); document.body.style.overflow = ""; }
-    });
-
-    // 2) Click on the dark backdrop (outside the calendar box) closes it.
+    // cal.eu only closes via its own X button, so add Escape + click-on-backdrop
+    // close. Remove EVERY cal modal box (and restore page scroll) so no grey
+    // backdrop layer is ever left behind.
+    function fwCloseCalModal() {
+      var boxes = document.querySelectorAll("cal-modal-box");
+      if (!boxes.length) return;
+      boxes.forEach(function (b) { if (b && b.remove) b.remove(); });
+      document.body.style.overflow = "";
+    }
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") fwCloseCalModal(); });
     document.addEventListener("click", function (e) {
       var t = e.target;
-      if (!t || !t.tagName) return;
-      var tag = t.tagName.toLowerCase();
-      // cal.eu uses a custom <cal-modal-box> element with the calendar inside.
-      // The backdrop is the host element; clicks on it (not its children)
-      // should dismiss. Also handles cases where the dark overlay is its own
-      // element with a known class.
-      if (tag === "cal-modal-box" || (t.className && typeof t.className === "string" && t.className.indexOf("cal-modal-overlay") !== -1)) {
-        var modal = document.querySelector("cal-modal-box");
-        if (modal && modal.remove) { modal.remove(); document.body.style.overflow = ""; }
-      }
+      if (t && t.tagName && t.tagName.toLowerCase() === "cal-modal-box") fwCloseCalModal();
     });
   </script>
 

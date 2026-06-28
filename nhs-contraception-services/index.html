@@ -537,7 +537,7 @@
                   <h3>Free discreet online pharmacist support from home.</h3>
                   <p>If treatment is suitable and supplied, prescription delivery is free.</p>
                 </div>
-                <a href="../book.html" class="service-detail-button service-detail-button--secondary" data-cal-link="albayatilabs/nhs-contraception-service" data-cal-config='{"layout":"month_view"}'>
+                <a href="../book.html" class="service-detail-button service-detail-button--secondary" data-fw-cal="albayatilabs/nhs-contraception-service" data-cal-config='{"layout":"month_view"}'>
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <rect x="4.75" y="5.5" width="14.5" height="13.5" rx="2.2" />
                     <path d="M8 3.75v3.1" />
@@ -715,7 +715,7 @@
         <p>Book a free online NHS Contraception consultation with Five Ways Pharmacy and we&rsquo;ll guide you through the next step.</p>
       </div>
       <div class="service-detail-action-row service-detail-action-row--cta">
-        <a href="../book.html" class="service-detail-button service-detail-button--primary" data-cal-link="albayatilabs/nhs-contraception-service" data-cal-config='{"layout":"month_view"}'>Book a free online NHS Contraception consultation</a>
+        <a href="../book.html" class="service-detail-button service-detail-button--primary" data-fw-cal="albayatilabs/nhs-contraception-service" data-cal-config='{"layout":"month_view"}'>Book a free online NHS Contraception consultation</a>
         <a href="tel:+441216302680" class="service-detail-button service-detail-button--primary">Call Five Ways Pharmacy</a>
       </div>
     </div>
@@ -1611,15 +1611,16 @@
       window.Cal("modal", { calLink: calLink, config: config });
     }
     document.addEventListener("click", function (e) {
-      var trigger = e.target.closest && e.target.closest("[data-cal-link]");
+      var trigger = e.target.closest && e.target.closest("[data-fw-cal]");
       if (!trigger || !window.Cal) return;
       e.preventDefault();
       var extra = null; var raw = trigger.getAttribute("data-cal-config");
       if (raw) { try { extra = JSON.parse(raw); } catch (err) {} }
-      openCal(trigger.getAttribute("data-cal-link"), extra);
+      openCal(trigger.getAttribute("data-fw-cal"), extra);
     });
-    document.addEventListener("keydown", function (e) { if (e.key !== "Escape") return; var m = document.querySelector("cal-modal-box"); if (m && m.remove) { m.remove(); document.body.style.overflow = ""; } });
-    document.addEventListener("click", function (e) { var t = e.target; if (!t || !t.tagName) return; if (t.tagName.toLowerCase() === "cal-modal-box") { var m = document.querySelector("cal-modal-box"); if (m && m.remove) { m.remove(); document.body.style.overflow = ""; } } });
+    function fwCloseCalModal() { var boxes = document.querySelectorAll("cal-modal-box"); if (!boxes.length) return; boxes.forEach(function (b) { if (b && b.remove) b.remove(); }); document.body.style.overflow = ""; }
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") fwCloseCalModal(); });
+    document.addEventListener("click", function (e) { var t = e.target; if (t && t.tagName && t.tagName.toLowerCase() === "cal-modal-box") fwCloseCalModal(); });
   </script>
 </body>
 </html>

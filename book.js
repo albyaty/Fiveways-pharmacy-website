@@ -2,9 +2,10 @@
   "use strict";
 
   // Renders the service cards on book.html. Each card's "Book" button gets
-  // a data-cal-link attribute pointing at this service's cal.eu event
-  // slug. The page-level click handler in book.html catches those clicks
-  // and opens the cal.eu modal for the picked service.
+  // a data-fw-cal attribute pointing at this service's cal.eu event slug.
+  // We use data-fw-cal (not cal's own data-cal-link) so cal.eu's built-in
+  // auto-binder does not also fire; the page-level click handler in
+  // book.html is the sole opener of the cal.eu modal for the picked service.
   //
   // To change which services appear here, edit services.js (and create
   // matching event types in cal.eu). No change needed in this file.
@@ -50,7 +51,7 @@
             <button
               type="button"
               class="book-card__cta"
-              data-cal-link="${escapeHtml(calLink)}"
+              data-fw-cal="${escapeHtml(calLink)}"
               data-cal-config='{"layout":"month_view"}'
               aria-label="Book a ${escapeHtml(s.name)} appointment"
             >
