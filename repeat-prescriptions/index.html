@@ -1363,6 +1363,10 @@
         if (!status) return;
         status.textContent = msg;
         status.classList.remove("is-error", "is-success");
+        status.style.color = kind === "success" &&
+          msg === "Thank you. Your nomination request has been sent. The pharmacy team will be in touch to confirm."
+          ? "#c23333"
+          : "";
         if (kind) status.classList.add(kind === "error" ? "is-error" : "is-success");
       }
 
