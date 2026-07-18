@@ -319,13 +319,6 @@
       </div>
     </div>
   </header>
-  <!-- Temporary emergency closure banner - remove when pharmacy reopens. -->
-  <section class="temporary-closure-site-banner" aria-label="Temporary pharmacy closure notice">
-    <div class="temporary-closure-site-banner__inner container">
-      <p class="temporary-closure-site-banner__text">Temporary closure: Five Ways Pharmacy is currently closed following a fire at our premises. We expect to reopen from 9:00 a.m. on Monday, 13th July. If you need medication before then, please contact NHS 111 and request an emergency prescription.</p>
-    </div>
-  </section>
-
   <div class="mobile-menu-shell" aria-hidden="true">
     <button class="mobile-menu-overlay" type="button" aria-label="Close menu"></button>
     <aside
@@ -631,22 +624,7 @@
           Complete the form below and your nomination request is sent securely to the Five Ways Pharmacy team, who will be
           in touch to confirm. You can also call or email us if you prefer.
         </p>
-        <!-- Temporary emergency closure notice — remove when pharmacy reopens. -->
-        <div class="service-detail-alert temporary-closure-form-notice" id="prescription-nomination-closure-note" aria-label="Temporary prescription nomination closure notice">
-          <span class="service-detail-alert__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <path d="M12 8v5" />
-              <path d="M12 17.25h.01" />
-              <path d="M10.06 4.72 3.9 15.2A1.9 1.9 0 0 0 5.54 18h12.92a1.9 1.9 0 0 0 1.64-2.8L13.94 4.72a1.9 1.9 0 0 0-3.88 0Z" />
-            </svg>
-          </span>
-          <div class="service-detail-alert__copy">
-            <p>
-              Repeat prescription nomination requests are temporarily unavailable while the pharmacy is closed. If you require medication before we reopen, please contact NHS 111 and request an emergency prescription.
-            </p>
-          </div>
-        </div>
-        <form id="nomination-request-form" action="/api/submit-nomination" method="post" aria-describedby="prescription-nomination-status prescription-nomination-closure-note" data-temporary-closure-active="true">
+        <form id="nomination-request-form" action="/api/submit-nomination" method="post" aria-describedby="prescription-nomination-status">
           <!-- Honeypot: hidden from users, catches bots. Do not remove. -->
           <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
             <label>Company<input type="text" name="company" tabindex="-1" autocomplete="off" /></label>
@@ -1367,9 +1345,6 @@
     (function () {
       var form = document.getElementById("nomination-request-form");
       if (!form) return;
-      // Temporary emergency closure notice — remove when pharmacy reopens.
-      var temporaryClosureActive = form.getAttribute("data-temporary-closure-active") === "true";
-      var temporaryClosureMessage = "Repeat prescription nomination requests are temporarily unavailable while the pharmacy is closed. If you require medication before we reopen, please contact NHS 111 and request an emergency prescription.";
       var btn = form.querySelector('button[type="submit"]');
       var status = document.getElementById("prescription-nomination-status");
       var consent = form.querySelector("#nomination-consent");
@@ -1377,10 +1352,6 @@
 
       function refreshEnabled() {
         if (!btn) return;
-        if (temporaryClosureActive) {
-          btn.disabled = true;
-          return;
-        }
         btn.disabled = !(consent && consent.checked && privacy && privacy.checked);
       }
       [consent, privacy].forEach(function (c) {
@@ -1401,14 +1372,6 @@
 
       form.addEventListener("submit", async function (e) {
         e.preventDefault();
-        if (temporaryClosureActive) {
-          if (btn) {
-            btn.disabled = true;
-            btn.textContent = "Submit nomination request";
-          }
-          setStatus(temporaryClosureMessage, "error");
-          return;
-        }
         var payload = {
           form_name: "Repeat prescription nomination",
           full_name: (form.full_name || {}).value || "",
