@@ -8,7 +8,7 @@
   <title>Meningitis B Vaccines | Five Ways Pharmacy</title>
   <meta
     name="description"
-    content="Meningitis vaccination services are being prepared and are not currently available to book or access through Five Ways Pharmacy. Contact the pharmacy team for general enquiries."
+    content="Book eligible NHS Meningitis B vaccination appointments at Five Ways Pharmacy from 20 July 2026 to 31 March 2027, subject to NHS guidance, vaccine supply, and appointment capacity."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -297,7 +297,6 @@
               <path d="M9.55 18.45 5.9 20.1l1.65-3.65" />
             </svg>
             <span>Meningitis B Vaccines</span>
-            <span class="category-pill-soon-badge">Soon</span>
           </a>
           <a href="#" class="category-pill-popular">
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -474,16 +473,39 @@
             <span aria-hidden="true">/</span>
             <span aria-current="page">Meningitis B Vaccines</span>
           </nav>
-          <span class="section-kicker">Coming soon</span>
+          <span class="section-kicker">NHS vaccination appointments</span>
           <h1>Meningitis B Vaccines</h1>
           <p>
-            Meningitis vaccination services are being prepared and are not currently available to book or access through
-            Five Ways Pharmacy.
+            Five Ways Pharmacy offers NHS Meningitis B vaccination appointments from 20 July 2026 to 31 March 2027.
+          </p>
+          <article class="service-detail-info-card">
+            <h2>Who can book?</h2>
+            <p>
+              Please book only if you are eligible for the NHS MenB vaccination programme.
+            </p>
+            <p>
+              You may be eligible if you are:
+            </p>
+            <ul class="service-detail-checklist">
+              <li>born between 1 September 2007 and 31 August 2008</li>
+              <li>born on or after 21 July 2001 and starting undergraduate university for the first time in autumn 2026</li>
+              <li>born on or after 21 July 2001 and moving into further education accommodation or halls of residence for the first time in autumn 2026</li>
+            </ul>
+          </article>
+          <p>
+            Appointments are available Monday to Friday, 12:00 p.m. to 5:00 p.m., subject to NHS guidance, vaccine supply, and pharmacy appointment capacity.
           </p>
           <p>
-            Please check back later or contact the pharmacy team for general enquiries.
+            If you are booking as a university or further education student, please bring evidence of your university or college offer to your appointment.
+          </p>
+          <p>
+            The NHS MenB programme usually involves two doses. The pharmacy team will advise you about the second dose when you attend.
+          </p>
+          <p class="service-detail-action-note">
+            Not sure if you are eligible? Call the pharmacy before booking.
           </p>
           <div class="service-detail-action-row">
+            <a href="../book.html" class="service-detail-button service-detail-button--primary" data-cal-link="albayatilabs/meningitis-b-vaccines" data-cal-config='{"layout":"month_view"}'>Book Meningitis B vaccine</a>
             <a href="tel:+441216302680" class="service-detail-button service-detail-button--primary">Call Five Ways Pharmacy</a>
           </div>
         </div>
@@ -493,9 +515,11 @@
             <div class="service-detail-hero-card__body">
               <p class="service-detail-hero-card__eyebrow">At a glance</p>
               <ul class="service-detail-checklist">
-                <li>Coming soon</li>
-                <li>Not currently available to book or access through Five Ways Pharmacy</li>
-                <li>Contact the pharmacy team for general enquiries</li>
+                <li>NHS MenB vaccination appointments from 20 July 2026 to 31 March 2027.</li>
+                <li>Please book only if you are eligible for the NHS MenB vaccination programme.</li>
+                <li>Appointments are available Monday to Friday, 12:00 p.m. to 5:00 p.m.</li>
+                <li>University or further education students should bring evidence of their offer.</li>
+                <li>The NHS MenB programme usually involves two doses.</li>
               </ul>
             </div>
           </aside>
@@ -1081,6 +1105,30 @@
   <script src="/cookie-consent.js" defer></script>
   <script src="/auth-config.js"></script>
   <script src="/auth-header.js" defer></script>
+  <!-- cal.eu modal embed + click/close handlers. -->
+  <script type="text/javascript">
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.eu/embed/embed.js", "init");
+    var FIVEWAYS_CAL_VARS = { "cal-brand": "#0f757b", "cal-bg-emphasis": "#eaf4f5", "cal-bg": "#ffffff", "cal-bg-muted": "#f7fbfb", "cal-text": "#274b50", "cal-text-emphasis": "#0a666b", "cal-text-muted": "#5a7a7e", "cal-border": "#bdd4d7", "cal-border-subtle": "#e0eeef", "cal-border-emphasis": "#89b7bc" };
+    Cal("init", { origin: "https://cal.eu" });
+    Cal("ui", { theme: "light", hideEventTypeDetails: false, layout: "month_view", cssVarsPerTheme: { light: FIVEWAYS_CAL_VARS, dark: FIVEWAYS_CAL_VARS } });
+    function openCal(calLink, extraConfig) {
+      var config = Object.assign({ layout: "month_view", theme: "light" }, extraConfig || {});
+      if (window.FW_SESSION_USER) { if (window.FW_SESSION_USER.name) config.name = window.FW_SESSION_USER.name; if (window.FW_SESSION_USER.email) config.email = window.FW_SESSION_USER.email; }
+      window.Cal("modal", { calLink: calLink, config: config });
+    }
+    document.addEventListener("click", function (e) {
+      var trigger = e.target.closest && e.target.closest("[data-cal-link]");
+      if (!trigger || !window.Cal) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      var extra = null; var raw = trigger.getAttribute("data-cal-config");
+      if (raw) { try { extra = JSON.parse(raw); } catch (err) {} }
+      openCal(trigger.getAttribute("data-cal-link"), extra);
+    }, true);
+    function fwCloseCalModal() { var boxes = document.querySelectorAll("cal-modal-box"); if (!boxes.length) return; boxes.forEach(function (b) { if (b && b.remove) b.remove(); }); document.body.style.overflow = ""; }
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") fwCloseCalModal(); });
+    document.addEventListener("click", function (e) { var t = e.target; if (t && t.tagName && t.tagName.toLowerCase() === "cal-modal-box") fwCloseCalModal(); });
+  </script>
 </body>
 </html>
 
